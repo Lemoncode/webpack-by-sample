@@ -9,7 +9,7 @@ The Lemoncode Frontend Master Students are working on a review process, if you w
 
 ## 00 Intro
 
-### 00 Boiler plate
+### 00 Boilerplate
 
 In this sample we are going to setup a web project that can be easily managed
 by webpack.
@@ -26,7 +26,7 @@ Summary steps:
 
 In this sample we are going to start working with es6 modules (import).
 
-We will start from sample _00 Intro/00 Boiler plate_ and add a new javascript that will
+We will start from sample _00 Intro/00 Boilerplate_ and add a new javascript that will
 hold a simple algorithm to calculate the average of an score array.
 
 We will use this javascript array into the main students.js file by importing
@@ -225,7 +225,7 @@ Summary steps:
  - Connecting with Webpack.
  - Adding custom rules.
 
-### 02 Webpack Tree Shaking
+### 02 Tree Shaking
 
 On of the most interest features that ships Webpack 2 is TreeShaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
