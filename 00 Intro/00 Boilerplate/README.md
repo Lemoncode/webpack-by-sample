@@ -129,38 +129,47 @@ const messageToDisplay = `average score ${averageScore}`;
 document.write(messageToDisplay);
 ```
 
-- It's time to configure webpack, create an empty skeleton on a file named **webpack.config.js**, and indicate the js entry point.
+- Now, it's time to add babel configuration file:
 
+### ./.babelrc:
+```javascript
+{
+  "presets": [
+    "env",
+  ]
+}
+```
+
+- We can countinue with webpack configuration. Create an empty skeleton on a file named **webpack.config.js**, and indicate the js entry point.
+
+### ./webpack.config.js
 ```javascript
 module.exports = {
-  entry: ["./students.js"],
+  entry: ['./students.js'],
   output: {
-    filename: "bundle.js"
-  }
+    filename: 'bundle.js',
+  },
 };
+
 ```
 
 - Now add support for es6, we will ask webpack to handle all js files under the project folder (excluding the `node_modules` subfolder) and transpile them from es6 to es5 (using the `babel-loader`).
 
-```javascript
+```diff
 module.exports = {
-  entry: ["./students.js"],
+  entry: ['./students.js'],
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js',
   },
-
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015']
-        }
-      }
-    ]
-  }
++ module: {
++   rules: [
++     {
++       test: /\.js$/,
++       exclude: /node_modules/,
++       loader: 'babel-loader',
++     },
++   ],
++ },
 };
 ```
 
@@ -170,40 +179,48 @@ module.exports = {
 npm start
 ```
 
-![npm init](../../99 Readme Resources/02 Webpack/Demo00_webpackexec.png "Demo00_webpackexec.png")
+![npm start](../../99 Readme Resources/00 Boilerplate/npm start.png)
 
 - We can check that a file named **bundle.js** has been generated.
 
 - if we open the **bundle.js** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **students.js**.
 
+### ./bundle.js
 ```javascript
-/***/ function(module, exports) {
+...
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+"use strict";
 
-	// Let's use some ES6 features
-	var averageScore = "90";
-	var messageToDisplay = "average score " + averageScore;
 
-	document.write(messageToDisplay);
+// Let's use some ES6 features
+var averageScore = "90";
+var messageToDisplay = "average score " + averageScore;
 
-/***/ }
+document.write(messageToDisplay);
+...
 ```
 
-- Create now a simple HTML file, **index.html**, and include a script tag that will point to our generated **bundle.js** file. Now we can click on the html file and see our small piece of code up and running.
+- Create now a simple HTML file, **index.html**, and include a script tag that will point to our generated **bundle.js** file.
 
+### ./index.html
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Webpack 1.x by sample</title>
-    <script src="bundle.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Webpack 2.x by sample</title>
   </head>
   <body>
-    Hello webpack !
+    Hello Webpack 2!
+    <script src="bundle.js"></script>
   </body>
 </html>
-```
 
-![Browser](../../99 Readme Resources/02 Webpack/Demo00_browser.png "Demo00_browser.png")
+```
+- Now we can click on the html file and see our small piece of code up and running.
+
+![running webpack 2](../../99 Readme Resources/00 Boilerplate/result.png)
