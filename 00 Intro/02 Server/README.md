@@ -73,7 +73,6 @@ npm start
 - Now that we are using this approach, we don't need `webpack-dev-server` globally installed. In order to uninstall `webpack-dev-server` globally, execute the next command (note down the "-g" param):
 
 ```
-npm uninstall webpack -g
 npm uninstall webpack-dev-server -g
 ```
 
