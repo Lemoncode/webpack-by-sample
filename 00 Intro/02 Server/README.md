@@ -19,7 +19,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _00 BoilerPlate_.
+Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 Import_.
 
 ## steps
 
@@ -110,7 +110,9 @@ module.exports = {
 
 ```
 
-- Now, it's running on 8081 port. We can restore default port:
+- Now, it's running on 8081 port.
+
+- We can restore default port:
 
 ### ./webpack.config.js
 ```diff
