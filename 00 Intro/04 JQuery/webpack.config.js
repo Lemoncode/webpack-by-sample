@@ -1,13 +1,19 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 var basePath = __dirname;
 
 module.exports = {
-  entry: ['./students.js'],
+  entry: {
+    app: './students.js',
+    vendor: [
+      'jquery',
+    ],
+  },
   output: {
     path: path.join(basePath, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -29,6 +35,13 @@ module.exports = {
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
 			hash: true,
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
     }),
   ],
 };
