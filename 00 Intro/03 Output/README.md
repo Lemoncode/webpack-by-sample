@@ -119,8 +119,7 @@ module.exports = {
 ```
 
 
-- Now if we run webpack we will realize that index.html is copied under the dist folder
-and the script tag is automatically being generated. There is only one caveat... we are not getting any additional hash param to avoid browser caching, we can do that by setting the option hash to true:
+- Now if we run webpack we will realize that index.html is copied under the dist folder and the script tag is automatically being generated. There is only one caveat... we are not getting any additional hash param to avoid browser caching, we can do that by setting the option hash to true:
 
 ### ./webpack.config.js
 ```diff
@@ -141,22 +140,31 @@ module.exports = {
 };
 ```
 
-![html hash](../../99 Readme Resources/02 Webpack/Demo03_htmlHash.png "Demo03_htmlHash.png")
+![bundle with hash](../../99 Readme Resources/03 Output/bundle with hash.png)
 
 
-- This looks quite well but... we are developers. What would happen if we attempt to debug from the browser our web app? By default we only will be able to debug bundle.js (big file already trasnpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` cofiguration, right after `output` closing curly bracket, we can include this line:
+- This looks quite well but... we are developers. What would happen if we attempt to debug from the browser our web app? By default we only will be able to debug bundle.js (big file already transpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` cofiguration, right after `output` closing curly bracket, we can include this line:
 
-```
-devtool: 'source-map',
+### ./webpack.config.js
+```diff
+...
+module.exports = {
+  ...
++ // For development https://webpack.js.org/configuration/devtool/#for-development
++ devtool: 'inline-source-map',
+  devServer: {
+    port: 8080,
+  },
+  ...
+
 ```
 
 Now if you just start our web server again (npm start) and open the developer tab we will be
 able to browse our original es6 files and place breakpoints / debug.
 
-![map browser](../../99 Readme Resources/02 Webpack/Demo03_mapBrowser.png "Demo03_mapBrowser.png")
+![sourcemaps](../../99 Readme Resources/03 Output/sourcemaps.png)
 
-- Just to wrapup... a mandatory step on any web app is not minify / obsfuscate the javascript
-files, in order to do that we only need to call webpack adding the param -p
+- Just to wrap up... a mandatory step on any web app is not minify / obsfuscate the javascript files. In order to do that we only need to call webpack adding the param -p
 
 ```
 webpack -p
@@ -164,4 +172,4 @@ webpack -p
 
 If we open the generated bundle.js file we will realize that the new version has been minified.
 
-![minified](../../99 Readme Resources/02 Webpack/Demo03_Minified.png "Demo03_Minified.png")
+![minified bundle](../../99 Readme Resources/03 Output/minified bundle.png)
