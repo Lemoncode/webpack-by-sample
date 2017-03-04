@@ -140,7 +140,7 @@ module.exports = {
 };
 ```
 
-![bundle with hash](../../99 Readme Resources/03 Output/bundle with hash.png)
+![bundle with hash](../../99 Readme Resources/00 Intro/03 Output/bundle with hash.png)
 
 
 - This looks quite well but... we are developers. What would happen if we attempt to debug from the browser our web app? By default we only will be able to debug bundle.js (big file already transpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` cofiguration, right after `output` closing curly bracket, we can include this line:
@@ -162,7 +162,7 @@ module.exports = {
 Now if you just start our web server again (npm start) and open the developer tab we will be
 able to browse our original es6 files and place breakpoints / debug.
 
-![sourcemaps](../../99 Readme Resources/03 Output/sourcemaps.png)
+![sourcemaps](../../99 Readme Resources/00 Intro/03 Output/sourcemaps.png)
 
 - Just to wrap up... a mandatory step on any web app is not minify / obsfuscate the javascript files. In order to do that we only need to call webpack adding the param -p
 
@@ -172,4 +172,4 @@ webpack -p
 
 If we open the generated bundle.js file we will realize that the new version has been minified.
 
-![minified bundle](../../99 Readme Resources/03 Output/minified bundle.png)
+![minified bundle](../../99 Readme Resources/00 Intro/03 Output/minified bundle.png)
