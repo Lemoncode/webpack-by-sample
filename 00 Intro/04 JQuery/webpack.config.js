@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.join(basePath, 'dist'),
-    filename: '[name].js',
+    filename: '[chunkhash].[name].js',
   },
   module: {
     rules: [
@@ -41,7 +41,7 @@ module.exports = {
       jQuery: "jquery"
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      names: ['vendor', 'manifest'],
     }),
   ],
 };

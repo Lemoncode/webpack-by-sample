@@ -185,3 +185,88 @@ Finally in the generated index.html (under dist) we can check that both scripts 
 + <script type="text/javascript" src="bundle.js?320a16e25cb5421c9f10"></script></body>
 </html>
 ```
+
+- Next step can be add `[chunkhash]` tag to output file name, to see how webpack is dealing with builds when we don't change content of the files.
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+...
+  output: {
+    path: path.join(basePath, 'dist'),
+-   filename: '[name].js',
++   filename: '[chunkhash].[name].js',
+  },
+  ...
+};
+
+```
+
+- Now we run `npm start`. As we see, output files appears with hash:
+
+![bundle with chunkhash](../../99 Readme Resources/04 JQuery/bundle with chunkhash.png)
+
+- If we update our code, for example:
+
+### ./averageService.js
+
+```diff
+...
+
+function getTotalScore(scores) {
+  return scores.reduce((score, count) => {
+-   return score + count;
++   return score + count + 1;
+  });
+}
+
+```
+
+- `chunkhash` changes again, for app and vendor. That means that we still don't reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.
+
+![bundle after change code](../../99 Readme Resources/04 JQuery/bundle after change code.png)
+
+- To prevent this, we need to add [manifest configuration](https://webpack.js.org/guides/code-splitting-libraries/#manifest-file):
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  plugins: [
+    ...
+    new webpack.optimize.CommonsChunkPlugin({
+-     name: 'vendor',
++     names: ['vendor', 'manifest'],
+    }),
+  ],
+};
+
+```
+
+- Now if we restore, previous code and run `npm start` again, it appears `manifest.js` with `chunkhash` too:
+
+![bundle with manifest](../../99 Readme Resources/04 JQuery/bundle with manifest.png)
+
+- Updating our code again:
+
+### ./averageService.js
+
+```diff
+...
+
+function getTotalScore(scores) {
+  return scores.reduce((score, count) => {
+-   return score + count;
++   return score + count + 1;
+  });
+}
+
+```
+
+- But this time, vendors doesn't change their hash, so it isn't compiled again and it reduces the time to build solution:
+
+![bundle manifest after change code](../../99 Readme Resources/04 JQuery/bundle manifest after change code.png)
