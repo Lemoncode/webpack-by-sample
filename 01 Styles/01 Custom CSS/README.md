@@ -58,59 +58,214 @@ used on some e.g. div. (we will name it mystyles.css):
 
 ```
 
-- Let's start installing `style-loader` and `css-loader` as dev dependencies
-
+- Let's start installing `style-loader` and `css-loader` as dev dependencies.
+  - `css-loader` is for load `.css` files.
+  - `style-loader` is to insert styles in html file, so we can use these styles.
 
 ```
 npm install style-loader --save-dev
-```
-
-
-```
 npm install css-loader --save-dev
 ```
 
-- Let's import this style from our main javascript file, we have to add the following line of code into the `students.js` file:
+- Let's add this style to our entry point:
 
-```javascript
-import * as styles from "./mystyles.css";
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  entry: {
+    app: './students.js',
++   appStyles: [
++     './mystyles.css',
++   ],
+    vendor: [
+      'jquery',
+    ],
+  },
+  ...
+};
+
 ```
+
 - If we launch a webpack build this will throw errors, that's because we haven't
 defined any loader to handle the css extension. To configure webpack
 properly let's add to the loader section a css entry and execute first
 the css-loader extension (handle css files), then the style-loader (add CSS to the down by injecting a styler class).
 
-```javascript
-module: {
- loaders: [
-   {
-     test: /\.css$/,
-     exclude: /node_modules/,
-     loader: "style-loader!css-loader"
-   },			
-   {
-     test: /\.js$/,
-     loader: "babel-loader",
-     exclude: /node_modules/,
-     query: {
-       presets: ['es2015']
-     }
-   }
- ]
-},
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
++     {
++       test: /\.css$/,
++       exclude: /node_modules/,
++       use: [
++         {
++           loader: 'style-loader',
++         },
++         {
++           loader: 'css-loader',
++         },
++       ],
++     },
+    ],
+  },
+...
+};
+
 ```
 
 - Now we can just execute the app (npm start) and check how the red background is
 being displayed on the div we have chosen.
 
-![Demo01_00_CSS.png](../../99 Readme Resources/02 Webpack/Demo01_00_CSS.png "Demo01_00_CSS.png")
+![red background result](../../99 Readme Resources/01 Styles/01 Custom CSS/red background result.png)
 
-- Why did the blue background dissappeared? Where did the css go? If we open the developer tools in our browser and hit
-the network tab we can check that there is no CSS file being requested, but if we
-open the main HTML file, we can check how this have been included as a style.
+- If we run `webpack` and take a look at console, we can see that appStyles are bundling as `.js` file. We need take care about size here because `.js` file is weightier than `.css`files.
 
-![Demo01_01_Network.png](../../99 Readme Resources/02 Webpack/Demo01_01_Network.png "Demo01_01_Network.png")
+![appStyles in console](../../99 Readme Resources/01 Styles/01 Custom CSS/appStyles in console.png)
+
+- Opening `appStyles.js` file, we can see that has about 316 lines of code, where we can see:
+
+### ./dist/...appStyles.js
+```
+...
+exports = module.exports = __webpack_require__(4)();
+// imports
 
 
-- In next demos we will learn how to ask webpack to separate our styles from bundle.js
-into separate css output file. Depending on your scenario you could choose one way or the other.
+// module
+exports.push([module.i, ".red-background {\r\n background-color: indianred;\r\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+...
+```
+
+- To avoid size issue, we need to install [`extract-text-webpack-plugin`](https://github.com/webpack-contrib/extract-text-webpack-plugin):
+
+```
+npm install extract-text-webpack-plugin --save-dev
+```
+
+- Let's to configure loader:
+
+### ./webpack.config.js
+```diff
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
++ var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+var basePath = __dirname;
+
+module.exports = {
+...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+-       use: [
+-         {
+-           loader: 'style-loader',
+-         },
+-         {
+-           loader: 'css-loader',
+-          },
+-       ],
++       loader: ExtractTextPlugin.extract({
++         fallback: 'style-loader',
++         use: {
++           loader: 'css-loader',
++         },
++       }),
+      },
+    ],
+  },
+...
+};
+
+```
+
+- Finally, add plugin configuration:
+  - `disable`: boolean to disable the plugin.
+  - `allChunks`: boolean to extract from all additional chunks too (by default it extracts only from the initial chunk(s)).
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  plugins: [
+    ...
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
++   new ExtractTextPlugin({
++     filename: '[chunkhash].[name].css',
++     disable: false,
++     allChunks: true,
++   }),
+  ],
+};
+
+```
+
+- Running `webpack` again, it split into two files `appStyles.js` and `appStyles.css` and how to size decrease:
+
+  ![appStyles js and css in console](../../99 Readme Resources/01 Styles/01 Custom CSS/appStyles js and css in console.png)
+
+- Extract text plugin removes most of code in `appStyles.js` (only have 19 line of code) and create `appStyles.css`:
+
+### ./dist/...appStyles.js
+```javascript
+webpackJsonp([1,3],[
+/* 0 */,
+/* 1 */,
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(2);
+
+
+/***/ })
+],[4]);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9teXN0eWxlcy5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUEseUMiLCJmaWxlIjoiYmU3NDMyNGJjYjRiYmI2OWVlYTguYXBwU3R5bGVzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gcmVtb3ZlZCBieSBleHRyYWN0LXRleHQtd2VicGFjay1wbHVnaW5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL215c3R5bGVzLmNzc1xuLy8gbW9kdWxlIGlkID0gMlxuLy8gbW9kdWxlIGNodW5rcyA9IDEiXSwic291cmNlUm9vdCI6IiJ9
+```
+
+### ./dist/...appStyles.css
+```css
+.red-background {
+ background-color: indianred;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJiZTc0MzI0YmNiNGJiYjY5ZWVhOC5hcHBTdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/
+```
