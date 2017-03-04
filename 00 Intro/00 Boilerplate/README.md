@@ -32,7 +32,7 @@ file we will generated).
 npm init
 ```
 
-![npm init](../../99 Readme Resources/00 Boilerplate/npm init.png)
+![npm init](../../99 Readme Resources/00 Intro/00 Boilerplate/npm init.png)
 
 - Install **webpack** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
@@ -179,7 +179,7 @@ module.exports = {
 npm start
 ```
 
-![npm start](../../99 Readme Resources/00 Boilerplate/npm start.png)
+![npm start](../../99 Readme Resources/00 Intro/00 Boilerplate/npm start.png)
 
 - We can check that a file named **bundle.js** has been generated.
 
@@ -223,4 +223,4 @@ document.write(messageToDisplay);
 ```
 - Now we can click on the html file and see our small piece of code up and running.
 
-![running webpack 2](../../99 Readme Resources/00 Boilerplate/result.png)
+![running webpack 2](../../99 Readme Resources/00 Intro/00 Boilerplate/result.png)
