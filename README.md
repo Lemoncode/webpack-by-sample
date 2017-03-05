@@ -158,6 +158,7 @@ We will start from sample _00 Intro/03 Output_, install TypeScript locally,
 configure a tsconfig file, add some ts like, install awesome-typescript-loader and apply it to webpackconfig.
 
 Summary steps:
+ - Remove babel configuration.
  - Install TypeScript as a local dependency.
  - Configure TypeScript for our project (tsconfig)
  - Port our project to TypeScript and add use in our code some of the ts features.
