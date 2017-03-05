@@ -124,7 +124,7 @@ Summary steps:
 ### 03 SASS
 
 In this demo we rename our css file to scss extension and add a simple SASS variable. We will learn how to add a loader that can
-make the SASS preproccess and then chain it to our css / style pipe.
+make the SASS preprocess and then chain it to our css / style pipe.
 
 We will start from sample _01 Styles/02 Import Bootstrap_.
 
