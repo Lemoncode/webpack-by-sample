@@ -239,7 +239,7 @@ module.exports = {
 - Extract text plugin removes most of code in `appStyles.js` (only have 19 line of code) and create `appStyles.css`:
 
 ### ./dist/...appStyles.js
-```JavaScript
+```javascript
 webpackJsonp([1,3],[
 /* 0 */,
 /* 1 */,

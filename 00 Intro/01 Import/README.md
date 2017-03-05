@@ -33,7 +33,7 @@ npm install
 - Let's add a new file called averageService.js, this file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them).
 
 ### ./averageService.js
-```JavaScript
+```javascript
 export function getAvg(scores) {
  return getTotalScore(scores) / scores.length;
 }
