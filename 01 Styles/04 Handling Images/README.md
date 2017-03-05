@@ -58,21 +58,45 @@ the Bootstrap's *jumbotron* component and add a `<div>` with a given "id".
 
 ```
 
-- We will continue by creating a folder named **content** and adding two images there:
-[logo_1.png](https://github.com/Lemoncode/webpack-1.x-by-sample/blob/master/01%20Styles/04%20Handling%20Images/content/logo_1.png)
-and
-[logo_2.png](https://github.com/Lemoncode/webpack-1.x-by-sample/blob/master/01%20Styles/04%20Handling%20Images/content/logo_2.png).
+- We will continue by creating a folder named **content** and adding two images there: [logo_1](./content/logo_1.png) and [logo_2](./content/logo_2.png).
 
 - Let's jump into *students.js* and import *logo_1.png* using JavaScript.
 Let's place it under a given `<div>`:
 
-```javascript
-import logoImg from './content/logo_1.png';
+### ./students.js
+```diff
+import {getAvg} from "./averageService";
++ import logoImg from './content/logo_1.png';
 
-const img = document.createElement('img');
-img.src = logoImg;
+$('body').css('background-color', 'lightSkyBlue');
 
-document.getElementById('imgContainer').appendChild(img);
+const scores = [90, 75, 60, 99, 94, 30];
+const averageScore = getAvg(scores);
+
+const messageToDisplay = `average score ${averageScore}`;
+
+document.write(messageToDisplay);
+
++ const img = document.createElement('img');
++ img.src = logoImg;
+
++ document.getElementById('imgContainer').appendChild(img);
+```
+
+- Add some styles to image:
+
+### ./mystyles.scss
+```diff
+$blue-color: teal;
+
+.red-background {
+ background-color: $blue-color;
+}
+
++ img {
++   width: 200px;
++ }
+
 ```
 
 - We have already installed *url-loader* plugin, so we only need to configure the
@@ -81,18 +105,34 @@ we are adding an additional parameter to the url-loader called **limit**. By usi
 parameter we are telling the loader to encode the image if its size is less than
 5KB approx and embed it directly in the HTML file.
 
-```javascript
-loaders: [
-  {
-    test: /\.(png|jpg)$/,
-    exclude: /node_modules/,
-    loader: 'url-loader?limit=5000'
-  },			
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
++     {
++       test: /\.(png|jpg)$/,
++       exclude: /node_modules/,
++       loader: 'url-loader?limit=5000',
++     },
+    ],
+  },
+  ...
+};
+
 ```
 
-- Now if run the app (npm start) we can check that the first logo is being shown.
+- Now if run the app (`npm start`) we can check that the first logo is being shown.
 
-![Demo01_04_app1.png](../../99 Readme Resources/02 Webpack/Demo01_04_app1.png "Demo01_04_app1.png")
+![result logo 1](../../99 Readme Resources/01 Styles/04 Handling Images/result logo 1.png)
 
 
 - That's fine but what if we had already the image referenced inside a HTML
