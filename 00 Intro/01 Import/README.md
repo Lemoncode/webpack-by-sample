@@ -2,10 +2,10 @@
 
 In this sample we are going to start working with es6 modules (import).
 
-We will start from sample _00 Intro/00 Boilerplate_ and add a new javascript that will
+We will start from sample _00 Intro/00 Boilerplate_ and add a new JavaScript that will
 hold a simple algorithm to calculate the average of an score array.
 
-We will use this javascript array into the main students.js file by importing
+We will use this JavaScript array into the main students.js file by importing
 it.
 
 Summary steps:
@@ -33,7 +33,7 @@ npm install
 - Let's add a new file called averageService.js, this file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them).
 
 ### ./averageService.js
-```javascript
+```JavaScript
 export function getAvg(scores) {
  return getTotalScore(scores) / scores.length;
 }

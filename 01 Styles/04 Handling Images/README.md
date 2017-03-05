@@ -1,18 +1,16 @@
 # 04 Handling Images
 
 In this demo we are going to include images in our project in two flavours: via
-javascript and via HTML. On the javascript side we will see is something
+JavaScript and via HTML. On the JavaScript side we will see is something
 straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader html-loader
 
 We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
  - Add two images to our project.
- - Add the code to load the first image via javascript.
+ - Add first image from HTML.
+ - Add second image from JavaScript.
  - Configure the loader.
- - Add the second image to the HTML file.
- - Install html-loader.
- - Configure the html loader in the webpack.config.js
 
 # Steps to build it
 

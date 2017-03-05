@@ -118,10 +118,10 @@ Our **package.json** file should looks something like:
 
 ```
 
-- Now create a javascript file named **students.js** that will include ES6 syntax.
+- Now create a JavaScript file named **students.js** that will include ES6 syntax.
 
 ### ./students.js
-```javascript
+```JavaScript
 // Let's use some ES6 features
 const averageScore = "90";
 const messageToDisplay = `average score ${averageScore}`;
@@ -132,7 +132,7 @@ document.write(messageToDisplay);
 - Now, it's time to add babel configuration file:
 
 ### ./.babelrc:
-```javascript
+```JavaScript
 {
   "presets": [
     "env",
@@ -143,7 +143,7 @@ document.write(messageToDisplay);
 - We can countinue with webpack configuration. Create an empty skeleton on a file named **webpack.config.js**, and indicate the js entry point.
 
 ### ./webpack.config.js
-```javascript
+```JavaScript
 module.exports = {
   entry: ['./students.js'],
   output: {
@@ -186,7 +186,7 @@ npm start
 - if we open the **bundle.js** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **students.js**.
 
 ### ./bundle.js
-```javascript
+```JavaScript
 ...
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {

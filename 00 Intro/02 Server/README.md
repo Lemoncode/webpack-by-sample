@@ -46,7 +46,7 @@ will launch our web dev server, in this case in port 8080.
 
 ![running webpack 2](../../99 Readme Resources/00 Intro/02 Server/result.png)
 
-- One interesting feature that ships this dev server is **live reloading**, thus any changes introduced in any of the javascript files will be automatically detected and webpack dev server will launch the build process and once finished automatically refresh the page being display in the browser. In order to do this we don't need to do anything.
+- One interesting feature that ships this dev server is **live reloading**, thus any changes introduced in any of the JavaScript files will be automatically detected and webpack dev server will launch the build process and once finished automatically refresh the page being display in the browser. In order to do this we don't need to do anything.
 
 - We don't need to remember this params every time we want to launch our dev
 server, in order to avoid this we can just add a `start` script to our `package.json` file.
