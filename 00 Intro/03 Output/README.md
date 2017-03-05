@@ -164,7 +164,7 @@ able to browse our original es6 files and place breakpoints / debug.
 
 ![sourcemaps](../../99 Readme Resources/00 Intro/03 Output/sourcemaps.png)
 
-- Just to wrap up... a mandatory step on any web app is not minify / obsfuscate the javascript files. In order to do that we only need to call webpack adding the param -p
+- Just to wrap up... a mandatory step on any web app is not minify / obsfuscate the JavaScript files. In order to do that we only need to call webpack adding the param -p
 
 ```
 webpack -p

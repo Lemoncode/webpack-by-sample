@@ -118,7 +118,7 @@ Our **package.json** file should looks something like:
 
 ```
 
-- Now create a javascript file named **students.js** that will include ES6 syntax.
+- Now create a JavaScript file named **students.js** that will include ES6 syntax.
 
 ### ./students.js
 ```javascript

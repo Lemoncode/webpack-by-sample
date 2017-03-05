@@ -26,10 +26,10 @@ Summary steps:
 
 In this sample we are going to start working with es6 modules (import).
 
-We will start from sample _00 Intro/00 Boilerplate_ and add a new javascript that will
+We will start from sample _00 Intro/00 Boilerplate_ and add a new JavaScript that will
 hold a simple algorithm to calculate the average of an score array.
 
-We will use this javascript array into the main students.js file by importing
+We will use this JavaScript array into the main students.js file by importing
 it.
 
 Summary steps:
@@ -137,18 +137,16 @@ Summary steps:
 ### 04 Handling Images
 
 In this demo we are going to include images in our project in two flavours: via
-javascript and via HTML. On the javascript side we will see is something
+JavaScript and via HTML. On the JavaScript side we will see is something
 straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader html-loader
 
 We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
- - Add two images to our project.
- - Add the code to load the first image via javascript.
- - Configure the loader.
- - Add the second image to the HTML file.
- - Install html-loader.
- - Configure the html loader in the webpack.config.js
+- Add two images to our project.
+- Add first image from HTML.
+- Add second image from JavaScript.
+- Configure the loader.
 
 ## 02 Fx (frameworks / libraries / languages)
 
