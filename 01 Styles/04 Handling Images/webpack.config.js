@@ -72,7 +72,7 @@ module.exports = {
         test: /\.(png|jpg)$/,
         exclude: /node_modules/,
         loader: 'url-loader?limit=5000',
-      },
+      }
     ],
   },
   // For development https://webpack.js.org/configuration/devtool/#for-development
