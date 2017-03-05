@@ -163,7 +163,7 @@ Summary steps:
  - Install TypeScript as a local dependency.
  - Configure TypeScript for our project (tsconfig)
  - Port our project to TypeScript and add use in our code some of the ts features.
- - Install awesome-typescript-loader plugin.
+ - Install [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader).
  - Add the proper configuration in webpack.config.js
 
 ### 01 React
