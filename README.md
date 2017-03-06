@@ -154,7 +154,7 @@ Summary steps:
 
 In this demo we will add support for TypeScript.
 
-We will start from sample _00 Intro/03 Output_, install TypeScript locally,
+We will start from sample _01 Styles/03 SASS_, install TypeScript locally,
 configure a tsconfig file, add some ts like, install awesome-typescript-loader and apply it to webpackconfig.
 
 Summary steps:
@@ -174,9 +174,8 @@ We will start from sample _00 Intro/03 Output_, install react locally, update th
 Summary steps:
  - Install reactjs as a local dependency.
  - Update students.js to students.jsx and update content.
- - Let's resolve the jsx extensions and point out the the entry
-point has changed
- - Configure the webpack.config.js to support jsx (loader)
+ - Let's resolve the jsx extensions and point out the the entry point has changed.
+ - Configure the webpack.config.js to support jsx.
 
 ### 02 Angular
 
