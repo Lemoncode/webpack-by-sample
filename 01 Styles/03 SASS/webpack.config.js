@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     app: './students.js',
     appStyles: [
-      './mystyles.css',
+      './mystyles.scss',
     ],
     vendor: [
       'jquery',
@@ -30,7 +30,19 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', },
+            { loader: 'sass-loader', },
+          ],
+        }),
+      },
+      {
         test: /\.css$/,
+        include: /node_modules/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: {
