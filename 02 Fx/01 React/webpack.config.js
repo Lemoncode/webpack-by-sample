@@ -6,16 +6,18 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var basePath = __dirname;
 
 module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.scss',
-    ],
+    app: './students.jsx',
     vendor: [
-      'jquery',
+      'react',
+      'react-dom',
     ],
     vendorStyles: [
-      './node_modules/bootstrap/dist/css/bootstrap.css',
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
   },
   output: {
@@ -25,7 +27,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
