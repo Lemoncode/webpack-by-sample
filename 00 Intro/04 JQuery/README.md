@@ -181,8 +181,8 @@ Finally in the generated index.html (under dist) we can check that both scripts 
   </head>
   <body>
     Hello webpack !
-+ <script type="text/javascript" src="vendor.js?320a16e25cb5421c9f10"></script>
-+ <script type="text/javascript" src="bundle.js?320a16e25cb5421c9f10"></script></body>
++ <script type="text/JavaScript" src="vendor.js?320a16e25cb5421c9f10"></script>
++ <script type="text/JavaScript" src="bundle.js?320a16e25cb5421c9f10"></script></body>
 </html>
 ```
 
