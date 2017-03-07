@@ -108,19 +108,17 @@ Summary steps:
 ### 02 Import Bootstrap
 
 In this demo we will install and configure webpack to import the well known
-bootstrap css library.
-
-In this demo will import Bootstrap, and use a css component.
+[Bootstrap](https://getbootstrap.com/) css library.
 
 We will start from sample _01 Styles/01 Custom CSS_.
 
 Summary steps:
  - Install bootstrap.
- - Use a jumbotron element from bootstrap in our HTML.
  - Import the css library.
+ - Use a jumbotron element from bootstrap in our HTML.
  - Check that we get errors when running webpack.
  - Install additional loaders in order to manage fonts and other
- files required by bootstrap.
+ files required by Bootstrap.
  - Check results.
 
 ### 03 SASS
