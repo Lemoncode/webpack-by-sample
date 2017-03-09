@@ -28,7 +28,7 @@ npm install
 
 - Let's start by making some cleanup in our *index.html*, we are going to remove the Bootstrap's *jumbotron* component and add a `<img>` tag:
 
-### ./index.html
+### ./src/index.html
 ```diff
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@ npm install
 -       Bootstrap is the most popular ...
 -     </p>
 -   </div>
-+   <img src="./content/logo_1.png"/>
++   <img src="./src/content/logo_1.png"/>
     Hello Webpack 2!
     <div class="red-background ">
       RedBackground stuff
@@ -55,11 +55,11 @@ npm install
 
 ```
 
-- We will continue by creating a folder named **content** and adding two images there: [logo_1](./content/logo_1.png) and [logo_2](./content/logo_2.png).
+- We will continue by creating a folder named **content** and adding two images there: [logo_1](./src/content/logo_1.png) and [logo_2](./src/content/logo_2.png).
 
 - Add some styles to image:
 
-### ./mystyles.scss
+### ./src/mystyles.scss
 ```diff
 $blue-color: teal;
 
@@ -91,7 +91,7 @@ $blue-color: teal;
     <title>Webpack 2.x by sample</title>
   </head>
   <body>
-    <img src="./content/logo_1.png"/>
+    <img src="./src/content/logo_1.png"/>
     Hello Webpack 2!
 +   <div id="imgContainer"></div>
     <div class="red-background ">
@@ -105,7 +105,7 @@ $blue-color: teal;
 - Let's jump into *students.js* and import *logo_2.png* using JavaScript.
 Let's place it under a given `<div>`:
 
-### ./students.js
+### ./src/students.js
 ```diff
 import {getAvg} from "./averageService";
 + import logoImg from './content/logo_2.png';

@@ -47,6 +47,7 @@ Another benefit of installing locally is that we can set up a specific version o
 - The next step is to add a TypeScript configuration file, *tsconfig.json*.
 In this file will define the settings that we want, e.g to transpile to ES5 amongst others.
 
+### ./tsconfig.json
 ```json
 {
   "compilerOptions": {
@@ -77,7 +78,7 @@ npm install @types/jquery --save-dev
 - Let's introduce some TypeScript, in *students.ts* we are going to type the
 variables we are using:
 
-### ./students.ts
+### ./src/students.ts
 ```diff
 import {getAvg} from "./averageService";
 + import * as $ from 'jquery';
@@ -125,10 +126,12 @@ npm install awesome-typescript-loader --save-dev
 
 - Let's update *webpack.config.js* in order to use this loader on **ts** extension files and in order to avoid having to add the extensions to the ts imports we can just add it to the array of extensions to be resolved:
 
+### ./webpack.config.js
 ```diff
 ...
 
 module.exports = {
+  context: path.join(basePath, 'src'),
 + resolve: {
 +   extensions: ['.js', '.ts'],
 + },

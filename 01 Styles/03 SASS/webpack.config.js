@@ -6,6 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var basePath = __dirname;
 
 module.exports = {
+  context: path.join(basePath, 'src'),
   entry: {
     app: './students.js',
     appStyles: [
@@ -15,7 +16,7 @@ module.exports = {
       'jquery',
     ],
     vendorStyles: [
-      './node_modules/bootstrap/dist/css/bootstrap.css',
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
   },
   output: {

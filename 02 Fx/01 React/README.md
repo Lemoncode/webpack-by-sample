@@ -24,32 +24,22 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- To keep maintainable our source code, let's move files under `src` folder:
-  - Move to `./src/averageService.js`.
-  - Move to `./src/students.js`.
-  - Move to `./src/index.html`.
-  - Delete mystyles.scss because we don't need for this sample.
+- Delete mystyles.scss because we don't need for this sample.
 
-- And update `webpack.config` to set context path over `src` folder:
+- And update `webpack.config`:
 
 ### ./webpack.config.js
 ```diff
 ...
 
 module.exports = {
-+ context: path.join(basePath, 'src'),
+  context: path.join(basePath, 'src'),
   entry: {
     app: './students.js',
 -   appStyles: [
 -     './mystyles.scss',
 -   ],
-    vendor: [
-      'jquery',
-    ],
-    vendorStyles: [
--     './node_modules/bootstrap/dist/css/bootstrap.css',
-+     '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
+    ...
   },
   ...
 };
