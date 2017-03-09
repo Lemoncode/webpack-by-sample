@@ -8,12 +8,9 @@ var basePath = __dirname;
 module.exports = {
   context: path.join(basePath, 'src'),
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.scss',
-    ],
+    app: './index.js',
     vendor: [
-      'jquery',
+      'angular',
     ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
@@ -68,6 +65,11 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        loader: 'raw-loader',
       },
     ],
   },
