@@ -184,26 +184,28 @@ In this sample we are going to create a simple Angular 1.x sample (es6 based).
 We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
- - Installing Angular libraries.
+ - Installing Angular 1.x libraries.
  - Creating the app.
  - Instantiating the app from the html.
  - Creating a component (inline HTML).
  - Creating a service.
  - Displaying the component.
- - Creating an exernal HTML template and consuming git.
+ - Creating an exernal HTML template and consuming it.
 
 ### 03 Angular 2
 
 In this sample we are going to setup a basic Angular 2 app with Webpack.
 
-We will start from sample _01 Styles/03 SASS_.
+We will start from sample _02 Fx/00 TypeScript_.
 
 Summary steps:
-- Prerequisite: Install Node.js and npm.
-- Create and configure the project.
-- Configure webpack.
-- Create the application.
-- Build and run the application.
+ - Installing Angular 2.x libraries.
+ - Creating the app.
+ - Instantiating the app from the html.
+ - Creating a component (inline HTML).
+ - Creating a service.
+ - Displaying the component.
+ - Creating an exernal HTML template and consuming it.
 
 
 ## 03 Misc (other samples)

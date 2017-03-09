@@ -5,13 +5,13 @@ In this sample we are going to create a simple Angular 1.x sample (es6 based).
 We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
- - Installing Angular libraries.
+ - Installing Angular 1.x libraries.
  - Creating the app.
  - Instantiating the app from the html.
  - Creating a component (inline HTML).
  - Creating a service.
  - Displaying the component.
- - Creating an exernal HTML template and consuming git.
+ - Creating an exernal HTML template and consuming it.
 
 # Steps to build it
 
