@@ -169,7 +169,7 @@ Summary steps:
 
 In this demo we will add support for React.
 
-We will start from sample _00 Intro/03 Output_, install react locally, update the students.js to jsx and include some basic rendering.
+We will start from sample _01 Styles/03 SASS_, install react locally, update the students.js to jsx and include some basic rendering.
 
 Summary steps:
  - Install reactjs as a local dependency.
@@ -181,7 +181,7 @@ Summary steps:
 
 In this sample we are going to create a simple Angular 1.x sample (es6 based).
 
-We will start from sample _00 Intro/03 Output_.
+We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
  - Installing Angular libraries.
@@ -196,7 +196,7 @@ Summary steps:
 
 In this sample we are going to setup a basic Angular 2 app with Webpack.
 
-We will start from sample _00 Intro/03 Output_.
+We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
 - Prerequisite: Install Node.js and npm.
@@ -212,7 +212,7 @@ Summary steps:
 
 In this sample we are going to introduce Linting. This is a technique which you can analyse code for potential errors, so that can help you to make less mistakes.
 
-We will start from sample _00 Intro/03 Output_.
+We will start from sample _01 Styles/03 SASS_.
 
 Summary steps:
  - Installing ESLint.
