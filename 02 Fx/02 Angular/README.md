@@ -42,7 +42,7 @@ npm install angular --save
 - Now, we can uninstall `jquery` because we don't need for this sample:
 
 ```
-npm uninstall jquery
+npm uninstall jquery --save
 ```
 
 - Let's require angular and create a simple app module, to test that it's Creating the right object we will just dump into the console the app object.
