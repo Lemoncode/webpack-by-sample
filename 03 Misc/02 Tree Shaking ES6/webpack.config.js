@@ -8,13 +8,7 @@ var basePath = __dirname;
 module.exports = {
   context: path.join(basePath, 'src'),
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
+    app: './index.js',
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
