@@ -7,4 +7,4 @@ const averageScore = getAvg(scores);
 
 const messageToDisplay = `average score ${averageScore}`;
 
-document.write(messageToDisplay);
+console.log(messageToDisplay);

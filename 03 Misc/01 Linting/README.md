@@ -130,90 +130,93 @@ npm install babel-eslint --save-dev
 npm install eslint-loader --save-dev
 ```
 
-![package.json installing eslint-loader](../../99 Readme Resources/02 Webpack/04 Misc/01 Linting/03 Install eslint-loader.png)
-
 - To configure Webpack, we're going to use preloader definition. We make sure ESLint parse the code before any other process. We get a _webpack.config.js_ like this:
 
-#### webpack.config.js
-```javascript
+```
+{
+  test: /\.js$/,
+  loader: "eslint",
+  exclude: /node_modules/,
+}
+```
+
+### ./webpack.config.js
+```diff
 ...
-module: {
-  preLoaders: [
-    {
-      test: /\.js$/,
-      loader: "eslint",
-      exclude: /node_modules/,
-    }
-  ],
-  loaders: [
-    {
-      test: /\.js$/,
-      loader: "babel-loader",
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015']
-      }
-    }
-  ]
-},
-...
+
+module.exports = {
+  ...
+  module: {
+    rules: [
++     {
++       test: /\.js$/,
++       exclude: /node_modules/,
++       enforce: 'pre',
++       loader: 'eslint-loader',
++     },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      ...
+    ],
+  },
+  ...
+};
+
 ```
 
 - Now we can remove previous npm command and execute again `npm start`.
 
-#### package.json
-```json
-...
-"scripts": {
-  "start": "webpack-dev-server --inline",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
-...
+### ./package.json
+```diff
+{
+  ...
+  "scripts": {
++   "start": "webpack-dev-server"
+-   "start": "webpack-dev-server",
+-   "lint": "eslint ."
+  },
+  ...
+}
+
 ```
 
-![Webpack build after configure eslint-loader](../../99 Readme Resources/02 Webpack/04 Misc/01 Linting/04 Webpack build after configure eslint-loader.png)
+- Naked eye, it looks like nothing happens with the build. Let's go to change the code to introduce a typo:
 
-- Naked eye, it looks like nothing happens with the build. Let's go to change the code:
+### ./src/students.js
 
-#### BEFORE students.js
+```diff
+import {getAvg} from "./averageService";
 
-```javascript
-import {getAvg} from "./averageService"
+$('body').css('background-color', 'lightSkyBlue');
 
-const scores = [90, 75, 60, 99, 94, 30]
+const scores = [90, 75, 60, 99, 94, 30];
 const averageScore = getAvg(scores);
+
 const messageToDisplay = `average score ${averageScore}`;
 
-document.write(messageToDisplay);
+- document.write(messageToDisplay);
++ document.write(message);
+
 ```
 
-
-#### Typo: using _message_ instead of _messageToDisplay_
-
-```javascript
-import {getAvg} from "./averageService"
-
-const scores = [90, 75, 60, 99, 94, 30]
-const averageScore = getAvg(scores);
-const messageToDisplay = `average score ${averageScore}`;
-
-document.write(message);
-```
-
-![Typo](../../99 Readme Resources/02 Webpack/04 Misc/01 Linting/05 Typo in students.js.png)
+![typo](../../99 Readme Resources/03 Misc/01 Linting/typo.png)
 
 ## Defining Rules
 
 - As we see previously, we are using [ESLint default rules](http://eslint.org/docs/rules/)
 
-#### .eslintrc.json
-```json
+### ./.eslintrc.json
+```diff
 {
   "extends": [
     "eslint:recommended"
   ],
   ...
 }
+
 ```
 
 - The good news is that we can [configure all of these rules](http://eslint.org/docs/user-guide/configuring#configuring-rules) following these values:
@@ -224,19 +227,25 @@ document.write(message);
 
 - For example, if we change `students.js` to this code:
 
-```javascript
-import {getAvg} from "./averageService"
+### ./src/students.js
+```diff
+import {getAvg} from "./averageService";
 
-const scores = [90, 75, 60, 99, 94, 30]
+$('body').css('background-color', 'lightSkyBlue');
+
+const scores = [90, 75, 60, 99, 94, 30];
 const averageScore = getAvg(scores);
+
 const messageToDisplay = `average score ${averageScore}`;
 
-console.log(messageToDisplay);
+- document.write(message);
++ console.log(messageToDisplay);
+
 ```
 
 - As result, we get this error because the use of _console_ is disallow by default.
 
-![Using console](../../99 Readme Resources/02 Webpack/04 Misc/01 Linting/06 Using console log.png)
+![console error](../../99 Readme Resources/03 Misc/01 Linting/console error.png)
 
 - We can disable this rule with the following configuration:
 

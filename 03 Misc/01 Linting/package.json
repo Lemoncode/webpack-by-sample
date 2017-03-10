@@ -4,8 +4,7 @@
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "lint": "eslint ."
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
