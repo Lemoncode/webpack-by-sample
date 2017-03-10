@@ -132,14 +132,6 @@ npm install eslint-loader --save-dev
 
 - To configure Webpack, we're going to use preloader definition. We make sure ESLint parse the code before any other process. We get a _webpack.config.js_ like this:
 
-```
-{
-  test: /\.js$/,
-  loader: "eslint",
-  exclude: /node_modules/,
-}
-```
-
 ### ./webpack.config.js
 ```diff
 ...
@@ -249,43 +241,53 @@ const messageToDisplay = `average score ${averageScore}`;
 
 - We can disable this rule with the following configuration:
 
-```json
+### ./.eslintrc.json
+```diff
 {
   "extends": [
     "eslint:recommended"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true,
+    "jquery": true
   },
-  "parser": "babel-eslint",
-  "rules": {
-    "no-console": 0
-  }
+- "parser": "babel-eslint"
++ "parser": "babel-eslint",
++ "rules": {
++   "no-console": 0
++ }
 }
+
 ```
 
-![Disabling no-console rule](../../99 Readme Resources/02 Webpack/04 Misc/01 Linting/07 Disabling no-console rule.png)
+![disabling no-console rule](../../99 Readme Resources/03 Misc/01 Linting/disabling no-console rule.png)
 
 - Other example is rule named [max-lines](http://eslint.org/docs/rules/max-lines) that it _enforces a maximum number of lines per file, in order to aid in maintainability and reduce complexity._
 
-```json
+### ./.eslintrc.json
+```diff
 {
   "extends": [
     "eslint:recommended"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true,
+    "jquery": true
   },
   "parser": "babel-eslint",
   "rules": {
-    "no-console": 0,
-    "max-lines": ["error", 1]
+-   "no-console": 0
++   "no-console": 0,
++   "max-lines": ["error", 1]
   }
 }
+
 ```
 
 _NOTE:_ We can use "error" or 2. But we can read better this line if we use "error" word.
 
-![Using max-lines rule](../../99 Readme Resources/02 Webpack/04 Misc/01 Linting/08 Using max-lines rule.png)
+![enable max-lines rule](../../99 Readme Resources/03 Misc/01 Linting/enable max-lines rule.png)
 
 - To integrate tslinter with React based project we can use [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react) that provides linting for JSX language.

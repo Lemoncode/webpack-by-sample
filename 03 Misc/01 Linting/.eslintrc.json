@@ -7,5 +7,9 @@
     "node": true,
     "jquery": true
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "rules": {
+    "no-console": 0,
+    "max-lines": ["error", 1]
+  }
 }
