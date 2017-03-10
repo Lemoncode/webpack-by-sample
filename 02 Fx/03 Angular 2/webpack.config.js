@@ -11,12 +11,17 @@ module.exports = {
     extensions: ['.js', '.ts']
   },
   entry: {
-    app: './students.ts',
-    appStyles: [
-      './mystyles.scss',
-    ],
+    app: './index.ts',
     vendor: [
-      'jquery',
+      'core-js',
+      'reflect-metadata',
+      'zone.js',
+      '@angular/core',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
+      '@angular/common',
+      '@angular/compiler',
+      'rxjs',
     ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
@@ -98,5 +103,9 @@ module.exports = {
       disable: false,
       allChunks: true,
     }),
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      path.join(__dirname, 'src')
+    ),
   ],
 };

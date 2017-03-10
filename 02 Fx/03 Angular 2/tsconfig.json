@@ -6,7 +6,8 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true
   },
   "compileOnSave": false,
   "exclude": [

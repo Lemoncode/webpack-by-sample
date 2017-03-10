@@ -33,7 +33,7 @@ npm install
 npm install angular --save
 ```
 
-- We are going to start with a new sample, let's clear up the students.js file and start from scratch. Let's define a simple app.
+- We are going to start with a new sample, let's clear up the students.js file and start from scratch.
 
   - Remove `src/mystyles.scss`.
   - Remove `src/averageService.js`.

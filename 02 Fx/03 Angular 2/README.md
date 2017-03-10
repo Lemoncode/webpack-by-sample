@@ -33,7 +33,6 @@ npm install
 
 ## Required dependencies
 - core-js
-- reflect-metadata
 - zone.js
 - @angular/core
 - @angular/platform-browser
@@ -45,30 +44,76 @@ npm install
 - rxjs
 
 ```
-npm install angular --save
+npm install @angular/common @angular/compiler
+@angular/core @angular/platform-browser @angular/platform-browser-dynamic
+core-js reflect-metadata
+rxjs zone.js --save
 ```
 
-- We are going to start with a new sample, let's clear up the students.js file and start from scratch. Let's define a simple app.
+- Install typings for `core-js`:
+
+```
+npm install @types/core-js --save-dev
+```
+
+- We are going to start with a new sample, let's clear up the students.js file and start from scratch.
 
   - Remove `src/mystyles.scss`.
-  - Remove `src/averageService.js`.
-  - Remove `src/students.js`.
+  - Remove `src/averageService.ts`.
+  - Remove `src/students.ts`.
+
 
 - Now, we can uninstall `jquery` because we don't need for this sample:
 
 ```
 npm uninstall jquery --save
+npm uninstall @types/jquery --save-dev
 ```
 
-- Let's require angular and create a simple app module, to test that it's Creating the right object we will just dump into the console the app object.
+- Let's going to create a new file that will contain a simple component with an inline template, let's create a file called _studentsComponent.ts_
 
-### ./src/index.js
+### ./src/components/student/studentComponent.ts
 ```javascript
-import * as angular from 'angular'
+import { Component } from '@angular/core';
 
-const app = angular.module('myStudentApp', []);
+@Component(
+  {
+    selector: 'student-component',
+    template: `
+      <h1>Student Component</h1>
+    `
+  }
+)
+class StudentComponent {
 
-console.log(app);
+}
+
+export {
+  StudentComponent
+}
+
+```
+
+- Let's require angular libs and create a simple app module with the StudentComponent.
+
+### ./src/index.ts
+```javascript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { StudentComponent } from './components/student/studentComponent';
+
+@NgModule({
+  declarations: [StudentComponent],
+  imports: [BrowserModule],
+  bootstrap: [StudentComponent],
+})
+class AppModule {
+
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+
 ```
 
 - The next step is to reference the app in our HTML file, let's open index.html
@@ -83,18 +128,18 @@ console.log(app);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Webpack 2.x by sample</title>
   </head>
-- <body>
-+ <body ng-app="myStudentApp">
+  <body>
 -   <div class="jumbotron">
 -     <h1>Testing Bootstrap</h1>
 -     <p>
 -       Bootstrap is the most popular ...
 -     </p>
 -   </div>
-    Hello Webpack 2!
+-   Hello Webpack 2!
 -   <div class="red-background ">
 -     RedBackground stuff
 -   </div>
++   <student-component></student-component>
   </body>
 </html>
 
@@ -109,14 +154,22 @@ console.log(app);
 module.exports = {
   ...
   entry: {
--   app: './students.js',
-+   app: './index.js',
+-   app: './students.ts',
++   app: './index.ts',
 -   appStyles: [
 -     './mystyles.scss',
 -   ],
     vendor: [
 -     'jquery',
-+     'angular',
++     'core-js',
++     'reflect-metadata',
++     'zone.js',
++     '@angular/common',
++     '@angular/compiler',
++     '@angular/core',
++     '@angular/platform-browser',
++     '@angular/platform-browser-dynamic',
++     'rxjs',
     ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
@@ -127,22 +180,63 @@ module.exports = {
 
 ```
 
+- Since we are declaring `@NgModule` and `@Component` with decorators, we have to enable it:
+
+### ./tsconfig.json
+```diff
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "noLib": false,
+-   "suppressImplicitAnyIndexErrors": true
++   "suppressImplicitAnyIndexErrors": true,
++   "experimentalDecorators": true
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+```
+
 - If we run the application and open the browser console, we check that app object is displayed in the console.
 
 ```
 npm start
 ```
 
-- Application up and running, let's move forward. We are going to create a new file that will contain a simple component with an inline template, let's create a file called _studentsComponent.js_
+![warnings angular core](../../99 Readme Resources/02 Fx/03 Angular 2/warnings angular core.png)
 
-### ./src/components/student/studentComponent.js
-```javascript
-export const studentComponent = {
-  template: '<h1>Students Component</h1>',
-}
+- To avoid [these warnings](https://github.com/AngularClass/angular2-webpack-starter/issues/993) we can configure our `webpack.config`:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  plugins: [
+    ...
+    new ExtractTextPlugin({
+      filename: '[chunkhash].[name].css',
+      disable: false,
+      allChunks: true,
+    }),
++   new webpack.ContextReplacementPlugin(
++     /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
++     path.join(__dirname, 'src')
++   ),
+  ],
+};
+
 ```
 
-- Let's register this component in our main app
+![result after fix warnings](../../99 Readme Resources/02 Fx/03 Angular 2/result after fix warnings.png)
 
 ### ./src/index.js
 ```diff
