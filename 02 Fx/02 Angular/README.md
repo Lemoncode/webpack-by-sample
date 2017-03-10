@@ -123,7 +123,7 @@ npm start
 ### ./src/components/student/studentComponent.js
 ```javascript
 export const studentComponent = {
-  template: '<h1>Students Component</h1>',
+  template: '<h1>Student Component</h1>',
 }
 ```
 
@@ -230,7 +230,7 @@ npm start
 export const studentComponent = {
   template: require('./template.html'),
 + controller: function() {
-+   this.message = 'Hello from students components';
++   this.message = 'Hello from student component';
 + },
 }
 

@@ -180,7 +180,7 @@ module.exports = {
 
 ```
 
-- Since we are declaring `@NgModule` and `@Component` with decorators, we have to enable it:
+- Since we are declaring `@NgModule` and `@Component` with decorators, we have to enable it. We need to use `core-js` as global typings:
 
 ### ./tsconfig.json
 ```diff
@@ -194,7 +194,10 @@ module.exports = {
     "noLib": false,
 -   "suppressImplicitAnyIndexErrors": true
 +   "suppressImplicitAnyIndexErrors": true,
-+   "experimentalDecorators": true
++   "types": [
++     "core-js",
++     "webpack-env"
++   ]
   },
   "compileOnSave": false,
   "exclude": [
@@ -238,43 +241,6 @@ module.exports = {
 
 ![result after fix warnings](../../99 Readme Resources/02 Fx/03 Angular 2/result after fix warnings.png)
 
-### ./src/index.js
-```diff
-import * as angular from 'angular';
-+ import {studentComponent} from './components/student/studentComponent';
-
-const app = angular.module('myStudentApp', []);
-+ app.component('studentComponent', studentComponent);
-
-- console.log(app);
-
-```
-
-- Now that we have the component defined, we can instantiate in the index.html file (remember kebab case for the HTML, in this case studentComponent turns in to student-component)
-
-```diff
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Webpack 2.x by sample</title>
-  </head>
-  <body ng-app="myStudentApp">
--   Hello Webpack 2!
-+   <student-component />
-  </body>
-</html>
-
-```
-
-- If we run the sample we can see that the component get's instantiated and rendering properly.
-
-```
-npm start
-```
-
 - Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _template.html_ and add our HTML content.
 
 ### ./src/components/student/template.html
@@ -285,9 +251,57 @@ npm start
 
 ### ./src/components/student/studentComponent.js
 ```diff
-export const studentComponent = {
-- template: '<h1>Student Component</h1>',
-+ template: require('./template.html'),
+import { Component } from '@angular/core';
+
+@Component(
+  {
+    selector: 'student-component',
+-   template: `
+-     <h1>Student Component</h1>
+-   `
++   template: require<string>('./template.html'),
+  }
+)
+class StudentComponent {
+
+}
+
+export {
+  StudentComponent
+}
+
+```
+
+- We see that TypeScript cannot find name `require` because we need to install typings:
+
+```
+npm install @types/webpack-env --save-dev
+```
+
+- And we need to use it as global typings:
+
+### ./tsconfig.json
+```diff
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "noLib": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true,
+    "types": [
+-     "core-js"
++     "core-js",
++     "webpack-env"
+    ]
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules"
+  ]
 }
 
 ```
@@ -336,11 +350,24 @@ npm start
 
 ### ./src/components/student/studentComponent.js
 ```diff
-export const studentComponent = {
-  template: require('./template.html'),
-+ controller: function() {
-+   this.message = 'Hello from students components';
-+ },
+import { Component } from '@angular/core';
+
+@Component(
+  {
+    selector: 'student-component',
+    template: require<string>('./template.html'),
+  }
+)
+class StudentComponent {
++ message: string;
+
++ constructor() {
++   this.message = 'Hello from student component'
++ }
+}
+
+export {
+  StudentComponent
 }
 
 ```
@@ -350,7 +377,7 @@ export const studentComponent = {
 ### ./src/components/student/template.html
 ```diff
 - <h1>Student Component</h1>
-+ <h1>Message: {{$ctrl.message}}</h1>
++ <h1>Message: {{this.message}}</h1>
 ```
 
 - Now if we run the sample we can see the new message in application
@@ -359,4 +386,4 @@ export const studentComponent = {
 npm start
 ```
 
-![result](../../99 Readme Resources/02 Fx/02 Angular/result.png)
+![result](../../99 Readme Resources/02 Fx/03 Angular 2/result.png)

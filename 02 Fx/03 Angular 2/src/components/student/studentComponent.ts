@@ -3,13 +3,15 @@ import { Component } from '@angular/core';
 @Component(
   {
     selector: 'student-component',
-    template: `
-      <h1>Student Component</h1>
-    `
+    template: require<string>('./template.html'),
   }
 )
 class StudentComponent {
+  message: string;
 
+  constructor() {
+    this.message = 'Hello from student component'
+  }
 }
 
 export {
