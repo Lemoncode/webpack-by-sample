@@ -439,3 +439,75 @@ module.exports = {
 - Running `npm start` again:
 
 ![using camelCase](../../99 Readme Resources/03 Misc/04 CSS Modules/using camelCase.png)
+
+- If we take a look to the browser console, we can see how webpack transform css class names:
+
+![browser console](../../99 Readme Resources/03 Misc/04 CSS Modules/browser console.png)
+
+- Finally, let's do an example where we need to add styles to element that has a Bootstrap class:
+
+### ./src/averageComponent.jsx
+```diff
+...
+
+  render() {
+    return (
+      <div>
+        <span className={classNames.resultBackground}>
+          Students average: {this.state.average}
+        </span>
+
++       <span className={`jumbotron ${classNames.resultBackground}`}>
++         Jumbotron students average: {this.state.average}
++       </span>
+      </div>
+    );
+  }
+}
+
+```
+
+- Running `npm start`, it looks a bit weird:
+
+![add jumbotron styles](../../99 Readme Resources/03 Misc/04 CSS Modules/add jumbotron styles.png)
+
+- Let's go to add own styles:
+
+### ./src/averageComponentStyles.scss
+```diff
+$background: teal;
++ $jumbotronBackground: darkseagreen;
+
+.result-background {
+  background-color: $background;
+}
+
++ .jumbotron.result-background {
++   background-color: $jumbotronBackground!important;
++   display: block;
++ }
+
+```
+
+- Running `npm start` nothing changes, why? Due to webpack is transform `local` class names to `'[name]__[local]___[hash:base64:5]'` we need to tell him that jumbotron is a `global` style ([more info](https://webpack.js.org/loaders/css-loader/#-css-modules-https-github-com-css-modules-css-modules-)):
+
+### ./src/averageComponentStyles.scss
+```diff
+$background: teal;
+$jumbotronBackground: darkseagreen;
+
+.result-background {
+  background-color: $background;
+}
+
+- .jumbotron.result-background {
++ :global(.jumbotron).result-background {
+  background-color: $jumbotronBackground!important;
+  display: block;
+}
+
+```
+
+- As result:
+
+![result](../../99 Readme Resources/03 Misc/04 CSS Modules/result.png)
