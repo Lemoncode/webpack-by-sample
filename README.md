@@ -190,7 +190,7 @@ Summary steps:
  - Creating a component (inline HTML).
  - Creating a service.
  - Displaying the component.
- - Creating an exernal HTML template and consuming it.
+ - Creating an external HTML template and consuming it.
 
 ### 03 Angular 2
 
@@ -205,7 +205,7 @@ Summary steps:
  - Creating a component (inline HTML).
  - Creating a service.
  - Displaying the component.
- - Creating an exernal HTML template and consuming it.
+ - Creating an external HTML template and consuming it.
 
 
 ## 03 Misc (other samples)

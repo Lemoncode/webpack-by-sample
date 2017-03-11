@@ -11,7 +11,7 @@ Summary steps:
  - Creating a component (inline HTML).
  - Creating a service.
  - Displaying the component.
- - Creating an exernal HTML template and consuming it.
+ - Creating an external HTML template and consuming it.
 
 # Steps to build it
 

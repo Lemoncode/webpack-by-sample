@@ -72,7 +72,7 @@ npm install webpack --save-dev
 ```
 
 - We will write es6 code but we need to transpile it to es5, in order to do
-that install `babel-core` plus `babe-preset-env` and save it as a dev dependency on the **package.json** file that has been previously generated.
+that install `babel-core` plus `babel-preset-env` and save it as a dev dependency on the **package.json** file that has been previously generated.
 
 ```
 npm install babel-core --save-dev
