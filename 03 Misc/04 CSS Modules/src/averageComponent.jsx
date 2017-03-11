@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {getAvg} from './averageService';
+import classNames from './averageComponentStyles';
 
 export class AverageComponent extends React.Component {
   constructor() {
@@ -18,7 +19,7 @@ export class AverageComponent extends React.Component {
   render() {
     return (
       <div>
-        <span className='result-background'>
+        <span className={classNames.resultBackground}>
           Students average: {this.state.average}
         </span>
       </div>

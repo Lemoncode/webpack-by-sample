@@ -12,9 +12,6 @@ module.exports = {
   },
   entry: {
     app: './students.jsx',
-    appStyles: [
-      './averageComponentStyles.scss',
-    ],
     vendor: [
       'react',
       'react-dom',
@@ -40,7 +37,14 @@ module.exports = {
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', },
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+                camelCase: true,
+              },
+            },
             { loader: 'sass-loader', },
           ],
         }),

@@ -103,4 +103,339 @@ module.exports = {
 
 ![averageComponent styles without css modules](../../99 Readme Resources/03 Misc/04 CSS Modules/averageComponent styles without css modules.png)
 
-- Now we are going to create 
+- Now we are going to create `TotalScoreComponent`:
+
+### ./src/averageService.js
+```diff
+export function getAvg(scores) {
+ return getTotalScore(scores) / scores.length;
+}
+
+- function getTotalScore(scores) {
++ export function getTotalScore(scores) {
+  return scores.reduce((score, count) => {
+    return score + count;
+  });
+}
+
+```
+
+### ./src/totalScoreComponent.jsx
+```javascript
+import * as React from 'react';
+import {getTotalScore} from './averageService';
+
+export class TotalScoreComponent extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      scores: [10, 20, 30, 40, 50],
+      totalScore: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({totalScore: getTotalScore(this.state.scores)});
+  }
+
+  render() {
+    return (
+      <div>
+        <span className='result-background'>
+          Students total score: {this.state.totalScore}
+        </span>
+      </div>
+    );
+  }
+}
+
+```
+
+### ./src/totalScoreComponentStyles.scss
+```css
+$background: indianred;
+
+.result-background {
+  background-color: $background;
+}
+
+```
+
+> NOTE: we declare same class name for TotalScoreComponent
+
+- Using `TotalScoreComponent`:
+
+### ./src/students.jsx
+```diff
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {AverageComponent} from './averageComponent';
++ import {TotalScoreComponent} from './totalScoreComponent';
+
+ReactDOM.render(
+  <div>
+    <h1>Hello from React DOM</h1>
+    <AverageComponent />
++   <TotalScoreComponent />
+  </div>,
+  document.getElementById('root')
+);
+
+```
+
+- And update `webpack.config`:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  entry: {
+    app: './students.jsx',
+    appStyles: [
+      './averageComponentStyles.scss',
++     './totalScoreComponentStyles.scss',
+    ],
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+    ],
+  },
+  ...
+};
+
+```
+
+![totalScoreComponent styles without css modules](../../99 Readme Resources/03 Misc/04 CSS Modules/totalScoreComponent styles without css modules.png)
+
+- As result, averageComponentStyles are overridden by totalScoreComponentStyles. How to solve this? _CSS Modules to the rescue!_
+
+- CSS Modules scope is to isolate different scss files using same css class names. We are going to replace `adding styles via webpack entry point` by `import styles where we need it`. Let's to configure it:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+-   extensions: ['.js', '.jsx'],
++   extensions: ['.js', '.jsx', '.scss'],
+  },
+  entry: {
+    app: './students.jsx',
+-   appStyles: [
+-     './averageComponentStyles.scss',
+-     './totalScoreComponentStyles.scss',
+-   ],
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+    ],
+  },
+  output: {
+    path: path.join(basePath, 'dist'),
+    filename: '[chunkhash].[name].js',
+  },
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+-           { loader: 'css-loader', },
++           {
++             loader: 'css-loader',
++             options: {
++               modules: true,
++               localIdentName: '[name]__[local]___[hash:base64:5]',
++             },
++           },
+            { loader: 'sass-loader', },
+          ],
+        }),
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
+            loader: 'css-loader',
+          },
+        }),
+      },
+      ...
+    ],
+  },
+  ...
+  ],
+};
+
+```
+
+- Updating `AverageComponent`:
+
+### ./src/averageComponent.jsx
+```diff
+import * as React from 'react';
+import {getAvg} from './averageService';
++ import classNames from './averageComponentStyles';
+
+export class AverageComponent extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      scores: [90, 75, 60, 99, 94, 30],
+      average: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({average: getAvg(this.state.scores)});
+  }
+
+  render() {
+    return (
+      <div>
+-       <span className='result-background'>
++       <span className={classNames['result-background']}>
+          Students average: {this.state.average}
+        </span>
+      </div>
+    );
+  }
+}
+
+```
+
+- Updating `TotalScoreComponent`:
+
+### ./src/totalScoreComponent.jsx
+```diff
+import * as React from 'react';
+import {getTotalScore} from './averageService';
++ import classNames from './totalScoreComponentStyles';
+
+export class TotalScoreComponent extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      scores: [10, 20, 30, 40, 50],
+      totalScore: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({totalScore: getTotalScore(this.state.scores)});
+  }
+
+  render() {
+    return (
+      <div>
+-       <span className='result-background'>
++       <span className={classNames['result-background']}>
+          Students total score: {this.state.totalScore}
+        </span>
+      </div>
+    );
+  }
+}
+
+```
+
+![using css modules](../../99 Readme Resources/03 Misc/04 CSS Modules/using css modules.png)
+
+- To avoid reference classNames like `classNames['result-background']`, webpack provides us to transform `kebab case` to `camelCase`:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  module: {
+    ...
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]',
++               camelCase: true,
+              },
+            },
+            { loader: 'sass-loader', },
+          ],
+        }),
+      },
+      ...
+    ],
+  },
+  ...
+};
+
+```
+
+- Updating components:
+
+### ./src/averageComponent.jsx
+```diff
+...
+
+  render() {
+    return (
+      <div>
+-       <span className={classNames['result-background']}>
++       <span className={classNames.resultBackground}>
+          Students average: {this.state.average}
+        </span>
+      </div>
+    );
+  }
+}
+
+```
+
+### ./src/totalScoreComponent.jsx
+```diff
+...
+
+  render() {
+    return (
+      <div>
+-       <span className={classNames['result-background']}>
++       <span className={classNames.resultBackground}>
+          Students total score: {this.state.totalScore}
+        </span>
+      </div>
+    );
+  }
+}
+
+```
+
+- Running `npm start` again:
+
+![using camelCase](../../99 Readme Resources/03 Misc/04 CSS Modules/using camelCase.png)
