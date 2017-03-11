@@ -280,3 +280,8 @@ document.body.appendChild(element);
 ```
 
 - Now webpack knows which `harmony modules` (ES6 modules) are unused. If we run `npm run build:prod`, they won't be included in the build.
+
+### ./dist/...app.js
+```diff
+webpackJsonp([1,2],[function(e,n,t){"use strict";function u(e,n){return e+n}n.a=u},,function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var u=t(0),c=t.i(u.a)(2,2),r=document.createElement("h1");r.innerHTML="Sum result: "+c,document.body.appendChild(r)}],[2]);
+```
