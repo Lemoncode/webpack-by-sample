@@ -223,19 +223,31 @@ Summary steps:
  - Connecting with Webpack.
  - Adding custom rules.
 
-### 02 Tree Shaking
+### 02 Tree Shaking ES6
 
-On of the most interest features that ships Webpack 2 is TreeShaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
-We are going to create a simple sample:
+We will start from sample _01 Styles/03 SASS_ and we are going to create a simple sample in ES6:
 
-- A calculator module where we create an export per basic operatin (sum, substract, mul, div..).
+- A calculator module where we create an export per basic operation (sum, substract, mul, div..).
 
 - A main.js file that will import this calculator module and use only sum operation.
 
 We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
 
-### 03 CSS Modules
+### 03 Tree Shaking TypeScript
+
+On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+
+We will start from sample _02 Fx/00 TypeScript_ and we are going to create a simple sample in TypeScript:
+
+- A calculator module where we create an export per basic operation (sum, substract, mul, div..).
+
+- A main.js file that will import this calculator module and use only sum operation.
+
+We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
+
+### 04 CSS Modules
 
 In this demo we are going to isolate different scss files using same css class names.
 We will learn how to configure it and how to deal with external css class provided by third libraries like Bootstrap.
