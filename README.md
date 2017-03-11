@@ -252,10 +252,10 @@ We will use webpack's 2 tree shaking and check that we end up having a bundle th
 In this demo we are going to isolate different scss files using same css class names.
 We will learn how to configure it and how to deal with external css class provided by third libraries like Bootstrap.
 
-We will start from sample _01 Styles/03 SASS_.
+We will start from sample _02 Fx/01 React_.
 
 Summary steps:
-- Add _02 Fx/01 React_ configuration
 - Update webpack.config.js with CSS Modules config.
-- Create other scss file with same class name.
+- Add scss file with averageComponent styles.
+- Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.
