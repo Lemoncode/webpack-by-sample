@@ -18,9 +18,12 @@
   "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
   "devDependencies": {
     "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.11",
     "css-loader": "^0.26.2",
+    "eslint": "^3.17.1",
+    "eslint-loader": "^1.6.3",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
