@@ -18,7 +18,9 @@ export class AverageComponent extends React.Component {
   render() {
     return (
       <div>
-        <span>Students average: {this.state.average}</span>
+        <span className='result-background'>
+          Students average: {this.state.average}
+        </span>
       </div>
     );
   }

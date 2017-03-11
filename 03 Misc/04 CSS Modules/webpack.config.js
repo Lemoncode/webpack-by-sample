@@ -8,10 +8,13 @@ var basePath = __dirname;
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
   },
   entry: {
     app: './students.jsx',
+    appStyles: [
+      './averageComponentStyles.scss',
+    ],
     vendor: [
       'react',
       'react-dom',
