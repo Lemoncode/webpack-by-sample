@@ -150,6 +150,7 @@ npm install webpack-merge --save-dev
 
 - Let's go to create the `dev` environment configuration:
 
+### ./dev.webpack.config.js
 ```javascript
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./base.webpack.config.js');
@@ -179,3 +180,63 @@ module.exports = function () {
 ```
 
 - Running `npm start`:
+
+![dev config result](../../99 Readme Resources/03 Misc/05 Production Configuration/dev config result.png)
+
+- We are going to create a `build dev` command to see how much size has bundles files without `webpack-dev-server` stuff:
+
+### ./package.json
+```diff
+{
+  ...
+  "scripts": {
+-   "start": "webpack-dev-server --config=dev.webpack.config.js"
++   "start": "webpack-dev-server --config=dev.webpack.config.js",
++   "build:dev": "webpack --config=dev.webpack.config.js"
+  },
+  ...
+}
+
+```
+
+- Running `npm run build:dev`, we can see how vendor bundle size decrease:
+
+![build dev config](../../99 Readme Resources/03 Misc/05 Production Configuration/build dev config.png)
+
+- Let's configure `production` environment:
+
+### ./prod.webpack.config.js
+```javascript
+var webpackMerge = require('webpack-merge');
+var commonConfig = require('./base.webpack.config.js');
+
+module.exports = function () {
+  return webpackMerge(commonConfig, {
+    devtool: 'cheap-module-source-map',
+  });
+}
+
+```
+
+- Add production command script:
+
+### ./package.json
+```diff
+{
+  ...
+  "scripts": {
+    "start": "webpack-dev-server --config=dev.webpack.config.js",
+-   "build:dev": "webpack --config=dev.webpack.config.js"
++   "build:dev": "webpack --config=dev.webpack.config.js",
++   "build:prod": "webpack --config=prod.webpack.config.js"
+  },
+  ...
+}
+
+```
+
+- Running `npm run build:prod`, we can see how all bundle sizes decrease and map files appears:
+
+![cheap source maps configuration](../../99 Readme Resources/03 Misc/05 Production Configuration/cheap source maps configuration.png)
+
+- But

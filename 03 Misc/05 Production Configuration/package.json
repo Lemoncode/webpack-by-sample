@@ -4,7 +4,9 @@
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config=dev.webpack.config.js"
+    "start": "webpack-dev-server --config=dev.webpack.config.js",
+    "build:dev": "webpack --config=dev.webpack.config.js",
+    "build:prod": "webpack --config=prod.webpack.config.js"
   },
   "repository": {
     "type": "git",
