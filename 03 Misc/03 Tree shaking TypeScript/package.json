@@ -20,6 +20,9 @@
   "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
   "devDependencies": {
     "awesome-typescript-loader": "^3.1.2",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-env": "^1.2.1",
     "css-loader": "^0.26.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",

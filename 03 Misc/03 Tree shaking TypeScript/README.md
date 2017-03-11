@@ -278,3 +278,125 @@ document.body.appendChild(element);
 ![build prod error](../../99 Readme Resources/03 Misc/03 Tree shaking TypeScript/build prod error.png)
 
 - What's it going on here? Since we are target to `es6`, TypeScript doesn't transpile backticks to `element.innerHTML = 'Sum result: ' + result;` like babel did in sample [02 Tree Shaking ES6](../02 Tree Shaking ES6/README.md#distappjs-1)
+
+- So next step could be add this configuration:
+
+```
+TypeScript transpile to ES6 files and Babel transpile to ES5 files
+
+      TypeScript            Babel
+.ts ============> ES6 .js =========> ES5 .js
+
+```
+
+- As we know, we need to install:
+
+```
+npm install babel-core babel-preset-env babel-loader --save-dev
+```
+
+- Add `.babelrc` with `ES6 modules` config:
+
+### ./.babelrc
+```diff
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+      },
+    ],
+  ]
+}
+
+```
+
+- And update `webpack.config`:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+-       loader: 'awesome-typescript-loader',
++       use: [
++         { loader: 'babel-loader'},
++         { loader: 'awesome-typescript-loader'},
++       ],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', },
+            { loader: 'sass-loader', },
+          ],
+        }),
+      },
+      ...
+    ],
+  },
+  ...
+};
+
+```
+
+> NOTE: When we load multiple loaders take into account that last loader is executed first. See `sass and css loaders` or `awesome-typescript and babel loaders` as examples.
+
+- Running `npm run build:dev` again, babel transform backticks into `element.innerHTML = 'Sum result: ' + result;`:
+
+### ./dist/...app.js
+```diff
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = sum;
+/* unused harmony export substract */
+/* unused harmony export mul */
+/* unused harmony export div */
+function sum(a, b) {
+    return a + b;
+}
+function substract(a, b) {
+    return a - b;
+}
+function mul(a, b) {
+    return a * b;
+}
+function div(a, b) {
+    return a / b;
+}
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__(0);
+
+var result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
+var element = document.createElement('h1');
+element.innerHTML = 'Sum result: ' + result;
+document.body.appendChild(element);
+
+/***/ })
+```
+
+- If we run `npm run build:prod` again:
+
+### ./dist/...app.js
+```diff
+webpackJsonp([1,2],[function(e,n,t){"use strict";function u(e,n){return e+n}n.a=u},,function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var u=t(0),c=t.i(u.a)(2,2),r=document.createElement("h1");r.innerHTML="Sum result: "+c,document.body.appendChild(r)}],[2]);
+```
