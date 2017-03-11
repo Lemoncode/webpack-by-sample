@@ -269,7 +269,7 @@ We will start from sample _03 Misc/04 CSS Modules_.
 
 Summary steps:
 - Add base webpack config file
-- Add cross-env package to create environment variables.
+- Add webpack-merge package.
 - Add development config file.
 - Add production config file.
-- Add webpack-merge package.
+- Add cross-env package to create environment variables.
