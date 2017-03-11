@@ -33,7 +33,7 @@ npm install
 npm install angular --save
 ```
 
-- We are going to start with a new sample, let's clear up the students.js file and start from scratch. Let's define a simple app.
+- We are going to start with a new sample, let's clear up the students.js file and start from scratch.
 
   - Remove `src/mystyles.scss`.
   - Remove `src/averageService.js`.
@@ -42,7 +42,7 @@ npm install angular --save
 - Now, we can uninstall `jquery` because we don't need for this sample:
 
 ```
-npm uninstall jquery
+npm uninstall jquery --save
 ```
 
 - Let's require angular and create a simple app module, to test that it's Creating the right object we will just dump into the console the app object.
@@ -123,7 +123,7 @@ npm start
 ### ./src/components/student/studentComponent.js
 ```javascript
 export const studentComponent = {
-  template: '<h1>Students Component</h1>',
+  template: '<h1>Student Component</h1>',
 }
 ```
 
@@ -230,7 +230,7 @@ npm start
 export const studentComponent = {
   template: require('./template.html'),
 + controller: function() {
-+   this.message = 'Hello from students components';
++   this.message = 'Hello from student component';
 + },
 }
 

@@ -6,7 +6,12 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true,
+    "types": [
+      "core-js",
+      "webpack-env"
+    ]
   },
   "compileOnSave": false,
   "exclude": [
