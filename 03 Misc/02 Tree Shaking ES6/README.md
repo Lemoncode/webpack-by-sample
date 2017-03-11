@@ -58,7 +58,7 @@ export function div(a, b) {
 
 ```
 
-- Let's add a _index.js_ file that will just make a document.write of the result.
+- Let's add a _index.js_ file that will just make an `h1` of the result.
 
 ### ./src/index.js
 ```javascript
@@ -66,7 +66,10 @@ import {sum} from './calculator';
 
 const result = sum(2, 2);
 
-document.write(`Sum result: ${result}`);
+const element = document.createElement('h1');
+element.innerHTML = `Sum result: ${result}`;
+
+document.body.appendChild(element);
 
 ```
 
@@ -123,3 +126,157 @@ module.exports = {
 };
 
 ```
+
+- To avoid each time we run build delete the dist folder manually, we are going to install a package that does it for us:
+
+```
+npm install rimraf --save-dev
+```
+
+- Finaly we are going to add two commands in `package.json` to run webpack builds:
+
+### ./package.json
+```diff
+{
+  ...
+  "scripts": {
+-   "start": "webpack-dev-server"
++   "start": "webpack-dev-server",
++   "build:dev": "rimraf dist && webpack",
++   "build:prod": "rimraf dist && webpack -p"
+  },
+  ...
+}
+
+```
+
+- Running `npm run build:dev`, we can see in `dist` folder that all methods are imported:
+
+### ./dist/...app.js
+```diff
+...
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.sum = sum;
+exports.substract = substract;
+exports.mul = mul;
+exports.div = div;
+function sum(a, b) {
+  return a + b;
+}
+
+function substract(a, b) {
+  return a - b;
+}
+
+function mul(a, b) {
+  return a * b;
+}
+
+function div(a, b) {
+  return a / b;
+}
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _calculator = __webpack_require__(0);
+
+var result = (0, _calculator.sum)(2, 2);
+
+var element = document.createElement('h1');
+element.innerHTML = 'Sum result: ' + result;
+
+document.body.appendChild(element);
+
+/***/ })
+/******/ ]);
+
+...
+```
+
+- How we can configure to avoid unused modules? We have to take into account that [Webpack 2 Tree Shaking](https://webpack.js.org/guides/tree-shaking/#components/sidebar/sidebar.jsx) comes with a built-in support for ES6 modules (alias harmony modules), that why we need to tell babel to use this kind of modules.
+
+- By default, `babel-preset-env` package has enable transformation [ES6 modules to `commonjs`](http://babeljs.io/docs/plugins/preset-env/#optionsmodules), we need to disable it:
+
+### ./.babelrc
+```diff
+{
+  "presets": [
+-   "env",
++   [
++     "env",
++     {
++       "modules": false,
++     },
++   ],
+  ]
+}
+
+```
+
+> NOTE: We need to wrap `env preset` inside array for add preset options, [example here](http://babeljs.io/docs/plugins/preset-env/#examples-export-with-various-targets).
+
+- Running `npm run build:dev` again:
+
+### ./dist/...app.js
+```diff
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = sum;
+/* unused harmony export substract */
+/* unused harmony export mul */
+/* unused harmony export div */
+function sum(a, b) {
+  return a + b;
+}
+
+function substract(a, b) {
+  return a - b;
+}
+
+function mul(a, b) {
+  return a * b;
+}
+
+function div(a, b) {
+  return a / b;
+}
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__(0);
+
+
+var result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
+
+var element = document.createElement('h1');
+element.innerHTML = 'Sum result: ' + result;
+
+document.body.appendChild(element);
+
+/***/ })
+
+```
+
+- Now webpack knows which `harmony modules` (ES6 modules) are unused. If we run `npm run build:prod`, they won't be included in the build.

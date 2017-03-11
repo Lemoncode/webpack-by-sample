@@ -81,9 +81,9 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   names: ['vendor', 'manifest'],
+    // }),
     new ExtractTextPlugin({
       filename: '[chunkhash].[name].css',
       disable: false,
