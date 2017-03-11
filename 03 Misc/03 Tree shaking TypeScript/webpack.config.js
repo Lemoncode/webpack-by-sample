@@ -11,13 +11,7 @@ module.exports = {
     extensions: ['.js', '.ts']
   },
   entry: {
-    app: './students.ts',
-    appStyles: [
-      './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
+    app: './index.ts',
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
