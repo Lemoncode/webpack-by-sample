@@ -18,7 +18,7 @@
   "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
   "devDependencies": {
     "@types/jquery": "^2.0.40",
-    "awesome-typescript-loader": "^3.0.8",
+    "awesome-typescript-loader": "^3.1.2",
     "css-loader": "^0.26.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",

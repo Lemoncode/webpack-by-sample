@@ -6,6 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var basePath = __dirname;
 
 module.exports = {
+  context: path.join(basePath, 'src'),
   entry: {
     app: './students.js',
     appStyles: [
@@ -15,7 +16,7 @@ module.exports = {
       'jquery',
     ],
     vendorStyles: [
-      './node_modules/bootstrap/dist/css/bootstrap.css',
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
   },
   output: {
@@ -72,7 +73,7 @@ module.exports = {
         test: /\.(png|jpg)$/,
         exclude: /node_modules/,
         loader: 'url-loader?limit=5000',
-      }
+      },
     ],
   },
   // For development https://webpack.js.org/configuration/devtool/#for-development

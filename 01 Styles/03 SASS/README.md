@@ -115,3 +115,35 @@ module.exports = {
 - If we run our app (`npm start`), we can check that now we are getting a blue background instead of a red one.
 
 ![result](../../99 Readme Resources/01 Styles/03 SASS/result.png)
+
+- To keep maintainable our source code, let's move files under `src` folder:
+  - Move to `./src/averageService.js`.
+  - Move to `./src/students.js`.
+  - Move to `./src/index.html`.
+  - Move to `./src/mystyles.scss`.
+
+- And update `webpack.config` to set context path over `src` folder:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
++ context: path.join(basePath, 'src'),
+  entry: {
+    app: './students.js',
+    appStyles: [
+      './mystyles.scss',
+    ],
+    vendor: [
+      'jquery',
+    ],
+    vendorStyles: [
+-     './node_modules/bootstrap/dist/css/bootstrap.css',
++     '../node_modules/bootstrap/dist/css/bootstrap.css',
+    ],
+  },
+  ...
+};
+
+```
