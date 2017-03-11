@@ -8,6 +8,7 @@ We will start from sample _03 Misc/04 CSS Modules_.
 Summary steps:
 - Add base webpack config file
 - Add webpack-merge package.
+- Install rimraf to clean dist folder.
 - Add development config file.
 - Add production config file.
 - Add cross-env package to create environment variables.
@@ -142,6 +143,13 @@ module.exports = {
 
 ```
 
+- To avoid each time we run build delete the dist folder manually, we are going to install a package that does it for us:
+
+```
+npm install rimraf --save-dev
+```
+
+
 - Now it's time to install `webpack-merge` package. This allow us to combine `base.webpack.config` with environment config:
 
 ```
@@ -192,7 +200,7 @@ module.exports = function () {
   "scripts": {
 -   "start": "webpack-dev-server --config=dev.webpack.config.js"
 +   "start": "webpack-dev-server --config=dev.webpack.config.js",
-+   "build:dev": "webpack --config=dev.webpack.config.js"
++   "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js"
   },
   ...
 }
@@ -226,9 +234,9 @@ module.exports = function () {
   ...
   "scripts": {
     "start": "webpack-dev-server --config=dev.webpack.config.js",
--   "build:dev": "webpack --config=dev.webpack.config.js"
-+   "build:dev": "webpack --config=dev.webpack.config.js",
-+   "build:prod": "webpack --config=prod.webpack.config.js"
+-   "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js"
++   "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js",
++   "build:prod": "rimraf dist && webpack --config=prod.webpack.config.js"
   },
   ...
 }
@@ -239,4 +247,36 @@ module.exports = function () {
 
 ![cheap source maps configuration](../../99 Readme Resources/03 Misc/05 Production Configuration/cheap source maps configuration.png)
 
-- But
+- But we need one step over to decrease bundle size. We need to minify and uglify our bundles. To do this, we only need to active `p` flag:
+
+### ./package.json
+```diff
+{
+  ...
+  "scripts": {
+    "start": "webpack-dev-server --config=dev.webpack.config.js",
+    "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js",
+-   "build:prod": "rimraf dist && webpack --config=prod.webpack.config.js"
++   "build:prod": "rimraf dist && webpack -p --config=prod.webpack.config.js"
+  },
+  ...
+}
+
+```
+
+- Running `npm run build:prod`, we can see how bundle sizes decrease considerably:
+
+![prod config result](../../99 Readme Resources/03 Misc/05 Production Configuration/prod config result.png)
+
+### ./dist/...app.js
+```diff
+webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t}var o=n(18),u=r(o),a=n(29),c=r(a),l=n(79),i=n(80);c.render(u.createElement("div",null,u.createElement("h1",null,"Hello from React DOM"),u.createElement(l.AverageComponent,null),u.createElement(i.TotalScoreComponent,null)),document.getElementById("root"))},49:function(e,t,n){"use strict";function r(e){return o(e)/e.length}function o(e){return e.reduce(function(e,t){return
+  ...
+```
+
+### ./dist/..app.css
+```diff
+.averageComponentStyles__result-background___Z3Vf0{background-color:teal}.jumbotron.averageComponentStyles__result-background___Z3Vf0{background-color:#8fbc8f!important;display:block}.totalScoreComponentStyles__result-background___3eH-g{background-color:#cd5c5c}
+/*# sourceMappingURL=5cb91c14c876707fc272.app.css.map*/
+
+```
