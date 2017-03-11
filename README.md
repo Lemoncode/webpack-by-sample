@@ -272,4 +272,3 @@ Summary steps:
 - Add webpack-merge package.
 - Add development config file.
 - Add production config file.
-- Add cross-env package to create environment variables.

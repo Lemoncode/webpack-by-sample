@@ -11,7 +11,6 @@ Summary steps:
 - Install rimraf to clean dist folder.
 - Add development config file.
 - Add production config file.
-- Add cross-env package to create environment variables.
 
 # Steps to build it
 
