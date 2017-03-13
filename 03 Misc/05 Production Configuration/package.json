@@ -23,6 +23,7 @@
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.11",
     "babel-preset-react": "^6.23.0",
+    "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",

@@ -302,3 +302,53 @@ webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esM
 - Running `npm run build:prod`, we can see how `app` sizes decrease a bit more:
 
 ![result with tree shaking](../../99 Readme Resources/03 Misc/05 Production Configuration/result with tree shaking.png)
+
+- About using React in `production` mode with Webpack, [here](https://facebook.github.io/react/docs/optimizing-performance.html) explains you that we only need to add:
+
+```javascript
+new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: JSON.stringify('production')
+  }
+}),
+new webpack.optimize.UglifyJsPlugin()
+```
+
+- So, since [Webpack 2 -p flag](https://webpack.js.org/guides/production-build/#components/sidebar/sidebar.jsx) is doing all of these for us, we don't need to add any configuration more.
+
+- As an optional configuration, we can go one over step and generate gzipped bundles. We need install [compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin):
+
+```
+npm install compression-webpack-plugin --save-dev
+```
+
+- Updating `prod.webpack.config`:
+
+### ./prod.webpack.config.js
+```diff
+var webpackMerge = require('webpack-merge');
++ var CompressionPlugin = require('compression-webpack-plugin');
+var commonConfig = require('./base.webpack.config.js');
+
+module.exports = function () {
+  return webpackMerge(commonConfig, {
+    devtool: 'cheap-module-source-map',
++   plugins: [
++     new CompressionPlugin({
++       asset: '[path].gz[query]',
++       algorithm: 'gzip',
++       minRatio: 0.8,
++     }),
+    ],
+  });
+}
+
+```
+
+- Running `npm run build:prod`, we can see `.gz` files that we can upload to server. This is an optional configuration because it needs an extra configuration in server side:
+
+![result with gzipped bundles](../../99 Readme Resources/03 Misc/05 Production Configuration/result with gzipped bundles.png)
+
+> NOTE: `.map` files or index.html are not gzipping because they have low sizes and compression is not needed.
+
+> _minRatio: Only assets that compress better that this ratio are processed. Defaults to 0.8._
