@@ -279,3 +279,26 @@ webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esM
 /*# sourceMappingURL=5cb91c14c876707fc272.app.css.map*/
 
 ```
+
+- Finally, if we want to decrease the size even more, we can enable Tree Shaking like in [02 Tree Shaking ES6](../02 Tree Shaking ES6/README.md#babelrc) sample:
+
+### ./.babelrc
+```diff
+{
+  "presets": [
+-   "env",
++   [
++     "env",
++     {
++       "modules": false,
++     },
++   ],
+    "react",
+  ]
+}
+
+```
+
+- Running `npm run build:prod`, we can see how `app` sizes decrease a bit more:
+
+![result with tree shaking](../../99 Readme Resources/03 Misc/05 Production Configuration/result with tree shaking.png)
