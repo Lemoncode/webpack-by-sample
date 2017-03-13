@@ -259,3 +259,16 @@ Summary steps:
 - Add scss file with averageComponent styles.
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.
+
+### 05 Production Configuration
+
+In this demo we are going to create different builds for each environment.
+We will learn how to configure it and how to reduce bundle file sizes.
+
+We will start from sample _03 Misc/04 CSS Modules_.
+
+Summary steps:
+- Add base webpack config file
+- Add webpack-merge package.
+- Add development config file.
+- Add production config file.
