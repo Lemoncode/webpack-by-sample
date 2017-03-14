@@ -93,7 +93,7 @@ Our **package.json** file should looks something like:
 {
   "name": "boilerplate",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "description": "Front End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
   "main": "index.js",
   "scripts": {
     "start": "webpack"
