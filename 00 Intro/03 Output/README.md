@@ -143,7 +143,7 @@ module.exports = {
 ![bundle with hash](../../99 Readme Resources/00 Intro/03 Output/bundle with hash.png)
 
 
-- This looks quite well but... we are developers. What would happen if we attempt to debug our web app from the browser? By default we only will be able to debug bundle.js (big file already transpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` cofiguration, right after `output` closing curly bracket:
+- This looks quite well but... we are developers. What would happen if we attempt to debug our web app from the browser? By default we only will be able to debug bundle.js (big file already transpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` configuration, right after `output` closing curly bracket:
 
 ### ./webpack.config.js
 ```diff
