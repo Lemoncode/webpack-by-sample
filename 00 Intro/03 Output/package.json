@@ -1,10 +1,10 @@
 {
-  "name": "boilerplate",
+  "name": "output",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Output",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server -p"
   },
   "repository": {
     "type": "git",
