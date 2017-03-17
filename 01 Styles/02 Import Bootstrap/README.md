@@ -120,7 +120,7 @@ module.exports = {
 
 - If we try to run webpack now we will get errors. Webpack is complaining that it's not able to process fonts that are being used by Bootstrap thus we need to set a font appropriate loader:
 
-![fail to load icons](../../99 Readme Resources/01 Styles/02 Import Bootstrap/fail to load icons.png)
+![fail to load icons](../../99%20Readme%20Resources/01%20Styles/02%20Import%20Bootstrap/fail%20to%20load%20icons.png)
 
 - Let's set up the appropriate font / glyphicon loaders. We will install first [file-loader](https://github.com/webpack/file-loader). It will produce a new file into our build directory (*/dist*) and return the public url.
 
@@ -186,4 +186,4 @@ module.exports = {
 - Let's launch the application (`npm start`) and check that our page is being displayed
 using Bootstrap styles (see [Bootstrap's jumbotron](https://getbootstrap.com/components/#jumbotron)).
 
-![result](../../99 Readme Resources/01 Styles/02 Import Bootstrap/result.png)
+![result](../../99%20Readme%20Resources/01%20Styles/02%20Import%20Bootstrap/result.png)
