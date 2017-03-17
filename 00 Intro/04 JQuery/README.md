@@ -113,7 +113,7 @@ document.write(messageToDisplay);
 
 - Now we can just execute the app (npm start) and check how the background of the page has changed from white to blue.
 
-![blue background](../../99 Readme Resources/00 Intro/04 JQuery/blue background.png)
+![blue background](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/blue%20background.png)
 
 - To finish with this demo, let's face the following case: we want to split the bundle into two, a main one (application level) and a second one that will hold all the third party libraries. To do that we can use the `CommonChunkPlugin`
 (already included in webpack). In this plugin we specify the libraries that are going to be placed in the separate library js under the 'vendor' category.
@@ -166,7 +166,7 @@ module.exports = {
 
 Now if we run `webpack` and take a look to the dist folder we can check that the two bundles have been created.
 
-![split into app and vendor](../../99 Readme Resources/00 Intro/04 JQuery/split into app and vendor.png)
+![split into app and vendor](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/split%20into%20app%20and%20vendor.png)
 
 
 Finally in the generated index.html (under dist) we can check that both scripts have been successfully referenced:
@@ -206,7 +206,7 @@ module.exports = {
 
 - Now we run `npm start`. As we see, output files appears with hash:
 
-![bundle with chunkhash](../../99 Readme Resources/00 Intro/04 JQuery/bundle with chunkhash.png)
+![bundle with chunkhash](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20with%20chunkhash.png)
 
 - If we update our code, for example:
 
@@ -226,7 +226,7 @@ function getTotalScore(scores) {
 
 - `chunkhash` changes again, for app and vendor. That means that we still don't reap the benefits of browser caching because the hash for vendor file changes on every build and the browser will have to reload the file.
 
-![bundle after change code](../../99 Readme Resources/00 Intro/04 JQuery/bundle after change code.png)
+![bundle after change code](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20after%20change%20code.png)
 
 - To prevent this, we need to add [manifest configuration](https://webpack.js.org/guides/code-splitting-libraries/#manifest-file):
 
@@ -249,7 +249,7 @@ module.exports = {
 
 - Now if we restore, previous code and run `npm start` again, it appears `manifest.js` with `chunkhash` too:
 
-![bundle with manifest](../../99 Readme Resources/00 Intro/04 JQuery/bundle with manifest.png)
+![bundle with manifest](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20with%20manifest.png)
 
 - Updating our code again:
 
@@ -269,4 +269,4 @@ function getTotalScore(scores) {
 
 - But this time, vendors doesn't change their hash, so it isn't compiled again and it reduces the time to build solution:
 
-![bundle manifest after change code](../../99 Readme Resources/00 Intro/04 JQuery/bundle manifest after change code.png)
+![bundle manifest after change code](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20manifest%20after%20change%20code.png)

@@ -240,4 +240,4 @@ module.exports = {
 
 - Finally if we run the app we will see the React based functionality in action.
 
-![result](../../99 Readme Resources/02 Fx/01 React/result.png)
+![result](../../99%20Readme%20Resources/02%20Fx/01%20React/result.png)
