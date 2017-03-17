@@ -213,7 +213,7 @@ module.exports = {
 npm start
 ```
 
-![warnings angular core](../../99 Readme Resources/02 Fx/03 Angular 2/warnings angular core.png)
+![warnings angular core](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/warnings%20angular%20core.png)
 
 - To avoid [these warnings](https://github.com/AngularClass/angular2-webpack-starter/issues/993) we can configure our `webpack.config`:
 
@@ -239,7 +239,7 @@ module.exports = {
 
 ```
 
-![result after fix warnings](../../99 Readme Resources/02 Fx/03 Angular 2/result after fix warnings.png)
+![result after fix warnings](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/result%20after%20fix%20warnings.png)
 
 - Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _template.html_ and add our HTML content.
 
@@ -386,4 +386,4 @@ export {
 npm start
 ```
 
-![result](../../99 Readme Resources/02 Fx/03 Angular 2/result.png)
+![result](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/result.png)
