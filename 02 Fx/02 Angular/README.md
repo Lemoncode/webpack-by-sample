@@ -250,4 +250,4 @@ export const studentComponent = {
 npm start
 ```
 
-![result](../../99 Readme Resources/02 Fx/02 Angular/result.png)
+![result](../../99%20Readme%20Resources/02%20Fx/02%20Angular/result.png)
