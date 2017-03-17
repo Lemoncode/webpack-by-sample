@@ -65,7 +65,7 @@ document.write(messageToDisplay);
 can see that the new average function is up and running and has been included in
 the bundle.js file.
 
-![running webpack 2](../../99 Readme Resources/00 Intro/01 Import/result.png)
+![running webpack 2](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
 
 ## Appendix - Playing with import
 
