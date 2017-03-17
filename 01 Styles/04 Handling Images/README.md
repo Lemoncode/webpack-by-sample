@@ -76,7 +76,7 @@ $blue-color: teal;
 
 - And run `npm start`:
 
-![result logo 1](../../99 Readme Resources/01 Styles/04 Handling Images/result logo 1.png)
+![result logo 1](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/result%20logo%201.png)
 
 - That's fine but what if we had already the image referenced from JavaScript file and inserted in HTML by `<div>` with a given "id".
 
@@ -154,8 +154,8 @@ module.exports = {
 
 - Now if run the app (`npm start`) we can check that the first logo is being shown.
 
-![result logo 2](../../99 Readme Resources/01 Styles/04 Handling Images/result logo 2.png)
+![result logo 2](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/result%20logo%202.png)
 
 - Finally if we open the developer tools in our browser we can see that the `src` attribute of the `<img>` has changed:
 
-![browser console](../../99 Readme Resources/01 Styles/04 Handling Images/browser console.png)
+![browser console](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/browser%20console.png)
