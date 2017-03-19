@@ -139,6 +139,7 @@ document.write(messageToDisplay);
   ]
 }
 ```
+- Some editors can highlight that the comma is error, but really it isn't. You can delete the comma but really it's not necessary.
 
 - We can countinue with webpack configuration. Create an empty skeleton on a file named **webpack.config.js**, and indicate the js entry point.
 
