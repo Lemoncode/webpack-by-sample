@@ -1,8 +1,6 @@
 # 04 Handling Images
 
-In this demo we are going to include images in our project in two flavours: via
-JavaScript and via HTML. On the JavaScript side we will see is something
-straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader html-loader
+In this demo we are going to include images in our project in two flavours: via JavaScript and via HTML. On the JavaScript side we will see is quite straightforward (using the same plugins we used for fonts), but for the HTML we will use a new loader html-loader
 
 We will start from sample _01 Styles/03 SASS_.
 
@@ -16,9 +14,9 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _03 SASS_.
+You will need to have nodejs installed in your computer. If you want to follow the steps of this guide you must take as starting point the sample _03 SASS_.
 
-## steps
+## Steps
 
 - `npm install` to install previous sample packages:
 
@@ -78,7 +76,7 @@ $blue-color: teal;
 
 ![result logo 1](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/result%20logo%201.png)
 
-- That's fine but what if we had already the image referenced from JavaScript file and inserted in HTML by `<div>` with a given "id".
+- That's fine but, what if we already had the image referenced from JavaScript file and inserted in HTML by `<div>` with a given "id"?
 
 ### ./index.html
 ```diff
@@ -156,6 +154,6 @@ module.exports = {
 
 ![result logo 2](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/result%20logo%202.png)
 
-- Finally if we open the developer tools in our browser we can see that the `src` attribute of the `<img>` has changed:
+- Finally, if we open the developer tools in our browser we can see that the `src` attribute of the `<img>` has changed:
 
 ![browser console](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/browser%20console.png)
