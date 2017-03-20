@@ -6,7 +6,7 @@ We will learn how to configure it and how to deal with external css class provid
 We will start from sample _02 Fx/01 React_.
 
 Summary steps:
-- Update webpack.config.js with CSS Modules config.
+- Update `webpack.config.js` with CSS Modules config.
 - Add scss file with averageComponent styles.
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.

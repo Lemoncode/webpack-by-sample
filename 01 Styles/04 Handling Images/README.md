@@ -26,7 +26,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- Let's start by making some cleanup in our *index.html*, we are going to remove the Bootstrap's *jumbotron* component and add a `<img>` tag:
+- Let's start by making some cleanup in our *`index.html`*, we are going to remove the Bootstrap's *jumbotron* component and add a `<img>` tag:
 
 ### ./src/index.html
 ```diff
@@ -102,7 +102,7 @@ $blue-color: teal;
 
 ```
 
-- Let's jump into *students.js* and import *logo_2.png* using JavaScript.
+- Let's jump into *`students.js`* and import *`logo_2.png`* using JavaScript.
 Let's place it under a given `<div>`:
 
 ### ./src/students.js
@@ -125,7 +125,7 @@ document.write(messageToDisplay);
 + document.getElementById('imgContainer').appendChild(img);
 ```
 
-- We have already installed *url-loader* plugin, so we only need to configure the extension png/jpeg in the *webpack.config.js* loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
+- We have already installed *url-loader* plugin, so we only need to configure the extension png/jpeg in the *`webpack.config.js`* loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
 
 ### ./webpack.config.js
 ```diff
