@@ -30,11 +30,9 @@ You will need to have Node.js installed in your computer. In order to follow thi
   npm install
   ```
 
-- Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them).
+- Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them). So, add the following content to `averageService.js`:
 
-### ./averageService.js
-
-- Add the following content to `averageService.js`:
+  #### ./averageService.js
 
   ```javascript
   function getTotalScore(scores) {
@@ -47,9 +45,10 @@ You will need to have Node.js installed in your computer. In order to follow thi
     return getTotalScore(scores) / scores.length;
   }
   ```
-### ./students.js
 
 - Now let's update `students.js` to import the previous file and consume it:
+
+  #### ./students.js
 
   ```diff javascript
   - // Let's use some ES6 features
@@ -83,6 +82,8 @@ We have covered a single named export usage in our previous example, but there a
   One popular way is using **`export default`** as the export keyword. This will indicate that, by default, there will be just a **single export per module**. Then, we can directly use an import *alias* (by omitting the curly braces) and this will point out to our default exported member (*averarge* function in our example).
 
   - Default export usage in `averageService.js`:
+    
+    #### ./averageService.js
 
     ```diff
     - export function getAvg(scores) {
@@ -99,6 +100,8 @@ We have covered a single named export usage in our previous example, but there a
     ```
 
   - Default import usage in `students.js`:
+  
+    #### ./students.js
 
     ```diff
     - import {getAvg} from "./averageService";
@@ -117,6 +120,8 @@ We have covered a single named export usage in our previous example, but there a
 Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this example. We can export both using named exports, just by adding the **export** keyword on each function. 
 
   - Multiple exports usage in `averageService.js`:
+    
+    #### ./averageService.js
 
     ```diff
     - export default function getAvg(scores) {
@@ -134,6 +139,8 @@ Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this
 Now, we can import them in several ways into `students.js`:
 
   - Import both members into the current scope:
+
+    #### ./students.js
 
     ```diff
     - import getAvg from "./averageService";
@@ -154,6 +161,8 @@ Now, we can import them in several ways into `students.js`:
     ```  
   
   - Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
+
+    #### ./students.js
 
     ```diff
     - import {getAvg, getTotalScore} from "./averageService";
