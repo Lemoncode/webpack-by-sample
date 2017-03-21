@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "import",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 01 Import",
   "main": "index.js",
   "scripts": {
     "start": "webpack"

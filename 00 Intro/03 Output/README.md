@@ -1,6 +1,6 @@
 # 03 Output
 
-In this sample we are going to setup a dist folder where the webpack bundle and
+In this sample we are going to setup a distribution folder where the webpack bundle and
 main HTML page will be copied to.
 
 We will start from sample _00 Intro/02 Server_,
@@ -16,7 +16,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _02 Server_.
+You will need to have nodejs installed in your computer. If you want to follow this step-by-step guide you will need to take as starting point sample _00 Intro/02 Server_.
 
 ## steps
 
@@ -56,7 +56,7 @@ module.exports = {
 
 - We have the js file under the dist folder, wouldn't it be nice to include the `index.html` into that folder? And what's more wouldn't be great if didn't need to manually inject the script tag pointing to the `bundle.js` file, and let webpack do that for us? (including a hash param to avoid browser caching when new versions are being deployed).
 
-- In order to do that we are going to introduce the concept of [webpack plugin](https://webpack.js.org/configuration/plugins/): plugins allows us to inject custom build steps. Meanwhile loaders (e.g. babel-loader) act file by file (files that match the given extension e.g. js, or ts...), plugins act globally and are executed once. We are going to install a plugin called [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin). In the command prompt, type:
+- In order to do that we are going to introduce the concept of [webpack plugin](https://webpack.js.org/configuration/plugins/): plugins allow us to inject custom build steps. Meanwhile loaders (e.g. babel-loader) act file by file (files that match the given extension e.g. js, or ts...), plugins act globally and are executed once. We are going to install a plugin called [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin). In the command prompt, type:
 
 ```
 npm install html-webpack-plugin --save-dev
@@ -164,7 +164,7 @@ able to browse our original es6 files and place breakpoints / debug.
 
 ![sourcemaps](../../99%20Readme%20Resources/00%20Intro/03%20Output/sourcemaps.png)
 
-- Just to wrap up... a mandatory step on any web app is not minify / obsfuscate the JavaScript files. In order to do that we only need to call webpack adding the param -p
+- Just to wrap up... a mandatory step on any web app is to minify / obsfuscate the JavaScript files. In order to do that we only need to call webpack adding the param -p
 
 ```
 webpack -p
