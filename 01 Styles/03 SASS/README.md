@@ -6,10 +6,10 @@ make the SASS preprocess and then chain it to our css / style pipe.
 We will start from sample _01 Styles/02 Import Bootstrap_.
 
 Summary steps:
- - Rename mystyles.css to scss.
+ - Rename `mystyles.css` to scss.
  - Add some SASS specific code.
  - Install a SASS preprocessor loader.
- - Add this preprocessor to the pipe (update webpack.config.js).
+ - Add this preprocessor to the pipe (update `webpack.config.js`).
 
 # Steps to build it
 
@@ -114,7 +114,7 @@ module.exports = {
 
 - If we run our app (`npm start`), we can check that now we are getting a blue background instead of a red one.
 
-![result](../../99 Readme Resources/01 Styles/03 SASS/result.png)
+![result](../../99%20Readme%20Resources/01%20Styles/03%20SASS/result.png)
 
 - To keep maintainable our source code, let's move files under `src` folder:
   - Move to `./src/averageService.js`.

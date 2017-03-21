@@ -2,13 +2,13 @@
 
 In this demo we will add support for React.
 
-We will start from sample _01 Styles/03 SASS_, install react locally, update the students.js to jsx and include some basic rendering.
+We will start from sample _01 Styles/03 SASS_, install react locally, update the `students.js` to jsx and include some basic rendering.
 
 Summary steps:
  - Install reactjs as a local dependency.
- - Update students.js to students.jsx and update content.
+ - Update `students.js` to `students.jsx` and update content.
  - Let's resolve the jsx extensions and point out the the entry point has changed.
- - Configure the webpack.config.js to support jsx.
+ - Configure the `webpack.config.js` to support jsx.
 
 # Steps to build it
 
@@ -24,7 +24,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- Delete mystyles.scss because we don't need for this sample.
+- Delete `mystyles.scss` because we don't need for this sample.
 
 - And update `webpack.config`:
 
@@ -83,7 +83,7 @@ module.exports = {
 
 ```
 
-- In the *index.html* file let's add a `<div>` that will be the entry
+- In the *`index.html`* file let's add a `<div>` that will be the entry
 point for our React app.
 
 ### ./src/index.html
@@ -193,7 +193,7 @@ npm install babel-preset-react --save-dev
 
 ```
 
-- It's time to update *webpack.config.js*, we will start by adding the resolve *jsx* extension:
+- It's time to update *`webpack.config.js`*, we will start by adding the resolve *jsx* extension:
 
 ### ./webpack.config.js
 ```diff
@@ -240,4 +240,4 @@ module.exports = {
 
 - Finally if we run the app we will see the React based functionality in action.
 
-![result](../../99 Readme Resources/02 Fx/01 React/result.png)
+![result](../../99%20Readme%20Resources/02%20Fx/01%20React/result.png)

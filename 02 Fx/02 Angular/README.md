@@ -33,7 +33,7 @@ npm install
 npm install angular --save
 ```
 
-- We are going to start with a new sample, let's clear up the students.js file and start from scratch.
+- We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
 
   - Remove `src/mystyles.scss`.
   - Remove `src/averageService.js`.
@@ -56,7 +56,7 @@ const app = angular.module('myStudentApp', []);
 console.log(app);
 ```
 
-- The next step is to reference the app in our HTML file, let's open index.html
+- The next step is to reference the app in our HTML file, let's open `index.html`
 
 ### ./src/index.html
 ```diff
@@ -118,7 +118,7 @@ module.exports = {
 npm start
 ```
 
-- Application up and running, let's move forward. We are going to create a new file that will contain a simple component with an inline template, let's create a file called _studentsComponent.js_
+- Application up and running, let's move forward. We are going to create a new file that will contain a simple component with an inline template, let's create a file called _`studentsComponent.js`_
 
 ### ./src/components/student/studentComponent.js
 ```javascript
@@ -141,7 +141,7 @@ const app = angular.module('myStudentApp', []);
 
 ```
 
-- Now that we have the component defined, we can instantiate in the index.html file (remember kebab case for the HTML, in this case studentComponent turns in to student-component)
+- Now that we have the component defined, we can instantiate in the `index.html` file (remember kebab case for the HTML, in this case studentComponent turns in to student-component)
 
 ```diff
 <!DOCTYPE html>
@@ -166,7 +166,7 @@ const app = angular.module('myStudentApp', []);
 npm start
 ```
 
-- Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _template.html_ and add our HTML content.
+- Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _`template.html`_ and add our HTML content.
 
 ### ./src/components/student/template.html
 ```html
@@ -189,7 +189,7 @@ export const studentComponent = {
 npm install raw-loader --save-dev
 ```
 
-- Let's properly configure it into the webpack.config.js
+- Let's properly configure it into the `webpack.config.js`
 
 ```diff
 ...
@@ -250,4 +250,4 @@ export const studentComponent = {
 npm start
 ```
 
-![result](../../99 Readme Resources/02 Fx/02 Angular/result.png)
+![result](../../99%20Readme%20Resources/02%20Fx/02%20Angular/result.png)

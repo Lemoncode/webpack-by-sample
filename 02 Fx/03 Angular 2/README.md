@@ -56,7 +56,7 @@ rxjs zone.js --save
 npm install @types/core-js --save-dev
 ```
 
-- We are going to start with a new sample, let's clear up the students.js file and start from scratch.
+- We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
 
   - Remove `src/mystyles.scss`.
   - Remove `src/averageService.ts`.
@@ -70,7 +70,7 @@ npm uninstall jquery --save
 npm uninstall @types/jquery --save-dev
 ```
 
-- Let's going to create a new file that will contain a simple component with an inline template, let's create a file called _studentsComponent.ts_
+- Let's going to create a new file that will contain a simple component with an inline template, let's create a file called _`studentsComponent.ts`_
 
 ### ./src/components/student/studentComponent.ts
 ```javascript
@@ -116,7 +116,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ```
 
-- The next step is to reference the app in our HTML file, let's open index.html
+- The next step is to reference the app in our HTML file, let's open `index.html`
 
 ### ./src/index.html
 ```diff
@@ -213,7 +213,7 @@ module.exports = {
 npm start
 ```
 
-![warnings angular core](../../99 Readme Resources/02 Fx/03 Angular 2/warnings angular core.png)
+![warnings angular core](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/warnings%20angular%20core.png)
 
 - To avoid [these warnings](https://github.com/AngularClass/angular2-webpack-starter/issues/993) we can configure our `webpack.config`:
 
@@ -239,9 +239,9 @@ module.exports = {
 
 ```
 
-![result after fix warnings](../../99 Readme Resources/02 Fx/03 Angular 2/result after fix warnings.png)
+![result after fix warnings](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/result%20after%20fix%20warnings.png)
 
-- Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _template.html_ and add our HTML content.
+- Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _`template.html`_ and add our HTML content.
 
 ### ./src/components/student/template.html
 ```html
@@ -312,7 +312,7 @@ npm install @types/webpack-env --save-dev
 npm install raw-loader --save-dev
 ```
 
-- Let's properly configure it into the webpack.config.js
+- Let's properly configure it into the `webpack.config.js`
 
 ```diff
 ...
@@ -386,4 +386,4 @@ export {
 npm start
 ```
 
-![result](../../99 Readme Resources/02 Fx/03 Angular 2/result.png)
+![result](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/result.png)

@@ -73,7 +73,7 @@ We are going to create a file `.eslintrc.json` (there are many [file formats opt
 npm run lint
 ```
 
-![eslint errors](../../99 Readme Resources/03 Misc/01 Linting/eslint errors.png)
+![eslint errors](../../99%20Readme%20Resources/03%20Misc/01%20Linting/eslint%20errors.png)
 
 - ESLint throws two parse errors due to use _export_ and _import_ keywords. Import and export functionalities are provided by Babel to work with modules. So it's time to connect ESLint with Babel:
 
@@ -96,7 +96,7 @@ npm install babel-eslint --save-dev
 
 ```
 
-![jquery error](../../99 Readme Resources/03 Misc/01 Linting/jquery error.png)
+![jquery error](../../99%20Readme%20Resources/03%20Misc/01%20Linting/jquery%20error.png)
 
 - As we see, this time `npm run lint` throw a `jquery` errors. To solve this:
 
@@ -119,7 +119,7 @@ npm install babel-eslint --save-dev
 
 - Run `npm run lint`:
 
-![eslint no errors](../../99 Readme Resources/03 Misc/01 Linting/eslint no errors.png)
+![eslint no errors](../../99%20Readme%20Resources/03%20Misc/01%20Linting/eslint%20no%20errors.png)
 
 
 - As we see, this time doesn't throw any errors, it sounds good!. But we want to execute ESLint while we are writing our code. That is, the following step is connect ESLint with Webpack.
@@ -130,7 +130,7 @@ npm install babel-eslint --save-dev
 npm install eslint-loader --save-dev
 ```
 
-- To configure Webpack, we're going to use preloader definition. We make sure ESLint parse the code before any other process. We get a _webpack.config.js_ like this:
+- To configure Webpack, we're going to use preloader definition. We make sure ESLint parse the code before any other process. We get a _`webpack.config.js`_ like this:
 
 ### ./webpack.config.js
 ```diff
@@ -194,7 +194,7 @@ const messageToDisplay = `average score ${averageScore}`;
 
 ```
 
-![typo](../../99 Readme Resources/03 Misc/01 Linting/typo.png)
+![typo](../../99%20Readme%20Resources/03%20Misc/01%20Linting/typo.png)
 
 ## Defining Rules
 
@@ -237,7 +237,7 @@ const messageToDisplay = `average score ${averageScore}`;
 
 - As result, we get this error because the use of _console_ is disallow by default.
 
-![console error](../../99 Readme Resources/03 Misc/01 Linting/console error.png)
+![console error](../../99%20Readme%20Resources/03%20Misc/01%20Linting/console%20error.png)
 
 - We can disable this rule with the following configuration:
 
@@ -261,7 +261,7 @@ const messageToDisplay = `average score ${averageScore}`;
 
 ```
 
-![disabling no-console rule](../../99 Readme Resources/03 Misc/01 Linting/disabling no-console rule.png)
+![disabling no-console rule](../../99%20Readme%20Resources/03%20Misc/01%20Linting/disabling%20no-console%20rule.png)
 
 - Other example is rule named [max-lines](http://eslint.org/docs/rules/max-lines) that it _enforces a maximum number of lines per file, in order to aid in maintainability and reduce complexity._
 
@@ -288,6 +288,6 @@ const messageToDisplay = `average score ${averageScore}`;
 
 _NOTE:_ We can use "error" or 2. But we can read better this line if we use "error" word.
 
-![enable max-lines rule](../../99 Readme Resources/03 Misc/01 Linting/enable max-lines rule.png)
+![enable max-lines rule](../../99%20Readme%20Resources/03%20Misc/01%20Linting/enable%20max-lines%20rule.png)
 
 - To integrate tslinter with React based project we can use [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react) that provides linting for JSX language.

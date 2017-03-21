@@ -4,11 +4,11 @@ In this sample we are going to setup a web project that can be easily managed
 by webpack.
 
 We will setup an initial npm project, give support to ES6, and install webpack.
-Then we will create a helloworld.js sample.
+Then we will create a `helloworld.js` sample.
 
 Summary steps:
  - Prerequisites: Install Node.js
- - Intialize package.json (npm init)
+ - Intialize `package.json` (npm init)
  - Create a simple HTML file.
 
 
@@ -25,14 +25,14 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.x) if they are not already
 - Navigate to the folder where you are going to create the empty project.
 
 - Execute `npm init`, you will be prompted to answer some information request
-about the project (once you have successfully fullfilled them a **package.json**
+about the project (once you have successfully fullfilled them a **`package.json`**
 file we will generated).
 
 ```
 npm init
 ```
 
-![npm init](../../99 Readme Resources/00 Intro/00 Boilerplate/npm init.png)
+![npm init](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/npm%20init.png)
 
 - Install **webpack** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
@@ -40,9 +40,9 @@ npm init
 npm install webpack --save-dev
 ```
 
-- In order to launch webpack, modify the **package.json** file an add the following property `"start": "webpack"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
+- In order to launch webpack, modify the **`package.json`** file an add the following property `"start": "webpack"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
 
- Now, our **package.json** file should looks something like:
+ Now, our **`package.json`** file should looks something like:
 
 ### ./package.json
 ```json
@@ -72,7 +72,7 @@ npm install webpack --save-dev
 ```
 
 - We will write es6 code but we need to transpile it to es5, in order to do
-that install `babel-core` plus `babel-preset-env` and save it as a dev dependency on the **package.json** file that has been previously generated.
+that install `babel-core` plus `babel-preset-env` and save it as a dev dependency on the **`package.json`** file that has been previously generated.
 
 ```
 npm install babel-core --save-dev
@@ -86,7 +86,7 @@ webpack to be able to make use of `babel-core` transpiler.
 npm install babel-loader --save-dev
 ```
 
-Our **package.json** file should looks something like:
+Our **`package.json`** file should looks something like:
 
 ### ./package.json
 ```diff
@@ -118,7 +118,7 @@ Our **package.json** file should looks something like:
 
 ```
 
-- Now create a JavaScript file named **students.js** that will include ES6 syntax.
+- Now create a JavaScript file named **`students.js`** that will include ES6 syntax.
 
 ### ./students.js
 ```javascript
@@ -139,8 +139,9 @@ document.write(messageToDisplay);
   ]
 }
 ```
+- Some editors can highlight that the comma is error, but really it isn't. You can delete the comma but really it's not necessary.
 
-- We can countinue with webpack configuration. Create an empty skeleton on a file named **webpack.config.js**, and indicate the js entry point.
+- We can countinue with webpack configuration. Create an empty skeleton on a file named **`webpack.config.js`**, and indicate the js entry point.
 
 ### ./webpack.config.js
 ```javascript
@@ -179,11 +180,11 @@ module.exports = {
 npm start
 ```
 
-![npm start](../../99 Readme Resources/00 Intro/00 Boilerplate/npm start.png)
+![npm start](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/npm%20start.png)
 
-- We can check that a file named **bundle.js** has been generated.
+- We can check that a file named **`bundle.js`** has been generated.
 
-- if we open the **bundle.js** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **students.js**.
+- if we open the **`bundle.js`** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **`students.js`**.
 
 ### ./bundle.js
 ```javascript
@@ -202,7 +203,7 @@ document.write(messageToDisplay);
 ...
 ```
 
-- Create now a simple HTML file, **index.html**, and include a script tag that will point to our generated **bundle.js** file.
+- Create now a simple HTML file, **`index.html`**, and include a script tag that will point to our generated **`bundle.js`** file.
 
 ### ./index.html
 ```html
@@ -223,4 +224,4 @@ document.write(messageToDisplay);
 ```
 - Now we can click on the html file and see our small piece of code up and running.
 
-![running webpack 2](../../99 Readme Resources/00 Intro/00 Boilerplate/result.png)
+![running webpack 2](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/result.png)

@@ -1,149 +1,183 @@
 # 01 Import
 
-In this sample we are going to start working with es6 modules (import).
+In this sample we are going to start working with ES6 modules (import).
 
-We will start from sample _00 Intro/00 Boilerplate_ and add a new JavaScript that will
+We will start from sample _00 Intro/00 Boilerplate_ and add a new JavaScript service that will
 hold a simple algorithm to calculate the average of an score array.
 
 We will use this JavaScript array into the main students.js file by importing
 it.
 
 Summary steps:
- - Add a new file averageService.js
- - Add an array on students.js
- - Import averageService into students.js
- - Use the averageService inside the students.js code.
- - Transpile and test on index.html
+ - Add a new file `averageService.js`
+ - Add an array on `students.js`
+ - Import averageService into `students.js`
+ - Use the averageService features inside the `students.js` code.
+ - Transpile and test on `index.html`
 
 
 # Steps to build it
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _00 BoilerPlate_.
+You will need to have Node.js installed in your computer. In order to follow this step guides you will also need to take sample _00 BoilerPlate_ as a starting point.
 
-## steps
+## Steps
 
-- `npm install` to install previous sample packages:
+- `npm install` to install previous sample dependencies:
 
-```
-npm install
-```
+  ```
+  npm install
+  ```
 
-- Let's add a new file called averageService.js, this file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them).
+- Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them). So, add the following content to `averageService.js`:
 
-### ./averageService.js
-```javascript
-export function getAvg(scores) {
- return getTotalScore(scores) / scores.length;
-}
+  #### ./averageService.js
 
-function getTotalScore(scores) {
-  return scores.reduce((score, count) => {
-    return score + count;
-  });
-}
+  ```javascript
+  function getTotalScore(scores) {
+    return scores.reduce((score, count) => {
+      return score + count;
+    });
+  }
 
-```
+  export function getAvg(scores) {
+    return getTotalScore(scores) / scores.length;
+  }
+  ```
 
-- Now let's update students.js to import that file and consume it.
+- Now let's update `students.js` to import the previous file and consume it:
 
-```diff
-- // Let's use some ES6 features
-+ import {getAvg} from "./averageService";
+  #### ./students.js
 
-- const averageScore = "90";
-+ const scores = [90, 75, 60, 99, 94, 30];
-+ const averageScore = getAvg(scores);
+  ```diff javascript
+  - // Let's use some ES6 features
+  + import {getAvg} from "./averageService";
 
-const messageToDisplay = `average score ${averageScore}`;
+  - const averageScore = "90";
+  + const scores = [90, 75, 60, 99, 94, 30];
+  + const averageScore = getAvg(scores);
 
-document.write(messageToDisplay);
-```
+  const messageToDisplay = `average score ${averageScore}`;
 
-- Now let's run webpack from the command prompt and click on the index.html, we
-can see that the new average function is up and running and has been included in
-the bundle.js file.
+  document.write(messageToDisplay);
+  ```
 
-![running webpack 2](../../99 Readme Resources/00 Intro/01 Import/result.png)
+- Finally, let's run webpack from the command prompt by executing the following command:
 
-## Appendix - Playing with import
+  ```
+  npm start
+  ```
 
-- There are other ways to use modules, one popular way is to use "export default"
-indicating that by default the average function will be the one exported, then
-we can directly use an import "alias" and this will point out to our averarge function.
+  It is time to double-click on the `index.html` and check that the new average function is up and running and has been included in the `bundle.js` file.
 
-Export default (averageService.js)
+  ![running webpack 2](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
 
-```diff
-- export function getAvg(scores) {
-+ export default function getAvg(scores) {
- return getTotalScore(scores) / scores.length;
-}
+## Appendix - Module alternative usage
 
-function getTotalScore(scores) {
-  return scores.reduce((score, count) => {
-    return score + count;
-  });
-}
+We have covered a single named export usage in our previous example, but there are some other ways to use modules:
 
-```
+### Default export
+  
+  One popular way is using **`export default`** as the export keyword. This will indicate that, by default, there will be just a **single export per module**. Then, we can directly use an import *alias* (by omitting the curly braces) and this will point out to our default exported member (*averarge* function in our example).
 
-Import and usage (students.js)
+  - Default export usage in `averageService.js`:
+    
+    #### ./averageService.js
 
-```diff
-- import {getAvg} from "./averageService";
-+ import getAvg from "./averageService";
+    ```diff
+    - export function getAvg(scores) {
+    + export default function getAvg(scores) {
+    return getTotalScore(scores) / scores.length;
+    }
 
-const scores = [90, 75, 60, 99, 94, 30];
-const averageScore = getAvg(scores);
+    function getTotalScore(scores) {
+      return scores.reduce((score, count) => {
+        return score + count;
+      });
+    }
 
-const messageToDisplay = `average score ${averageScore}`;
+    ```
 
-document.write(messageToDisplay);
-```
+  - Default import usage in `students.js`:
+  
+    #### ./students.js
 
+    ```diff
+    - import {getAvg} from "./averageService";
+    + import getAvg from "./averageService";
 
-- Another way to use import is to use `*` to indicate we want to import everything
-from that module, let's add for the sake of this sample two functions sum and average,
-then on the main students file we can import everything provides an alias and use
-the function we need.
+    const scores = [90, 75, 60, 99, 94, 30];
+    const averageScore = getAvg(scores);
 
-Several Exports (AverageService)
+    const messageToDisplay = `average score ${averageScore}`;
 
-```diff
-- export default function getAvg(scores) {
-+ export function getAvg(scores) {
- return getTotalScore(scores) / scores.length;
-}
+    document.write(messageToDisplay);
+    ```
 
-- function getTotalScore(scores) {
-+ export function getTotalScore(scores) {
-  return scores.reduce((score, count) => {
-    return score + count;
-  });
-}
+### Multiple named exports
 
+Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this example. We can export both using named exports, just by adding the **export** keyword on each function. 
 
-```
+  - Multiple exports usage in `averageService.js`:
+    
+    #### ./averageService.js
 
-Import * and usage sum + average
+    ```diff
+    - export default function getAvg(scores) {
+    + export function getAvg(scores) {
+    return getTotalScore(scores) / scores.length;
+    }
 
-```diff
-- import getAvg from "./averageService";
-+ import * as averageService from "./averageService";
+    - function getTotalScore(scores) {
+    + export function getTotalScore(scores) {
+      return scores.reduce((score, count) => {
+        return score + count;
+      });
+    }
+    ```
+Now, we can import them in several ways into `students.js`:
 
-const scores = [90, 75, 60, 99, 94, 30];
-- const averageScore = getAvg(scores);
-+ const averageScore = averageService.getAvg(scores);
-+ const totalScore = averageService.getTotalScore(scores);
+  - Import both members into the current scope:
 
-- const messageToDisplay = `average score ${averageScore}`;
-+ const messageToDisplayAvg = `average score ${averageScore} `;
-+ const messageToDisplayTotal = `total score ${totalScore}`;
+    #### ./students.js
 
-- document.write(messageToDisplay);
-+ document.write(messageToDisplayAvg);
-+ document.write(messageToDisplayTotal);
+    ```diff
+    - import getAvg from "./averageService";
+    + import {getAvg, getTotalScore} from "./averageService";
 
-```
+    const scores = [90, 75, 60, 99, 94, 30];
+    const averageScore = getAvg(scores);
+    + const totalScore = getTotalScore(scores);
+
+    - const messageToDisplay = `average score ${averageScore}`;
+    + const messageToDisplayAvg = `average score ${averageScore} `;
+    + const messageToDisplayTotal = `total score ${totalScore}`;
+
+    - document.write(messageToDisplay);
+    + document.write(messageToDisplayAvg);
+    + document.write(messageToDisplayTotal);
+
+    ```  
+  
+  - Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
+
+    #### ./students.js
+
+    ```diff
+    - import {getAvg, getTotalScore} from "./averageService";
+    + import * as averageService from "./averageService";
+
+    const scores = [90, 75, 60, 99, 94, 30];
+    - const averageScore = getAvg(scores);
+    - const totalScore = getTotalScore(scores);
+    + const averageScore = averageService.getAvg(scores);
+    + const totalScore = averageService.getTotalScore(scores);
+
+    const messageToDisplayAvg = `average score ${averageScore} `;
+    const messageToDisplayTotal = `total score ${totalScore}`;
+
+    document.write(messageToDisplayAvg);
+    document.write(messageToDisplayTotal);
+
+    ```

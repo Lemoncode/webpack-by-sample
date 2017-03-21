@@ -188,7 +188,7 @@ module.exports = function () {
 
 - Running `npm start`:
 
-![dev config result](../../99 Readme Resources/03 Misc/05 Production Configuration/dev config result.png)
+![dev config result](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/dev%20config%20result.png)
 
 - We are going to create a `build dev` command to see how much size has bundles files without `webpack-dev-server` stuff:
 
@@ -208,7 +208,7 @@ module.exports = function () {
 
 - Running `npm run build:dev`, we can see how vendor bundle size decrease:
 
-![build dev config](../../99 Readme Resources/03 Misc/05 Production Configuration/build dev config.png)
+![build dev config](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/build%20dev%20config.png)
 
 - Let's configure `production` environment:
 
@@ -244,7 +244,7 @@ module.exports = function () {
 
 - Running `npm run build:prod`, we can see how all bundle sizes decrease and map files appears:
 
-![cheap source maps configuration](../../99 Readme Resources/03 Misc/05 Production Configuration/cheap source maps configuration.png)
+![cheap source maps configuration](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/cheap%20source%20maps%20configuration.png)
 
 - But we need one step over to decrease bundle size. We need to minify and uglify our bundles. To do this, we only need to active `p` flag:
 
@@ -265,7 +265,7 @@ module.exports = function () {
 
 - Running `npm run build:prod`, we can see how bundle sizes decrease considerably:
 
-![prod config result](../../99 Readme Resources/03 Misc/05 Production Configuration/prod config result.png)
+![prod config result](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/prod%20config%20result.png)
 
 ### ./dist/...app.js
 ```diff
@@ -280,7 +280,7 @@ webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esM
 
 ```
 
-- Finally, if we want to decrease the size even more, we can enable Tree Shaking like in [02 Tree Shaking ES6](../02 Tree Shaking ES6/README.md#babelrc) sample:
+- Finally, if we want to decrease the size even more, we can enable Tree Shaking like in [02 Tree Shaking ES6](../02%20Tree%20Shaking%20ES6/README.md#babelrc) sample:
 
 ### ./.babelrc
 ```diff
@@ -301,7 +301,7 @@ webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esM
 
 - Running `npm run build:prod`, we can see how `app` sizes decrease a bit more:
 
-![result with tree shaking](../../99 Readme Resources/03 Misc/05 Production Configuration/result with tree shaking.png)
+![result with tree shaking](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/result%20with%20tree%20shaking.png)
 
 - About using React in `production` mode with Webpack, [here](https://facebook.github.io/react/docs/optimizing-performance.html) explains you that we only need to add:
 
@@ -347,8 +347,8 @@ module.exports = function () {
 
 - Running `npm run build:prod`, we can see `.gz` files that we can upload to server. This is an optional configuration because it needs an extra configuration in server side:
 
-![result with gzipped bundles](../../99 Readme Resources/03 Misc/05 Production Configuration/result with gzipped bundles.png)
+![result with gzipped bundles](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/result%20with%20gzipped%20bundles.png)
 
-> NOTE: `.map` files or index.html are not gzipping because they have low sizes and compression is not needed.
+> NOTE: `.map` files or `index.html` are not gzipping because they have low sizes and compression is not needed.
 
 > _minRatio: Only assets that compress better that this ratio are processed. Defaults to 0.8._

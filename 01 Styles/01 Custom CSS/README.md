@@ -27,7 +27,7 @@ npm install
 ```
 
 - Now let's create a simple CSS file that will add a red background when
-used on some e.g. div. (we will name it mystyles.css):
+used on some e.g. div. (we will name it `mystyles.css`):
 
 ### ./mystyles.css
 ```css
@@ -36,7 +36,7 @@ used on some e.g. div. (we will name it mystyles.css):
 }
 ```
 
-- And now we can just use this style directly in our HTML file (so far so good, if we run this project now we won't see this styles applied, we have to go through some webpack configuration), let's update index.html
+- And now we can just use this style directly in our HTML file (so far so good, if we run this project now we won't see this styles applied, we have to go through some webpack configuration), let's update `index.html`
 
 ### ./index.html
 ```diff
@@ -128,11 +128,11 @@ module.exports = {
 - Now we can just execute the app (npm start) and check how the red background is
 being displayed on the div we have chosen.
 
-![red background result](../../99 Readme Resources/01 Styles/01 Custom CSS/red background result.png)
+![red background result](../../99%20Readme%20Resources/01%20Styles/01%20Custom%20CSS/red%20background%20result.png)
 
 - If we run `webpack` and take a look at console, we can see that appStyles are bundling as `.js` file. We need take care about size here because `.js` file is weightier than `.css`files.
 
-![appStyles in console](../../99 Readme Resources/01 Styles/01 Custom CSS/appStyles in console.png)
+![appStyles in console](../../99%20Readme%20Resources/01%20Styles/01%20Custom%20CSS/appStyles%20in%20console.png)
 
 - Opening `appStyles.js` file, we can see that has about 316 lines of code, where we can see:
 
@@ -234,7 +234,7 @@ module.exports = {
 
 - Running `webpack` again, it split into two files `appStyles.js` and `appStyles.css` and how to size decrease:
 
-  ![appStyles js and css in console](../../99 Readme Resources/01 Styles/01 Custom CSS/appStyles js and css in console.png)
+  ![appStyles js and css in console](../../99%20Readme%20Resources/01%20Styles/01%20Custom%20CSS/appStyles%20js%20and%20css%20in%20console.png)
 
 - Extract text plugin removes most of code in `appStyles.js` (only have 19 line of code) and create `appStyles.css`:
 

@@ -6,7 +6,7 @@ We will learn how to configure it and how to deal with external css class provid
 We will start from sample _02 Fx/01 React_.
 
 Summary steps:
-- Update webpack.config.js with CSS Modules config.
+- Update `webpack.config.js` with CSS Modules config.
 - Add scss file with averageComponent styles.
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.
@@ -101,7 +101,7 @@ module.exports = {
 
 ```
 
-![averageComponent styles without css modules](../../99 Readme Resources/03 Misc/04 CSS Modules/averageComponent styles without css modules.png)
+![averageComponent styles without css modules](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/averageComponent%20styles%20without%20css%20modules.png)
 
 - Now we are going to create `TotalScoreComponent`:
 
@@ -214,7 +214,7 @@ module.exports = {
 
 ```
 
-![totalScoreComponent styles without css modules](../../99 Readme Resources/03 Misc/04 CSS Modules/totalScoreComponent styles without css modules.png)
+![totalScoreComponent styles without css modules](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/totalScoreComponent%20styles%20without%20css%20modules.png)
 
 - As result, averageComponentStyles are overridden by totalScoreComponentStyles. How to solve this? _CSS Modules to the rescue!_
 
@@ -360,7 +360,7 @@ export class TotalScoreComponent extends React.Component {
 
 ```
 
-![using css modules](../../99 Readme Resources/03 Misc/04 CSS Modules/using css modules.png)
+![using css modules](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/using%20css%20modules.png)
 
 - To avoid reference classNames like `classNames['result-background']`, webpack provides us to transform `kebab case` to `camelCase`:
 
@@ -438,11 +438,11 @@ module.exports = {
 
 - Running `npm start` again:
 
-![using camelCase](../../99 Readme Resources/03 Misc/04 CSS Modules/using camelCase.png)
+![using camelCase](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/using%20camelCase.png)
 
 - If we take a look to the browser console, we can see how webpack transform css class names:
 
-![browser console](../../99 Readme Resources/03 Misc/04 CSS Modules/browser console.png)
+![browser console](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/browser%20console.png)
 
 - Finally, let's do an example where we need to add styles to element that has a Bootstrap class:
 
@@ -469,7 +469,7 @@ module.exports = {
 
 - Running `npm start`, it looks a bit weird:
 
-![add jumbotron styles](../../99 Readme Resources/03 Misc/04 CSS Modules/add jumbotron styles.png)
+![add jumbotron styles](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/add%20jumbotron%20styles.png)
 
 - Let's go to add own styles:
 
@@ -510,4 +510,4 @@ $jumbotronBackground: darkseagreen;
 
 - As result:
 
-![result](../../99 Readme Resources/03 Misc/04 CSS Modules/result.png)
+![result](../../99%20Readme%20Resources/03%20Misc/04%20CSS%20Modules/result.png)
