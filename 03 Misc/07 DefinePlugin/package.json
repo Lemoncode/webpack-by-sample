@@ -1,0 +1,48 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lemoncode/webpack-2.x-by-sample.git"
+  },
+  "author": "Lemoncode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lemoncode/webpack-2.x-by-sample/issues"
+  },
+  "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
+  "devDependencies": {
+    "@types/node": "^7.0.8",
+    "@types/webpack-env": "^1.13.0",
+    "awesome-typescript-loader": "^3.1.2",
+    "css-loader": "^0.26.2",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.0",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
+    "typescript": "^2.2.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "@angular/common": "^2.4.9",
+    "@angular/compiler": "^2.4.9",
+    "@angular/core": "^2.4.9",
+    "@angular/platform-browser": "^2.4.9",
+    "@angular/platform-browser-dynamic": "^2.4.9",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.2.0",
+    "zone.js": "^0.7.8"
+  }
+}
