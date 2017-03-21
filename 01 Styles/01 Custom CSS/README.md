@@ -27,7 +27,7 @@ npm install
 ```
 
 - Now let's create a simple CSS file that will add a red background when
-used on some e.g. div. (we will name it mystyles.css):
+used on some e.g. div. (we will name it `mystyles.css`):
 
 ### ./mystyles.css
 ```css
@@ -36,7 +36,7 @@ used on some e.g. div. (we will name it mystyles.css):
 }
 ```
 
-- And now we can just use this style directly in our HTML file (so far so good, if we run this project now we won't see this styles applied, we have to go through some webpack configuration), let's update index.html
+- And now we can just use this style directly in our HTML file (so far so good, if we run this project now we won't see this styles applied, we have to go through some webpack configuration), let's update `index.html`
 
 ### ./index.html
 ```diff

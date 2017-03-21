@@ -6,7 +6,7 @@ We will start from sample _01 Styles/03 SASS_ and we are going to create a simpl
 
 - A calculator module where we create an export per basic operation (sum, substract, mul, div..).
 
-- A main.js file that will import this calculator module and use only sum operation.
+- A `main.js` file that will import this calculator module and use only sum operation.
 
 We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
 
@@ -24,7 +24,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- We are going to start with a new sample, let's clear up the students.js file and start from scratch.
+- We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
 
   - Remove `src/mystyles.scss`.
   - Remove `src/averageService.js`.
@@ -36,7 +36,7 @@ npm install
 npm uninstall jquery --save
 ```
 
-- First create a file called _calculator.js_ and export four functions:
+- First create a file called _`calculator.js`_ and export four functions:
 
 ### ./src/calculator.js
 ```javascript
@@ -58,7 +58,7 @@ export function div(a, b) {
 
 ```
 
-- Let's add a _index.js_ file that will just make an `h1` of the result.
+- Let's add a _`index.js`_ file that will just make an `h1` of the result.
 
 ### ./src/index.js
 ```javascript

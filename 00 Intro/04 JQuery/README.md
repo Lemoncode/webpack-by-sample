@@ -11,13 +11,13 @@ Summary steps:
  - Install jquery via npm.
  - Setup a global alias ($).
  - Create some sample code using this library.
- - Break into two bundles app.js and vendor.js.  
+ - Break into two bundles `app.js` and `vendor.js`.  
 
 # Steps to build it
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _03 Output_.
+Prerequisites, you will need to have nodejs installed on your computer. If you want to follow this guide steps you will need to take as starting point sample _03 Output_.
 
 ## steps
 
@@ -27,7 +27,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- Let's start by downloading the jquery library via npm. In this case we will execute the following command from the command prompt ```npm install jquery --save```.
+- Let's start by downloading the jquery library via npm. In this case we will execute the following command on the command prompt ```npm install jquery --save```.
 **note down**: this time we are not adding the `-dev` suffix to the parameter, this time the jquery package is a dependency of the web app not of the build process.
 
 ```
@@ -94,7 +94,7 @@ module.exports = {
 
 ```
 
-- Now it's ready to use. Just to test it, let's change the background color of the page body to blue. Let's change the background of the body element using jquery:
+- Now it's ready to be used. Just to test it, let's change the background color of the page body to blue. Let's change the background of the body element using jquery:
 
 ### ./students.js
 ```diff
@@ -111,7 +111,7 @@ document.write(messageToDisplay);
 
 ```
 
-- Now we can just execute the app (npm start) and check how the background of the page has changed from white to blue.
+- Now we can just execute the app (```npm start```) and check how the background of the page has changed from white to blue.
 
 ![blue background](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/blue%20background.png)
 
@@ -169,7 +169,7 @@ Now if we run `webpack` and take a look to the dist folder we can check that the
 ![split into app and vendor](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/split%20into%20app%20and%20vendor.png)
 
 
-Finally in the generated index.html (under dist) we can check that both scripts have been successfully referenced:
+Finally in the generated `index.html` (under dist) we can check that both scripts have been successfully referenced:
 
 ### ./dist/index.html
 ```diff
@@ -186,7 +186,7 @@ Finally in the generated index.html (under dist) we can check that both scripts 
 </html>
 ```
 
-- Next step can be add `[chunkhash]` tag to output file name, to see how webpack is dealing with builds when we don't change content of the files.
+- Next step can be to add `[chunkhash]` tag to output file name, to see how webpack is dealing with builds when we don't change content of the files.
 
 ### ./webpack.config.js
 ```diff
@@ -204,7 +204,7 @@ module.exports = {
 
 ```
 
-- Now we run `npm start`. As we see, output files appears with hash:
+- Now we run `npm start`. As we see, output files appear with hash:
 
 ![bundle with chunkhash](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20with%20chunkhash.png)
 
@@ -247,7 +247,7 @@ module.exports = {
 
 ```
 
-- Now if we restore, previous code and run `npm start` again, it appears `manifest.js` with `chunkhash` too:
+- Now if we restore the previous code and run `npm start` again, `manifest.js` appears with `chunkhash` too:
 
 ![bundle with manifest](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20with%20manifest.png)
 
@@ -267,6 +267,6 @@ function getTotalScore(scores) {
 
 ```
 
-- But this time, vendors doesn't change their hash, so it isn't compiled again and it reduces the time to build solution:
+- But this time, vendor doesn't change its hash, so it isn't compiled again and it reduces the time to build solution:
 
 ![bundle manifest after change code](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20manifest%20after%20change%20code.png)

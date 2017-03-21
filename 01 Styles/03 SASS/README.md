@@ -6,10 +6,10 @@ make the SASS preprocess and then chain it to our css / style pipe.
 We will start from sample _01 Styles/02 Import Bootstrap_.
 
 Summary steps:
- - Rename mystyles.css to scss.
+ - Rename `mystyles.css` to scss.
  - Add some SASS specific code.
  - Install a SASS preprocessor loader.
- - Add this preprocessor to the pipe (update webpack.config.js).
+ - Add this preprocessor to the pipe (update `webpack.config.js`).
 
 # Steps to build it
 

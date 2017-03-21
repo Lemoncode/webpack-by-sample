@@ -1,22 +1,22 @@
 # 03 Output
 
-In this sample we are going to setup a dist folder where the webpack bundle and
+In this sample we are going to setup a distribution folder where the webpack bundle and
 main HTML page will be copied to.
 
 We will start from sample _00 Intro/02 Server_,
 
 Summary steps:
- - Redirect output (bundle.js) to "dist" folder.
- - Include into the build proccess: copying the index.html file to "dist" folder
- - Let webpack include the bundle.js script into the index.html file.
+ - Redirect output (`bundle.js`) to "dist" folder.
+ - Include into the build proccess: copying the `index.html` file to "dist" folder
+ - Let webpack include the `bundle.js` script into the `index.html` file.
  - Add map support in order to enable ES6 files to be debugged directly on the browser.
- - Generate a minified version of the bundle.js.
+ - Generate a minified version of the `bundle.js`.
 
 # Steps to build it
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _02 Server_.
+You will need to have nodejs installed in your computer. If you want to follow this step-by-step guide you will need to take as starting point sample _00 Intro/02 Server_.
 
 ## steps
 
@@ -26,7 +26,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- It's not a good idea to mix source code with generated one (bundle), ideally this generated code should be placed under a separate folder (let's name it dist). In order to setup this we have to indicate webpack the output folder. First we will require the "path" package on top of our `webpack.config.js` file just to get some helpers to manipulate paths. We will also create a member variable that will hold the basePath (current path where webpack.config is being placed):
+- It's not a good idea to mix source code with generated one (bundle), ideally this generated code should be placed under a separate folder (let's name it dist). In order to setup this we have to indicate webpack the output folder. First we will require the "path" package on top of our `webpack.config.js` file just to get some helpers to manipulate paths. We will also create a member variable that will hold the basePath (current path where `webpack.config` is being placed):
 
 ### ./webpack.config.js
 ```diff
@@ -54,15 +54,15 @@ module.exports = {
   ...
 ```
 
-- We have the js file under the dist folder, wouldn't it be nice to include the index.html into that folder? And what's more wouldn't be great if didn't need to manually inject the script tag pointing to the bundle.js file, and let webpack do that for us? (including a hash param to avoid browser caching when new versions are being deployed).
+- We have the js file under the dist folder, wouldn't it be nice to include the `index.html` into that folder? And what's more wouldn't be great if didn't need to manually inject the script tag pointing to the `bundle.js` file, and let webpack do that for us? (including a hash param to avoid browser caching when new versions are being deployed).
 
-- In order to do that we are going to introduce the concept of [webpack plugin](https://webpack.js.org/configuration/plugins/): plugins allows us to inject custom build steps. Meanwhile loaders (e.g. babel-loader) act file by file (files that match the given extension e.g. js, or ts...), plugins act globally and are executed once. We are going to install a plugin called [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin). In the command prompt, type:
+- In order to do that we are going to introduce the concept of [webpack plugin](https://webpack.js.org/configuration/plugins/): plugins allow us to inject custom build steps. Meanwhile loaders (e.g. babel-loader) act file by file (files that match the given extension e.g. js, or ts...), plugins act globally and are executed once. We are going to install a plugin called [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin). In the command prompt, type:
 
 ```
 npm install html-webpack-plugin --save-dev
 ```
 
-- Let's remove from our base index.html the script tag:
+- Let's remove from our base `index.html` the script tag:
 
 ### ./index.html
 ```diff
@@ -82,7 +82,7 @@ npm install html-webpack-plugin --save-dev
 
 ```
 
-- This plugin (html-webpack-plugin) will take as template input our index.html, and we will point an output destination (index.html under dist folder). The plugin will copy index.html into destination and inject the script tag including a hash tag to avoid browser caching when new versions are being deployed. Once we have installed it, we need to require it on top of our webpack.config.js file:
+- This plugin (html-webpack-plugin) will take as template input our `index.html`, and we will point an output destination (`index.html` under dist folder). The plugin will copy `index.html` into destination and inject the script tag including a hash tag to avoid browser caching when new versions are being deployed. Once we have installed it, we need to require it on top of our `webpack.config.js` file:
 
 ### ./webpack.config.js
 ```diff
@@ -98,7 +98,7 @@ module.exports = {
 ```
 
 - In order to configure it we have to add the following section
-on our webpack.config.js (right after modules definition).
+on our `webpack.config.js` (right after modules definition).
 
 ### ./webpack.config.js
 ```diff
@@ -119,7 +119,7 @@ module.exports = {
 ```
 
 
-- Now if we run webpack we will realize that index.html is copied under the dist folder and the script tag is automatically being generated. There is only one caveat... we are not getting any additional hash param to avoid browser caching, we can do that by setting the option hash to true:
+- Now if we run webpack we will realize that `index.html` is copied under the dist folder and the script tag is automatically being generated. There is only one caveat... we are not getting any additional hash param to avoid browser caching, we can do that by setting the option hash to true:
 
 ### ./webpack.config.js
 ```diff
@@ -143,7 +143,7 @@ module.exports = {
 ![bundle with hash](../../99%20Readme%20Resources/00%20Intro/03%20Output/bundle%20with%20hash.png)
 
 
-- This looks quite well but... we are developers. What would happen if we attempt to debug from the browser our web app? By default we only will be able to debug bundle.js (big file already transpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` cofiguration, right after `output` closing curly bracket, we can include this line:
+- This looks quite well but... we are developers. What would happen if we attempt to debug from the browser our web app? By default we only will be able to debug `bundle.js` (big file already transpiled to es5), if we need to pinpoint issues and debug step by step this is far from ideal. Is there a way to let the browser link our original files and let us debug directly on es6 mode? The answer is yes, we only need to add a line of code to our `webpack.config` cofiguration, right after `output` closing curly bracket, we can include this line:
 
 ### ./webpack.config.js
 ```diff
@@ -164,12 +164,12 @@ able to browse our original es6 files and place breakpoints / debug.
 
 ![sourcemaps](../../99%20Readme%20Resources/00%20Intro/03%20Output/sourcemaps.png)
 
-- Just to wrap up... a mandatory step on any web app is not minify / obsfuscate the JavaScript files. In order to do that we only need to call webpack adding the param -p
+- Just to wrap up... a mandatory step on any web app is to minify / obsfuscate the JavaScript files. In order to do that we only need to call webpack adding the param -p
 
 ```
 webpack -p
 ```
 
-If we open the generated bundle.js file we will realize that the new version has been minified.
+If we open the generated `bundle.js` file we will realize that the new version has been minified.
 
 ![minified bundle](../../99%20Readme%20Resources/00%20Intro/03%20Output/minified%20bundle.png)

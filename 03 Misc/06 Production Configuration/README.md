@@ -1,4 +1,4 @@
-# 05 Production Configuration
+# 06 Production Configuration
 
 In this demo we are going to create different builds for each environment.
 We will learn how to configure it and how to reduce bundle file sizes.
@@ -349,6 +349,6 @@ module.exports = function () {
 
 ![result with gzipped bundles](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/result%20with%20gzipped%20bundles.png)
 
-> NOTE: `.map` files or index.html are not gzipping because they have low sizes and compression is not needed.
+> NOTE: `.map` files or `index.html` are not gzipping because they have low sizes and compression is not needed.
 
 > _minRatio: Only assets that compress better that this ratio are processed. Defaults to 0.8._

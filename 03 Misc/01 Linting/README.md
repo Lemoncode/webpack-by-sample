@@ -130,7 +130,7 @@ npm install babel-eslint --save-dev
 npm install eslint-loader --save-dev
 ```
 
-- To configure Webpack, we're going to use preloader definition. We make sure ESLint parse the code before any other process. We get a _webpack.config.js_ like this:
+- To configure Webpack, we're going to use preloader definition. We make sure ESLint parse the code before any other process. We get a _`webpack.config.js`_ like this:
 
 ### ./webpack.config.js
 ```diff
