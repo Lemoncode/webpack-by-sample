@@ -4,7 +4,7 @@
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Output",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server -p"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
