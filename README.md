@@ -1,6 +1,6 @@
 # Webpack 2.x by sample
 
-Learn webpack by sample, each of the samples contains a readme.md file that
+Learn webpack by sample, each of the samples contains a `readme.md` file that
 indicates the purpose of the sample plus an step by step guide to reproduce it.
 
 The Lemoncode Frontend Master Students are working on a review process, if you want to cooperate in this process or add more useful samples don't hesitate to contact us, fork the project and asking for PR once ready.
@@ -16,10 +16,10 @@ by webpack.
 
 We will setup an initial npm project, give support to ES6, and install webpack.
 
-We will create a hellword.js sample.
+We will create a `hellword.js` sample.
 
 Summary steps:
- - Intialize package.json (npm init)
+ - Intialize `package.json` (npm init)
  - Create a simple HTML file.
 
 ### 01 Import
@@ -29,7 +29,7 @@ In this sample we are going to start working with ES6 modules (import).
 We will start from sample _00 Intro/00 Boilerplate_ and add a new JavaScript service that will
 hold a simple algorithm to calculate the average of an score array.
 
-We will use this JavaScript array into the main students.js file by importing
+We will use this JavaScript array into the main `students.js` file by importing
 it.
 
 Summary steps:
@@ -44,18 +44,18 @@ Summary steps:
 
 In this sample we are going to enter into "dev mode". Working with files service
 is not ideal when you are developing a web application, we will learn how to launch
-a lite web server, how deploy our bundle into a dist folder (including index.html)
+a lite web server, how deploy our bundle into a dist folder (including `index.html`)
 , how to debug our es6 code directly into the browser debugger and minify
-our bundle.js.
+our `bundle.js`.
 
 We will start from sample _00 Intro/01 Import_, install `webpack-dev-server`, setup our config
 to deploy on config folder and support maps (debug), then we will minify
-our bundle.js file via webpack cli params.
+our `bundle.js` file via webpack cli params.
 
 Summary steps:
  - Install via npm webpack-dev-server.
  - Execute webpack-dev-server with live reload.
- - Add start command to package.json.
+ - Add start command to `package.json`.
 
 
 ### 03 Output
@@ -66,11 +66,11 @@ main HTML page will be copied to.
 We will start from sample _00 Intro/02 Server_,
 
 Summary steps:
- - Redirect output (bundle.js) to "dist" folder.
- - Include into the build proccess: copying the index.html file to "dist" folder
- - Let webpack include the bundle.js script into the index.html file.
+ - Redirect output (`bundle.js`) to "dist" folder.
+ - Include into the build proccess: copying the `index.html` file to "dist" folder
+ - Let webpack include the `bundle.js` script into the `index.html` file.
  - Add map support in order to enable ES6 files to be debugged directly on the browser.
- - Generate a minified version of the bundle.js.
+ - Generate a minified version of the `bundle.js`.
 
 ### 04 JQuery
 
@@ -85,7 +85,7 @@ Summary steps:
  - Install jquery via npm.
  - Setup a global alias ($).
  - Create some sample code using this library.
- - Break into two bundles app.js and vendor.js.  
+ - Break into two bundles `app.js` and `vendor.js`.  
 
 
 ## 01 Styles
@@ -129,10 +129,10 @@ make the SASS preprocess and then chain it to our css / style pipe.
 We will start from sample _01 Styles/02 Import Bootstrap_.
 
 Summary steps:
- - Rename mystyles.css to scss.
+ - Rename `mystyles.css` to scss.
  - Add some SASS specific code.
  - Install a SASS preprocessor loader.
- - Add this preprocessor to the pipe (update webpack.config.js).
+ - Add this preprocessor to the pipe (update `webpack.config.js`).
 
 ### 04 Handling Images
 
@@ -163,19 +163,19 @@ Summary steps:
  - Configure TypeScript for our project (tsconfig)
  - Port our project to TypeScript and add use in our code some of the ts features.
  - Install [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader).
- - Add the proper configuration in webpack.config.js
+ - Add the proper configuration in `webpack.config.js`
 
 ### 01 React
 
 In this demo we will add support for React.
 
-We will start from sample _01 Styles/03 SASS_, install react locally, update the students.js to jsx and include some basic rendering.
+We will start from sample _01 Styles/03 SASS_, install react locally, update the `students.js` to jsx and include some basic rendering.
 
 Summary steps:
  - Install reactjs as a local dependency.
- - Update students.js to students.jsx and update content.
+ - Update `students.js` to `students.jsx` and update content.
  - Let's resolve the jsx extensions and point out the the entry point has changed.
- - Configure the webpack.config.js to support jsx.
+ - Configure the `webpack.config.js` to support jsx.
 
 ### 02 Angular
 
@@ -231,7 +231,7 @@ We will start from sample _01 Styles/03 SASS_ and we are going to create a simpl
 
 - A calculator module where we create an export per basic operation (sum, substract, mul, div..).
 
-- A main.js file that will import this calculator module and use only sum operation.
+- A `main.js` file that will import this calculator module and use only sum operation.
 
 We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
 
@@ -243,7 +243,7 @@ We will start from sample _02 Fx/00 TypeScript_ and we are going to create a sim
 
 - A calculator module where we create an export per basic operation (sum, substract, mul, div..).
 
-- A main.js file that will import this calculator module and use only sum operation.
+- A `main.js` file that will import this calculator module and use only sum operation.
 
 We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
 
@@ -255,7 +255,7 @@ We will learn how to configure it and how to deal with external css class provid
 We will start from sample _02 Fx/01 React_.
 
 Summary steps:
-- Update webpack.config.js with CSS Modules config.
+- Update `webpack.config.js` with CSS Modules config.
 - Add scss file with averageComponent styles.
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.

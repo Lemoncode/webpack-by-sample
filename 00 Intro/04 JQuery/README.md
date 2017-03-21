@@ -11,7 +11,7 @@ Summary steps:
  - Install jquery via npm.
  - Setup a global alias ($).
  - Create some sample code using this library.
- - Break into two bundles app.js and vendor.js.  
+ - Break into two bundles `app.js` and `vendor.js`.  
 
 # Steps to build it
 
@@ -169,7 +169,7 @@ Now if we run `webpack` and take a look to the dist folder we can check that the
 ![split into app and vendor](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/split%20into%20app%20and%20vendor.png)
 
 
-Finally in the generated index.html (under dist) we can check that both scripts have been successfully referenced:
+Finally in the generated `index.html` (under dist) we can check that both scripts have been successfully referenced:
 
 ### ./dist/index.html
 ```diff

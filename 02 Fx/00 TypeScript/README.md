@@ -11,7 +11,7 @@ Summary steps:
  - Configure TypeScript for our project (tsconfig)
  - Port our project to TypeScript and add use in our code some of the ts features.
  - Install [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader).
- - Add the proper configuration in webpack.config.js
+ - Add the proper configuration in `webpack.config.js`
 
 # Steps to build it
 
@@ -44,7 +44,7 @@ npm install typescript --save-dev
 _(*) Why installing TypeScript locally and not globally? By installing it locally the project does not depend on global dependencies and is easier to e.g make build and pass unit tests on a clean CI (Continuous Integration) machine like [Travis](https://travis-ci.org/), [Docker](https://www.docker.com/), [Jenkins](https://jenkins.io/), etc.
 Another benefit of installing locally is that we can set up a specific version of TypeScript with no rely on the global version installed on the machine is being executed._
 
-- The next step is to add a TypeScript configuration file, *tsconfig.json*.
+- The next step is to add a TypeScript configuration file, *`tsconfig.json`*.
 In this file will define the settings that we want, e.g to transpile to ES5 amongst others.
 
 ### ./tsconfig.json
@@ -73,9 +73,9 @@ In this file will define the settings that we want, e.g to transpile to ES5 amon
 npm install @types/jquery --save-dev
 ```
 
-- Let's port our code to TypeScript, we are going to rename the files *students.js* and *averageService.js* to _students.**ts**_ and _averageService.**ts**_.
+- Let's port our code to TypeScript, we are going to rename the files *`students.js`* and *`averageService.js`* to _students.**ts**_ and _averageService.**ts**_.
 
-- Let's introduce some TypeScript, in *students.ts* we are going to type the
+- Let's introduce some TypeScript, in *`students.ts`* we are going to type the
 variables we are using:
 
 ### ./src/students.ts
@@ -99,7 +99,7 @@ document.write(messageToDisplay);
 
 ![jquery typings](../../99%20Readme%20Resources/02%20Fx/00%20TypeScript/jquery%20typings.png)
 
-- Next we'll type our function in *averageService.ts*:
+- Next we'll type our function in *`averageService.ts`*:
 
 ### ./averageService.ts
 ```diff
@@ -124,7 +124,7 @@ TypeScript: [awesome-typescript-loader](https://github.com/s-panferov/awesome-ty
 npm install awesome-typescript-loader --save-dev
 ```
 
-- Let's update *webpack.config.js* in order to use this loader on **ts** extension files and in order to avoid having to add the extensions to the ts imports we can just add it to the array of extensions to be resolved:
+- Let's update *`webpack.config.js`* in order to use this loader on **ts** extension files and in order to avoid having to add the extensions to the ts imports we can just add it to the array of extensions to be resolved:
 
 ### ./webpack.config.js
 ```diff
