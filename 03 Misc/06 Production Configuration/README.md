@@ -1,4 +1,4 @@
-# 05 Production Configuration
+# 06 Production Configuration
 
 In this demo we are going to create different builds for each environment.
 We will learn how to configure it and how to reduce bundle file sizes.

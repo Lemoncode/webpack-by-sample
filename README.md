@@ -260,7 +260,21 @@ Summary steps:
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.
 
-### 05 Production Configuration
+### 05 Commons Chunk Plugin
+
+In this demo we will learn how to split our application in different bundles and how does Webpack manage to do so with the CommonsChunkPlugin.
+We will also learn some tips and tricks.
+
+We will start from sample _02 Fx/00 TypeScript_.
+
+Summary steps:
+- Comment out the CommonsChunkPlugin to analyze what happens.
+- Add it back and see the changes.
+- Add a new third party library and see how the inline vendor grows.
+- create a vendor file as an alternative to inline vendor in the config.
+- move all the vendors imports there.
+
+### 06 Production Configuration
 
 In this demo we are going to create different builds for each environment.
 We will learn how to configure it and how to reduce bundle file sizes.
