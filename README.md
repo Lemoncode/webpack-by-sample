@@ -286,3 +286,13 @@ Summary steps:
 - Add webpack-merge package.
 - Add development config file.
 - Add production config file.
+
+### 07 DefinePlugin
+
+In this demo, we will see how can we do a basic usage of environment variables to enable the production mode of Angular
+
+We will start from sample _02 Fx/03 Angular 2_.
+
+Summary steps:
+- importing enableProdMode on index.ts.
+- adding an if clause that will enableProdMode based on the -p parameter.
