@@ -169,13 +169,13 @@ Summary steps:
 
 In this demo we will add support for React.
 
-We will start from sample _01 Styles/03 SASS_, install react locally, update the `students.js` to jsx and include some basic rendering.
+We will start from sample _01 Styles / 03 SASS_, install React locally, update `students.js` to `students.jsx` and include some basic rendering.
 
 Summary steps:
- - Install reactjs as a local dependency.
- - Update `students.js` to `students.jsx` and update content.
- - Let's resolve the jsx extensions and point out the the entry point has changed.
- - Configure the `webpack.config.js` to support jsx.
+ - Install [React](https://facebook.github.io/react/) as a local dependency.
+ - Update `students.js` to `students.jsx` and update its content accordingly.
+ - Resolve the `jsx` extensions and point out that the entry point has changed.
+ - Configure the `webpack.config.js` to support `jsx`.
 
 ### 02 Angular
 
