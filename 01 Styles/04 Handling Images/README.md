@@ -1,8 +1,7 @@
 # 04 Handling Images
 
-In this demo we are going to include images in our project in two flavours: via
-JavaScript and via HTML. On the JavaScript side we will see is something
-straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader html-loader
+In this demo we are going to include images in our project in two flavours: via JavaScript and via HTML.
+On the HTML side we will see is quite straightforward (using the same plugins we used for fonts), but for the Javascript we will use a new configuration for the loader _url-loader_.
 
 We will start from sample _01 Styles/03 SASS_.
 
@@ -16,17 +15,17 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _03 SASS_.
+You will need to have nodejs installed in your computer. If you want to follow the steps of this guide you must take as starting point the sample _03 SASS_.
 
-## steps
+## Steps
 
-- `npm install` to install previous sample packages:
+- Run `npm install` to install previous sample packages:
 
 ```
 npm install
 ```
 
-- Let's start by making some cleanup in our *`index.html`*, we are going to remove the Bootstrap's *jumbotron* component and add a `<img>` tag:
+- Let's start by cleaning up our *`index.html`*. We are going to remove the Bootstrap's *jumbotron* component and add a `<img>` tag:
 
 ### ./src/index.html
 ```diff
@@ -55,9 +54,9 @@ npm install
 
 ```
 
-- We will continue by creating a folder named **content** and adding two images there: [logo_1](./src/content/logo_1.png) and [logo_2](./src/content/logo_2.png).
+- We will continue by creating a folder named **content** inside the **src** folder, and adding two images there: [logo_1](./src/content/logo_1.png) and [logo_2](./src/content/logo_2.png).
 
-- Add some styles to image:
+- Next, we will add some styles for the images in our CSS file:
 
 ### ./src/mystyles.scss
 ```diff
@@ -74,11 +73,11 @@ $blue-color: teal;
 
 ```
 
-- And run `npm start`:
+- And run `npm start`. We should obtain the following result in our browser:
 
 ![result logo 1](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/result%20logo%201.png)
 
-- That's fine but what if we had already the image referenced from JavaScript file and inserted in HTML by `<div>` with a given "id".
+- That's fine but, what if we already have the image referenced from a JavaScript file and inserted into the HTML using a `<div>` element with a given `id`?
 
 ### ./index.html
 ```diff
@@ -102,8 +101,9 @@ $blue-color: teal;
 
 ```
 
-- Let's jump into *`students.js`* and import *`logo_2.png`* using JavaScript.
-Let's place it under a given `<div>`:
+
+- Let's jump into *`students.js`* and import *`logo_2.png`* using JavaScript. 
+Then, let's place it under a `<div>` with a given `id`:
 
 ### ./src/students.js
 ```diff
@@ -152,10 +152,10 @@ module.exports = {
 
 ```
 
-- Now if run the app (`npm start`) we can check that the first logo is being shown.
+- Now if run the app (`npm start`) we can check that both logo images are being shown.
 
 ![result logo 2](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/result%20logo%202.png)
 
-- Finally if we open the developer tools in our browser we can see that the `src` attribute of the `<img>` has changed:
+- Finally, if we open the developer tools in our browser we can see that a `<img>` has been inserted under the `<div>` element, and also that its `src` attribute has changed:
 
 ![browser console](../../99%20Readme%20Resources/01%20Styles/04%20Handling%20Images/browser%20console.png)
