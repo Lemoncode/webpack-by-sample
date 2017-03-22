@@ -296,3 +296,30 @@ We will start from sample _02 Fx/03 Angular 2_.
 Summary steps:
 - importing enableProdMode on index.ts.
 - adding an if clause that will enableProdMode based on the -p parameter.
+
+### 09 Right pad library
+
+Do you want to create a library? This example is for you.
+
+We will start from scratch in here
+
+Summary steps:
+- npm init, to initialize the repo
+- install dependencies
+- create webpack config for libraries
+- put some tsconfig for typescript
+- generate library to see it working
+- add d.ts generation features
+- try it with "npm link"
+
+### 10 Right pad usage
+
+Here we try our new shiny library
+
+We start from sample _02 Fx/00 TypeScript_.
+
+Summary steps:
+- npm install
+- npm link right-pad
+- add right pad usage into students.ts
+- profit.
