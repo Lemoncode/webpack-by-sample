@@ -56,7 +56,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 - `jquery` won't be needed for this sample, so you can safely uninstall it:
 
   ```
-  npm uninstall jquery
+  npm uninstall jquery --save
   ```
 
 - And update `webpack.config.js` vendor stuff with these changes:
