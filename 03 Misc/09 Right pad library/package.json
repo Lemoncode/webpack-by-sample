@@ -1,0 +1,22 @@
+{
+  "name": "right-pad",
+  "version": "1.0.0",
+  "description": "A library to append text",
+  "main": "dist/rightpad.js",
+  "types": "dist/rightpad.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rightpad",
+    "append",
+    "text"
+  ],
+  "author": "Lemoncode",
+  "license": "MIT",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.1.2",
+    "typescript": "^2.2.1",
+    "webpack": "^2.3.1"
+  }
+}
