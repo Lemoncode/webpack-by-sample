@@ -20,7 +20,7 @@ module.exports = function () {
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          loaders: [
+          use: [
             'style-loader',
             {
               loader: 'css-loader',
@@ -36,7 +36,7 @@ module.exports = function () {
         {
           test: /\.css$/,
           include: /node_modules/,
-          loaders: ['style-loader', 'css-loader']
+          use: ['style-loader', 'css-loader']
         },
       ]
     },

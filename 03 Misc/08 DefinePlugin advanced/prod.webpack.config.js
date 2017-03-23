@@ -11,7 +11,6 @@ const env = {
   API_URL: JSON.stringify('https://webpack-sample-prod-lemoncode.herokuapp.com/api/students')
 }
 
-
 module.exports = function () {
   return webpackMerge(commonConfig, {
     devtool: 'cheap-module-source-map',
