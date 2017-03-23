@@ -1,4 +1,4 @@
-# 03 Import Materialize
+# 05 Import Materialize
 
 In this demo we will install and configure webpack to import the Google framework [Materialize](http://materializecss.com/).
 
@@ -123,7 +123,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   ```
   We will get errors! Webpack is complaining that it's not able to process fonts that are being used by Materialize by default, thus, we need to set an appropiate font loader:
 
-  ![fail to load Roboto font](../../99%20Readme%20Resources/01%20Styles/03%20Import%20Materialize/fail%20to%20load%20font.png)
+  ![fail to load Roboto font](../../99%20Readme%20Resources/01%20Styles/05%20Import%20Materialize/fail%20to%20load%20font.png)
 
 - Let's set up the appropriate font loaders, combining [file-loader](https://github.com/webpack/file-loader) with [url-loader](https://github.com/webpack/url-loader). With both loaders working together, we can improve data loading performance by embedding files into our HTML under a certain condition: encode only files that are smaller than a given size.
   ```
@@ -181,4 +181,4 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   ```
   Check that our page is being displayed using Materialize Card component (see [Materialize's cards](http://materializecss.com/cards.html)).
 
-  ![result](../../99%20Readme%20Resources/01%20Styles/03%20Import%20Materialize/result.png)
+  ![result](../../99%20Readme%20Resources/01%20Styles/05%20Import%20Materialize/result.png)
