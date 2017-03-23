@@ -1,7 +1,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
 
@@ -20,44 +19,12 @@ module.exports = {
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
   },
-  output: {
-    path: path.join(basePath, 'dist'),
-    filename: '[chunkhash].[name].js',
-  },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-                camelCase: true,
-              },
-            },
-            { loader: 'sass-loader', },
-          ],
-        }),
-      },
-      {
-        test: /\.css$/,
-        include: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
       },
       // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
       // Using here url-loader and file-loader
@@ -79,9 +46,6 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    port: 8080,
-  },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
@@ -95,11 +59,6 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
-    }),
-    new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
-      disable: false,
-      allChunks: true,
-    }),
+    })
   ],
 };
