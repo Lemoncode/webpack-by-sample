@@ -6,6 +6,12 @@ var commonConfig = require('./base.webpack.config.js');
 
 var basePath = __dirname;
 
+const env = {
+  NODE_ENV: JSON.stringify('production'),
+  API_URL: JSON.stringify('https://webpack-sample-prod-lemoncode.herokuapp.com/api/students')
+}
+
+
 module.exports = function () {
   return webpackMerge(commonConfig, {
     devtool: 'cheap-module-source-map',
@@ -59,6 +65,9 @@ module.exports = function () {
         disable: false,
         allChunks: true,
       }),
+      new webpack.DefinePlugin({
+        'process.env': env
+      })
     ],
   });
 }

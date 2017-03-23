@@ -5,6 +5,11 @@ var commonConfig = require('./base.webpack.config.js');
 
 var basePath = __dirname;
 
+const env = {
+  NODE_ENV: JSON.stringify('development'),
+  API_URL: JSON.stringify('https://webpack-sample-dev-lemoncode.herokuapp.com/api/students')
+}
+
 module.exports = function () {
   return webpackMerge(commonConfig, {
     // For development https://webpack.js.org/configuration/devtool/#for-development
@@ -41,6 +46,11 @@ module.exports = function () {
       filename: '[name].js',
     },
 
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': env
+      })
+    ],
 
     devServer: {
       port: 8080,
