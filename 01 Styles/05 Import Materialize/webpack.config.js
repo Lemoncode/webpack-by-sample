@@ -13,6 +13,7 @@ module.exports = {
     ],
     vendor: [
       'jquery',
+      './node_modules/materialize-css/dist/js/materialize.js',
     ],
     vendorStyles: [
       './node_modules/materialize-css/dist/css/materialize.css',

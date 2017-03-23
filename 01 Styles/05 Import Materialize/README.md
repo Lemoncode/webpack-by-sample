@@ -6,7 +6,7 @@ We will start from sample _01 Styles / 01 Custom CSS_.
 
 Summary steps:
  - Install Materialize.
- - Import the CSS library.
+ - Import the CSS and JS library.
  - Use a card element from Materialize in our HTML.
  - Check that we get errors when running webpack.
  - Install additional loaders in order to manage fonts and other
@@ -33,7 +33,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   npm install materialize-css --save
   ```
 
-- Now, let's import the CSS library in order to include it in our project:
+- Now, let's import the CSS and JS library in order to include it in our project:
 
   ### ./webpack.config.js
   ```diff
@@ -47,6 +47,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
       ],
       vendor: [
         'jquery',
+  +     './node_modules/materialize-css/dist/js/materialize.js',
       ],
   +   vendorStyles: [
   +     './node_modules/materialize-css/dist/css/materialize.css',
@@ -89,7 +90,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
   ```
 
-- Let's modify our *index.html* and include some specific Materialize component:
+- Let's modify our *index.html* and include some specific Materialize component. Also, let's add some special effects that requires the JavaScript part of Materialize:
 
   ### ./index.html
   ```diff
@@ -102,13 +103,14 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
       <title>Webpack 2.x by sample</title>
     </head>
     <body>
-  +   <div class="card-panel orange accent-2">
+  +   <div class="card-panel orange accent-2 waves-effect waves-light">
   +     <h1>Testing Materialize</h1>
   +     <p class="flow-text">
   +       Materialize is so good looking!
   +     </p>
   +   </div>
-      Hello Webpack 2!
+  -   Hello Webpack 2!
+  +   <p>Hello Webpack 2!</p>
       <div class="red-background ">
         RedBackground stuff
       </div>
@@ -179,6 +181,6 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   ```
   npm start
   ```
-  Check that our page is being displayed using Materialize Card component (see [Materialize's cards](http://materializecss.com/cards.html)).
+  Check that our page is being displayed using Materialize Card component (see [Materialize's cards](http://materializecss.com/cards.html)). Click on the new component to make sure that you see a wave effect over it. Cool!
 
   ![result](../../99%20Readme%20Resources/01%20Styles/05%20Import%20Materialize/result.png)
