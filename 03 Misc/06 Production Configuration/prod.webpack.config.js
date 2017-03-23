@@ -56,7 +56,6 @@ module.exports = function () {
       }),
       new ExtractTextPlugin({
         filename: '[chunkhash].[name].css',
-        disable: false,
         allChunks: true,
       }),
     ],
