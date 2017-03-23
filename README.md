@@ -297,6 +297,20 @@ Summary steps:
 - importing enableProdMode on index.ts.
 - adding an if clause that will enableProdMode based on the -p parameter.
 
+### 08 DefinePlugin advanced
+
+This demo shows how to have alternative API_URL for development and production
+
+Starts from sample _03 Misc/06 Production Configuration_.
+
+Summary steps:
+- create a students service and a student list component
+- See it working with hardcoded data
+- Update the service to use the dev endpoint
+- Update the component to use async data.
+- Update the dev and prod config to have environment variables
+- Update the services to use the new environment variables.
+
 ### 09 Right pad library
 
 Do you want to create a library? This example is for you.
