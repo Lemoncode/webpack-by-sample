@@ -148,6 +148,21 @@ Summary steps:
 - Add second image from JavaScript.
 - Configure the loader.
 
+### 05 Import Materialize
+
+In this demo we will install and configure webpack to import the Google framework [Materialize](http://materializecss.com/).
+
+We will start from sample _01 Styles / 01 Custom CSS_.
+
+Summary steps:
+ - Install Materialize.
+ - Import the CSS and JS library.
+ - Use a card element from Materialize in our HTML.
+ - Check that we get errors when running webpack.
+ - Install additional loaders in order to manage fonts and other
+ files required by Materialize.
+ - Check results.
+
 ## 02 Fx (frameworks / libraries / languages)
 
 ### 00 TypeScript
