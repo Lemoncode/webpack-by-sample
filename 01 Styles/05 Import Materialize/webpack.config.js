@@ -13,7 +13,7 @@ module.exports = {
     ],
     vendor: [
       'jquery',
-      './node_modules/materialize-css/dist/js/materialize.js',
+      'materialize-css',
     ],
     vendorStyles: [
       './node_modules/materialize-css/dist/css/materialize.css',
@@ -65,7 +65,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-			hash: true,
+      hash: true,
     }),
     new webpack.ProvidePlugin({
       $: "jquery",

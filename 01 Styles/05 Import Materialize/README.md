@@ -47,7 +47,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
       ],
       vendor: [
         'jquery',
-  +     './node_modules/materialize-css/dist/js/materialize.js',
+  +     'materialize-css',
       ],
   +   vendorStyles: [
   +     './node_modules/materialize-css/dist/css/materialize.css',
