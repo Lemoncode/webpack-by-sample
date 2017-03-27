@@ -5,6 +5,7 @@ In this demo we will install and configure webpack to import the Google framewor
 We will start from sample _01 Styles / 01 Custom CSS_.
 
 Summary steps:
+ - Fix jQuery dependency version.
  - Install Materialize.
  - Import the CSS and JS library.
  - Use a card element from Materialize in our HTML.
@@ -20,6 +21,13 @@ Summary steps:
 You will need to have [Node.js](https://nodejs.org/en/) installed in your computer. If you want to follow this step guide you will need to take sample _01 Custom CSS_ as a starting point.
 
 ## Steps
+- **IMPORTANT**: First of all, lets modify jQuery dependency version. Materialize does not support jQuery version 3 and above. So, change `package.json` as follows:
+
+  ### ./package.json
+  ```diff
+  - "jquery": "^3.1.1",
+  + "jquery": "^2.1.4",
+  ```
 
 - `npm install` to install previous sample packages:
 
