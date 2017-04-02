@@ -15,11 +15,13 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 Styles/03 SASS_.
+You will need to have nodejs installed in your computer. 
 
-## steps
+If you want to follow this step guides you will need to take as starting point sample _01 Styles/03 SASS_.
 
-- `npm install` to install previous sample packages:
+## Steps
+
+- Run `npm install` to install packages from previous sample:
 
 ```
 npm install
