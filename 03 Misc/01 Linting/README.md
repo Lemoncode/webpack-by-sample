@@ -258,7 +258,8 @@ const messageToDisplay = `average score ${averageScore}`;
     "node": true,
     "jquery": true
   },
-  "parser": "babel-eslint",
+- "parser": "babel-eslint"
++ "parser": "babel-eslint",
 + "rules": {
 +   "no-console": 0
 + }
@@ -284,7 +285,8 @@ const messageToDisplay = `average score ${averageScore}`;
   },
   "parser": "babel-eslint",
   "rules": {
-    "no-console": 0,
+-   "no-console": 0
++   "no-console": 0,
 +   "max-lines": ["error", 1]
   }
 }
