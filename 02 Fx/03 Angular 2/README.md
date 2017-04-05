@@ -50,6 +50,8 @@ npm install @angular/common @angular/compiler
 core-js reflect-metadata
 rxjs zone.js --save
 ```
+
+
 - We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
 
   - Remove `src/mystyles.scss`.
@@ -64,6 +66,28 @@ npm uninstall jquery --save
 npm uninstall @types/jquery --save-dev
 ```
 
+- We need to indicate the list of library files to be included in the compilation.
+
+### ./tsconfig.json
+```diff
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "sourceMap": true,
+-   "noLib": false,
+   "suppressImplicitAnyIndexErrors": true
++   "lib": ["dom", "es2015"]   
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+```
 - Let's create a new file that will contain a simple component with an inline template. Let's create a file called _`studentsComponent.ts`_
 
 ### ./src/components/student/studentComponent.ts
@@ -174,7 +198,7 @@ module.exports = {
 
 ```
 
-- Since we are declaring `@NgModule` and `@Component` with decorators, we have to enable it. We need to use `core-js` as global typings:
+- Since we are declaring `@NgModule` and `@Component` with decorators, we have to enable it.
 
 ### ./tsconfig.json
 ```diff
@@ -185,11 +209,10 @@ module.exports = {
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
--   "noLib": false,
 -   "suppressImplicitAnyIndexErrors": true
 +   "suppressImplicitAnyIndexErrors": true,
 +   "experimentalDecorators":true,
-+   "lib": ["dom", "es2015"]   
+    "lib": ["dom", "es2015"]   
   },
   "compileOnSave": false,
   "exclude": [
