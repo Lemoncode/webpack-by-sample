@@ -5,19 +5,19 @@ In this sample we are going to setup a basic Angular 2 app with Webpack.
 We will start from sample _02 Fx/00 TypeScript_.
 
 Summary steps:
- - Installing Angular 1.x libraries.
- - Creating the app.
- - Instantiating the app from the html.
- - Creating a component (inline HTML).
- - Creating a service.
- - Displaying the component.
- - Creating an external HTML template and consuming it.
+ - Install Angular 1.x libraries.
+ - Create the app.
+ - Instantiate the app from the html.
+ - Create a component (inline HTML).
+ - Create a service.
+ - Display the component.
+ - Create an external HTML template and consuming it.
 
 # Steps to build it
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _00 TypeScript_.
+Prerequisites, you will need to have nodejs installed on your computer. If you want to follow this guide steps you will need to take as a starting point sample _00 TypeScript_.
 
 ## steps
 
@@ -27,7 +27,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- Since, Angular 2 is based on TypeScript, that why we are going to base this sample from _00 TypeScript_.
+- As Angular 2 is based on TypeScript, we are going to base this sample on _00 TypeScript_.
 
 - Let's start by installing Angular 2.x libraries:
 
@@ -37,6 +37,7 @@ npm install
 - @angular/core
 - @angular/platform-browser
 - @angular/platform-browser-dynamic
+- reflect-metadata
 
 ## Peer dependencies
 - @angular/common
@@ -49,13 +50,6 @@ npm install @angular/common @angular/compiler
 core-js reflect-metadata
 rxjs zone.js --save
 ```
-
-- Install typings for `core-js`:
-
-```
-npm install @types/core-js --save-dev
-```
-
 - We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
 
   - Remove `src/mystyles.scss`.
@@ -63,14 +57,14 @@ npm install @types/core-js --save-dev
   - Remove `src/students.ts`.
 
 
-- Now, we can uninstall `jquery` because we don't need for this sample:
+- Now, we can uninstall `jquery` because we don't need it for this sample:
 
 ```
 npm uninstall jquery --save
 npm uninstall @types/jquery --save-dev
 ```
 
-- Let's going to create a new file that will contain a simple component with an inline template, let's create a file called _`studentsComponent.ts`_
+- Let's create a new file that will contain a simple component with an inline template. Let's create a file called _`studentsComponent.ts`_
 
 ### ./src/components/student/studentComponent.ts
 ```javascript
@@ -191,13 +185,11 @@ module.exports = {
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
+-   "noLib": false,
 -   "suppressImplicitAnyIndexErrors": true
 +   "suppressImplicitAnyIndexErrors": true,
-+   "types": [
-+     "core-js",
-+     "webpack-env"
-+   ]
++   "experimentalDecorators":true,
++   "lib": ["dom", "es2015"]   
   },
   "compileOnSave": false,
   "exclude": [
@@ -207,7 +199,7 @@ module.exports = {
 
 ```
 
-- If we run the application and open the browser console, we check that app object is displayed in the console.
+- If we run the application and open the browser , we can check that the app object is displayed in the console.
 
 ```
 npm start
@@ -238,10 +230,41 @@ module.exports = {
 };
 
 ```
+- In case you also get these warnings:
+
+ ![warnings angular coreES5](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/warnings%20angular%20coreES5.png)
+
+- You can avoid them adding also to the `webpack.config`:
+
+### ./webpack.config.js
+```diff
+...
+
+module.exports = {
+  ...
+  plugins: [
+    ...
+    new ExtractTextPlugin({
+      filename: '[chunkhash].[name].css',
+      disable: false,
+      allChunks: true,
+    }),
+   new webpack.ContextReplacementPlugin(
+     /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+     path.join(__dirname, 'src')
+   ),
++   new webpack.ContextReplacementPlugin(
++     /angular(\\|\/)core(\\|\/)@angular/,
++      path.join(__dirname, 'src')
++    ),
+  ],
+};
+
+```
 
 ![result after fix warnings](../../99%20Readme%20Resources/02%20Fx/03%20Angular%202/result%20after%20fix%20warnings.png)
 
-- Using inline HMTL is not a good idea, if we plan to use complex layouts, we should think about separating them in a separate HTML template, let's create an html template that we will call _`template.html`_ and add our HTML content.
+- If we plan to use complex layouts, using inline HMTL is not a good idea. So we should think about separating them in a separate HTML template. Let's create an html template called _`template.html`_ and add our HTML content.
 
 ### ./src/components/student/template.html
 ```html
@@ -249,7 +272,7 @@ module.exports = {
 
 ```
 
-### ./src/components/student/studentComponent.js
+### ./src/components/student/studentComponent.ts
 ```diff
 import { Component } from '@angular/core';
 
@@ -306,7 +329,7 @@ npm install @types/webpack-env --save-dev
 
 ```
 
-- Now going back into the content, we are just going to require the HTML file. In order to load the HTML we need a new loader, in this case we are going to use [raw-loader](https://github.com/webpack-contrib/raw-loader) (there are other avaialble), let's install this loader:
+- To finish our example, we are going to require the HTML file. In order to load the HTML we need a new loader, in this case we are going to use [raw-loader](https://github.com/webpack-contrib/raw-loader) (there are other availables), let's install this loader:
 
 ```
 npm install raw-loader --save-dev
@@ -338,17 +361,17 @@ module.exports = {
 
 ```
 
-- Now we can run the project and check that our latest changes are working as expected
+- Now we can run the project and check that our latest changes are working as expected.
 
 ```
 npm start
 ```
 
-- The final step is to add a controller to this component and add some logic.
+- The final step is to add a controller with some logic to this component.
 
-- Let's create add this controller to the studentComponent:
+- Let's add a controller to studentComponent:
 
-### ./src/components/student/studentComponent.js
+### ./src/components/student/studentComponent.ts
 ```diff
 import { Component } from '@angular/core';
 
@@ -372,7 +395,7 @@ export {
 
 ```
 
-- Let's display this customers into the html template:
+- Let's display this message into the html template:
 
 ### ./src/components/student/template.html
 ```diff
@@ -380,7 +403,7 @@ export {
 + <h1>Message: {{this.message}}</h1>
 ```
 
-- Now if we run the sample we can see the new message in application
+- Now if we run the application we can see the new message in the browser.
 
 ```
 npm start
