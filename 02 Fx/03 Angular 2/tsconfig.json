@@ -7,7 +7,7 @@
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
-    "lib": ["dom", "es2015"]   ,
+    "lib": ["dom", "es2015"],
     "types": [
       "webpack-env"
     ]

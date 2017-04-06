@@ -78,7 +78,7 @@ npm uninstall @types/jquery --save-dev
     "noImplicitAny": false,
     "sourceMap": true,
 -   "noLib": false,
-   "suppressImplicitAnyIndexErrors": true
+   "suppressImplicitAnyIndexErrors": true,
 +   "lib": ["dom", "es2015"]   
   },
   "compileOnSave": false,
@@ -209,10 +209,10 @@ module.exports = {
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
--   "suppressImplicitAnyIndexErrors": true
-+   "suppressImplicitAnyIndexErrors": true,
-+   "experimentalDecorators":true,
-    "lib": ["dom", "es2015"]   
+   "suppressImplicitAnyIndexErrors": true,
+-   "lib": ["dom", "es2015"] 
++   "lib": ["dom", "es2015"], 
++   "experimentalDecorators":true     
   },
   "compileOnSave": false,
   "exclude": [
@@ -336,13 +336,13 @@ npm install @types/webpack-env --save-dev
     "noImplicitAny": false,
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "experimentalDecorators": true,
-    "types": [
--     "core-js"
-+     "core-js",
+    "suppressImplicitAnyIndexErrors": true,   
+    "lib": ["dom", "es2015"], 
+-   "experimentalDecorators":true 
++   "experimentalDecorators":true,    
++    "types": [
 +     "webpack-env"
-    ]
++    ]
   },
   "compileOnSave": false,
   "exclude": [
