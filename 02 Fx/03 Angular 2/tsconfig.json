@@ -5,11 +5,10 @@
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
+    "lib": ["dom", "es2015"],
     "types": [
-      "core-js",
       "webpack-env"
     ]
   },
