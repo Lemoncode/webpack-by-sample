@@ -36,8 +36,8 @@ You will need to have Node.js installed in your computer. In order to follow thi
 
   ```javascript
   function getTotalScore(scores) {
-    return scores.reduce((score, count) => {
-      return score + count;
+    return scores.reduce((totalScore, currentScore) => {
+      return totalScore + currentScore;
     });
   }
 
@@ -78,11 +78,11 @@ You will need to have Node.js installed in your computer. In order to follow thi
 We have covered a single named export usage in our previous example, but there are some other ways to use modules:
 
 ### Default export
-  
+
   One popular way is using **`export default`** as the export keyword. This will indicate that, by default, there will be just a **single export per module**. Then, we can directly use an import *alias* (by omitting the curly braces) and this will point out to our default exported member (*averarge* function in our example).
 
   - Default export usage in `averageService.js`:
-    
+
     #### ./averageService.js
 
     ```diff
@@ -100,7 +100,7 @@ We have covered a single named export usage in our previous example, but there a
     ```
 
   - Default import usage in `students.js`:
-  
+
     #### ./students.js
 
     ```diff
@@ -117,10 +117,10 @@ We have covered a single named export usage in our previous example, but there a
 
 ### Multiple named exports
 
-Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this example. We can export both using named exports, just by adding the **export** keyword on each function. 
+Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this example. We can export both using named exports, just by adding the **export** keyword on each function.
 
   - Multiple exports usage in `averageService.js`:
-    
+
     #### ./averageService.js
 
     ```diff
@@ -159,7 +159,7 @@ Now, we can import them in several ways into `students.js`:
     + document.write(messageToDisplayTotal);
 
     ```  
-  
+
   - Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
 
     #### ./students.js
