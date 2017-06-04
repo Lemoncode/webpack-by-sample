@@ -70,9 +70,9 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
     entry: {
       app: './students.js',
       vendor: [
-  -     'jquery',
-  +     'react',
-  +     'react-dom',
+-       'jquery',
++       'react',
++       'react-dom',
       ],
       vendorStyles: [
         '../node_modules/bootstrap/dist/css/bootstrap.css',
@@ -80,7 +80,6 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
     },
     ...
   };
-
   ```
 
 - In the *`index.html`* file let's add a `<div>` element that will be the entry
@@ -97,18 +96,18 @@ point for our React app.
       <title>Webpack 2.x by sample</title>
     </head>
     <body>
-  -   <div class="jumbotron">
-  -     <h1>Testing Bootstrap</h1>
-  -     <p>
-  -       Bootstrap is the most popular ...
-  -     </p>
-  -   </div>
-  -   Hello Webpack 2!
-  -  <div class="red-background ">
-  -    RedBackground stuff
-  -  </div>
-  +  <div id="root">
-  +  </div>
+-     <div class="jumbotron">
+-       <h1>Testing Bootstrap</h1>
+-       <p>
+-         Bootstrap is the most popular ...
+-       </p>
+-     </div>
+-     Hello Webpack 2!
+-    <div class="red-background ">
+-      RedBackground stuff
+-    </div>
++    <div id="root">
++    </div>
     </body>
   </html>
 
@@ -200,12 +199,12 @@ point for our React app.
 
   module.exports = {
     context: path.join(basePath, 'src'),
-  + resolve: {
-  +   extensions: ['.js', '.jsx'],
-  + },
++   resolve: {
++     extensions: ['.js', '.jsx'],
++   },
     entry: {
-  -   app: './students.js',
-  +   app: './students.jsx',
+-     app: './students.js',
++     app: './students.jsx',
       ...
     },
     ...
@@ -224,8 +223,8 @@ point for our React app.
     module: {
       rules: [
         {
-  -       test: /\.js$/,
-  +       test: /\.jsx?$/,
+-         test: /\.js$/,
++         test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
         },
