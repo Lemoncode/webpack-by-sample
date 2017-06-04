@@ -121,6 +121,10 @@ module.exports = {
 
 - Now if we run webpack we will realize that `index.html` is copied under the dist folder and the script tag is automatically being generated. There is only one caveat... we are not getting any additional hash param to avoid browser caching, we can do that by setting the option hash to true:
 
+```cmd
+npm run build
+```
+
 ### ./webpack.config.js
 ```diff
 ...
@@ -164,10 +168,25 @@ able to browse our original es6 files and place breakpoints / debug.
 
 ![sourcemaps](../../99%20Readme%20Resources/00%20Intro/03%20Output/sourcemaps.png)
 
-- Just to wrap up... a mandatory step on any web app is to minify / obsfuscate the JavaScript files. In order to do that we only need to call webpack adding the param -p
+- Just to wrap up... a mandatory step on any web app is to minify / obsfuscate the JavaScript files. In order to do that we we will a new script command to our
+package.json
+
+_./package.json_
+
+```cmd
+
+```diff
+"scripts": {
+  "start": "webpack-dev-server",
+  "build": "webpack",
++  "build:prod": "webpack -p",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+And run the following command
 
 ```
-webpack -p
+npm run build:prod
 ```
 
 If we open the generated `bundle.js` file we will realize that the new version has been minified.
