@@ -104,12 +104,12 @@ document.write(messageToDisplay);
 ### ./averageService.ts
 ```diff
 - export function getAvg(scores) {
-+ export function getAvg(scores): number {
++ export function getAvg(scores: number[]): number {
    return getTotalScore(scores) / scores.length;
   }
 
 - function getTotalScore(scores) {
-+ function getTotalScore(scores): number {
++ function getTotalScore(scores: number[]): number {
     return scores.reduce((score, count) => {
       return score + count;
     });
