@@ -30,59 +30,40 @@ npm install
 ```
 
 - Let's install `webpack-dev-server`, this package ships with a lite server that we
-can use as dev web server. This time we'll install this package as a global dependency (note down the "-g" param).
+can use as dev web server.
 
 ```
-npm install webpack -g
-npm install webpack-dev-server -g
+npm install webpack-dev-server --save-dev
 ```
 
-- Now we can directly execute from the command prompt `webpack-dev-server`, this
-will launch our web dev server, in this case in port 8080.
+- Let's reconfigure our _package.json_ _start_command and add a new custom command that we will call _build_.
 
-![webpack-dev-server](../../99%20Readme%20Resources/00%20Intro/02%20Server/webpack-dev-server.png)
+### ./package.json
+```
+  "scripts": {
+-   "start": "webpack"
++   "start": "webpack-dev-server"
++   "buid": "webpack"
+  },
+```
 
+
+- Now if we type from the command prompt.
+
+```cmd
+npm start
+```
 - If we open a browser we can point the url to http://localhost:8080 and we will browse our web app.
 
 ![running webpack 2](../../99%20Readme%20Resources/00%20Intro/02%20Server/result.png)
 
 - One interesting feature that ships this dev server is **live reloading**, thus any changes introduced in any of the JavaScript files will be automatically detected and webpack dev server will launch the build process and once finished automatically refresh the page being display in the browser. In order to do this we don't need to do anything.
 
-- We don't need to remember this params every time we want to launch our dev
-server, in order to avoid this we can just add a `start` script to our `package.json` file.
+- If we want to run _webpack_ build, we only need to type from the command prompt:
 
-### ./package.json
-```diff
-{
-  ...
-  "scripts": {
--   "start": "webpack"
-+   "start": "webpack-dev-server"
-  },
-  ...
-}
-
+```cmd
+npm run build
 ```
-
-- Once we have saved this change we can directly execute from the command prompt:
-
-```
-npm start
-```
-
-- Now that we are using this approach, we don't need `webpack-dev-server` globally installed. In order to uninstall `webpack-dev-server` globally, execute the next command (note down the "-g" param):
-
-```
-npm uninstall webpack-dev-server -g
-```
-
--  We could just install it at project level, stop it and then use `npm start` to launch it again:
-
-```
-npm install webpack-dev-server --save-dev
-```
-
-And we will get our dev server up and running.
 
 - Finally, we can configure this server in _`webpack.config.js`_:
 
