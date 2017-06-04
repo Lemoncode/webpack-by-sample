@@ -74,6 +74,7 @@ npm install css-loader --save-dev
 ...
 
 module.exports = {
+entry: ['./students.js'],  
   entry: {
     app: './students.js',
 +   appStyles: [

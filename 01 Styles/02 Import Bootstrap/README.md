@@ -75,7 +75,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
         },
         {
           test: /\.css$/,
-  -       exclude: /node_modules/,
+-         exclude: /node_modules/,
           loader: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: {
@@ -103,12 +103,12 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
       <title>Webpack 2.x by sample</title>
     </head>
     <body>
-  +   <div class="jumbotron">
-  +     <h1>Testing Bootstrap</h1>
-  +     <p>
-  +       Bootstrap is the most popular ...
-  +     </p>
-  +   </div>
+ +    <div class="jumbotron">
+ +      <h1>Testing Bootstrap</h1>
+ +      <p>
+ +        Bootstrap is the most popular ...
+ +      </p>
+ +    </div>
       Hello Webpack 2!
       <div class="red-background ">
         RedBackground stuff
