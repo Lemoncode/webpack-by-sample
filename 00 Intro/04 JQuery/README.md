@@ -34,6 +34,8 @@ npm install
 npm install jquery --save
 ```
 
+It automatically adds that entry to our _package.json_.
+
 ### ./package.json
 ```diff
 {
