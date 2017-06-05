@@ -43,7 +43,7 @@ npm install webpack-dev-server --save-dev
   "scripts": {
 -   "start": "webpack"
 +   "start": "webpack-dev-server"
-+   "buid": "webpack"
++   "build": "webpack"
   },
 ```
 
