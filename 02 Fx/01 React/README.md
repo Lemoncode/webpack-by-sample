@@ -20,16 +20,16 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 - `npm install` to install previous sample packages:
 
-  ```
-  npm install
-  ```
+```
+ npm install
+```
 
 - Delete `mystyles.scss`, we won't need it for this sample.
 
 - Let's update `webpack.config`:
 
   ### ./webpack.config.js
-  ```diff
+```diff
   ...
 
   module.exports = {
@@ -44,25 +44,25 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
     ...
   };
 
-  ```
+```
 
 - React is an open source library for building user interfaces, quite popular nowdays. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
 
-  ```
+```
   npm install react --save
   npm install react-dom --save
-  ```
+```
 
 - `jquery` won't be needed for this sample, so you can safely uninstall it:
 
-  ```
+```
   npm uninstall jquery --save
-  ```
+```
 
 - And update `webpack.config.js` vendor stuff with these changes:
 
   ### ./webpack.config.js
-  ```diff
+```diff
   ...
 
   module.exports = {
@@ -80,13 +80,13 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
     },
     ...
   };
-  ```
+```
 
 - In the *`index.html`* file let's add a `<div>` element that will be the entry
 point for our React app.
 
   ### ./src/index.html
-  ```diff
+```diff
   <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -111,12 +111,12 @@ point for our React app.
     </body>
   </html>
 
-  ```
+```
 
 - Let's create our first React component under `src` folder called `AverageComponent`:
 
   ### ./src/averageComponent.jsx
-  ```javascript
+```javascript
   import * as React from 'react';
   import {getAvg} from './averageService';
 
@@ -143,12 +143,12 @@ point for our React app.
     }
   }
 
-  ```
+```
 
 - Let's rename `students.js` to `students.jsx` and update the code to use React:
 
   ### ./src/students.jsx
-  ```diff
+```diff
   + import * as React from 'react';
   + import * as ReactDOM from 'react-dom';
   + import {AverageComponent} from './averageComponent';
@@ -170,31 +170,31 @@ point for our React app.
   +   </div>,
   +   document.getElementById('root')
   + );
-  ```
+```
 
 - For *Babel* to parse React `jsx` files we need to install
 [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
 
-  ```
+```
   npm install babel-preset-react --save-dev
-  ```
+```
 
 - Add it to `.babelrc` config:
 
   ### ./.babelrc
-  ```diff
+```diff
   {
     "presets": [
       "env",
   +   "react",
     ]
   }
-  ```
+```
 
 - It's time to update *`webpack.config.js`*, we will start by adding the resolve `jsx` extension:
 
   ### ./webpack.config.js
-  ```diff
+```diff
   ...
 
   module.exports = {
@@ -210,12 +210,12 @@ point for our React app.
     ...
   };
 
-  ```
+```
 
 - In the loaders section we need to indicate to *babel-loader* that it should take into account not only `js` but **`jsx`**, and that it should take into account React preset.
 
   ### ./webpack.config.js
-  ```diff
+```diff
   ...
 
   module.exports = {
@@ -234,12 +234,12 @@ point for our React app.
     ...
   };
 
-  ```
+```
 
 - Finally, if we run the app we will see the React based functionality in action.
   
-  ```
+```
   npm start
-  ```
+```
 
   ![result](../../99%20Readme%20Resources/02%20Fx/01%20React/result.png)
