@@ -4,7 +4,8 @@
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 02 Server",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.11",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
   }
 }
