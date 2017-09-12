@@ -4,7 +4,9 @@
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 01 Styles - 03 Materialize",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "build:prod": "webpack -p"
   },
   "repository": {
     "type": "git",
