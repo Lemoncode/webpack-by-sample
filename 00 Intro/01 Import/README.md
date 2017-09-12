@@ -71,7 +71,7 @@ You will need to have Node.js installed in your computer. In order to follow thi
 
   It is time to double-click on the `index.html` and check that the new average function is up and running and has been included in the `bundle.js` file.
 
-  ![running webpack 2](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
+  ![running webpack 3](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
 
 ## Appendix - Module alternative usage
 
