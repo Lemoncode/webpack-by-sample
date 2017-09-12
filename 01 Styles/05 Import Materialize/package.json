@@ -1,7 +1,7 @@
 {
-  "name": "materialize",
+  "name": "materialize-demo",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 01 Styles - 03 Materialize",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 01 Styles - 05 Import Materialize",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
