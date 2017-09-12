@@ -100,7 +100,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Webpack 2.x by sample</title>
+      <title>Webpack 3.x by sample</title>
     </head>
     <body>
  +    <div class="jumbotron">
@@ -109,7 +109,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
  +        Bootstrap is the most popular ...
  +      </p>
  +    </div>
-      Hello Webpack 2!
+      Hello Webpack 3!
       <div class="red-background ">
         RedBackground stuff
       </div>
