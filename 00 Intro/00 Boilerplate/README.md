@@ -65,7 +65,7 @@ npm install webpack --save-dev
   },
   "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
   "devDependencies": {
-    "webpack": "^2.2.1"
+    "webpack": "^3.5.6"
   }
 }
 
@@ -112,7 +112,7 @@ Our **`package.json`** file should looks something like:
 +   "babel-core": "^6.23.1",
 +   "babel-loader": "^6.3.2",
 +   "babel-preset-env": "^1.1.11",
-    "webpack": "^2.2.1"
+    "webpack": "^3.5.6"
   }
 }
 
