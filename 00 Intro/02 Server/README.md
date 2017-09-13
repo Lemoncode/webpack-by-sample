@@ -55,7 +55,7 @@ npm start
 ```
 - If we open a browser we can point the url to http://localhost:8080 and we will browse our web app.
 
-![running webpack 2](../../99%20Readme%20Resources/00%20Intro/02%20Server/result.png)
+![running webpack 3](../../99%20Readme%20Resources/00%20Intro/02%20Server/result.png)
 
 - One interesting feature that ships this dev server is **live reloading**, thus any changes introduced in any of the JavaScript files will be automatically detected and webpack dev server will launch the build process and once finished automatically refresh the page being display in the browser. In order to do this we don't need to do anything.
 

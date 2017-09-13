@@ -41,15 +41,15 @@ It automatically adds that entry to our _package.json_.
 {
   ...
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-env": "^1.1.11",
-    "html-webpack-plugin": "^2.28.0",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
   },
 + "dependencies": {
-+   "jquery": "^3.1.1"
++   "jquery": "^3.2.1"
 + }
 }
 
