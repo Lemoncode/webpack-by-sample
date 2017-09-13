@@ -241,7 +241,7 @@ Summary steps:
 
 ### 02 Tree Shaking ES6
 
-On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
 We will start from sample _01 Styles/03 SASS_ and we are going to create a simple sample in ES6:
 
@@ -253,7 +253,7 @@ We will use webpack's 2 tree shaking and check that we end up having a bundle th
 
 ### 03 Tree Shaking TypeScript
 
-On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
 We will start from sample _02 Fx/00 TypeScript_ and we are going to create a simple sample in TypeScript:
 
