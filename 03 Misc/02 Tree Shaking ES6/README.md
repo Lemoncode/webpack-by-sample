@@ -140,9 +140,10 @@ npm install rimraf --save-dev
 {
   ...
   "scripts": {
--   "start": "webpack-dev-server"
-+   "start": "webpack-dev-server",
-+   "build:dev": "rimraf dist && webpack",
+    "start": "webpack-dev-server",
+-   "build": "webpack",
++   "build": "rimraf dist && webpack",
+-   "build:prod": "webpack -p"
 +   "build:prod": "rimraf dist && webpack -p"
   },
   ...
@@ -150,7 +151,7 @@ npm install rimraf --save-dev
 
 ```
 
-- Running `npm run build:dev`, we can see in `dist` folder that all methods are imported:
+- Running `npm run build`, we can see in `dist` folder that all methods are imported:
 
 ### ./dist/...app.js
 ```diff
@@ -230,7 +231,7 @@ document.body.appendChild(element);
 
 > NOTE: We need to wrap `env preset` inside array for add preset options, [example here](http://babeljs.io/docs/plugins/preset-env/#examples-export-with-various-targets).
 
-- Running `npm run build:dev` again:
+- Running `npm run build` again:
 
 ### ./dist/...app.js
 ```diff
