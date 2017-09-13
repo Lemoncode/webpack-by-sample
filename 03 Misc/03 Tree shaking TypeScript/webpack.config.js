@@ -26,8 +26,8 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         use: [
-          { loader: 'babel-loader'},
-          { loader: 'awesome-typescript-loader'},
+          { loader: 'babel-loader' },
+          { loader: 'awesome-typescript-loader' },
         ],
       },
       {
@@ -81,7 +81,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-			hash: true,
+      hash: true,
     }),
     new webpack.ProvidePlugin({
       $: "jquery",
