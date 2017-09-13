@@ -56,7 +56,6 @@ In this file will define the settings that we want, e.g to transpile to ES5 amon
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
     "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "dom",

@@ -5,7 +5,6 @@
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
     "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "dom",

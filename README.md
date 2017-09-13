@@ -215,7 +215,7 @@ In this sample we are going to setup a basic Angular 2 app with Webpack.
 We will start from sample _02 Fx/00 TypeScript_.
 
 Summary steps:
- - Install Angular 1.x libraries.
+ - Install Angular 2.x libraries.
  - Create the app.
  - Instantiate the app from the html.
  - Create a component (inline HTML).
