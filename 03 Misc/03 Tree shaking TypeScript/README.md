@@ -143,7 +143,7 @@ npm install rimraf --save-dev
   "scripts": {
 -   "start": "webpack-dev-server"
 +   "start": "webpack-dev-server",
-+   "build:dev": "rimraf dist && webpack",
++   "build": "rimraf dist && webpack",
 +   "build:prod": "rimraf dist && webpack -p"
   },
   ...
@@ -151,7 +151,7 @@ npm install rimraf --save-dev
 
 ```
 
-- Running `npm run build:dev`, we can see in `dist` folder that all methods are imported:
+- Running `npm run build`, we can see in `dist` folder that all methods are imported:
 
 ### ./dist/...app.js
 ```diff
@@ -207,16 +207,44 @@ document.body.appendChild(element);
 ```diff
 {
   "compilerOptions": {
--   "target": "es5",
-+   "target": "es6",
--   "module": "commonjs",
--   "module": "es6",
--   "moduleResolution": "node",
+    "target": "es5",
+    "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.iterable"
+    ]
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+{
+  "compilerOptions": {
+-   "target": "es5",
++   "target": "es6",
+-   "module": "commonjs",
++   "module": "es6",
++   "moduleResolution": "node",
+    "declaration": false,
+    "noImplicitAny": false,
+    "sourceMap": true,
++   "noLib": false,
++   "suppressImplicitAnyIndexErrors": true
+-   "suppressImplicitAnyIndexErrors": true,
+-   "lib": [
+-     "dom",
+-     "es5",
+-     "scripthost",
+-     "es2015.iterable"
+-   ]
   },
   "compileOnSave": false,
   "exclude": [
@@ -228,7 +256,7 @@ document.body.appendChild(element);
 
 > NOTE: It's not necessary to set `"module": "es6"`. But we have to set `"moduleResolution": "node"` (this value is taken as default when is `commonjs`) to resolve modules. More [info](https://www.typescriptlang.org/docs/handbook/module-resolution.html#classic)
 
-- Running `npm run build:dev` again:
+- Running `npm run build` again:
 
 ### ./dist/...app.js
 ```diff
@@ -352,7 +380,7 @@ module.exports = {
 
 > NOTE: When we load multiple loaders take into account that last loader is executed first. See `sass and css loaders` or `awesome-typescript and babel loaders` as examples.
 
-- Running `npm run build:dev` again, babel transform backticks into `element.innerHTML = 'Sum result: ' + result;`:
+- Running `npm run build` again, babel transform backticks into `element.innerHTML = 'Sum result: ' + result;`:
 
 ### ./dist/...app.js
 ```diff
