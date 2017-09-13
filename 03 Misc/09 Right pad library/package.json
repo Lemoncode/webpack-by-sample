@@ -5,7 +5,8 @@
   "main": "dist/rightpad.js",
   "types": "dist/rightpad.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf dist && webpack",
+    "build:prod": "rimraf dist && webpack -p"
   },
   "keywords": [
     "rightpad",
@@ -16,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.3",
+    "rimraf": "^2.6.2",
     "typescript": "^2.5.2",
     "webpack": "^3.5.6"
   }
