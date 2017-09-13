@@ -5,10 +5,21 @@
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
     "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015"
+    ],
     "experimentalDecorators": true,
-    "lib": ["es2015", "dom"]
+    "types": [
+      "webpack-env",
+      "node"
+    ]
   },
-  "compileOnSave": false
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules"
+  ]
 }
