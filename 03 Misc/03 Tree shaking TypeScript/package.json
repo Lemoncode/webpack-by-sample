@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "tree-shaking-typescript",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 03 Tree Shaking TypeScript",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",

@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "commons-chunk-plugin",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 05 Commons Chunk Plugin",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
