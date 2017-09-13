@@ -15,8 +15,8 @@
   "author": "Lemoncode",
   "license": "MIT",
   "devDependencies": {
-    "awesome-typescript-loader": "^3.1.2",
-    "typescript": "^2.2.1",
-    "webpack": "^2.3.1"
+    "awesome-typescript-loader": "^3.2.3",
+    "typescript": "^2.5.2",
+    "webpack": "^3.5.6"
   }
 }
