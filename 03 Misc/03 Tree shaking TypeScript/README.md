@@ -1,6 +1,6 @@
 # 03 Tree Shaking TypeScript
 
-On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
 We will start from sample _02 Fx/00 TypeScript_ and we are going to create a simple sample in TypeScript:
 
@@ -84,7 +84,7 @@ document.body.appendChild(element);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Webpack 2.x by sample</title>
+    <title>Webpack 3.x by sample</title>
   </head>
   <body>
 -   <div class="jumbotron">
@@ -93,7 +93,7 @@ document.body.appendChild(element);
 -       Bootstrap is the most popular ...
 -     </p>
 -   </div>
--   Hello Webpack 2!
+-   Hello Webpack 3!
 -   <div class="red-background ">
 -     RedBackground stuff
 -   </div>
