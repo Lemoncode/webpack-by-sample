@@ -183,7 +183,7 @@ module.exports = {
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
   "main": "index.js",
   "scripts": {
-+    "start": "webpack"
++    "start": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 ```
