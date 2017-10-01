@@ -39,7 +39,7 @@ npm install webpack-dev-server --save-dev
 - Let's reconfigure our _package.json_ _start_command and add a new custom command that we will call _build_.
 
 ### ./package.json
-```
+```diff
   "scripts": {
 -   "start": "webpack"
 +   "start": "webpack-dev-server"
