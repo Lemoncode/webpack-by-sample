@@ -135,7 +135,7 @@ document.write(messageToDisplay);
 ```javascript
 {
   "presets": [
-    "env",
+    "env"
   ]
 }
 ```
