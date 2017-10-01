@@ -184,6 +184,7 @@ module.exports = {
   "main": "index.js",
   "scripts": {
 +    "start": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
 ```
 
