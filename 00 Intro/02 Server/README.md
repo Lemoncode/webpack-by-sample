@@ -42,8 +42,8 @@ npm install webpack-dev-server --save-dev
 ```diff
   "scripts": {
 -   "start": "webpack"
-+   "start": "webpack-dev-server"
-+   "build": "webpack"
++   "start": "webpack-dev-server",
++   "build": "webpack",
   },
 ```
 
