@@ -174,6 +174,19 @@ module.exports = {
 };
 ```
 
+- Let's add _webpack_ as start command in our _package.json_ file:
+
+```diff
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "main": "index.js",
+  "scripts": {
++    "start": "webpack"
+  },
+```
+
 - Let's run webpack from the command line, type `npm start` and press enter.
 
 ```
