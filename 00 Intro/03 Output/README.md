@@ -171,21 +171,19 @@ able to browse our original es6 files and place breakpoints / debug.
 - Just to wrap up... a mandatory step on any web app is to minify / obsfuscate the JavaScript files. In order to do that we we will a new script command to our
 package.json
 
-_./package.json_
-
-```cmd
+### ./package.json
 
 ```diff
 "scripts": {
   "start": "webpack-dev-server",
-  "build": "webpack",
+- "build": "webpack"
++ "build": "webpack",
 +  "build:prod": "webpack -p",
-  "test": "echo \"Error: no test specified\" && exit 1"
 },
 ```
 And run the following command
 
-```
+```cmd
 npm run build:prod
 ```
 
