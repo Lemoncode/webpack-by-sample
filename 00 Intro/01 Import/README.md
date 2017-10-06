@@ -35,15 +35,15 @@ You will need to have Node.js installed in your computer. In order to follow thi
   #### ./averageService.js
 
   ```javascript
-  function getTotalScore(scores) {
-    return scores.reduce((totalScore, currentScore) => {
-      return totalScore + currentScore;
-    });
-  }
+ export function getAvg(scores) {
+ return getTotalScore(scores) / scores.length;
+}
 
-  export function getAvg(scores) {
-    return getTotalScore(scores) / scores.length;
-  }
+function getTotalScore(scores) {
+  return scores.reduce((score, count) => {
+    return score + count;
+  });
+}
   ```
 
 - Now let's update `students.js` to import the previous file and consume it:
