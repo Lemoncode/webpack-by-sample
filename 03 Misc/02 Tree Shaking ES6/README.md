@@ -217,13 +217,13 @@ document.body.appendChild(element);
 ```diff
 {
   "presets": [
--   "env",
+-   "env"
 +   [
 +     "env",
 +     {
-+       "modules": false,
-+     },
-+   ],
++       "modules": false
++     }
++   ]
   ]
 }
 

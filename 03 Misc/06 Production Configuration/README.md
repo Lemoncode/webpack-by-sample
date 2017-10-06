@@ -289,14 +289,14 @@ webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esM
 ```diff
 {
   "presets": [
--   "env",
+-   "env"
 +   [
 +     "env",
 +     {
-+       "modules": false,
-+     },
++       "modules": false
++     }
 +   ],
-    "react",
+    "react"
   ]
 }
 

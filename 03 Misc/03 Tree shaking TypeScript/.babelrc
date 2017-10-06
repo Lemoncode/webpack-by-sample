@@ -3,8 +3,8 @@
     [
       "env",
       {
-        "modules": false,
-      },
-    ],
+        "modules": false
+      }
+    ]
   ]
 }

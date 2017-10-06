@@ -332,9 +332,9 @@ npm install babel-core babel-preset-env babel-loader --save-dev
     [
       "env",
       {
-        "modules": false,
-      },
-    ],
+        "modules": false
+      }
+    ]
   ]
 }
 

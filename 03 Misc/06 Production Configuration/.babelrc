@@ -3,9 +3,9 @@
     [
       "env",
       {
-        "modules": false,
-      },
+        "modules": false
+      }
     ],
-    "react",
+    "react"
   ]
 }
