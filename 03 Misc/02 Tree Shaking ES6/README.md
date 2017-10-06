@@ -1,6 +1,6 @@
 # 02 Tree Shaking ES6
 
-On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
 We will start from sample _01 Styles/03 SASS_ and we are going to create a simple sample in ES6:
 
@@ -83,7 +83,7 @@ document.body.appendChild(element);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Webpack 2.x by sample</title>
+    <title>Webpack 3.x by sample</title>
   </head>
   <body>
 -   <div class="jumbotron">
@@ -92,7 +92,7 @@ document.body.appendChild(element);
 -       Bootstrap is the most popular ...
 -     </p>
 -   </div>
--   Hello Webpack 2!
+-   Hello Webpack 3!
 -   <div class="red-background ">
 -     RedBackground stuff
 -   </div>
@@ -140,9 +140,10 @@ npm install rimraf --save-dev
 {
   ...
   "scripts": {
--   "start": "webpack-dev-server"
-+   "start": "webpack-dev-server",
-+   "build:dev": "rimraf dist && webpack",
+    "start": "webpack-dev-server",
+-   "build": "webpack",
++   "build": "rimraf dist && webpack",
+-   "build:prod": "webpack -p"
 +   "build:prod": "rimraf dist && webpack -p"
   },
   ...
@@ -150,7 +151,7 @@ npm install rimraf --save-dev
 
 ```
 
-- Running `npm run build:dev`, we can see in `dist` folder that all methods are imported:
+- Running `npm run build`, we can see in `dist` folder that all methods are imported:
 
 ### ./dist/...app.js
 ```diff
@@ -230,7 +231,7 @@ document.body.appendChild(element);
 
 > NOTE: We need to wrap `env preset` inside array for add preset options, [example here](http://babeljs.io/docs/plugins/preset-env/#examples-export-with-various-targets).
 
-- Running `npm run build:dev` again:
+- Running `npm run build` again:
 
 ### ./dist/...app.js
 ```diff

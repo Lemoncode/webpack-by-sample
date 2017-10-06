@@ -1,10 +1,12 @@
 {
-  "name": "boilerplate",
+  "name": "linting-demo",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 01 Linting",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "build:prod": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -17,25 +19,25 @@
   },
   "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-env": "^1.1.11",
-    "css-loader": "^0.26.2",
-    "eslint": "^3.17.1",
-    "eslint-loader": "^1.6.3",
-    "extract-text-webpack-plugin": "^2.0.0",
-    "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.28.0",
-    "node-sass": "^4.5.0",
-    "sass-loader": "^6.0.2",
-    "style-loader": "^0.13.2",
-    "url-loader": "^0.5.8",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.6.1",
+    "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "jquery": "^3.1.1"
+    "jquery": "^3.2.1"
   }
 }

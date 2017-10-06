@@ -178,8 +178,10 @@ module.exports = function () {
 {
   ...
   "scripts": {
--   "start": "webpack-dev-server"
-+   "start": "webpack-dev-server --config=dev.webpack.config.js"
+-   "start": "webpack-dev-server",
++   "start": "webpack-dev-server --config=dev.webpack.config.js",
+    "build": "webpack",
+    "build:prod": "webpack -p"
   },
   ...
 }
@@ -197,16 +199,17 @@ module.exports = function () {
 {
   ...
   "scripts": {
--   "start": "webpack-dev-server --config=dev.webpack.config.js"
-+   "start": "webpack-dev-server --config=dev.webpack.config.js",
-+   "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js"
+    "start": "webpack-dev-server --config=dev.webpack.config.js",
+-   "build": "webpack",
++   "build": "rimraf dist && webpack --config=dev.webpack.config.js",
+    "build:prod": "webpack -p"
   },
   ...
 }
 
 ```
 
-- Running `npm run build:dev`, we can see how vendor bundle size decrease:
+- Running `npm run build`, we can see how vendor bundle size decrease:
 
 ![build dev config](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/build%20dev%20config.png)
 
@@ -233,8 +236,8 @@ module.exports = function () {
   ...
   "scripts": {
     "start": "webpack-dev-server --config=dev.webpack.config.js",
--   "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js"
-+   "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js",
+    "build": "rimraf dist && webpack --config=dev.webpack.config.js",
+-   "build:prod": "webpack -p"
 +   "build:prod": "rimraf dist && webpack --config=prod.webpack.config.js"
   },
   ...
@@ -254,7 +257,7 @@ module.exports = function () {
   ...
   "scripts": {
     "start": "webpack-dev-server --config=dev.webpack.config.js",
-    "build:dev": "rimraf dist && webpack --config=dev.webpack.config.js",
+    "build": "rimraf dist && webpack --config=dev.webpack.config.js",
 -   "build:prod": "rimraf dist && webpack --config=prod.webpack.config.js"
 +   "build:prod": "rimraf dist && webpack -p --config=prod.webpack.config.js"
   },
