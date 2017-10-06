@@ -230,7 +230,7 @@ function getTotalScore(scores) {
 
 ![bundle after change code](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20after%20change%20code.png)
 
-- To prevent this, we need to add [manifest configuration](https://webpack.js.org/guides/code-splitting-libraries/#manifest-file):
+- To prevent this, we need to add [manifest configuration](https://webpack.js.org/guides/caching/#extracting-boilerplate) (we can also name it `runtime` file):
 
 ### ./webpack.config.js
 ```diff
@@ -272,3 +272,97 @@ function getTotalScore(scores) {
 - But this time, vendor doesn't change its hash, so it isn't compiled again and it reduces the time to build solution:
 
 ![bundle manifest after change code](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/bundle%20manifest%20after%20change%20code.png)
+
+- Finally, imagine we want to add `lodash` lib to clone `scores` array:
+
+```bash
+npm install lodash --save
+```
+
+- We need to add it to `vendor` bundle:
+
+### ./webpack.config.js
+```diff
+...
+ entry: {
+    app: './students.js',
+    vendor: [
+      'jquery',
++     'lodash',
+    ],
+  },
+```
+
+- And use it:
+
+### ./students.js
+```diff
+import { getAvg } from './averageService';
++ import {cloneDeep} from 'lodash';
+
+$('body').css('background-color', 'lightSkyBlue');
+
+const scores = [90, 75, 60, 99, 94, 30];
++ const clonedScores = cloneDeep(scores);
++
+const averageScore = getAvg(scores);
++ const clonedAverageScore = getAvg(clonedScores);
++
+- const messageToDisplay = `average score ${averageScore}`;
++ const messageToDisplay = `average score ${averageScore},
++ cloned: ${clonedAverageScore}`;
+
+document.write(messageToDisplay);
+
+```
+
+- `npm run build` and see that the `vendor's` hash is changed:
+
+![installing lodash](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/installing%20lodash.png)
+
+- As good developers, we are going to change the import's order and keep third libraries on top:
+
+### ./students.js
+```diff
+- import { getAvg } from './averageService';
+- import { cloneDeep } from 'lodash';
++ import { cloneDeep } from 'lodash';
++ import { getAvg } from './averageService';
+
+$('body').css('background-color', 'lightSkyBlue');
+
+const scores = [90, 75, 60, 99, 94, 30];
+const clonedScores = cloneDeep(scores);
+
+const averageScore = getAvg(scores);
+const clonedAverageScore = getAvg(clonedScores);
+
+const messageToDisplay = `average score ${averageScore},
+cloned: ${clonedAverageScore}`;
+
+document.write(messageToDisplay);
+
+```
+
+- `npm run build` and it changes again:
+
+![import reorder](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/import%20reorder.png)
+
+- Due to it changes the `modules.id` that use webpack to require the module, it modify the hash. We can fix it using [`HashedModuleIdsPlugin`](https://webpack.js.org/plugins/hashed-module-ids-plugin/):
+
+### ./webpack.config.js
+
+```diff
+...
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
++   new webpack.HashedModuleIdsPlugin(),
+```
+
+- Executing twice changing the import's order:
+
+![01 using hashed plugin](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/01%20using%20hashed%20plugin.png)
+
+![02 using hashed plugin](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/02%20using%20hashed%20plugin.png)
+
