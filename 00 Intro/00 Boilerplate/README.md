@@ -56,14 +56,14 @@ npm install webpack --save-dev
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lemoncode/webpack-2.x-by-sample.git"
+    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
   },
   "author": "Lemoncode",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Lemoncode/webpack-2.x-by-sample/issues"
+    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
   },
-  "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
+  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
   "devDependencies": {
     "webpack": "^3.5.6"
   }
@@ -100,14 +100,14 @@ Our **`package.json`** file should looks something like:
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lemoncode/webpack-2.x-by-sample.git"
+    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
   },
   "author": "Lemoncode",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Lemoncode/webpack-2.x-by-sample/issues"
+    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
   },
-  "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
+  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
   "devDependencies": {
 +   "babel-core": "^6.26.0",
 +   "babel-loader": "^7.1.2",

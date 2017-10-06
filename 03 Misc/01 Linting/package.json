@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lemoncode/webpack-2.x-by-sample.git"
+    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
   },
   "author": "Lemoncode",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Lemoncode/webpack-2.x-by-sample/issues"
+    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
   },
-  "homepage": "https://github.com/Lemoncode/webpack-2.x-by-sample#readme",
+  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
