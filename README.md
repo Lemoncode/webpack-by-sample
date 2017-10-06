@@ -1,4 +1,4 @@
-# Webpack 2.x by sample
+# Webpack 3.x by sample
 
 Learn webpack by sample, each of the samples contains a `readme.md` file that
 indicates the purpose of the sample plus an step by step guide to reproduce it.
@@ -215,7 +215,7 @@ In this sample we are going to setup a basic Angular 2 app with Webpack.
 We will start from sample _02 Fx/00 TypeScript_.
 
 Summary steps:
- - Install Angular 1.x libraries.
+ - Install Angular 2.x libraries.
  - Create the app.
  - Instantiate the app from the html.
  - Create a component (inline HTML).
@@ -241,7 +241,7 @@ Summary steps:
 
 ### 02 Tree Shaking ES6
 
-On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
 We will start from sample _01 Styles/03 SASS_ and we are going to create a simple sample in ES6:
 
@@ -253,7 +253,7 @@ We will use webpack's 2 tree shaking and check that we end up having a bundle th
 
 ### 03 Tree Shaking TypeScript
 
-On of the most interest features that ships Webpack 2 is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
 We will start from sample _02 Fx/00 TypeScript_ and we are going to create a simple sample in TypeScript:
 

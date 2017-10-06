@@ -5,7 +5,7 @@ In this sample we are going to setup a basic Angular 2 app with Webpack.
 We will start from sample _02 Fx/00 TypeScript_.
 
 Summary steps:
- - Install Angular 1.x libraries.
+ - Install Angular 2.x libraries.
  - Create the app.
  - Instantiate the app from the html.
  - Create a component (inline HTML).
@@ -44,9 +44,12 @@ npm install
 - @angular/compiler
 - rxjs
 
+   bootstrap@latest core-js@latest reflect-metadata@late
+st rxjs@5 zone.js@latest
+
 ```
-npm install @angular/common @angular/compiler
-@angular/core @angular/platform-browser @angular/platform-browser-dynamic
+npm install @angular/common@2 @angular/compiler@2
+@angular/core@2 @angular/platform-browser@2 @angular/platform-browser-dynamic@2
 core-js reflect-metadata
 rxjs zone.js --save
 ```
@@ -64,29 +67,6 @@ rxjs zone.js --save
 ```
 npm uninstall jquery --save
 npm uninstall @types/jquery --save-dev
-```
-
-- We need to indicate the list of library files to be included in the compilation.
-
-### ./tsconfig.json
-```diff
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "sourceMap": true,
--   "noLib": false,
-   "suppressImplicitAnyIndexErrors": true,
-+   "lib": ["dom", "es2015"]   
-  },
-  "compileOnSave": false,
-  "exclude": [
-    "node_modules"
-  ]
-}
-
 ```
 - Let's create a new file that will contain a simple component with an inline template. Let's create a file called _`studentsComponent.ts`_
 
@@ -144,7 +124,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Webpack 2.x by sample</title>
+    <title>Webpack 3.x by sample</title>
   </head>
   <body>
 -   <div class="jumbotron">
@@ -153,7 +133,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 -       Bootstrap is the most popular ...
 -     </p>
 -   </div>
--   Hello Webpack 2!
+-   Hello Webpack 3!
 -   <div class="red-background ">
 -     RedBackground stuff
 -   </div>
@@ -210,8 +190,14 @@ module.exports = {
     "noImplicitAny": false,
     "sourceMap": true,
    "suppressImplicitAnyIndexErrors": true,
--   "lib": ["dom", "es2015"] 
-+   "lib": ["dom", "es2015"], 
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+-     "es2015.iterable"
++     "es2015"
+-   ]
++   ],
 +   "experimentalDecorators":true     
   },
   "compileOnSave": false,
@@ -336,8 +322,13 @@ npm install @types/webpack-env --save-dev
     "noImplicitAny": false,
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true,   
-    "lib": ["dom", "es2015"], 
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015"
+    ], 
 -   "experimentalDecorators":true 
 +   "experimentalDecorators":true,    
 +    "types": [

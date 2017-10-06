@@ -56,8 +56,13 @@ In this file will define the settings that we want, e.g to transpile to ES5 amon
     "declaration": false,
     "noImplicitAny": false,
     "sourceMap": true,
-    "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.iterable"
+    ]
   },
   "compileOnSave": false,
   "exclude": [
