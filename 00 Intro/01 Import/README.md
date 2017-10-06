@@ -54,8 +54,8 @@ You will need to have Node.js installed in your computer. In order to follow thi
   - // Let's use some ES6 features
   + import {getAvg} from "./averageService";
 
-  - const averageScore = "90";
   + const scores = [90, 75, 60, 99, 94, 30];
+  - const averageScore = "90";
   + const averageScore = getAvg(scores);
 
   const messageToDisplay = `average score ${averageScore}`;
