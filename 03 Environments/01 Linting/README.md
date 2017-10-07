@@ -64,7 +64,7 @@ We are going to create a file `.eslintrc.json` (there are many [file formats opt
     "build": "rimraf dist && webpack",
 -   "build:prod": "rimraf dist && webpack -p"
 +   "build:prod": "rimraf dist && webpack -p",
-+    "lint": "eslint ."
++   "lint": "eslint ."
   },
   ...
 }
@@ -305,4 +305,4 @@ _NOTE:_ In the rule configuration, we can use the value `2` instead of `"error"`
 
 - To "go back to normal" we should remove the rule or configure it to a more reasonable number of lines per file.
 
-- Finally, if we want to integrate tslinter with a React based project, we can use [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react) that provides linting for JSX language.
+- Finally, if we want to integrate eslint with a React based project, we can use [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react) that provides linting for JSX language.
