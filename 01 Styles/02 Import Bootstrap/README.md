@@ -49,9 +49,9 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
       vendor: [
         'jquery',
       ],
-  +   vendorStyles: [
-  +     './node_modules/bootstrap/dist/css/bootstrap.css',
-  +   ],
++     vendorStyles: [
++       './node_modules/bootstrap/dist/css/bootstrap.css',
++     ],
     },
     ...
   };
@@ -162,24 +162,24 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
             },
           }),
         },
-  +     // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
-  +     // Using here url-loader and file-loader
-  +     {
-  +       test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-  +       loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-  +     },
-  +     {
-  +       test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-  +       loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-  +     },
-  +     {
-  +       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-  +       loader: 'file-loader'
-  +     },
-  +     {
-  +       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-  +       loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-  +     },
++       // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
++       // Using here url-loader and file-loader
++       {
++         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
++         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
++       },
++       {
++         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
++         loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
++       },
++       {
++         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
++         loader: 'file-loader'
++       },
++       {
++         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
++         loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
++       },
       ],
     },
   ...
