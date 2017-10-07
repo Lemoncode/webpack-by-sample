@@ -61,9 +61,9 @@ We are going to create a file `.eslintrc.json` (there are many [file formats opt
   ...
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
--   "build:prod": "webpack -p"
-+    "build:prod": "webpack -p",
+    "build": "rimraf dist && webpack",
+-   "build:prod": "rimraf dist && webpack -p"
++   "build:prod": "rimraf dist && webpack -p",
 +    "lint": "eslint ."
   },
   ...
@@ -174,9 +174,9 @@ module.exports = {
   ...
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
-+   "build:prod": "webpack -p"
--   "build:prod": "webpack -p",
+    "build": "rimraf dist && webpack",
++   "build:prod": "rimraf dist && webpack -p"
+-   "build:prod": "rimraf dist && webpack -p",
 -   "lint": "eslint ."
   },
   ...

@@ -143,13 +143,6 @@ module.exports = {
 
 ```
 
-- To avoid each time we run build delete the dist folder manually, we are going to install a package that does it for us:
-
-```
-npm install rimraf --save-dev
-```
-
-
 - Now it's time to install `webpack-merge` package. This allow us to combine `base.webpack.config` with environment config:
 
 ```
@@ -181,8 +174,8 @@ module.exports = function () {
   "scripts": {
 -   "start": "webpack-dev-server",
 +   "start": "webpack-dev-server --config=dev.webpack.config.js",
-    "build": "webpack",
-    "build:prod": "webpack -p"
+    "build": "rimraf dist && webpack",
+    "build:prod": "rimraf dist && webpack -p"
   },
   ...
 }
@@ -201,9 +194,9 @@ module.exports = function () {
   ...
   "scripts": {
     "start": "webpack-dev-server --config=dev.webpack.config.js",
--   "build": "webpack",
+-   "build": "rimraf dist && webpack",
 +   "build": "rimraf dist && webpack --config=dev.webpack.config.js",
-    "build:prod": "webpack -p"
+    "build:prod": "rimraf dist && webpack -p"
   },
   ...
 }
@@ -238,7 +231,7 @@ module.exports = function () {
   "scripts": {
     "start": "webpack-dev-server --config=dev.webpack.config.js",
     "build": "rimraf dist && webpack --config=dev.webpack.config.js",
--   "build:prod": "webpack -p"
+-   "build:prod": "rimraf dist && webpack -p"
 +   "build:prod": "rimraf dist && webpack --config=prod.webpack.config.js"
   },
   ...

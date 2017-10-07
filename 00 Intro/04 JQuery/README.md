@@ -45,6 +45,7 @@ It automatically adds that entry to our _package.json_.
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "html-webpack-plugin": "^2.30.1",
+    "rimraf": "^2.6.2",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
   },

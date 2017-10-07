@@ -190,3 +190,21 @@ npm run build:prod
 If we open the generated `bundle.js` file we will realize that the new version has been minified.
 
 ![minified bundle](../../99%20Readme%20Resources/00%20Intro/03%20Output/minified%20bundle.png)
+
+- To avoid each time we run build delete the dist folder manually, we are going to install a package that does it for us:
+
+```
+npm install rimraf --save-dev
+```
+
+### ./package.json
+
+```diff
+  "scripts": {
+    "start": "webpack-dev-server",
+-   "build": "webpack",
++   "build": "rimraf dist && webpack",
+-   "build:prod": "webpack -p"
++   "build:prod": "rimraf dist && webpack -p"
+  },
+```

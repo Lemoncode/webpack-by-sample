@@ -127,30 +127,6 @@ module.exports = {
 
 ```
 
-- To avoid each time we run build delete the dist folder manually, we are going to install a package that does it for us:
-
-```
-npm install rimraf --save-dev
-```
-
-- Finaly we are going to add two commands in `package.json` to run webpack builds:
-
-### ./package.json
-```diff
-{
-  ...
-  "scripts": {
-    "start": "webpack-dev-server",
--   "build": "webpack",
-+   "build": "rimraf dist && webpack",
--   "build:prod": "webpack -p"
-+   "build:prod": "rimraf dist && webpack -p"
-  },
-  ...
-}
-
-```
-
 - Running `npm run build`, we can see in `dist` folder that all methods are imported:
 
 ### ./dist/...app.js
