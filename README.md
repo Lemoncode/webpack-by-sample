@@ -302,8 +302,6 @@ We will start from sample _02 Fx/00 TypeScript_ and we are going to create a sim
 
 We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
 
-### 03 DLL plugin
-
 ## 05 Misc (other samples)
 
 ### 01 Commons Chunk Plugin
