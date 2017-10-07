@@ -93,7 +93,7 @@ document.body.appendChild(element);
 -     </p>
 -   </div>
 -   Hello Webpack 3!
--   <div class="red-background ">
+-   <div class="red-background">
 -     RedBackground stuff
 -   </div>
   </body>

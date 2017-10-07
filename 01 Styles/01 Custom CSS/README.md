@@ -50,7 +50,7 @@ used on some e.g. div. (we will name it `mystyles.css`):
   </head>
   <body>
     Hello Webpack 3!
-+   <div class="red-background ">
++   <div class="red-background">
 +     RedBackground stuff
 +   </div>
   </body>

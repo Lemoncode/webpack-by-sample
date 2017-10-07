@@ -103,7 +103,7 @@ point for our React app.
 -       </p>
 -     </div>
 -     Hello Webpack 3!
--    <div class="red-background ">
+-    <div class="red-background">
 -      RedBackground stuff
 -    </div>
 +    <div id="root">

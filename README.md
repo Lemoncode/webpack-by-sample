@@ -136,9 +136,8 @@ Summary steps:
 
 ### 04 Handling Images
 
-In this demo we are going to include images in our project in two flavours: via
-JavaScript and via HTML. On the JavaScript side we will see is something
-straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader html-loader
+In this demo we are going to include images in our project in two flavours: via JavaScript and via HTML.
+On the JavaScript side we will see it's something straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader: [html-loader](https://github.com/webpack-contrib/html-loader).
 
 We will start from sample _01 Styles/03 SASS_.
 

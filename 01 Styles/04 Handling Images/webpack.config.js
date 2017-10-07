@@ -74,6 +74,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'url-loader?limit=5000',
       },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
     ],
   },
   // For development https://webpack.js.org/configuration/devtool/#for-development

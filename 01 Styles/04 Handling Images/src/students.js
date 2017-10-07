@@ -1,5 +1,5 @@
 import {getAvg} from "./averageService";
-import logoImg from './content/logo_2.png';
+import logoImg from './content/logo_1.png';
 
 $('body').css('background-color', 'lightSkyBlue');
 

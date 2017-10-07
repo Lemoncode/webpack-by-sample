@@ -63,8 +63,8 @@ module.exports = {
 - Now it's time to start with the webpack plumbing. Let's install a [sass-loader](https://github.com/webpack-contrib/sass-loader) that requires [node-sass](https://github.com/sass/node-sass) as dependency:
 
 ```
-npm install node-sass --save-dev
 npm install sass-loader --save-dev
+npm install node-sass --save-dev
 ```
 - We only need one more step. Open our `webpack.config.js` and add a new  entry (scss) to the loaders that will use the just installed sass-loader. Interesting to note down: we are chaining loaders, first we preprocess the scss then with the css we obtain as result we just pass the css and styles loaders we were using before.
 
@@ -118,9 +118,9 @@ module.exports = {
 
 - To keep maintainable our source code, let's move files under `src` folder:
   - Move to `./src/averageService.js`.
-  - Move to `./src/students.js`.
   - Move to `./src/index.html`.
   - Move to `./src/mystyles.scss`.
+  - Move to `./src/students.js`.
 
 - And update `webpack.config` to set context path over `src` folder:
 

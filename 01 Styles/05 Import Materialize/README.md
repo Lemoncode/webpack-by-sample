@@ -111,7 +111,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   +   </div>
   -   Hello Webpack 3!
   +   <p>Hello Webpack 3!</p>
-      <div class="red-background ">
+      <div class="red-background">
         RedBackground stuff
       </div>
     </body>
