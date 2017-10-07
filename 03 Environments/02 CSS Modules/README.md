@@ -1,4 +1,4 @@
-# 04 CSS Modules
+# 02 CSS Modules
 
 In this demo we are going to isolate different scss files using same css class names.
 We will learn how to configure it and how to deal with external css class provided by third libraries like Bootstrap.

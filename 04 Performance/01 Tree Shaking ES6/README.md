@@ -1,4 +1,4 @@
-# 02 Tree Shaking ES6
+# 01 Tree Shaking ES6
 
 On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
 
