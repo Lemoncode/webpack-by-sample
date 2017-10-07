@@ -1,7 +1,7 @@
 {
   "name": "right-pad-usage",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 09 Right pad library",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 05 Misc - 05 Right pad usage",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -37,6 +37,6 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
-    "right-pad": "file:../09 Right pad library"
+    "right-pad": "file:../04 Right pad library"
   }
 }

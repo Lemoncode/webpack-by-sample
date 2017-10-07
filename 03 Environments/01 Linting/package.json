@@ -1,7 +1,7 @@
 {
   "name": "linting-demo",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 01 Linting",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Environments - 01 Linting",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",

@@ -1,7 +1,7 @@
 {
-  "name": "css-modules",
+  "name": "tree-shaking-es6",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 04 CSS Modules",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 04 Performance - 01 Tree Shaking ES6",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -22,7 +22,6 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
@@ -36,8 +35,6 @@
     "webpack-dev-server": "^2.8.0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "bootstrap": "^3.3.7"
   }
 }

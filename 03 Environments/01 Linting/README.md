@@ -79,7 +79,7 @@ npm run lint
 
 - We get the following output:
 
-![eslint errors](../../99%20Readme%20Resources/03%20Misc/01%20Linting/eslint%20errors.png)
+![eslint errors](../../99%20Readme%20Resources/03%20Environments/01%20Linting/eslint%20errors.png)
 
 - ESLint throws two parsing errors due to the usage of _export_ and _import_ keywords. Import and export functionalities are provided by Babel to work with modules, so it's time to connect ESLint with Babel:
 
@@ -103,7 +103,7 @@ npm install babel-eslint --save-dev
 ```
 - Then, when we run the `npm run lint` command again we get the following result:
 
-![jquery error](../../99%20Readme%20Resources/03%20Misc/01%20Linting/jquery%20error.png)
+![jquery error](../../99%20Readme%20Resources/03%20Environments/01%20Linting/jquery%20error.png)
 
 - As we see, this time we have an error related to `jquery` library. To solve this we need to change the linter configuration to define the `jquery` global variables, the same that we did with `browser` and `node` related variables:
 
@@ -126,7 +126,7 @@ npm install babel-eslint --save-dev
 
 - Now if we run `npm run lint` again:
 
-![eslint no errors](../../99%20Readme%20Resources/03%20Misc/01%20Linting/eslint%20no%20errors.png)
+![eslint no errors](../../99%20Readme%20Resources/03%20Environments/01%20Linting/eslint%20no%20errors.png)
 
 
 - As we see, this time the command doesn't throw any errors. That sounds good! But we want to execute ESLint while we are writing our code, so the following step is connect ESLint with Webpack, so the `webpack-dev-server` uses it to continuously check for errors.
@@ -204,7 +204,7 @@ const messageToDisplay = `average score ${averageScore}`;
 
 - As soon as we save the javascript file, we get the following linter error:
 
-![typo](../../99%20Readme%20Resources/03%20Misc/01%20Linting/typo.png)
+![typo](../../99%20Readme%20Resources/03%20Environments/01%20Linting/typo.png)
 
 ## Defining Rules
 
@@ -247,7 +247,7 @@ const messageToDisplay = `average score ${averageScore}`;
 
 - As result, we get this error because the use of _console_ is not allowed by default.
 
-![console error](../../99%20Readme%20Resources/03%20Misc/01%20Linting/console%20error.png)
+![console error](../../99%20Readme%20Resources/03%20Environments/01%20Linting/console%20error.png)
 
 - We can disable this rule with the following configuration:
 
@@ -272,7 +272,7 @@ const messageToDisplay = `average score ${averageScore}`;
 ```
 - We can trigger the linting by saving the `students.js` file again with no changes. Then we can see how the error referring to the console is not shown anymore.
 
-![disabling no-console rule](../../99%20Readme%20Resources/03%20Misc/01%20Linting/disabling%20no-console%20rule.png)
+![disabling no-console rule](../../99%20Readme%20Resources/03%20Environments/01%20Linting/disabling%20no-console%20rule.png)
 
 - Other example is the rule named [max-lines](http://eslint.org/docs/rules/max-lines). This rule _enforces a maximum number of lines per file, in order to aid in maintainability and reduce complexity._ For demo purposes we're going to configure it with a ridiculously low number of lines, that is, just one, so we can see the error.
 
@@ -301,7 +301,7 @@ _NOTE:_ In the rule configuration, we can use the value `2` instead of `"error"`
 
 - Again, we can trigger the linting action by saving the `students.js` file.
 
-![enable max-lines rule](../../99%20Readme%20Resources/03%20Misc/01%20Linting/enable%20max-lines%20rule.png)
+![enable max-lines rule](../../99%20Readme%20Resources/03%20Environments/01%20Linting/enable%20max-lines%20rule.png)
 
 - To "go back to normal" we should remove the rule or configure it to a more reasonable number of lines per file.
 

@@ -1,7 +1,7 @@
 {
-  "name": "production-configuration",
+  "name": "define-plugin-advanced",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 06 Production Configuration",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 05 Misc - 03 DefinePlugin advanced",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config=dev.webpack.config.js",

@@ -1,12 +1,12 @@
 {
-  "name": "define-plugin-advanced",
+  "name": "tree-shaking-typescript",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Misc - 08 DefinePlugin advanced",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 04 Performance - 02 Tree Shaking TypeScript",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config=dev.webpack.config.js",
-    "build": "rimraf dist && webpack --config=dev.webpack.config.js",
-    "build:prod": "rimraf dist && webpack -p --config=prod.webpack.config.js"
+    "start": "webpack-dev-server",
+    "build": "rimraf dist && webpack",
+    "build:prod": "rimraf dist && webpack -p"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,10 @@
   },
   "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
   "devDependencies": {
+    "awesome-typescript-loader": "^3.2.3",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "compression-webpack-plugin": "^1.0.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
@@ -32,14 +31,12 @@
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "typescript": "^2.5.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.8.0",
-    "webpack-merge": "^4.1.0"
+    "webpack-dev-server": "^2.8.0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "bootstrap": "^3.3.7"
   }
 }

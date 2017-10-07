@@ -223,7 +223,7 @@ Summary steps:
  - Create an external HTML template and consuming it.
 
 
-## 03 Misc (other samples)
+## 03 Environments (development and production configs)
 
 ### 01 Linting
 
@@ -238,31 +238,7 @@ Summary steps:
  - Connecting with Webpack.
  - Adding custom rules.
 
-### 02 Tree Shaking ES6
-
-On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
-
-We will start from sample _01 Styles/03 SASS_ and we are going to create a simple sample in ES6:
-
-- A calculator module where we create an export per basic operation (sum, substract, mul, div..).
-
-- A `main.js` file that will import this calculator module and use only sum operation.
-
-We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
-
-### 03 Tree Shaking TypeScript
-
-On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
-
-We will start from sample _02 Fx/00 TypeScript_ and we are going to create a simple sample in TypeScript:
-
-- A calculator module where we create an export per basic operation (sum, substract, mul, div..).
-
-- A `main.js` file that will import this calculator module and use only sum operation.
-
-We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
-
-### 04 CSS Modules
+### 02 CSS Modules
 
 In this demo we are going to isolate different scss files using same css class names.
 We will learn how to configure it and how to deal with external css class provided by third libraries like Bootstrap.
@@ -275,7 +251,52 @@ Summary steps:
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.
 
-### 05 Commons Chunk Plugin
+### 03 HRM
+
+### 04 Production Configuration
+
+In this demo we are going to create different builds for each environment.
+We will learn how to configure it and how to reduce bundle file sizes.
+
+We will start from sample _03 Environments/02 CSS Modules_.
+
+Summary steps:
+- Add base webpack config file
+- Add webpack-merge package.
+- Add development config file.
+- Add production config file.
+
+## 04 Peformance
+
+### 01 Tree Shaking ES6
+
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+
+We will start from sample _01 Styles/03 SASS_ and we are going to create a simple sample in ES6:
+
+- A calculator module where we create an export per basic operation (sum, substract, mul, div..).
+
+- A `main.js` file that will import this calculator module and use only sum operation.
+
+We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
+
+### 02 Tree Shaking TypeScript
+
+On of the most interest features that ships Webpack 2 and it has Webpack 3 too, is Tree Shaking: this allows to remove from a destination bundle the exports that are not in use by the project, reducing dramatically the site of our bundle.
+
+We will start from sample _02 Fx/00 TypeScript_ and we are going to create a simple sample in TypeScript:
+
+- A calculator module where we create an export per basic operation (sum, substract, mul, div..).
+
+- A `main.js` file that will import this calculator module and use only sum operation.
+
+We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
+
+### 03 DLL plugin
+
+## 05 Misc (other samples)
+
+### 01 Commons Chunk Plugin
 
 In this demo we will learn how to split our application in different bundles and how does Webpack manage to do so with the CommonsChunkPlugin.
 We will also learn some tips and tricks.
@@ -289,20 +310,7 @@ Summary steps:
 - create a vendor file as an alternative to inline vendor in the config.
 - move all the vendors imports there.
 
-### 06 Production Configuration
-
-In this demo we are going to create different builds for each environment.
-We will learn how to configure it and how to reduce bundle file sizes.
-
-We will start from sample _03 Misc/04 CSS Modules_.
-
-Summary steps:
-- Add base webpack config file
-- Add webpack-merge package.
-- Add development config file.
-- Add production config file.
-
-### 07 DefinePlugin
+### 02 DefinePlugin
 
 In this demo, we will see how can we do a basic usage of environment variables to enable the production mode of Angular
 
@@ -312,11 +320,11 @@ Summary steps:
 - importing enableProdMode on index.ts.
 - adding an if clause that will enableProdMode based on the -p parameter.
 
-### 08 DefinePlugin advanced
+### 03 DefinePlugin advanced
 
 This demo shows how to have alternative API_URL for development and production
 
-Starts from sample _03 Misc/06 Production Configuration_.
+Starts from sample _03 Environments/04 Production Configuration_.
 
 Summary steps:
 - create a students service and a student list component
@@ -326,7 +334,7 @@ Summary steps:
 - Update the dev and prod config to have environment variables
 - Update the services to use the new environment variables.
 
-### 09 Right pad library
+### 04 Right pad library
 
 Do you want to create a library? This example is for you.
 
@@ -341,7 +349,7 @@ Summary steps:
 - add d.ts generation features
 - try it with "npm link"
 
-### 10 Right pad usage
+### 05 Right pad usage
 
 Here we try our new shiny library
 

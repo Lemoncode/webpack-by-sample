@@ -303,7 +303,7 @@ document.body.appendChild(element);
 
 - Now webpack knows which `harmony modules` (ES6 modules) are unused. If we run `npm run build:prod`:
 
-![build prod error](../../99%20Readme%20Resources/03%20Misc/03%20Tree%20shaking%20TypeScript/build%20prod%20error.png)
+![build prod error](../../99%20Readme%20Resources/04%20Performance/02%20Tree%20shaking%20TypeScript/build%20prod%20error.png)
 
 - What's it going on here? Since we are target to `es6`, TypeScript doesn't transpile backticks to `element.innerHTML = 'Sum result: ' + result;` like babel did in sample [02 Tree Shaking ES6](../02%20Tree%20Shaking%20ES6/README.md#distappjs-1)
 

@@ -3,12 +3,11 @@
 In this demo we are going to create different builds for each environment.
 We will learn how to configure it and how to reduce bundle file sizes.
 
-We will start from sample _03 Misc/04 CSS Modules_.
+We will start from sample _03 Environments/02 CSS Modules_.
 
 Summary steps:
 - Add base webpack config file
 - Add webpack-merge package.
-- Install rimraf to clean dist folder.
 - Add development config file.
 - Add production config file.
 
@@ -184,7 +183,7 @@ module.exports = function () {
 
 - Running `npm start`:
 
-![dev config result](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/dev%20config%20result.png)
+![dev config result](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/dev%20config%20result.png)
 
 - We are going to create a `build dev` command to see how much size has bundles files without `webpack-dev-server` stuff:
 
@@ -205,7 +204,7 @@ module.exports = function () {
 
 - Running `npm run build`, we can see how vendor bundle size decrease:
 
-![build dev config](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/build%20dev%20config.png)
+![build dev config](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/build%20dev%20config.png)
 
 - Let's configure `production` environment:
 
@@ -241,7 +240,7 @@ module.exports = function () {
 
 - Running `npm run build:prod`, we can see how all bundle sizes decrease and map files appears:
 
-![cheap source maps configuration](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/cheap%20source%20maps%20configuration.png)
+![cheap source maps configuration](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/cheap%20source%20maps%20configuration.png)
 
 - But we need one step over to decrease bundle size. We need to minify and uglify our bundles. To do this, we only need to active `p` flag:
 
@@ -262,7 +261,7 @@ module.exports = function () {
 
 - Running `npm run build:prod`, we can see how bundle sizes decrease considerably:
 
-![prod config result](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/prod%20config%20result.png)
+![prod config result](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/prod%20config%20result.png)
 
 ### ./dist/...app.js
 ```diff
@@ -298,7 +297,7 @@ webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esM
 
 - Running `npm run build:prod`, we can see how `app` sizes decrease a bit more:
 
-![result with tree shaking](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/result%20with%20tree%20shaking.png)
+![result with tree shaking](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/result%20with%20tree%20shaking.png)
 
 - About using React in `production` mode with Webpack, [here](https://facebook.github.io/react/docs/optimizing-performance.html) explains you that we only need to add:
 
@@ -344,7 +343,7 @@ module.exports = function () {
 
 - Running `npm run build:prod`, we can see `.gz` files that we can upload to server. This is an optional configuration because it needs an extra configuration in server side:
 
-![result with gzipped bundles](../../99%20Readme%20Resources/03%20Misc/05%20Production%20Configuration/result%20with%20gzipped%20bundles.png)
+![result with gzipped bundles](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/result%20with%20gzipped%20bundles.png)
 
 > NOTE: `.map` files or `index.html` are not gzipping because they have low sizes and compression is not needed.
 
