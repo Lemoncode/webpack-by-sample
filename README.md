@@ -251,7 +251,17 @@ Summary steps:
 - Create other component and scss file with same class name.
 - Create selector using custom class and Bootstrap class.
 
-### 03 HRM
+### 03 HMR
+
+In this demo we are going to configure Hot Module Replacement. This feature is great for productivity in development environment, allowing us to update the app code without having to redeploy the whole files or refresh our browser to get the changes updated.
+
+We will start from sample _03 Environments/02 CSS Modules_.
+
+Summary steps:
+- Update `webpack.config.js` with HMR config.
+- Install `react-hot-loader`.
+- Update `student.jsx` file.
+- Create `index.jsx` file.
 
 ### 04 Production Configuration
 
