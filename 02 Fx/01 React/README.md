@@ -36,9 +36,9 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
     context: path.join(basePath, 'src'),
     entry: {
       app: './students.js',
-  -   appStyles: [
-  -     './mystyles.scss',
-  -   ],
+-     appStyles: [
+-       './mystyles.scss',
+-     ],
       ...
     },
     ...
@@ -149,27 +149,27 @@ point for our React app.
 
   ### ./src/students.jsx
 ```diff
-  + import * as React from 'react';
-  + import * as ReactDOM from 'react-dom';
-  + import {AverageComponent} from './averageComponent';
-  - import {getAvg} from './averageService';
++   import * as React from 'react';
++   import * as ReactDOM from 'react-dom';
++   import {AverageComponent} from './averageComponent';
+-   import {getAvg} from './averageService';
 
-  - $('body').css('background-color', 'lightSkyBlue');
+-   $('body').css('background-color', 'lightSkyBlue');
 
-  - const scores = [90, 75, 60, 99, 94, 30];
-  - const averageScore = getAvg(scores);
+-   const scores = [90, 75, 60, 99, 94, 30];
+-   const averageScore = getAvg(scores);
 
-  - const messageToDisplay = `average score ${averageScore}`;
+-   const messageToDisplay = `average score ${averageScore}`;
 
-  - document.write(messageToDisplay);
+-   document.write(messageToDisplay);
 
-  + ReactDOM.render(
-  +   <div>
-  +     <h1>Hello from React DOM</h1>
-  +     <AverageComponent />
-  +   </div>,
-  +   document.getElementById('root')
-  + );
++   ReactDOM.render(
++     <div>
++       <h1>Hello from React DOM</h1>
++       <AverageComponent />
++     </div>,
++     document.getElementById('root')
++   );
 ```
 
 - For *Babel* to parse React `jsx` files we need to install
@@ -185,8 +185,9 @@ point for our React app.
 ```diff
   {
     "presets": [
-      "env",
-  +   "react",
+-     "env"
++     "env",
++     "react"
     ]
   }
 ```
