@@ -24,7 +24,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
+- We are going to start with a new sample, let's clear up the `students.ts` file and start from scratch.
 
   - Remove `src/mystyles.scss`.
   - Remove `src/averageService.ts`.
@@ -124,30 +124,13 @@ module.exports = {
     ],
   },
   ...
+  
+- new webpack.ProvidePlugin({
+-   $: "jquery",
+-   jQuery: "jquery"
+- }),
+  ...
 };
-
-```
-
-- To avoid each time we run build delete the dist folder manually, we are going to install a package that does it for us:
-
-```
-npm install rimraf --save-dev
-```
-
-- Finaly we are going to add two commands in `package.json` to run webpack builds:
-
-### ./package.json
-```diff
-{
-  ...
-  "scripts": {
--   "start": "webpack-dev-server"
-+   "start": "webpack-dev-server",
-+   "build": "rimraf dist && webpack",
-+   "build:prod": "rimraf dist && webpack -p"
-  },
-  ...
-}
 
 ```
 
@@ -155,8 +138,24 @@ npm install rimraf --save-dev
 
 ### ./dist/...app.js
 ```diff
-...
-/* 0 */
+webpackJsonp([1],{
+
+/***/ "5fEv":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var calculator_1 = __webpack_require__("cOI6");
+var result = calculator_1.sum(2, 2);
+var element = document.createElement('h1');
+element.innerHTML = "Sum result: " + result;
+document.body.appendChild(element);
+
+
+/***/ }),
+
+/***/ "cOI6":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -180,22 +179,9 @@ function div(a, b) {
 exports.div = div;
 
 
-/***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var calculator_1 = __webpack_require__(0);
-var result = calculator_1.sum(2, 2);
-var element = document.createElement('h1');
-element.innerHTML = "Sum result: " + result;
-document.body.appendChild(element);
-
-
 /***/ })
+
+},["5fEv"]);
 ...
 ```
 
@@ -205,27 +191,6 @@ document.body.appendChild(element);
 
 ### ./tsconfig.json
 ```diff
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "lib": [
-      "dom",
-      "es5",
-      "scripthost",
-      "es2015.iterable"
-    ]
-  },
-  "compileOnSave": false,
-  "exclude": [
-    "node_modules"
-  ]
-}
-
 {
   "compilerOptions": {
 -   "target": "es5",
@@ -260,7 +225,24 @@ document.body.appendChild(element);
 
 ### ./dist/...app.js
 ```diff
-/* 0 */
+webpackJsonp([1],{
+
+/***/ "5fEv":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__("cOI6");
+
+const result = Object(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
+const element = document.createElement('h1');
+element.innerHTML = `Sum result: ${result}`;
+document.body.appendChild(element);
+
+
+/***/ }),
+
+/***/ "cOI6":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -282,23 +264,10 @@ function div(a, b) {
 }
 
 
-/***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__(0);
-
-const result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
-const element = document.createElement('h1');
-element.innerHTML = `Sum result: ${result}`;
-document.body.appendChild(element);
-
-
 /***/ })
 
+},["5fEv"]);
+...
 ```
 
 - Now webpack knows which `harmony modules` (ES6 modules) are unused. If we run `npm run build:prod`:
@@ -320,7 +289,7 @@ TypeScript transpile to ES6 files and Babel transpile to ES5 files
 - As we know, we need to install:
 
 ```
-npm install babel-core babel-preset-env babel-loader --save-dev
+npm install babel-core babel-preset-env --save-dev
 ```
 
 - Add `.babelrc` with `ES6 modules` config:
@@ -353,22 +322,10 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
--       loader: 'awesome-typescript-loader',
-+       use: [
-+         { loader: 'babel-loader'},
-+         { loader: 'awesome-typescript-loader'},
-+       ],
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', },
-            { loader: 'sass-loader', },
-          ],
-        }),
+        loader: 'awesome-typescript-loader',
++       options: {
++         useBabel: true,
++       },
       },
       ...
     ],
@@ -378,13 +335,27 @@ module.exports = {
 
 ```
 
-> NOTE: When we load multiple loaders take into account that last loader is executed first. See `sass and css loaders` or `awesome-typescript and babel loaders` as examples.
-
 - Running `npm run build` again, babel transform backticks into `element.innerHTML = 'Sum result: ' + result;`:
 
 ### ./dist/...app.js
 ```diff
-/* 0 */
+webpackJsonp([1],{
+
+/***/ "5fEv":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__("cOI6");
+
+var result = Object(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
+var element = document.createElement('h1');
+element.innerHTML = 'Sum result: ' + result;
+document.body.appendChild(element);
+
+/***/ }),
+
+/***/ "cOI6":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -405,26 +376,15 @@ function div(a, b) {
     return a / b;
 }
 
-/***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__(0);
-
-var result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
-var element = document.createElement('h1');
-element.innerHTML = 'Sum result: ' + result;
-document.body.appendChild(element);
-
 /***/ })
+
+},["5fEv"]);
+...
 ```
 
 - If we run `npm run build:prod` again:
 
 ### ./dist/...app.js
 ```diff
-webpackJsonp([1,2],[function(e,n,t){"use strict";function u(e,n){return e+n}n.a=u},,function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var u=t(0),c=t.i(u.a)(2,2),r=document.createElement("h1");r.innerHTML="Sum result: "+c,document.body.appendChild(r)}],[2]);
+webpackJsonp([1],{"5fEv":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var c=n("cOI6"),u=Object(c.a)(2,2),r=document.createElement("h1");r.innerHTML="Sum result: "+u,document.body.appendChild(r)},cOI6:function(e,t,n){"use strict";function c(e,t){return e+t}t.a=c}},["5fEv"]);
 ```

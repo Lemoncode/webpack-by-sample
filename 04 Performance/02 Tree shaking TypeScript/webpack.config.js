@@ -25,10 +25,10 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'babel-loader' },
-          { loader: 'awesome-typescript-loader' },
-        ],
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+        },
       },
       {
         test: /\.scss$/,
@@ -82,10 +82,6 @@ module.exports = {
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
       hash: true,
-    }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
