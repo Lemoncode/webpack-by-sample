@@ -3,7 +3,7 @@
 In this demo we are going to create different builds for each environment.
 We will learn how to configure it and how to reduce bundle file sizes.
 
-We will start from sample _03 Environments/02 CSS Modules_.
+We will start from sample _03 Environments/03 HMR_.
 
 Summary steps:
 - Add base webpack config file
@@ -15,7 +15,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _04 CSS Modules_.
+Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _03 HMR_.
 
 ## steps
 
@@ -25,7 +25,7 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- We are going to start with creating a base webpack configuration file where we are going to add the common features for both environments (`dev` and `prod`). One of the feature which we are split between environments is `sourcemaps`. [Webpack recommends](https://webpack.js.org/guides/production-build/#source-maps) that we enable source maps for `production` environment, due to are useful for debugging and to run benchmark tests. That's why they recommend use for example `cheap-module-source-map` for production.
+- We are going to start with creating a base webpack configuration file where we are going to add the common features for both environments (`dev` and `prod`). One of the feature which we are split between environments is `sourcemaps`. [Webpack recommends](https://webpack.js.org/guides/production/#source-mapping) that we enable source maps for `production` environment, due to are useful for debugging and to run benchmark tests, but we have to disable it for normal use.
 
 - Let's go to rename `webpack.config.js` to `base.webpack.config.js`:
 
@@ -44,7 +44,10 @@ module.exports = {
     extensions: ['.js', '.jsx', '.scss'],
   },
   entry: {
-    app: './students.jsx',
+    app: [
+      'react-hot-loader/patch',
+      './index.jsx',
+    ],
     vendor: [
       'react',
       'react-dom',
@@ -55,7 +58,7 @@ module.exports = {
   },
   output: {
     path: path.join(basePath, 'dist'),
-    filename: '[chunkhash].[name].js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -116,13 +119,14 @@ module.exports = {
 - devtool: 'inline-source-map',
   devServer: {
     port: 8080,
+    hot: true,
   },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-			hash: true,
+      hash: true,
     }),
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -133,10 +137,11 @@ module.exports = {
     }),
     new webpack.HashedModuleIdsPlugin(),
     new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
-      disable: false,
+      filename: '[name].css',
+      disable: true,
       allChunks: true,
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
 
@@ -155,12 +160,10 @@ npm install webpack-merge --save-dev
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./base.webpack.config.js');
 
-module.exports = function () {
-  return webpackMerge(commonConfig, {
-    // For development https://webpack.js.org/configuration/devtool/#for-development
-    devtool: 'inline-source-map',
-  });
-}
+module.exports = webpackMerge(commonConfig, {
+  // For development https://webpack.js.org/configuration/devtool/#for-development
+  devtool: 'inline-source-map',
+});
 
 ```
 
@@ -202,7 +205,7 @@ module.exports = function () {
 
 ```
 
-- Running `npm run build`, we can see how vendor bundle size decrease:
+- Running `npm run build`:
 
 ![build dev config](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/build%20dev%20config.png)
 
@@ -213,11 +216,9 @@ module.exports = function () {
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./base.webpack.config.js');
 
-module.exports = function () {
-  return webpackMerge(commonConfig, {
-    devtool: 'cheap-module-source-map',
-  });
-}
+module.exports = webpackMerge(commonConfig, {
+  devtool: 'cheap-module-source-map',
+});
 
 ```
 
@@ -263,41 +264,207 @@ module.exports = function () {
 
 ![prod config result](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/prod%20config%20result.png)
 
-### ./dist/...app.js
+- Moving configuration to `development`:
+
+### ./dev.webpack.config.js
+
 ```diff
-webpackJsonp([1,3],{171:function(e,t,n){"use strict";function r(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t}var o=n(18),u=r(o),a=n(29),c=r(a),l=n(79),i=n(80);c.render(u.createElement("div",null,u.createElement("h1",null,"Hello from React DOM"),u.createElement(l.AverageComponent,null),u.createElement(i.TotalScoreComponent,null)),document.getElementById("root"))},49:function(e,t,n){"use strict";function r(e){return o(e)/e.length}function o(e){return e.reduce(function(e,t){return
-  ...
-```
+var webpackMerge = require('webpack-merge');
+var commonConfig = require('./base.webpack.config.js');
++ var path = require('path');
++ var webpack = require('webpack');
++ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-### ./dist/..app.css
-```diff
-.averageComponentStyles__result-background___Z3Vf0{background-color:teal}.jumbotron.averageComponentStyles__result-background___Z3Vf0{background-color:#8fbc8f!important;display:block}.totalScoreComponentStyles__result-background___3eH-g{background-color:#cd5c5c}
-/*# sourceMappingURL=5cb91c14c876707fc272.app.css.map*/
++ var basePath = __dirname;
 
-```
++ const hotReloadingEntries = [
++   'react-hot-loader/patch',
++ ];
 
-- Finally, if we want to decrease the size even more, we can enable Tree Shaking like in [02 Tree Shaking ES6](../02%20Tree%20Shaking%20ES6/README.md#babelrc) sample:
-
-### ./.babelrc
-```diff
-{
-  "presets": [
--   "env"
-+   [
-+     "env",
-+     {
-+       "modules": false
-+     }
+- module.exports = webpackMerge(commonConfig, {
++ module.exports = webpackMerge.strategy({
++   entry: 'prepend',
++ })(commonConfig, {
+    // For development https://webpack.js.org/configuration/devtool/#for-development
+    devtool: 'inline-source-map',
++   entry: {
++     app: hotReloadingEntries,
++     vendorStyles: hotReloadingEntries,
++   },
++   output: {
++     path: path.join(basePath, 'dist'),
++     filename: '[name].js',
++   },
++   devServer: {
++     port: 8080,
++     hot: true,
++   },
++   plugins: [
++     new webpack.HotModuleReplacementPlugin(),
++     new ExtractTextPlugin({
++       disable: true,
++     }),
 +   ],
-    "react"
-  ]
-}
+});
 
 ```
 
-- Running `npm run build:prod`, we can see how `app` sizes decrease a bit more:
+- Moving configuration to `production`:
 
-![result with tree shaking](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/result%20with%20tree%20shaking.png)
+### ./prod.webpack.config.js
+
+```diff
+var webpackMerge = require('webpack-merge');
+var commonConfig = require('./base.webpack.config.js');
++ var path = require('path');
++ var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
++ var basePath = __dirname;
+
+module.exports = webpackMerge(commonConfig, {
+  devtool: 'cheap-module-source-map',
++ output: {
++   path: path.join(basePath, 'dist'),
++   filename: '[chunkhash].[name].js',
++ },
++ plugins: [
++   new ExtractTextPlugin({
++     filename: '[chunkhash].[name].css',
++     disable: false,
++     allChunks: true,
++   }),
++ ],
+});
+
+```
+
+- Clean `base`:
+
+### ./base.webpack.config.js
+
+```diff
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+var basePath = __dirname;
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.scss'],
+  },
+  entry: {
+-   app: [
+-     'react-hot-loader/patch',
+-     './index.jsx',
+-   ],
++   app: './index.jsx',
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+    ],
+  },
+- output: {
+-   path: path.join(basePath, 'dist'),
+-   filename: '[name].js',
+- },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+                camelCase: true,
+              },
+            },
+            { loader: 'sass-loader', },
+          ],
+        }),
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
+            loader: 'css-loader',
+          },
+        }),
+      },
+      // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
+      // Using here url-loader and file-loader
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+    ],
+  },
+- devServer: {
+-   port: 8080,
+-   hot: true,
+- },
+  plugins: [
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+      hash: true,
+    }),
+-   new webpack.ProvidePlugin({
+-     $: "jquery",
+-     jQuery: "jquery"
+-   }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
+    new webpack.HashedModuleIdsPlugin(),
+-   new ExtractTextPlugin({
+-     filename: '[name].css',
+-     disable: true,
+-     allChunks: true,
+-   }),
+-   new webpack.HotModuleReplacementPlugin(),
+  ],
+};
+
+```
+
+- `npm run build`:
+
+![dev config result after clean](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/dev%20config%20result%20after%20clean.png)
+
+- `npm run build:prod`:
+
+![prod config result after clean](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/prod%20config%20result%20after%20clean.png)
 
 - About using React in `production` mode with Webpack, [here](https://facebook.github.io/react/docs/optimizing-performance.html) explains you that we only need to add:
 
@@ -323,21 +490,32 @@ npm install compression-webpack-plugin --save-dev
 ### ./prod.webpack.config.js
 ```diff
 var webpackMerge = require('webpack-merge');
-+ var CompressionPlugin = require('compression-webpack-plugin');
 var commonConfig = require('./base.webpack.config.js');
+var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
++ var CompressionPlugin = require('compression-webpack-plugin');
 
-module.exports = function () {
-  return webpackMerge(commonConfig, {
-    devtool: 'cheap-module-source-map',
-+   plugins: [
-+     new CompressionPlugin({
-+       asset: '[path].gz[query]',
-+       algorithm: 'gzip',
-+       minRatio: 0.8,
-+     }),
-    ],
-  });
-}
+var basePath = __dirname;
+
+module.exports = webpackMerge(commonConfig, {
+  devtool: 'cheap-module-source-map',
+  output: {
+    path: path.join(basePath, 'dist'),
+    filename: '[chunkhash].[name].js',
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '[chunkhash].[name].css',
+      disable: false,
+      allChunks: true,
+    }),
++   new CompressionPlugin({
++     asset: '[path].gz[query]',
++     algorithm: 'gzip',
++     minRatio: 0.8,
++   }),
+  ],
+});
 
 ```
 
@@ -345,6 +523,6 @@ module.exports = function () {
 
 ![result with gzipped bundles](../../99%20Readme%20Resources/03%20Environments/04%20Production%20Configuration/result%20with%20gzipped%20bundles.png)
 
-> NOTE: `.map` files or `index.html` are not gzipping because they have low sizes and compression is not needed.
+> NOTE: `.map` files are not gzipping because they have low sizes and compression is not needed.
 
 > _minRatio: Only assets that compress better that this ratio are processed. Defaults to 0.8._

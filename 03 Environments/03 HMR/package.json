@@ -1,5 +1,5 @@
 {
-  "name": "css-modules",
+  "name": "hmr",
   "version": "1.0.0",
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Environments - 03 HMR",
   "main": "index.js",
