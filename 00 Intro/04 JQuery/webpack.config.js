@@ -9,7 +9,6 @@ module.exports = {
     app: './students.js',
     vendor: [
       'jquery',
-      'lodash',
     ],
   },
   output: {

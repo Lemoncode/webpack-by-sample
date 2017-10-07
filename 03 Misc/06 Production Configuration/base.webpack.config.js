@@ -59,6 +59,7 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
-    })
+    }),
+    new webpack.HashedModuleIdsPlugin(),
   ],
 };

@@ -366,3 +366,41 @@ document.write(messageToDisplay);
 
 ![02 using hashed plugin](../../99%20Readme%20Resources/00%20Intro/04%20JQuery/02%20using%20hashed%20plugin.png)
 
+- Uninstall `lodash` and restore `students.js` file to keep like before:
+
+```bash
+npm uninstall lodash --save
+```
+
+### ./webpack.config.js
+```diff
+ entry: {
+    app: './students.js',
+    vendor: [
+      'jquery',
+-     'lodash',
+    ],
+  },
+```
+
+### ./students.js
+
+```diff
+import { getAvg } from './averageService';
+- import { cloneDeep } from 'lodash';
+
+$('body').css('background-color', 'lightSkyBlue');
+-
+const scores = [90, 75, 60, 99, 94, 30];
+- const clonedScores = cloneDeep(scores);
+-
+const averageScore = getAvg(scores);
+-const clonedAverageScore = getAvg(clonedScores);
+
+- const messageToDisplay = `average score ${averageScore},
+- cloned: ${clonedAverageScore}`;
++ const messageToDisplay = `average score ${averageScore}`;
+
+document.write(messageToDisplay);
+
+```

@@ -90,6 +90,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
     }),
+    new webpack.HashedModuleIdsPlugin(),
     new ExtractTextPlugin({
       filename: '[chunkhash].[name].css',
       disable: false,
