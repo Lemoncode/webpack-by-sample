@@ -6,6 +6,6 @@ $jumbotronBackground: darkseagreen;
 }
 
 :global(.jumbotron).result-background {
-  background-color: $jumbotronBackground!important;
+  background-color: $jumbotronBackground;
   display: block;
 }

@@ -483,7 +483,7 @@ $background: teal;
 }
 
 + .jumbotron.result-background {
-+   background-color: $jumbotronBackground!important;
++   background-color: $jumbotronBackground;
 +   display: block;
 + }
 
@@ -502,7 +502,7 @@ $jumbotronBackground: darkseagreen;
 
 - .jumbotron.result-background {
 + :global(.jumbotron).result-background {
-  background-color: $jumbotronBackground!important;
+  background-color: $jumbotronBackground;
   display: block;
 }
 
