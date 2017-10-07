@@ -77,10 +77,6 @@ module.exports = {
       template: 'index.html', //Name of template in ./src
       hash: true,
     }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
     }),

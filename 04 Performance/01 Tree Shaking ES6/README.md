@@ -123,6 +123,11 @@ module.exports = {
     ],
   },
   ...
+  
+- new webpack.ProvidePlugin({
+-   $: "jquery",
+-   jQuery: "jquery"
+- }),
 };
 
 ```
@@ -131,9 +136,26 @@ module.exports = {
 
 ### ./dist/...app.js
 ```diff
-...
-/******/ ([
-/* 0 */
+webpackJsonp([1],{
+
+/***/ "JkW7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _calculator = __webpack_require__("tGDz");
+
+var result = (0, _calculator.sum)(2, 2);
+
+var element = document.createElement('h1');
+element.innerHTML = 'Sum result: ' + result;
+
+document.body.appendChild(element);
+
+/***/ }),
+
+/***/ "tGDz":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -162,26 +184,9 @@ function div(a, b) {
   return a / b;
 }
 
-/***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _calculator = __webpack_require__(0);
-
-var result = (0, _calculator.sum)(2, 2);
-
-var element = document.createElement('h1');
-element.innerHTML = 'Sum result: ' + result;
-
-document.body.appendChild(element);
-
 /***/ })
-/******/ ]);
 
+},["JkW7"]);
 ...
 ```
 
@@ -211,7 +216,26 @@ document.body.appendChild(element);
 
 ### ./dist/...app.js
 ```diff
-/* 0 */
+webpackJsonp([1],{
+
+/***/ "JkW7":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__("tGDz");
+
+
+var result = Object(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
+
+var element = document.createElement('h1');
+element.innerHTML = 'Sum result: ' + result;
+
+document.body.appendChild(element);
+
+/***/ }),
+
+/***/ "tGDz":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -235,30 +259,15 @@ function div(a, b) {
   return a / b;
 }
 
-/***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculator__ = __webpack_require__(0);
-
-
-var result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculator__["a" /* sum */])(2, 2);
-
-var element = document.createElement('h1');
-element.innerHTML = 'Sum result: ' + result;
-
-document.body.appendChild(element);
-
 /***/ })
 
+},["JkW7"]);
+...
 ```
 
 - Now webpack knows which `harmony modules` (ES6 modules) are unused. If we run `npm run build:prod`, they won't be included in the build.
 
 ### ./dist/...app.js
 ```diff
-webpackJsonp([1,2],[function(e,n,t){"use strict";function u(e,n){return e+n}n.a=u},,function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var u=t(0),c=t.i(u.a)(2,2),r=document.createElement("h1");r.innerHTML="Sum result: "+c,document.body.appendChild(r)}],[2]);
+webpackJsonp([1],{JkW7:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var u=n("tGDz"),c=Object(u.a)(2,2),r=document.createElement("h1");r.innerHTML="Sum result: "+c,document.body.appendChild(r)},tGDz:function(e,t,n){"use strict";function u(e,t){return e+t}t.a=u}},["JkW7"]);
 ```

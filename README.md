@@ -268,7 +268,7 @@ Summary steps:
 In this demo we are going to create different builds for each environment.
 We will learn how to configure it and how to reduce bundle file sizes.
 
-We will start from sample _03 Environments/02 CSS Modules_.
+We will start from sample _03 Environments/03 HMR_.
 
 Summary steps:
 - Add base webpack config file
