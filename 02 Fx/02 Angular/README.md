@@ -76,7 +76,7 @@ console.log(app);
 -       Bootstrap is the most popular ...
 -     </p>
 -   </div>
-    Hello Webpack 3!
+-   Hello Webpack 3!
 -   <div class="red-background">
 -     RedBackground stuff
 -   </div>
@@ -183,10 +183,10 @@ export const studentComponent = {
 
 ```
 
-- Now going back into the content, we are just going to require the HTML file. In order to load the HTML we need a new loader, in this case we are going to use [raw-loader](https://github.com/webpack-contrib/raw-loader) (there are other avaialble), let's install this loader:
+- Now going back into the content, we are just going to require the HTML file. In order to load the HTML we need a new loader, in this case we are going to use [html-loader](https://github.com/webpack-contrib/html-loader) (there are other avaialble), let's install this loader:
 
 ```
-npm install raw-loader --save-dev
+npm install html-loader --save-dev
 ```
 
 - Let's properly configure it into the `webpack.config.js`
@@ -206,7 +206,7 @@ module.exports = {
 +     {
 +       test: /\.html$/,
 +       exclude: /node_modules/,
-+       loader: 'raw-loader',
++       loader: 'html-loader',
 +     },
     ],
   },
