@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component(
   {
     selector: 'student-component',
-    template: require<string>('./template.html'),
+    template: require('./template.html'),
   }
 )
 class StudentComponent {

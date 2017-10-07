@@ -32,11 +32,11 @@ npm install
 - Let's start by installing Angular 2.x libraries:
 
 ## Required dependencies
-- core-js
-- zone.js
 - @angular/core
 - @angular/platform-browser
 - @angular/platform-browser-dynamic
+- core-js
+- zone.js
 - reflect-metadata
 
 ## Peer dependencies
@@ -44,16 +44,9 @@ npm install
 - @angular/compiler
 - rxjs
 
-   bootstrap@latest core-js@latest reflect-metadata@late
-st rxjs@5 zone.js@latest
-
 ```
-npm install @angular/common@2 @angular/compiler@2
-@angular/core@2 @angular/platform-browser@2 @angular/platform-browser-dynamic@2
-core-js reflect-metadata
-rxjs zone.js --save
+npm install @angular/core@2 @angular/platform-browser@2 @angular/platform-browser-dynamic@2 @angular/common@2 @angular/compiler@2 core-js zone.js reflect-metadata rxjs@5 --save
 ```
-
 
 - We are going to start with a new sample, let's clear up the `students.js` file and start from scratch.
 
@@ -88,6 +81,36 @@ class StudentComponent {
 
 export {
   StudentComponent
+}
+
+```
+
+- Since we are declaring `@Component` with decorators, we have to enable it.
+
+### ./tsconfig.json
+```diff
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "sourceMap": true,
+   "suppressImplicitAnyIndexErrors": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+-     "es2015.iterable"
++     "es2015"
+-   ]
++   ],
++   "experimentalDecorators":true     
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules"
+  ]
 }
 
 ```
@@ -178,36 +201,6 @@ module.exports = {
 
 ```
 
-- Since we are declaring `@NgModule` and `@Component` with decorators, we have to enable it.
-
-### ./tsconfig.json
-```diff
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "sourceMap": true,
-   "suppressImplicitAnyIndexErrors": true,
-    "lib": [
-      "dom",
-      "es5",
-      "scripthost",
--     "es2015.iterable"
-+     "es2015"
--   ]
-+   ],
-+   "experimentalDecorators":true     
-  },
-  "compileOnSave": false,
-  "exclude": [
-    "node_modules"
-  ]
-}
-
-```
-
 - If we run the application and open the browser , we can check that the app object is displayed in the console.
 
 ```
@@ -291,7 +284,7 @@ import { Component } from '@angular/core';
 -   template: `
 -     <h1>Student Component</h1>
 -   `
-+   template: require<string>('./template.html'),
++   template: require('./template.html'),
   }
 )
 class StudentComponent {
@@ -343,10 +336,10 @@ npm install @types/webpack-env --save-dev
 
 ```
 
-- To finish our example, we are going to require the HTML file. In order to load the HTML we need a new loader, in this case we are going to use [raw-loader](https://github.com/webpack-contrib/raw-loader) (there are other availables), let's install this loader:
+- To finish our example, we are going to require the HTML file. In order to load the HTML we need a new loader, in this case we are going to use [html-loader](https://github.com/webpack-contrib/html-loader) (there are other availables), let's install this loader:
 
 ```
-npm install raw-loader --save-dev
+npm install html-loader --save-dev
 ```
 
 - Let's properly configure it into the `webpack.config.js`
@@ -366,7 +359,7 @@ module.exports = {
 +     {
 +       test: /\.html$/,
 +       exclude: /node_modules/,
-+       loader: 'raw-loader',
++       loader: 'html-loader',
 +     },
     ],
   },
@@ -392,14 +385,14 @@ import { Component } from '@angular/core';
 @Component(
   {
     selector: 'student-component',
-    template: require<string>('./template.html'),
+    template: require('./template.html'),
   }
 )
 class StudentComponent {
 + message: string;
 
 + constructor() {
-+   this.message = 'Hello from student component'
++   this.message = 'Hello from student component';
 + }
 }
 
