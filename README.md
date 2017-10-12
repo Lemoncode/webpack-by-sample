@@ -313,6 +313,18 @@ Summary steps:
 - Apply `useCache` flag.
 - Apply CheckerPlugin.
 
+# 04 DLL plugin
+
+In this demo we are going to play with the build time speed installing `autodll-webpack-plugin`.
+
+We will start from sample _04 Performance/03 Reduce TypeScript build time_.
+
+Summary steps:
+- Take some base measures.
+- Configure `autodll-webpack-plugin`.
+- See new measures.
+
+
 ## 05 Misc (other samples)
 
 ### 01 Commons Chunk Plugin

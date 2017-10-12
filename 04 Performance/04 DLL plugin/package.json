@@ -1,7 +1,7 @@
 {
   "name": "dll-plugin-i",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 04 Performance - 04 DLL plugin I",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 04 Performance - 04 DLL plugin",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
