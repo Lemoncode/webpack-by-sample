@@ -302,7 +302,7 @@ We will start from sample _02 Fx/00 TypeScript_ and we are going to create a sim
 
 We will use webpack's 2 tree shaking and check that we end up having a bundle that doesn't contain the code for substract, mul, and div
 
-# 03 Reduce TypeScript build time
+### 03 Reduce TypeScript build time
 
 In this demo we are going to play with the build time speed with Webpack and TypeScript. For that, we are going to configure `awesome-typescript-loader` options.
 
@@ -313,7 +313,7 @@ Summary steps:
 - Apply `useCache` flag.
 - Apply CheckerPlugin.
 
-# 04 DLL plugin
+### 04 DLL plugin
 
 In this demo we are going to play with the build time speed installing `autodll-webpack-plugin`.
 
