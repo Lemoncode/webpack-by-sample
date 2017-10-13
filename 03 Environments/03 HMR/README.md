@@ -28,10 +28,8 @@ npm install
 - To work with HMR and `react`, we need to install `react-hot-loader`:
 
 ```bash
-npm install react-hot-loader@next --save-dev
+npm install react-hot-loader --save-dev
 ```
-
-> NOTE: The last version of [`react-hot-loader`](https://github.com/gaearon/react-hot-loader) is still in beta
 
 - Let's go to configure it:
 
