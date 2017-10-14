@@ -26,15 +26,15 @@ You will need to have Node.js installed in your computer. In order to follow thi
 
 - `npm install` to install previous sample dependencies:
 
-  ```
+```
   npm install
-  ```
+```
 
 - Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them). So, add the following content to `averageService.js`:
 
   #### ./averageService.js
 
-  ```javascript
+```javascript
  export function getAvg(scores) {
  return getTotalScore(scores) / scores.length;
 }
@@ -44,13 +44,13 @@ function getTotalScore(scores) {
     return score + count;
   });
 }
-  ```
+```
 
 - Now let's update `students.js` to import the previous file and consume it:
 
   #### ./students.js
 
-  ```diff javascript
+```diff javascript
   - // Let's use some ES6 features
   + import {getAvg} from "./averageService";
 
@@ -61,13 +61,13 @@ function getTotalScore(scores) {
   const messageToDisplay = `average score ${averageScore}`;
 
   document.write(messageToDisplay);
-  ```
+```
 
 - Finally, let's run webpack from the command prompt by executing the following command:
 
-  ```
+```
   npm start
-  ```
+```
 
   It is time to double-click on the `index.html` and check that the new average function is up and running and has been included in the `bundle.js` file.
 
@@ -85,7 +85,7 @@ We have covered a single named export usage in our previous example, but there a
 
     #### ./averageService.js
 
-    ```diff
+```diff
     - export function getAvg(scores) {
     + export default function getAvg(scores) {
     return getTotalScore(scores) / scores.length;
@@ -97,13 +97,13 @@ We have covered a single named export usage in our previous example, but there a
       });
     }
 
-    ```
+```
 
   - Default import usage in `students.js`:
 
     #### ./students.js
 
-    ```diff
+```diff
     - import {getAvg} from "./averageService";
     + import getAvg from "./averageService";
 
@@ -113,7 +113,7 @@ We have covered a single named export usage in our previous example, but there a
     const messageToDisplay = `average score ${averageScore}`;
 
     document.write(messageToDisplay);
-    ```
+```
 
 ### Multiple named exports
 
@@ -123,7 +123,7 @@ Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this
 
     #### ./averageService.js
 
-    ```diff
+```diff
     - export default function getAvg(scores) {
     + export function getAvg(scores) {
     return getTotalScore(scores) / scores.length;
@@ -135,14 +135,15 @@ Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this
         return score + count;
       });
     }
-    ```
+```
+
 Now, we can import them in several ways into `students.js`:
 
   - Import both members into the current scope:
 
     #### ./students.js
 
-    ```diff
+```diff
     - import getAvg from "./averageService";
     + import {getAvg, getTotalScore} from "./averageService";
 
@@ -158,13 +159,13 @@ Now, we can import them in several ways into `students.js`:
     + document.write(messageToDisplayAvg);
     + document.write(messageToDisplayTotal);
 
-    ```  
+```  
 
   - Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
 
     #### ./students.js
 
-    ```diff
+```diff
     - import {getAvg, getTotalScore} from "./averageService";
     + import * as averageService from "./averageService";
 
@@ -180,4 +181,4 @@ Now, we can import them in several ways into `students.js`:
     document.write(messageToDisplayAvg);
     document.write(messageToDisplayTotal);
 
-    ```
+```
