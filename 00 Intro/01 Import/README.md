@@ -32,7 +32,7 @@ You will need to have Node.js installed in your computer. In order to follow thi
 
 - Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them). So, add the following content to `averageService.js`:
 
-  #### ./averageService.js
+#### ./averageService.js
 
 ```javascript
  export function getAvg(scores) {
@@ -48,7 +48,7 @@ function getTotalScore(scores) {
 
 - Now let's update `students.js` to import the previous file and consume it:
 
-  #### ./students.js
+#### ./students.js
 
 ```diff
 -  // Let's use some ES6 features
@@ -69,9 +69,9 @@ function getTotalScore(scores) {
   npm start
 ```
 
-  It is time to double-click on the `index.html` and check that the new average function is up and running and has been included in the `bundle.js` file.
+It is time to double-click on the `index.html` and check that the new average function is up and running and has been included in the `bundle.js` file.
 
-  ![running webpack 3](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
+![running webpack 3](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
 
 ## Appendix - Module alternative usage
 
@@ -79,106 +79,106 @@ We have covered a single named export usage in our previous example, but there a
 
 ### Default export
 
-  One popular way is using **`export default`** as the export keyword. This will indicate that, by default, there will be just a **single export per module**. Then, we can directly use an import *alias* (by omitting the curly braces) and this will point out to our default exported member (*averarge* function in our example).
+One popular way is using **`export default`** as the export keyword. This will indicate that, by default, there will be just a **single export per module**. Then, we can directly use an import *alias* (by omitting the curly braces) and this will point out to our default exported member (*averarge* function in our example).
 
-  - Default export usage in `averageService.js`:
+- Default export usage in `averageService.js`:
 
-    #### ./averageService.js
+#### ./averageService.js
 
 ```diff
-    - export function getAvg(scores) {
-    + export default function getAvg(scores) {
-    return getTotalScore(scores) / scores.length;
-    }
+- export function getAvg(scores) {
++ export default function getAvg(scores) {
+return getTotalScore(scores) / scores.length;
+}
 
-    function getTotalScore(scores) {
-      return scores.reduce((score, count) => {
-        return score + count;
-      });
-    }
+function getTotalScore(scores) {
+  return scores.reduce((score, count) => {
+    return score + count;
+  });
+}
 
 ```
 
-  - Default import usage in `students.js`:
+- Default import usage in `students.js`:
 
-    #### ./students.js
+#### ./students.js
 
 ```diff
-    - import {getAvg} from "./averageService";
-    + import getAvg from "./averageService";
+- import {getAvg} from "./averageService";
++ import getAvg from "./averageService";
 
-    const scores = [90, 75, 60, 99, 94, 30];
-    const averageScore = getAvg(scores);
+const scores = [90, 75, 60, 99, 94, 30];
+const averageScore = getAvg(scores);
 
-    const messageToDisplay = `average score ${averageScore}`;
+const messageToDisplay = `average score ${averageScore}`;
 
-    document.write(messageToDisplay);
+document.write(messageToDisplay);
 ```
 
 ### Multiple named exports
 
 Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this example. We can export both using named exports, just by adding the **export** keyword on each function.
 
-  - Multiple exports usage in `averageService.js`:
+- Multiple exports usage in `averageService.js`:
 
-    #### ./averageService.js
+#### ./averageService.js
 
 ```diff
-    - export default function getAvg(scores) {
-    + export function getAvg(scores) {
-    return getTotalScore(scores) / scores.length;
-    }
+- export default function getAvg(scores) {
++ export function getAvg(scores) {
+return getTotalScore(scores) / scores.length;
+}
 
-    - function getTotalScore(scores) {
-    + export function getTotalScore(scores) {
-      return scores.reduce((score, count) => {
-        return score + count;
-      });
-    }
+- function getTotalScore(scores) {
++ export function getTotalScore(scores) {
+  return scores.reduce((score, count) => {
+    return score + count;
+  });
+}
 ```
 
 Now, we can import them in several ways into `students.js`:
 
-  - Import both members into the current scope:
+- Import both members into the current scope:
 
-    #### ./students.js
+#### ./students.js
 
 ```diff
-    - import getAvg from "./averageService";
-    + import {getAvg, getTotalScore} from "./averageService";
+- import getAvg from "./averageService";
++ import {getAvg, getTotalScore} from "./averageService";
 
-    const scores = [90, 75, 60, 99, 94, 30];
-    const averageScore = getAvg(scores);
-    + const totalScore = getTotalScore(scores);
+const scores = [90, 75, 60, 99, 94, 30];
+const averageScore = getAvg(scores);
++ const totalScore = getTotalScore(scores);
 
-    - const messageToDisplay = `average score ${averageScore}`;
-    + const messageToDisplayAvg = `average score ${averageScore} `;
-    + const messageToDisplayTotal = `total score ${totalScore}`;
+- const messageToDisplay = `average score ${averageScore}`;
++ const messageToDisplayAvg = `average score ${averageScore} `;
++ const messageToDisplayTotal = `total score ${totalScore}`;
 
-    - document.write(messageToDisplay);
-    + document.write(messageToDisplayAvg);
-    + document.write(messageToDisplayTotal);
+- document.write(messageToDisplay);
++ document.write(messageToDisplayAvg);
++ document.write(messageToDisplayTotal);
 
 ```  
 
-  - Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
+- Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
 
-    #### ./students.js
+#### ./students.js
 
 ```diff
-    - import {getAvg, getTotalScore} from "./averageService";
-    + import * as averageService from "./averageService";
+- import {getAvg, getTotalScore} from "./averageService";
++ import * as averageService from "./averageService";
 
-    const scores = [90, 75, 60, 99, 94, 30];
-    - const averageScore = getAvg(scores);
-    - const totalScore = getTotalScore(scores);
-    + const averageScore = averageService.getAvg(scores);
-    + const totalScore = averageService.getTotalScore(scores);
+const scores = [90, 75, 60, 99, 94, 30];
+- const averageScore = getAvg(scores);
+- const totalScore = getTotalScore(scores);
++ const averageScore = averageService.getAvg(scores);
++ const totalScore = averageService.getTotalScore(scores);
 
-    const messageToDisplayAvg = `average score ${averageScore} `;
-    const messageToDisplayTotal = `total score ${totalScore}`;
+const messageToDisplayAvg = `average score ${averageScore} `;
+const messageToDisplayTotal = `total score ${totalScore}`;
 
-    document.write(messageToDisplayAvg);
-    document.write(messageToDisplayTotal);
+document.write(messageToDisplayAvg);
+document.write(messageToDisplayTotal);
 
 ```

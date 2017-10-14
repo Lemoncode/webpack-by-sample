@@ -11,7 +11,6 @@ Summary steps:
  - Intialize `package.json` (npm init)
  - Create a simple HTML file.
 
-
 # Steps to build it
 
 ## Prerequisites
@@ -45,14 +44,15 @@ npm install webpack --save-dev
  Now, our **`package.json`** file should looks something like:
 
 ### ./package.json
-```json
+```diff
 {
   "name": "boilerplate",
   "version": "1.0.0",
   "description": "Front End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "webpack"
++   "start": "webpack"
+-   "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -172,20 +172,6 @@ module.exports = {
 +   ],
 + },
 };
-```
-
-- Let's add _webpack_ as start command in our _package.json_ file:
-
-```diff
-{
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
-  "main": "index.js",
-  "scripts": {
-+   "start": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
 ```
 
 - Let's run webpack from the command line, type `npm start` and press enter.
