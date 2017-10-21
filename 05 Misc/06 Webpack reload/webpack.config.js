@@ -11,15 +11,9 @@ module.exports = {
     extensions: ['.js', '.ts']
   },
   entry: {
-    app: './students.ts',
+    app: './reload.ts',
     appStyles: [
       './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
   },
   output: {
@@ -85,10 +79,6 @@ module.exports = {
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
       hash: true,
-    }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],

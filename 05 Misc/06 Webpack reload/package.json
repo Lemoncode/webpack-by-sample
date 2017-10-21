@@ -1,12 +1,10 @@
 {
-  "name": "right-pad-usage",
+  "name": "webpack-reload-config",
   "version": "1.0.0",
   "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 05 Misc - 05 Right pad usage",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "rimraf dist && webpack",
-    "build:prod": "rimraf dist && webpack -p"
+    "start:reload": "nodemon --watch webpack.config.js ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +24,7 @@
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
+    "nodemon": "^1.12.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
@@ -34,9 +33,5 @@
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.8.0"
   },
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1",
-    "right-pad": "file:../04 Right pad library"
-  }
+  "dependencies": {}
 }
