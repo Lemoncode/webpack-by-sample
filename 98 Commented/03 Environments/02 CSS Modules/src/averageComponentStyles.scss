@@ -1,0 +1,15 @@
+$background: teal;
+$jumbotronBackground: darkseagreen;
+
+.result-background { // We are using the same name for different CSS rules in separate CSS files
+  background-color: $background;
+}
+
+/* The example below illustrates how to use our custom classes alongside those from other vendors. In this case, we want our CSS selector to target an elemeent with jumbotron class
+ that has also the custom class result-background applied. The problem here is that our selector will also be transformed by webpack following the naming convention we had specified
+ ([name_of_the_css_file]__[name_of_the_css_class]__[some_hash]). Thus, it would never target the css class that we are importing from Bootstrap. In order to prevent that, we need to
+ add the :global() modifier to tell webpack that we want to refer a class from outside this CSS module*/
+:global(.jumbotron).result-background {
+  background-color: $jumbotronBackground;
+  display: block;
+}
