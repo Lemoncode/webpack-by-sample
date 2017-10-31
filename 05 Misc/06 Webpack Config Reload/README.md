@@ -78,3 +78,7 @@ and notice how `nodemon` is now the launcher of our `webpack-dev-server` as well
 Now open `webpack.config.js` and just add a empty line at the end to force a change. Save it and look at the terminal. 
 
 ![Command Prompt Restart](../../99%20Readme%20Resources/00%20Intro/BONUS%20Auto%20Restart%20DevServer/commandPrompt_restart.png)
+
+# Credits
+
+This sample has been created thanks to @fjcalzado and @adrigardi90 contributions.
