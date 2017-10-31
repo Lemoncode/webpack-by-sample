@@ -81,4 +81,4 @@ Now open `webpack.config.js` and just add a empty line at the end to force a cha
 
 # Credits
 
-This sample has been created thanks to (@fjcalzado)[https://github.com/fjcalzado] and @adrigardi90 contributions.
+This sample has been created thanks to (@fjcalzado)[https://github.com/fjcalzado] and (@adrigardi90)[https://github.com/adrigardi90] contributions.
