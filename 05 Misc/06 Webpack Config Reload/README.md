@@ -1,4 +1,4 @@
-# BONUS Auto restart DevServer
+# Detect webpack.config changes and auto restart DevServer
 
 You may have realized that any change made into webpack config file will require us to manually re-initialize `webpack-dev-server` by killing current instance and launching a new one (`npm start`). Sometimes, this could be annoying, especially when dealing with many changes in webpack configuration.
 
