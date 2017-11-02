@@ -1,0 +1,5 @@
+$background: indianred;
+
+.result-background {
+  background-color: $background; // We are using the same name for different CSS rules in separate CSS files
+}
