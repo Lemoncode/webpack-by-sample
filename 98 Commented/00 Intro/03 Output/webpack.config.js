@@ -49,7 +49,9 @@ module.exports = {
       {
         //test: Identify which file or files should be transformed by a certain loader
         // We can use regular expressions, so here we are saying to webpack that process any files with extension starting in ".js_" with babe's loader
-        test: /\.js$/,  //with exclude we can say to webpack where don't proceess files to build our app/web.
+        test: /\.js$/,  
+        //with exclude we can say to webpack where don't proceess files to build our app/web.
+        // In this case we are asking webpack to process js files under the node_modules folder
         exclude: /node_modules/,
           //charge babel's loader for "transpilar" from ES6 to ES5
         loader: 'babel-loader',
