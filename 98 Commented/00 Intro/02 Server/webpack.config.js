@@ -17,6 +17,7 @@ entry: ['./students.js'],
   //The output property tells webpack where to emit the bundles it creates and how to name these files
   // in this case, we are saing to wepack that built our app in the file: "bundle.js", and this will be
   // the file served to clients how enter in our resources (our app, our web, etc. depending on our development)
+  // IMPORTANT: we can chop into several bundles, not only a single file.
 output: {
   filename: 'bundle.js',
 },
