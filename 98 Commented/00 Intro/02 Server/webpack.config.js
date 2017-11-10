@@ -12,6 +12,7 @@ Webpack integrated well with transpilers like babel or typescript, they allow us
 module.exports = {
   //An entry point indicates which module webpack should use to begin building out its internal dependency graph
   // So, webpack will start reading on this entry to build our app, web, etc.
+  // In this sample app "students.js" is the starting point, usually you will find a more generics root file name like index.js, app.js....
 entry: ['./students.js'],
   //The output property tells webpack where to emit the bundles it creates and how to name these files
   // in this case, we are saing to wepack that built our app in the file: "bundle.js", and this will be
