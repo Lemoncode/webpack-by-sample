@@ -38,7 +38,7 @@ module.exports = {
           //with exclude we can say to webpack where don't proceess files to build our app/web.
           // In this case we are asking webpack to process js files under the node_modules folder
         exclude: /node_modules/,
-          //charge babel's loader for "transpilar" from ES6 to ES5
+          // Use babel-loader to transpile from ES6 to ES5. We can use a single loader or we can chain the execution of several loaders.
         loader: 'babel-loader',
       },
     ],
