@@ -6,7 +6,7 @@ that includes every module your application needs, then packages all of those mo
 There are a lot of statements that have been standardized in ES2015. 
 Although they are not supported in most browsers yet, webpack does support them out of the box.
 
-Webpack "transpiles" the code so that older browsers can also run it.
+Webpack integrated well with transpilers like babel or typescript, they allow us that older browsers can also run it.
 */
 
 module.exports = {
