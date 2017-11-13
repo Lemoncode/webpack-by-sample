@@ -1,0 +1,31 @@
+{
+  "name": "output",
+  "version": "1.0.0",
+  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 03 Output",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch webpack.config.js --exec webpack-dev-server",
+    "build": "rimraf dist && webpack",
+    "build:prod": "rimraf dist && webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
+  },
+  "author": "Lemoncode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
+  },
+  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "html-webpack-plugin": "^2.30.1",
+    "nodemon": "^1.12.1",
+    "rimraf": "^2.6.2",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
