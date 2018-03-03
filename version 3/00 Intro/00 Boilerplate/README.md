@@ -224,4 +224,4 @@ document.write(messageToDisplay);
 ```
 - Now we can click on the html file and see our small piece of code up and running.
 
-![running webpack 3](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/result.png)
+![running webpack 4](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/result.png)
