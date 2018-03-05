@@ -45,10 +45,10 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-       new ExtractTextPlugin({
-          filename: '[chunkhash].[name].css',
-          disable: false,
-          allChunks: true,
-        }),
+    new ExtractTextPlugin({
+      filename: '[chunkhash].[name].css',
+      disable: false,
+      allChunks: true,
+    }),
   ],
 };
