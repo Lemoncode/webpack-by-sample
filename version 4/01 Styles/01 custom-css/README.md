@@ -163,7 +163,20 @@ pero entry point (chunk).
 
 ```
 
-- Now we need to configure the 
+- Now if we run a build
+
+```
+npm run build 
+``` 
+
+- We can check that we get three chunks vendor, app and appStyles.
+
+> This is a big change comparing to wepack 3, we had to use in the past commonChunks plugin to 
+do that, now webpack incorporate splitChunks plugin and automatically makes the decisitions for
+your, if you want to have more control over it: https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+
+- Now we can see tha the styles are enclosed in a js file, what if we want to keep it as a separated
+css file? We can make use of ExtractTextPlugin.
 
 *** WORK IN PROGRESS USE SPLIT CHUNKS instead of common chunks**
 
