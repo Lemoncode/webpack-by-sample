@@ -178,9 +178,89 @@ your, if you want to have more control over it: https://gist.github.com/sokra/15
 - Now we can see tha the styles are enclosed in a js file, what if we want to keep it as a separated
 css file? We can make use of ExtractTextPlugin.
 
-*** WORK IN PROGRESS USE SPLIT CHUNKS instead of common chunks**
+> At the moment of this writing the current version of extract-text-webpack-plugin was not compatible
+with webpack 4, there was an alpha version available (that's why we will install it using the
+@next flag)
 
-https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+```bash
+npm install extract-text-webpack-plugin@next --d
+```
+
+> In the webpack roadmap (versions 4.x or 5) it supposed that the core webpack functionallity will
+implement the functionallity of this plugin.
+
+- Let's to configure loader:
+
+- Reference the plugin.
+
+_webpack.config.js_
+
+```diff
+var HtmlWebpackPlugin = require('html-webpack-plugin');
++ var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
+
+module.exports = {
+```
+
+- Configure the loader for the _.css_ extension
+
+```diff
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+-        use: [
+-          {
+-            loader: 'style-loader',
+-          },
+-          {
+-            loader: 'css-loader',
+-          },
++       loader: ExtractTextPlugin.extract({
++         fallback: 'style-loader',
++         use: {
++           loader: 'css-loader',
++         },
++       }),
+        ],
+      },
+    ],
+  },
+```
+
+- Finally, add plugin configuration:
+  - `disable`: boolean to disable the plugin.
+  - `allChunks`: boolean to extract from all additional chunks too (by default it extracts only from the initial chunk(s)).
+
+```diff
+  plugins: [
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+      hash: true,
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+
+  ],
++   new ExtractTextPlugin({
++     filename: '[chunkhash].[name].css',
++     disable: false,
++     allChunks: true,
++   }),
+```
+
+- Running `webpack` again, it split into two files `appStyles.js` and `appStyles.css` and how to size decrease:
 
 
 

@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 
 module.exports = {
@@ -24,14 +25,12 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
             loader: 'css-loader',
           },
-        ],
+        }),
       },
     ],
   },
@@ -46,6 +45,10 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-
+       new ExtractTextPlugin({
+          filename: '[chunkhash].[name].css',
+          disable: false,
+          allChunks: true,
+        }),
   ],
 };
