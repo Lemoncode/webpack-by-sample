@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack  --mode development"
+    "build": "rimraf dist && webpack  --mode development"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "css-loader": "^0.28.10",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "jquery": "^3.3.1",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.20.2"
   }
 }

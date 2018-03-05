@@ -262,5 +262,32 @@ module.exports = {
 
 - Running `webpack` again, it split into two files `appStyles.js` and `appStyles.css` and how to size decrease:
 
+- Maybe you have noticed that the _dist_ folder gets dirty, on every build we get some new files and files
+from previous build that have a different hash remain, in order to make a cleanup, we could just call
+an _rm_ or _delete_ command preivous to our _webpack_ command, but then our scripts would be platform
+dependant (windows or linux), there's a package called _rimraf_ that works multiplatform, le't configure 
+it.
 
+- First let's install it:
+
+```bash
+npm install rimraf -d
+```
+
+- Now in the _package.json_ file let's add an extra step
+
+```diff
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+-    "build": "webpack  --mode development"
++    "build": "rimraf dist && webpack  --mode development"
+  },
+```
+
+- Now if we run a build, we will see that dist folder is wiped and we get only the new generated fresh
+content.
+
+```bash
+npm run build
+```
 
