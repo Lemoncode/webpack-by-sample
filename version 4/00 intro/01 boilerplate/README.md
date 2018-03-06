@@ -34,8 +34,6 @@ npm init -y
 > by using "y" we agree with the default values the init ask for (beware if you have
 created a folder name that contains uppercase characters or blank spaces it will fail).
 
-![npm init](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/npm%20init.png)
-
 - Install **webpack** and **webpack-cli** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
 ```
