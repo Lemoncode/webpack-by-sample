@@ -177,8 +177,6 @@ module.exports = {
 npm start
 ```
 
-![npm start](../../99%20Readme%20Resources/00%20Intro/00%20Boilerplate/npm%20start.png)
-
 - We can check that a file named **`bundle.js`** has been generated.
 
 - if we open the **`bundle.js`** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **`students.js`**.
