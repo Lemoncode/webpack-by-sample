@@ -5,29 +5,30 @@ basic pillars of web development, consuming third party libraries.
 
 In this demo we will install a legacy library (jquery) via npm, define it as global, and use it. Finally we will end up creating a separate bundle for libraries.
 
-We will start from sample _00 Intro/03 Output_.
+We will start from sample _00 intro/_05 jquery_.
 
 Summary steps:
  - Install jquery via npm.
- - Setup a global alias ($).
- - Create some sample code using this library.
- - Break into two bundles `app.js` and `vendor.js`.  
+ - Steps to buid it:
+  - Prerequisites
+  - Steps
+  - Running and testing it
 
 # Steps to build it
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your computer. If you want to follow this guide steps you will need to take as starting point sample _04 Output_.
+Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your computer. If you want to follow this guide steps you will need to take as starting point sample _00 intro/_05 jquery_.
 
-## steps
+## Steps
 
 - `npm install` to install previous sample packages:
 
 ```
 npm install
 ```
-- Let's start by downloading the jquery library via npm. In this case we will execute the following command on the command prompt ```npm install jquery --save```.
-**note down**: this time we are not adding the `-d` suffix to the parameter, this time the jquery package is a dependency of the web app not of the build process.
+- Let's start by downloading the jquery library via npm. In this case we will execute the following command on the command prompt: ```npm install jquery --save```.
+**Note down**: this time we are not adding the `-d` suffix to the parameter, this time the jquery package is a dependency of the web app not of the build process.
 
 ```
 npm install jquery --save
@@ -53,7 +54,7 @@ _package.json_
 ```
 
 - Since this is a legacy library it expects to have a global variable available.
-Instead of assigning this manually let's define it in the `webpack.config.js`. file.
+Instead of assigning this manually let's define it in the `webpack.config.js` file.
 
 - First we will require an import "webpack" at the top of the file:
 
@@ -83,7 +84,7 @@ module.exports = {
 
 - Now it's ready to be used. Just to test it, let's change the background color of the page body to blue. Let's change the background of the body element using jquery:
 
-_./src_
+_./students.js_
 
 ```diff
 import {getAvg} from "./averageService";
@@ -98,7 +99,7 @@ const messageToDisplay = `average score ${averageScore}`;
 document.write(messageToDisplay);
 
 ```
-
+## Running and Testing it
 - Now we can just execute the app (```npm start```) and check how the background of the page has changed from white to blue.
 
 ```bash
