@@ -5,20 +5,20 @@ basic pillars of web development, consuming third party libraries.
 
 In this demo we will install a legacy library (jquery) via npm, define it as global, and use it. Finally we will end up creating a separate bundle for libraries.
 
-We will start from sample _00 intro/_05 jquery_.
+We will start from sample _00 intro/_04 output_.
 
 Summary steps:
- - Install jquery via npm.
- - Steps to buid it:
-  - Prerequisites
-  - Steps
-  - Running and testing it
+  - Prerequisites:
+    - nodejs packages must be installed
+    - (Optional) starting point _00 intro/_04 output_
+  - Install jQuery packages via npm
+  - Setup global variables
 
 # Steps to build it
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your computer. If you want to follow this guide steps you will need to take as starting point sample _00 intro/_05 jquery_.
+Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your computer. If you want to follow this guide steps you will need to take as starting point sample _00 intro/_04 output_.
 
 ## Steps
 
@@ -28,7 +28,7 @@ Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your
 npm install
 ```
 - Let's start by downloading the jquery library via npm. In this case we will execute the following command on the command prompt: ```npm install jquery --save```.
-**Note down**: this time we are not adding the `-d` suffix to the parameter, this time the jquery package is a dependency of the web app not of the build process.
+>Note down: this time we are not adding the `-d` suffix to the parameter, this time the jquery package is a dependency of the web app not of the build process.
 
 ```
 npm install jquery --save
