@@ -36,6 +36,8 @@ npm install bootstrap --save
 
 - Now, let's import the CSS library in order to include it in our project:
 
+_webpack.config.js_
+
 ```diff
 module.exports = {
   entry: {
