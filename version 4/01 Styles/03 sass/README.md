@@ -3,7 +3,7 @@
 In this demo we rename our css file to scss extension and add a simple SASS variable. We will learn how to add a loader that can
 make the SASS preprocess and then chain it to our css / style pipe.
 
-We will start from sample _01 Styles/02 Import Bootstrap_.
+We will start from sample _01 Styles/02 Twitter Bootstrap_.
 
 Summary steps:
  - Rename `mystyles.css` to scss.
@@ -15,7 +15,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer (at least v 8.9.2). If you want to follow this step guides you will need to take as starting point sample _02 Import Bootstrap_.
+Prerequisites, you will need to have nodejs installed in your computer (at least v 8.9.2). If you want to follow this step guides you will need to take as starting point sample _02 Twitter Bootstrap_.
 
 ## steps
 
@@ -40,7 +40,7 @@ npm install
 }
 
 ```
-- Since we have changed the extension of the css file to scss, we have to update the `webpack.config.js` file.
+- Once we have changed the extension of the css file to scss, we have to update the `webpack.config.js` file.
 
 ### ./webpack.config.js
 ```diff
@@ -73,7 +73,7 @@ module.exports = {
 npm install sass-loader node-sass -d
 ```
 
-- We only need one more step. Open our `webpack.config.js` and add a new  entry (scss) to the loaders that will use the just installed sass-loader. Interesting to note down: we are chaining loaders, first we preprocess the scss then with the css we obtain as result we just pass the css and styles loaders we were using before.
+- We only need one more step. Open our `webpack.config.js` and add a new  entry (scss) to the loaders that will use the just installed sass-loader. Interesting to note down: we are chaining loaders, first we preprocess the scss, then we apply the previous loaders to the resulting css.
 
 - Important here, we need to split in two loaders, first one using `sass-loader` for appStyles and second one using previous configuration for vendorStyles:
 
@@ -117,13 +117,13 @@ npm start
 - So far so good, it's time to refactor a bit our
 solution to make it more maintaneable.
 
-- To keep maintainable our source code, let's move files under `src` folder:
+- To keep maintainable our source code, let's create a `src` folder and move the following files into:
   - Move to `./src/averageService.js`.
   - Move to `./src/index.html`.
   - Move to `./src/mystyles.scss`.
   - Move to `./src/students.js`.
 
-_webpack.config.js_
+- After this, we must modify the path into our _webpack.config.js_ file, for these files to be found.
 
 ```diff
 module.exports = {
@@ -148,5 +148,6 @@ module.exports = {
 ```bash
 npm start
 ```
+- We did it!
 
 
