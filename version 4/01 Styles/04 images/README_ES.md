@@ -27,7 +27,7 @@ npm install
 ```
 - Comencemos limpiando nuestro _`index.html`_. Vamos a eliminar el componente _`jumbotron`_ de Bootstrap y agregar un elemento `<div>` con un `id` determinado:
 
-_[`./src/index.html`](./src/index.html)_
+_[./src/index.html](./src/index.html)_
 
 ```diff
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ _[`./src/index.html`](./src/index.html)_
 - Pasemos a _`students.js`_ e importaremos [`logo_1.png`](./src/content/logo_1.png) usando JavaScript.
 Luego, pongámoslo bajo el `<div>` con un `id` determinado:
 
-_[`./src/students.js`](./src/students.js)_
+_[./src/students.js](./src/students.js)_
 
 ```diff
 import {getAvg} from "./averageService";
@@ -89,7 +89,7 @@ npm install url-loader file-loader -d
 
 - Ahora que ya hemos instalado el plugin _`url-loader`_, solo necesitamos configurar la extensión _png/jpeg_ en su sección dentro de _`webpack.config.js`_. Una cosa para anotar es que estamos agregando un parámetro adicional al cargador de url llamado **límite**. Al utilizar este parámetro le estamos diciendo al cargador que codifique la imagen si su tamaño es inferior a 5 KB e incrústela directamente en el archivo HTML.
 
-_[`webpack.config.js`](webpack.config.js)_
+_[webpack.config.js](webpack.config.js)_
 
 ```diff
   module: {
@@ -133,7 +133,7 @@ _[`webpack.config.js`](webpack.config.js)_
 
 - A continuación, agregaremos algunos estilos para las imágenes en nuestro archivo CSS:
 
-_[`./src/mystyles.scss`](./src/mystyles.scss)_
+_[./src/mystyles.scss](./src/mystyles.scss)_
 
 ```diff
 $blue-color: teal;
@@ -156,7 +156,7 @@ npm start
 
 - Está bien, pero ¿y si ya teníamos la imagen referenciada dentro de una etiqueta HTML <img>? Agreguemos [`logo_2.png`](./src/content/logo_2.png) en el archivo index.html:
 
-### [`./index.html`](./index.html)
+### [./index.html](./index.html)
 
 ```diff
 <!DOCTYPE html>
@@ -194,7 +194,7 @@ npm install html-loader --save-dev
 
 - Y configura el cargador para los archivos _`.html`_
 
-_[`wepback.config.js`](wepback.config.js)_
+_[wepback.config.js](wepback.config.js)_
 
 ```diff
       {
@@ -212,7 +212,7 @@ _[`wepback.config.js`](wepback.config.js)_
 
 - Y recuerda que el `contexto` del paquete web ha terminado`./src` así que:
 
-_[`./src/index.html`](./src/index.html)_
+_[./src/index.html](./src/index.html)_
 
 ```diff
 <!DOCTYPE html>
