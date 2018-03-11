@@ -86,7 +86,7 @@ depending on it's size and _file-loader_ this loader will let us manage with raw
 npm install url-loader file-loader -d
 ```
 
-- Now that We have already installed *url-loader* plugin, we only need to configure the extension png/jpeg in the *`webpack.config.js`* loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
+- Now that We have already installed _url-loader_ plugin, we only need to configure the extension png/jpeg in the _`webpack.config.js`_ loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
 
 ```diff
   module: {
