@@ -25,7 +25,7 @@ Tendrá que tener [`nodejs`](https://nodejs.org/es/) instalado en su computadora
 ```
 npm install
 ```
-- Comencemos limpiando nuestro _`index.html`_. Vamos a eliminar el componente _`jumbotron`_ de Bootstrap y agregar un elemento `<div>` con un `id` determinado:
+- Comencemos limpiando nuestro _[index.html](./src/index.html)_. Vamos a eliminar el componente _`jumbotron`_ de Bootstrap y agregar un elemento `<div>` con un `id` determinado:
 
 _[./src/index.html](./src/index.html)_
 
@@ -87,7 +87,7 @@ dependiendo de su tamaño y _`file-loader`_ este cargador nos permitirá adminis
 npm install url-loader file-loader -d
 ```
 
-- Ahora que ya hemos instalado el plugin _`url-loader`_, solo necesitamos configurar la extensión _png/jpeg_ en su sección dentro de _`webpack.config.js`_. Una cosa para anotar es que estamos agregando un parámetro adicional al cargador de url llamado **límite**. Al utilizar este parámetro le estamos diciendo al cargador que codifique la imagen si su tamaño es inferior a 5 KB e incrústela directamente en el archivo HTML.
+- Ahora que ya hemos instalado el plugin _`url-loader`_, solo necesitamos configurar la extensión _png/jpeg_ en su sección dentro de _[webpack.config.js](webpack.config.js)_. Una cosa para anotar es que estamos agregando un parámetro adicional al cargador de url llamado **límite**. Al utilizar este parámetro le estamos diciendo al cargador que codifique la imagen si su tamaño es inferior a 5 KB e incrústela directamente en el archivo HTML.
 
 _[webpack.config.js](webpack.config.js)_
 
