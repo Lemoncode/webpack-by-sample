@@ -19,10 +19,10 @@
     "webpack-dev-server": "^3.1.0"
   },
   "dependencies": {
-    "css-loader": "^0.28.10",
+    "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "jquery": "^3.3.1",
     "rimraf": "^2.6.2",
-    "style-loader": "^0.20.2"
+    "style-loader": "^0.20.3"
   }
 }
