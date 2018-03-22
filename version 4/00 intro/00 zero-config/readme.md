@@ -16,7 +16,7 @@ Install [Node.js and npm](https://nodejs.org/en/) (min v8.9) if they are not alr
 
 > Verify that you are running at least node v8.x.x and npm 5.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
 
-## steps
+## Steps
 
 - Navigate to the folder where you are going to create the empty project.
 
@@ -28,7 +28,7 @@ file we will generated).
 npm init -y
 ```
 
-> by using "y" we agree with the default values the init ask for (beware if you have
+> By using "y" we agree with the default values the init ask for (beware if you have
 created a folder name that contains uppercase characters or blank spaces it will fail).
 
 - Install **webpack** and **webpack-cli** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
@@ -37,11 +37,11 @@ created a folder name that contains uppercase characters or blank spaces it will
 npm install webpack webpack-cli --d
 ```
 
-- In order to launch webpack, modify the **`package.json`** file an add the following property `"build": "webpack --mode development"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm run build`.
+- In order to launch webpack, modify the **`package.json`** file and add the following property `"build": "webpack --mode development"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm run build`.
 
-> In webpack 4 now is mandatory to inform the mode we are working on development or production (minified etc...) in the command line where we call it.
+> In webpack 4 now is mandatory to inform the mode we are working on development or production (minified, etc...) in the command line where we call it.
 
- Now, our **`package.json`** file should looks something like:
+Now, our **`package.json`** file should looks something like:
 
 ### ./package.json
 ```diff
@@ -63,7 +63,7 @@ npm install webpack webpack-cli --d
 }
 ```
 
-- With this configuration webpack will by default search for an entry point located under
+- With this configuration webpack will, by default, search for an entry point located under
 _./src/index.js_, let's create a dummy file:
 
 _./src/index.js_
