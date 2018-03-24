@@ -212,7 +212,7 @@ document.write(messageToDisplay);
   </head>
   <body>
     Hello Webpack 4!
-    <script src="bundle.js"></script>
+    <script src="./dist/bundle.js"></script>
   </body>
 </html>
 
