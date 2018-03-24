@@ -1,7 +1,7 @@
 # 04 Handling Images
 
 In this demo we are going to include images in our project in two flavours: via JavaScript and via HTML.
-On the JavaScript side we will see it's something straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader: [html-loader](https://github.com/webpack-contrib/html-loader).
+On the JavaScript side we will see it's something straightforward (using the same plugins we used for fonts), for the HTML we will use a new loader: [`html-loader`](https://github.com/webpack-contrib/html-loader).
 
 We will start from sample _01 Styles/03 SASS_.
 
@@ -9,7 +9,7 @@ Summary steps:
  - Add two images to our project.
  - Add first image from JavaScript.
  - Add second image from HTML.
- - Install `html-loader`.
+ - Install [`html-loader`](https://github.com/webpack-contrib/html-loader).
  - Configure the loader.
 
 # Steps to build it
@@ -25,7 +25,7 @@ You will need to have nodejs installed in your computer (at least v 8.9.2). If y
 ```
 npm install
 ```
-- Let's start by cleaning up our *`index.html`*. We are going to remove the Bootstrap's *jumbotron* component and add a `<div>` element with a given `id`:
+- Let's start by cleaning up our _`index.html`_. We are going to remove the Bootstrap's *jumbotron* component and add a `<div>` element with a given `id`:
 
 _./src/index.html_
 ```diff
@@ -53,9 +53,9 @@ _./src/index.html_
 </html>
 ```
 
-- We will continue by creating a folder named **content** inside the **src** folder, and adding two images there: [logo_1](./src/content/logo_1.png) and [logo_2](./src/content/logo_2.png).
+- We will continue by creating a folder named **content** inside the **src** folder, and adding two images there: [`logo_1`](./src/content/logo_1.png) and [`logo_2`](./src/content/logo_2.png).
 
-- Let's jump into *`students.js`* and import *`logo_1.png`* using JavaScript. 
+- Let's jump into _`students.js`_ and import [`logo_1`](./src/content/logo_1.png) using JavaScript. 
 Then, let's place it under a `<div>` with a given `id`:
 
 _./src/students.js_
@@ -86,7 +86,7 @@ depending on it's size and _file-loader_ this loader will let us manage with raw
 npm install url-loader file-loader -d
 ```
 
-- Now that We have already installed *url-loader* plugin, we only need to configure the extension png/jpeg in the *`webpack.config.js`* loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
+- Now that We have already installed _url-loader_ plugin, we only need to configure the extension png/jpeg in the _`webpack.config.js`_ loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
 
 ```diff
   module: {
@@ -150,7 +150,7 @@ $blue-color: teal;
 ```bash
 npm start
 ```
-- That's fine but what if we had already the image referenced inside a HTML <img> tag? Let's add logo_2.png into the index.html file:
+- That's fine but what if we had already the image referenced inside a HTML <img> tag? Let's add [`logo_2.png`](./src/content/logo_2.png) into the index.html file:
 
 ### ./index.html
 ```diff
@@ -181,7 +181,7 @@ npm start
 
 - Finally, if we open the developer tools in our browser we can see that a `<img>` has been inserted under the `<div>` element, and also that its `src` attribute has changed:
 
-- But we are referencing `logo 2` from `./src..` path. Whats if we upload to production? We loose the reference so we need to process this kind of files using `html-loader`:
+- But we are referencing [`logo_2`](./src/content/logo_2.png) from `./src..` path. Whats if we upload to production? We loose the reference so we need to process this kind of files using `html-loader`:
 
 ```bash
 npm install html-loader --save-dev

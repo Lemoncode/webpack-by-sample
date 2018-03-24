@@ -1,12 +1,12 @@
-# 02 Server
+# 03 Server
 
 In this sample we are going to enter into "dev mode". Working with files service
 is not ideal when you are developing a web application, we will learn how to launch
 a lite web server, how deploy our bundle into a dist folder (including `index.html`)
-, how to debug our es6 code directly into the browser debugger and minify
+, how to debug our ES6 code directly into the browser debugger and minify
 our `bundle.js`.
 
-We will start from sample _00 Intro/01 Import_, install `webpack-dev-server`, setup our config
+We will start from sample _00 Intro/02 Import_, install `webpack-dev-server`, setup our config
 to deploy on config folder and support maps (debug), then we will minify
 our `bundle.js` file via webpack cli params.
 
@@ -19,7 +19,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs (at least v 8.9.2) installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 Import_.
+Prerequisites, you will need to have nodejs (at least v 8.9.2) installed in your computer. If you want to follow this step guides you will need to take as starting point sample _02 Import_.
 
 ## steps
 
@@ -76,8 +76,6 @@ _index.html_
 npm start
 ```
 - If we open a browser we can point the url to http://localhost:8080 and we will browse our web app.
-
-![running webpack 4](../../99%20Readme%20Resources/00%20Intro/02%20Server/result.png)
 
 - One interesting feature that ships this dev server is **live reloading**, thus any changes introduced in any of the JavaScript files will be automatically detected and webpack dev server will launch the build process and once finished automatically refresh the page being display in the browser. In order to do this we don't need to do anything.
 

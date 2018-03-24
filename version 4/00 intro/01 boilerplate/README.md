@@ -1,4 +1,4 @@
-# 00 Boilerplate
+# 01 Boilerplate
 
 In this sample we are going to setup a web project that can be easily managed
 by webpack.
@@ -218,7 +218,7 @@ document.write(messageToDisplay);
   </head>
   <body>
     Hello Webpack 4!
-    <script src="bundle.js"></script>
+    <script src="./dist/bundle.js"></script>
   </body>
 </html>
 
