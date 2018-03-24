@@ -1,4 +1,4 @@
-# 00 Boilerplate
+# 01 Boilerplate
 
 In this sample we are going to setup a web project that can be easily managed
 by webpack.
@@ -37,7 +37,7 @@ created a folder name that contains uppercase characters or blank spaces it will
 - Install **webpack** and **webpack-cli** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
 ```
-npm install webpack webpack-cli --d
+npm install webpack webpack-cli --save-dev
 ```
 
 - In order to launch webpack, modify the **`package.json`** file an add the following property `"start": "webpack"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
@@ -212,7 +212,7 @@ document.write(messageToDisplay);
   </head>
   <body>
     Hello Webpack 4!
-    <script src="bundle.js"></script>
+    <script src="./dist/bundle.js"></script>
   </body>
 </html>
 
