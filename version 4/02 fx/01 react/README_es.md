@@ -1,33 +1,33 @@
 # 03 React
 
-In this demo we will add support for [React](https://reactjs.org/).
+En esta demo agregaremos soporte para [React](https://reactjs.org/).
 
-We will start from sample _01 Styles / 03 SASS_, install React locally, update students.js to students.jsx and include some basic rendering.
+Comenzaremos desde la demo _01 Styles / 03 SASS_, instalaremos React localmente, actualizaremos students.js a students.jsx e incluiremos algunas renderizados básicos.
 
-Summary steps:
+Resumen de pasos:
 
-- Install [React](https://facebook.github.io/react/) as a local dependency.
-- Update `students.js` to `students.jsx` and update its content accordingly.
-- Resolve the `jsx` extensions and point out that the entry point has changed.
-- Configure the `webpack.config.js` to support `jsx`.
+- Instala [React](https://facebook.github.io/react/) como una dependencia local.
+- Actualiza `students.js` a `students.jsx` y su contenido en consecuencia.
+- Resuelve las extensiones `jsx` y señala que el punto de entrada ha cambiado.
+- Configura el `webpack.config.js` para admitir `jsx`.
 
-# Steps to build it
+# Pasos para construirlo
 
-## Prerequisites
+## Requisitos previos
 
-You will need to have [Node.js](https://nodejs.org/en/) installed in your computer. If you want to follow this step guide you will need to take sample _03 SASS_ as starting point.
+Deberás tener instalado [Node.js](https://nodejs.org/en/) en tu equipo. Si deseas seguir esta guía de pasos deberás tomar la demo _03 SASS_ como punto de partida.
 
-## Steps
+## Pasos
 
-- `npm install` to install previous sample packages:
+- `npm install` para instalar los paquetes de muestra anteriores:
 
 ```bash
  npm install
 ```
 
-- Delete `mystyles.scss`, we won't need it for this sample.
+- Elimina `mystyles.scss`, no lo necesitaremos para esta demo.
 
-- Let's update `webpack.config`:
+- Actualiza `webpack.config.js`:
 
 ### ./webpack.config.js
 
@@ -47,20 +47,20 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- React is an open source library for building user interfaces, quite popular nowadays. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
+- React es una biblioteca de código abierto para crear interfaces de usuario, bastante popular hoy en día. Comencemos instalando la biblioteca que está dividida en 2: [react](https://www.npmjs.com/package/react) es la biblioteca central y [react-dom](https://www.npmjs.com/package/react-dom) es como el pegamento entre React y el DOM.
 
 ```bash
   npm install react --save
   npm install react-dom --save
 ```
 
-- `jquery` won't be needed for this sample, so you can safely uninstall it:
+- `jquery` no lo necesitamos para esta demo por lo que puedes desinstalarlo de forma segura:
 
 ```bash
   npm uninstall jquery --save
 ```
 
-- And update `webpack.config.js` vendor stuff with these changes:
+- Y actualiza la entrada vendor en `webpack.config.js` con los siguientes cambios:
 
 ### ./webpack.config.js
 
@@ -83,7 +83,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   };
 ```
 
-- And remove it from the plugins sections
+- Y elimina de la sección de plugins:
 
 ### ./webpack.config.js
 
@@ -101,7 +101,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 -    }),
 ```
 
-- In the *`index.html`* file let's add a `<div>` element that will be the entry point for our React app.
+- En el archivo *`index.html`* agregaremos un elemento `<div>` que será el punto de entrada de nuestra aplicación React..
 
 ### ./src/index.html
 
@@ -132,7 +132,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- Let's create our first React component under `src` folder called `AverageComponent`:
+- Vamos a crear nuestro primer componente React `AverageComponent` en la carpeta `src`:
 
 ### ./src/averageComponent.jsx
 
@@ -164,7 +164,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   }
 ```
 
-- Let's rename `students.js` to `students.jsx` and update the code to use React:
+- Vamos a renombrar `students.js` a `students.jsx` y actualizar el código para utilizar React:
 
 ### ./src/students.jsx
 
@@ -192,13 +192,13 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 +   );
 ```
 
-- For *Babel* to parse React `jsx` files we need to install [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
+- Para que *Babel* analice los archivos `jsx` de React necesitaremos instalar [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
 
 ```bash
   npm install babel-preset-react --save-dev
 ```
 
-- Add it to `.babelrc` config:
+- Agregar la configuración `.babelrc`:
 
 ### ./.babelrc
 
@@ -212,7 +212,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   }
 ```
 
-- It's time to update *`webpack.config.js`*, we will start by adding the resolve `jsx` extension:
+- Es hora de actualizar *`webpack.config.js`*, comenzaremos agregando la extensión `jsx`:
 
 ### ./webpack.config.js
 
@@ -233,7 +233,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- In the loaders section we need to indicate to *babel-loader* that it should take into account not only `js` but **`jsx`**, and that it should take into account React preset.
+- En la sección de loader, debemos indicar a *babel-loader* que debe tener en cuenta no sólo los `js` sino también  **`jsx`**, y los ajustes predefinidos de React.
 
 ### ./webpack.config.js
 
@@ -257,7 +257,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- Finally, if we run the app we will see the React based functionality in action.
+- Finalmente, si ejecutamos la aplicación, veremos la funcionalidad de React en acción.
 
 ```bash
   npm start
