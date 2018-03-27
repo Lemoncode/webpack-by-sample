@@ -7,9 +7,10 @@ We will setup an initial npm project, give support to ES6, and install webpack.
 Then we will create a `helloworld.js` sample.
 
 Summary steps:
- - Prerequisites: Install Node.js
- - Intialize `package.json` (npm init)
- - Create a simple HTML file.
+
+- Prerequisites: Install Node.js
+- Initialize `package.json` (npm init)
+- Create a simple HTML file.
 
 # Steps to build it
 
@@ -23,11 +24,9 @@ Install [Node.js and npm](https://nodejs.org/en/) (min v8.9) if they are not alr
 
 - Navigate to the folder where you are going to create the empty project.
 
-- Execute `npm init`, you will be prompted to answer some information request
-about the project (once you have successfully fullfilled them a **`package.json`**
-file we will generated).
+- Execute `npm init`, you will be prompted to answer some information request about the project (once you have successfully fulfilled them a **`package.json`** file we will generated).
 
-```
+```bash
 npm init -y
 ```
 
@@ -36,17 +35,18 @@ created a folder name that contains uppercase characters or blank spaces it will
 
 - Install **webpack** and **webpack-cli** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
-```
-npm install webpack webpack-cli --save-dev
+```bash
+npm install webpack webpack-cli --d
 ```
 
 - In order to launch webpack, modify the **`package.json`** file an add the following property `"start": "webpack"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
 
-> In webpack 4 now is mandatory to inform the mode we are working on development or production (minified etc...) in the command line where we call it.
+> In webpack 4 now is mandatory to inform the mode we are working on development or production (minified, etc...) in the command line where we call it.
 
  Now, our **`package.json`** file should looks something like:
 
 ### ./package.json
+
 ```diff
 {
   "name": "boilerplate",
@@ -68,7 +68,8 @@ npm install webpack webpack-cli --save-dev
   },
   "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
   "devDependencies": {
-    "webpack": "^4.0.1"
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10"
   }
 }
 ```
@@ -78,16 +79,14 @@ and you have a default entry point under _./src/index.js_ it will work by defaul
 some quick test code up and running, but on a real project is not enough, we will go the long way
 in this sample (create and configure the webpack.config.js).
 
-- We will write es6 code but we need to transpile it to es5, in order to do
-that install `babel-core` plus `babel-preset-env` and save it as a dev dependency on the **`package.json`** file that has been previously generated.
+- We will write es6 code but we need to transpile it to es5, in order to do that install `babel-core` plus `babel-preset-env` and save it as a dev dependency on the **`package.json`** file that has been previously generated.
 
 ```bash
 npm install babel-core --save-dev
 npm install babel-preset-env --save-dev
 ```
 
-- We need to install a "loader" (more on this in next modules) in order for
-webpack to be able to make use of `babel-core` transpiler.
+- We need to install a "loader" (more on this in next modules) in order for webpack to be able to make use of `babel-core` transpiler.
 
 ```bash
 npm install babel-loader --save-dev
@@ -96,6 +95,7 @@ npm install babel-loader --save-dev
 Our **`package.json`** file should looks something like:
 
 ### ./package.json
+
 ```diff
 {
   "name": "boilerplate",
@@ -111,7 +111,8 @@ Our **`package.json`** file should looks something like:
 +    "babel-core": "^6.26.0",
 +    "babel-loader": "^7.1.3",
 +    "babel-preset-env": "^1.6.1",
-+    "webpack": "^4.0.1"
++    "webpack": "^4.0.1",
++    "webpack-cli": "^2.0.10"
   }
 }
 ```
@@ -119,6 +120,7 @@ Our **`package.json`** file should looks something like:
 - Now create a JavaScript file named **`students.js`** that will include ES6 syntax.
 
 ### ./students.js
+
 ```javascript
 // Let's use some ES6 features
 const averageScore = "90";
@@ -130,6 +132,7 @@ document.write(messageToDisplay);
 - Now, it's time to add babel configuration file:
 
 ### ./.babelrc
+
 ```javascript
 {
   "presets": [
@@ -138,9 +141,10 @@ document.write(messageToDisplay);
 }
 ```
 
-- We can countinue with webpack configuration. Create an empty skeleton on a file named **`webpack.config.js`**, and indicate the js entry point.
+- We can continue with webpack configuration. Create an empty skeleton on a file named **`webpack.config.js`**, and indicate the js entry point.
 
 ### ./webpack.config.js
+
 ```javascript
 module.exports = {
   entry: ['./students.js'],
@@ -151,7 +155,7 @@ module.exports = {
 
 ```
 
-- Now add support for es6, we will ask webpack to handle all js files under the project folder (excluding the `node_modules` subfolder) and transpile them from es6 to es5 (using the `babel-loader`).
+- Now add support for es6, we will ask webpack to handle all js files under the project folder (excluding the `node_modules` sub-folder) and transpile them from es6 to es5 (using the `babel-loader`).
 
 ```diff
 module.exports = {
@@ -173,7 +177,7 @@ module.exports = {
 
 - Let's run webpack from the command line, type `npm start` and press enter.
 
-```
+```bash
 npm start
 ```
 
@@ -182,6 +186,7 @@ npm start
 - if we open the **`bundle.js`** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **`students.js`**.
 
 ### ./bundle.js
+
 ```javascript
 ...
 /* 0 */
@@ -201,6 +206,7 @@ document.write(messageToDisplay);
 - Create now a simple HTML file, **`index.html`**, and include a script tag that will point to our generated **`bundle.js`** file.
 
 ### ./index.html
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -217,5 +223,6 @@ document.write(messageToDisplay);
 </html>
 
 ```
+
 - Now we can click on the html file and see our small piece of code up and running.
 
