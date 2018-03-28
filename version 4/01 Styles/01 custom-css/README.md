@@ -183,7 +183,13 @@ css file? We can make use of ExtractTextPlugin.
 
 > At the moment of this writing the current version of extract-text-webpack-plugin was not compatible
 with webpack 4, there was an alpha version available (that's why we will install it using the
-@next flag)
+@next flag).
+
+>We should also consider that if we are working with webpack 4.2+ version there is an alternative using another package (mini-css-extract-plugin package).
+In the following document you have the steps to work with this package:
+
+>https://github.com/Lemoncode/webpack-by-sample/tree/master/version%204/01%20Styles/01%20custom-css/Mini-Css-Extract-Plugin.md
+
 
 ```bash
 npm install extract-text-webpack-plugin@next --d
