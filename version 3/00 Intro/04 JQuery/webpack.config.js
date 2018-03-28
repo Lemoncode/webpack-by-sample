@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.join(basePath, 'dist'),
-    filename: '[chunkhash].[name].js',
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [

@@ -225,7 +225,7 @@ module.exports = {
     }),
     new webpack.HashedModuleIdsPlugin(),
 +   new ExtractTextPlugin({
-+     filename: '[chunkhash].[name].css',
++     filename: '[name].[chunkhash].css',
 +     disable: false,
 +     allChunks: true,
 +   }),

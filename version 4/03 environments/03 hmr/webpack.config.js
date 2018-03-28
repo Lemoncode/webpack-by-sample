@@ -20,7 +20,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[hash].[name].js',
+    filename: '[name].[hash].js',
   },
   module: {
     rules: [
@@ -66,7 +66,7 @@ module.exports = {
       hash: true,
     }),
     new ExtractTextPlugin({
-      filename: '[hash].[name].css',
+      filename: '[name].[hash].css',
       disable: true,
       allChunks: true,
     }),

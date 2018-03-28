@@ -17,7 +17,7 @@ module.exports = webpackMerge(commonConfig, {
 
   output: {
     path: path.join(basePath, 'dist'),
-    filename: '[chunkhash].[name].js',
+    filename: '[name].[chunkhash].js',
   },
 
   module: {
@@ -60,7 +60,7 @@ module.exports = webpackMerge(commonConfig, {
       minRatio: 0.8,
     }),
     new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
+      filename: '[name].[chunkhash].css',
       allChunks: true,
     }),
     new webpack.DefinePlugin({
