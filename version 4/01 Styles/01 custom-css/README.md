@@ -149,7 +149,7 @@ _webpack.config.json_
 ```diff
 output: {
 -   filename: 'bundle.js',
-+   filename: '[chunkhash].[name].js',
++   filename: '[name].[chunkhash].js',
 },
 ```
 
@@ -161,7 +161,7 @@ pero entry point (chunk).
 ```diff
   output: {
 -    filename: 'bundle.js',
-+    filename: '[chunkhash].[name].js',
++    filename: '[name].[chunkhash].js',
   },
 
 ```
@@ -257,7 +257,7 @@ module.exports = {
 
   ],
 +   new ExtractTextPlugin({
-+     filename: '[chunkhash].[name].css',
++     filename: '[name].[chunkhash].css',
 +     disable: false,
 +     allChunks: true,
 +   }),
