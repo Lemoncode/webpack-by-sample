@@ -5,7 +5,7 @@ var path = require('path');
 var basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath, 'src'),  
+  context: path.join(basePath, 'src'),
   entry: {
     app: './students.js',
     appStyles: [
@@ -26,6 +26,12 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
       },
       {
@@ -33,12 +39,12 @@ module.exports = {
         exclude: /node_modules/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-          use: [
-            { loader: 'css-loader', },
-            { loader: 'sass-loader', },
+          use: [{
+              loader: 'css-loader',
+            },
+            {
+              loader: 'sass-loader',
+            },
           ],
         }),
       },
