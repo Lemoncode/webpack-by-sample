@@ -88,7 +88,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 ...
 
     new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
+      filename: '[name].[chunkhash].css',
       disable: false,
       allChunks: true,
     }),

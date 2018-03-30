@@ -19,7 +19,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[chunkhash].[name].js',
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -74,7 +74,7 @@ module.exports = {
       jQuery: "jquery"
     }),
     new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
+      filename: '[name].[chunkhash].css',
       disable: false,
       allChunks: true,
     }),
