@@ -5,9 +5,12 @@ var path = require('path');
 var basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath, 'src'),  
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
   entry: {
-    app: './students.js',
+    app: './students.ts',
     appStyles: [
       './mystyles.scss',
     ],
@@ -23,6 +26,14 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+        },
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
