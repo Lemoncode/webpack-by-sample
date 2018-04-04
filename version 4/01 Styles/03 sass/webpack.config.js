@@ -5,9 +5,12 @@ var path = require('path');
 var basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath, 'src'),  
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
   entry: {
-    app: './students.js',
+    app: './students.ts',
     appStyles: [
       './mystyles.scss',
     ],
@@ -19,10 +22,18 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[chunkhash].[name].js',
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+        },
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -65,7 +76,7 @@ module.exports = {
       jQuery: "jquery"
     }),
     new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
+      filename: '[name].[chunkhash].css',
       disable: false,
       allChunks: true,
     }),

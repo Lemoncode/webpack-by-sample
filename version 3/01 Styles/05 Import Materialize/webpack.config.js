@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     path: path.join(basePath, 'dist'),
-    filename: '[chunkhash].[name].js',
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -76,7 +76,7 @@ module.exports = {
     }),
     new webpack.HashedModuleIdsPlugin(),
     new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
+      filename: '[name].[chunkhash].css',
       disable: false,
       allChunks: true,
     }),

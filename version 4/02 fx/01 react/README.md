@@ -1,15 +1,15 @@
 # 03 React
 
-In this demo we will add support for React.
+In this demo we will add support for [React](https://reactjs.org/).
 
-We will start from sample 01 Styles / 03 SASS, install React locally, update students.js to students.jsx and include some basic rendering.
-
+We will start from sample _01 Styles / 03 SASS_, install React locally, update students.js to students.jsx and include some basic rendering.
 
 Summary steps:
- - Install [React](https://facebook.github.io/react/) as a local dependency.
- - Update `students.js` to `students.jsx` and update its content accordingly.
- - Resolve the `jsx` extensions and point out that the entry point has changed.
- - Configure the `webpack.config.js` to support `jsx`.
+
+- Install [React](https://facebook.github.io/react/) as a local dependency.
+- Update `students.js` to `students.jsx` and update its content accordingly.
+- Resolve the `jsx` extensions and point out that the entry point has changed.
+- Configure the `webpack.config.js` to support `jsx`.
 
 # Steps to build it
 
@@ -21,7 +21,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 - `npm install` to install previous sample packages:
 
-```
+```bash
  npm install
 ```
 
@@ -29,10 +29,10 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 - Let's update `webpack.config`:
 
-  ### ./webpack.config.js
+### ./webpack.config.js
+
 ```diff
   ...
-
   module.exports = {
     context: path.join(basePath, 'src'),
     entry: {
@@ -47,25 +47,25 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- React is an open source library for building user interfaces, quite popular nowdays. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
+- React is an open source library for building user interfaces, quite popular nowadays. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
 
-```
+```bash
   npm install react --save
   npm install react-dom --save
 ```
 
 - `jquery` won't be needed for this sample, so you can safely uninstall it:
 
-```
+```bash
   npm uninstall jquery --save
 ```
 
 - And update `webpack.config.js` vendor stuff with these changes:
 
-  ### ./webpack.config.js
+### ./webpack.config.js
+
 ```diff
   ...
-
   module.exports = {
     context: path.join(basePath, 'src'),
     entry: {
@@ -101,10 +101,10 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 -    }),
 ```
 
-- In the *`index.html`* file let's add a `<div>` element that will be the entry
-point for our React app.
+- In the *`index.html`* file let's add a `<div>` element that will be the entry point for our React app.
 
-  ### ./src/index.html
+### ./src/index.html
+
 ```diff
   <!DOCTYPE html>
   <html lang="en">
@@ -134,7 +134,8 @@ point for our React app.
 
 - Let's create our first React component under `src` folder called `AverageComponent`:
 
-  ### ./src/averageComponent.jsx
+### ./src/averageComponent.jsx
+
 ```javascript
   import * as React from 'react';
   import {getAvg} from './averageService';
@@ -165,7 +166,8 @@ point for our React app.
 
 - Let's rename `students.js` to `students.jsx` and update the code to use React:
 
-  ### ./src/students.jsx
+### ./src/students.jsx
+
 ```diff
 +   import * as React from 'react';
 +   import * as ReactDOM from 'react-dom';
@@ -190,16 +192,16 @@ point for our React app.
 +   );
 ```
 
-- For *Babel* to parse React `jsx` files we need to install
-[*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
+- For *Babel* to parse React `jsx` files we need to install [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
 
-```
+```bash
   npm install babel-preset-react --save-dev
 ```
 
 - Add it to `.babelrc` config:
 
-  ### ./.babelrc
+### ./.babelrc
+
 ```diff
   {
     "presets": [
@@ -212,10 +214,10 @@ point for our React app.
 
 - It's time to update *`webpack.config.js`*, we will start by adding the resolve `jsx` extension:
 
-  ### ./webpack.config.js
+### ./webpack.config.js
+
 ```diff
   ...
-
   module.exports = {
     context: path.join(basePath, 'src'),
 +   resolve: {
@@ -233,10 +235,10 @@ point for our React app.
 
 - In the loaders section we need to indicate to *babel-loader* that it should take into account not only `js` but **`jsx`**, and that it should take into account React preset.
 
-  ### ./webpack.config.js
+### ./webpack.config.js
+
 ```diff
   ...
-
   module.exports = {
     ...
     module: {
@@ -256,7 +258,7 @@ point for our React app.
 ```
 
 - Finally, if we run the app we will see the React based functionality in action.
-  
-```
+
+```bash
   npm start
 ```

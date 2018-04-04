@@ -1,5 +1,4 @@
-// Let's use some ES6 features
-import {getAvg} from "./averageService";
+import { getAvg } from "./averageService";
 
 $('body').css('background-color', 'lightSkyBlue');
 

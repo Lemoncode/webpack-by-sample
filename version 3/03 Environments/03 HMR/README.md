@@ -51,7 +51,7 @@ devServer: {
 },
 ...
   new ExtractTextPlugin({
-    filename: '[chunkhash].[name].css',
+    filename: '[name].[chunkhash].css',
     disable: false,
     allChunks: true,
   }),
@@ -146,12 +146,12 @@ entry: {
 ...
   output: {
     path: path.join(basePath, 'dist'),
--   filename: '[chunkhash].[name].js',
+-   filename: '[name].[chunkhash].js',
 +   filename: '[name].js',
   },
   ...
   new ExtractTextPlugin({
--   filename: '[chunkhash].[name].css',
+-   filename: '[name].[chunkhash].css',
 +   filename: '[name].css',
     disable: false,
     allChunks: true,
