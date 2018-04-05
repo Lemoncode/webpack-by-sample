@@ -5,7 +5,7 @@ import { AverageComponent } from './averageComponent';
 import { TotalScoreComponent } from './totalScoreComponent';
 
 
-const myRoot = () =>
+ const myRoot = () =>
   <div>
     <h1>Hello from React DOM</h1>
     <AverageComponent />
@@ -15,6 +15,7 @@ const myRoot = () =>
 const App = hot(module)(myRoot);
 
 ReactDOM.render(
+  hot(module)(App),
   <App />,
   document.getElementById('root')
 );

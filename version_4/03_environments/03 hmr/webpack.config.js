@@ -58,6 +58,9 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+     hot: true,
+  },  
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
