@@ -99,3 +99,5 @@ ReactDOM.render(
 //...
 ```
 
+Now you can launch `npm run start` to view the changes.
+
