@@ -214,7 +214,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+-        exclude: /node_modules/,
 -        use: [
 -          {
 -            loader: 'style-loader',
@@ -223,7 +223,10 @@ module.exports = {
 -            loader: 'css-loader',
 -          },
 -         ],
-+       use: [MiniCssExtractPlugin.loader, "css-loader"]
++       use: [
++          MiniCssExtractPlugin.loader, 
++         "css-loader"
++        ]
       },
     ],
   },
