@@ -7,10 +7,20 @@ var basePath = __dirname;
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
+    // add '.scss' extension
     extensions: ['.js', '.jsx', '.scss'],
   },
   entry: {
     app: './students.jsx',
+    /*
+    // add 'appStyles'
+    appStyles: [
+      './averageComponentStyles.scss',
+      // add new style from totalScoreComponent
+      './totalScoreComponentStyles.scss',
+    ],
+    //.. 
+    */ 
     vendor: [
       'react',
       'react-dom',
@@ -36,13 +46,13 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-                camelCase: true,
-              },
-            },
+             loader: 'css-loader',
+             options: {
+               modules: true,
+               localIdentName: '[name]__[local]___[hash:base64:5]',
+               camelCase: true,
+             },
+           },
             { loader: 'sass-loader', },
           ],
         }),
