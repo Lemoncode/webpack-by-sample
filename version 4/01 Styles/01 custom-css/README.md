@@ -179,14 +179,10 @@ do that, now webpack incorporate splitChunks plugin and automatically makes the 
 your, if you want to have more control over it: https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
 
 - Now we can see tha the styles are enclosed in a js file, what if we want to keep it as a separated
-css file? We can make use of ExtractTextPlugin.
-
-> At the moment of this writing the current version of extract-text-webpack-plugin was not compatible
-with webpack 4, there was an alpha version available (that's why we will install it using the
-@next flag)
+css file? We can make use of MiniCssExtractPlugin.
 
 ```bash
-npm install extract-text-webpack-plugin@next --d
+npm install mini-css-extract-plugin --d
 ```
 
 > In the webpack roadmap (versions 4.x or 5) it supposed that the core webpack functionallity will
@@ -200,7 +196,7 @@ _webpack.config.js_
 
 ```diff
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-+ var ExtractTextPlugin = require('extract-text-webpack-plugin');
++ var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 
 module.exports = {
@@ -218,7 +214,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+-        exclude: /node_modules/,
 -        use: [
 -          {
 -            loader: 'style-loader',
@@ -226,21 +222,17 @@ module.exports = {
 -          {
 -            loader: 'css-loader',
 -          },
-+       loader: ExtractTextPlugin.extract({
-+         fallback: 'style-loader',
-+         use: {
-+           loader: 'css-loader',
-+         },
-+       }),
-        ],
+-         ],
++       use: [
++          MiniCssExtractPlugin.loader, 
++         "css-loader"
++        ]
       },
     ],
   },
 ```
 
-- Finally, add plugin configuration:
-  - `disable`: boolean to disable the plugin.
-  - `allChunks`: boolean to extract from all additional chunks too (by default it extracts only from the initial chunk(s)).
+- Finally, add the plugin object for this package:
 
 ```diff
   plugins: [
@@ -254,13 +246,11 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-
-  ],
-+   new ExtractTextPlugin({
-+     filename: '[name].[chunkhash].css',
-+     disable: false,
-+     allChunks: true,
++   new MiniCssExtractPlugin({
++     filename: "[name].css",
++     chunkFilename: "[id].css"
 +   }),
+  ],
 ```
 
 - Running `webpack` again, it split into two files `appStyles.js` and `appStyles.css` and how to size decrease:

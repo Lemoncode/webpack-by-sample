@@ -31,10 +31,10 @@ npm install
 npm install react-hot-loader --save-dev
 ```
 
-- Let' add react-hot-loader/babel plugin to the _.babel.rc_:
+- Let' add react-hot-loader/babel plugin to the _[./babelrc](./babelrc)_:
 
 
-### ./babelrc
+### [./babelrc](./babelrc)
 
 ```diff
 {
@@ -48,10 +48,8 @@ npm install react-hot-loader --save-dev
 
 - Let's mark the root component as _hot-exported_:
 
-_student.jsx_
-
+_[./src/student.jsx](./src/student.jsx)_
 ```diff
-
 + const myRoot = () =>
 +  <div>
 +    <h1>Hello from React DOM</h1>
@@ -74,7 +72,7 @@ ReactDOM.render(
 
 - Let's add the flag 'hot' to our start command in package json
 
-### ./package.json
+### [./package.json](./package.json)
 ```diff
   "scripts": {
 -    "start": "webpack-dev-server --mode development --open",
@@ -83,14 +81,23 @@ ReactDOM.render(
   }
 ```
 
-> We could configure --hot in webpack.config
+> We could configure --hot in [./webpack.config.js](./webpack.config.js)
 
-### ./webpack.config.js
-
+### [./webpack.config.js](./webpack.config.js)
 ```diff
 ...
 + devServer: {
-+ hot: true,
-},
++   hot: true,
++ },
+  plugins: [
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+      hash: true,
+    }),
+//...
 ```
+
+Now you can launch `npm run start` to view the changes.
 
