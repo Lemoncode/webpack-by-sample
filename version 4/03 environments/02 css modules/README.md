@@ -27,7 +27,7 @@ npm install
 
 - We can start creating `AverageComponent` styles file (SASS file):
 
-### ./src/averageComponentStyles.scss
+### [./src/averageComponentStyles.scss](./src/averageComponentStyles.scss)
 ```css
 $background: teal;
 
@@ -38,7 +38,7 @@ $background: teal;
 
 - Let's go to use this style in `AverageComponent`:
 
-### ./src/averageComponent.jsx
+### [./src/averageComponent.jsx](./src/averageComponent.jsx)
 ```diff
 import * as React from 'react';
 import {getAvg} from './averageService';
@@ -73,10 +73,9 @@ export class AverageComponent extends React.Component {
 
 - Finally we need to update `webpack.config` for load `.scss` file, as we usually load it in other samples:
 
-### ./webpack.config.js
+### [./webpack.config.js](./webpack.config.js)
 ```diff
 ...
-
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
@@ -97,15 +96,14 @@ module.exports = {
   },
   ...
 };
-
 ```
 
 - If we run the the sample we can check that the style is being applied to the component (background color), but we are using global
 css names.
 
-- Now we are going to create `TotalScoreComponent`:
+- Now we are going to create `totalScoreComponent` creating the component [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx) and its style [/src/totalScoreComponentStyles.scss](/src/totalScoreComponentStyles.scss) :
 
-### ./src/averageService.js
+### [./src/averageService.js](./src/averageService.js)
 ```diff
 export function getAvg(scores) {
  return getTotalScore(scores) / scores.length;
@@ -120,7 +118,7 @@ export function getAvg(scores) {
 
 ```
 
-### ./src/totalScoreComponent.jsx
+### [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx)
 ```javascript
 import * as React from 'react';
 import {getTotalScore} from './averageService';
@@ -151,21 +149,20 @@ export class TotalScoreComponent extends React.Component {
 }
 ```
 
-### ./src/totalScoreComponentStyles.scss
+### [./src/totalScoreComponentStyles.scss](./src/totalScoreComponentStyles.scss)
 ```css
 $background: indianred;
 
 .result-background {
   background-color: $background;
 }
-
 ```
 
 > NOTE: we declare same class name for TotalScoreComponent
 
 - Using `TotalScoreComponent`:
 
-### ./src/students.jsx
+### [./src/students.jsx](./src/students.jsx)
 ```diff
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -185,7 +182,7 @@ ReactDOM.render(
 
 - And update `webpack.config`:
 
-### ./webpack.config.js
+### [./webpack.config.js](./webpack.config.js)
 ```diff
 ...
 
@@ -223,7 +220,7 @@ npm start
 
 - CSS Modules scope is to isolate different scss files using same css class names. We are going to replace `adding styles via webpack entry point` by `import styles where we need it`. Let's to configure it:
 
-### ./webpack.config.js
+### [./webpack.config.js](./webpack.config.js)
 ```diff
 ...
 
@@ -293,7 +290,7 @@ module.exports = {
 
 - Updating `AverageComponent`:
 
-### ./src/averageComponent.jsx
+### [./src/averageComponent.jsx](./src/averageComponent.jsx)
 ```diff
 import * as React from 'react';
 import {getAvg} from './averageService';
@@ -329,7 +326,7 @@ export class AverageComponent extends React.Component {
 
 - Updating `TotalScoreComponent`:
 
-### ./src/totalScoreComponent.jsx
+### [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx)
 ```diff
 import * as React from 'react';
 import {getTotalScore} from './averageService';
@@ -372,7 +369,7 @@ npm start
 
 - To avoid reference classNames like `classNames['result-background']`, webpack provides us to transform `kebab case` to `camelCase`:
 
-### ./webpack.config.js
+### [./webpack.config.js](./webpack.config.js)
 ```diff
 ...
 
@@ -408,7 +405,7 @@ module.exports = {
 
 - Updating components:
 
-### ./src/averageComponent.jsx
+### [./src/averageComponent.jsx](./src/averageComponent.jsx)
 ```diff
 ...
 
@@ -426,7 +423,7 @@ module.exports = {
 
 ```
 
-### ./src/totalScoreComponent.jsx
+### [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx)
 ```diff
 ...
 
@@ -455,7 +452,7 @@ npm start
 
 - Finally, let's do an example where we need to add styles to element that has a Bootstrap class:
 
-### ./src/averageComponent.jsx
+### [./src/averageComponent.jsx](./src/averageComponent.jsx)
 ```diff
 ...
 
@@ -480,7 +477,7 @@ npm start
 
 - Let's go to add own styles:
 
-### ./src/averageComponentStyles.scss
+### [./src/averageComponentStyles.scss](./src/averageComponentStyles.scss)
 ```diff
 $background: teal;
 + $jumbotronBackground: darkseagreen;
@@ -498,7 +495,7 @@ $background: teal;
 
 - Running `npm start` nothing changes, why? Due to webpack is transform `local` class names to `'[name]__[local]___[hash:base64:5]'` we need to tell him that jumbotron is a `global` style ([more info](https://webpack.js.org/loaders/css-loader/#-css-modules-https-github-com-css-modules-css-modules-)):
 
-### ./src/averageComponentStyles.scss
+### [./src/averageComponentStyles.scss](./src/averageComponentStyles.scss)
 ```diff
 $background: teal;
 $jumbotronBackground: darkseagreen;
