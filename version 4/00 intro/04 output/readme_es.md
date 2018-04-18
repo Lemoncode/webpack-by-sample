@@ -7,10 +7,10 @@ En este ejemplo vamos a usar la configuración por defecto de webpack y copiar n
 Empezaremos desde el ejemplo _00 Intro/02 Server_,
 
 Pasos:
-    - Redireccionar la salida (`bundle.js`) a la carpeta "dist".
-    - Incluir en el proceso de compilación: copiar el fichero `index.html` a la carpeta "dist"
+   - Redireccionar la salida (`bundle.js`) a la carpeta "dist".
+   - Incluir en el proceso de compilación: copiar el fichero `index.html` a la carpeta "dist"
     - Dejar que webpack incluya el script `bundle.js` en el fichero index.html
-    - Añadir comtabilidad para permitir que los ficheros ES6 se depuren directamente en el navegador.
+    - Añadir compatibilidad para permitir que los ficheros ES6 se depuren directamente en el navegador.
     - Generar una version simplificada de `bundle.js`
 
 ## PREREQUISITOS
