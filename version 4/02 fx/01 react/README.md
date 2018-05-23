@@ -1,8 +1,8 @@
 # 03 React
 
-In this demo we will add support for [React](https://reactjs.org/).
+In this demo we add support for [React](https://reactjs.org/).
 
-We will start from sample _01 Styles / 03 SASS_, install React locally, update students.js to students.jsx and include some basic rendering.
+We start from sample _01 Styles / 03 SASS_, install React locally, rename students.js to students.jsx and include some basic rendering.
 
 Summary steps:
 
@@ -15,7 +15,7 @@ Summary steps:
 
 ## Prerequisites
 
-You will need to have [Node.js](https://nodejs.org/en/) installed in your computer. If you want to follow this step guide you will need to take sample _03 SASS_ as starting point.
+You need to have [Node.js](https://nodejs.org/en/) installed in your computer. If you want to follow this step guide you need to take sample _03 SASS_ as starting point.
 
 ## Steps
 
@@ -25,7 +25,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
  npm install
 ```
 
-- Delete `mystyles.scss`, we won't need it for this sample.
+- Delete `mystyles.scss`, we don't need it for this sample.
 
 - Let's update `webpack.config`:
 
@@ -47,20 +47,20 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- React is an open source library for building user interfaces, quite popular nowadays. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
+- React is an quite popular open source library for building user interfaces. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
 
 ```bash
   npm install react --save
   npm install react-dom --save
 ```
 
-- `jquery` won't be needed for this sample, so you can safely uninstall it:
+- `jquery` isn't needed for this sample, so you can safely uninstall it:
 
 ```bash
   npm uninstall jquery --save
 ```
 
-- And update `webpack.config.js` vendor stuff with these changes:
+- Then update `webpack.config.js` vendor section with these changes:
 
 ### ./webpack.config.js
 
@@ -83,7 +83,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   };
 ```
 
-- And remove it from the plugins sections
+- And finally remove it from the plugins section.
 
 ### ./webpack.config.js
 
@@ -212,7 +212,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   }
 ```
 
-- It's time to update *`webpack.config.js`*, we will start by adding the resolve `jsx` extension:
+- It's time to update *`webpack.config.js`*. We start by adding the resolve `jsx` extension:
 
 ### ./webpack.config.js
 
@@ -233,7 +233,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- In the loaders section we need to indicate to *babel-loader* that it should take into account not only `js` but **`jsx`**, and that it should take into account React preset.
+- Next, in the loaders section, we need to indicate to *babel-loader* that it should not operate on `js` files but on **`jsx`** files, and that it should take into account React preset.
 
 ### ./webpack.config.js
 
@@ -257,7 +257,7 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 
 ```
 
-- Finally, if we run the app we will see the React based functionality in action.
+- Finally, when we run the app, we see React in action.
 
 ```bash
   npm start
