@@ -54,6 +54,12 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
   npm install react-dom --save
 ```
 
+Side note: if you are using TypeScript, add React type support for TypeScript:
+
+```bash
+  npm install @types/react @types/react-dom --save-dev
+```
+
 - `jquery` won't be needed for this sample, so you can safely uninstall it:
 
 ```bash
