@@ -81,9 +81,10 @@ in this sample (create and configure the webpack.config.js).
 
 - We will write es6 code but we need to transpile it to es5, in order to do that install `babel-core` plus `babel-preset-env` and save it as a dev dependency on the **`package.json`** file that has been previously generated.
 
+We are going to start working with babel 7
+
 ```bash
-npm install babel-core --save-dev
-npm install babel-preset-env --save-dev
+npm install @babel/cli @babel/core @babel/preset-env --save-dev
 ```
 
 - We need to install a "loader" (more on this in next modules) in order for webpack to be able to make use of `babel-core` transpiler.
@@ -94,7 +95,7 @@ npm install babel-loader --save-dev
 
 Our **`package.json`** file should looks something like:
 
-### ./package.json
+_./package.json_
 
 ```diff
 {
@@ -119,7 +120,7 @@ Our **`package.json`** file should looks something like:
 
 - Now create a JavaScript file named **`students.js`** that will include ES6 syntax.
 
-### ./students.js
+_./students.js_
 
 ```javascript
 // Let's use some ES6 features
@@ -131,19 +132,27 @@ document.write(messageToDisplay);
 
 - Now, it's time to add babel configuration file:
 
-### ./.babelrc
+_./.babelrc_
 
 ```javascript
 {
   "presets": [
-    "env"
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry"
+      }
+    ]
   ]
 }
 ```
 
+> More info about this config: https://babeljs.io/docs/en/babel-preset-env
+> You can as well set this setting directly on webpack: https://blog.craftlab.hu/all-the-new-things-setting-up-webpack-4-with-babel-7-39a5225b8168
+
 - We can continue with webpack configuration. Create an empty skeleton on a file named **`webpack.config.js`**, and indicate the js entry point.
 
-### ./webpack.config.js
+_./webpack.config.js_
 
 ```javascript
 module.exports = {
@@ -156,6 +165,8 @@ module.exports = {
 ```
 
 - Now add support for es6, we will ask webpack to handle all js files under the project folder (excluding the `node_modules` sub-folder) and transpile them from es6 to es5 (using the `babel-loader`).
+
+_./webpack.config.js_
 
 ```diff
 module.exports = {
