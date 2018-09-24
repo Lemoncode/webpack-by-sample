@@ -13,7 +13,7 @@ module.exports = {
         loader: 'babel-loader',
       },
     ],
-  },  
+  },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
@@ -22,5 +22,4 @@ module.exports = {
       hash:true,
     }),
   ],
-      
 };
