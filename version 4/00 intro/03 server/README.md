@@ -33,7 +33,7 @@ npm install
 can use as dev web server.
 
 ```
-npm install webpack-dev-server --d
+npm install webpack-dev-server --save-dev
 ```
 
 - Let's reconfigure our _package.json_ _start_command and add a new custom command that we will call _build_.
