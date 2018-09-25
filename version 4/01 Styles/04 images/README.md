@@ -83,7 +83,7 @@ document.write(messageToDisplay);
 depending on it's size and _file-loader_ this loader will let us manage with raw folder.
 
 ```bash
-npm install url-loader file-loader -d
+npm install url-loader file-loader -save-dev
 ```
 
 - Now that we have already installed _url-loader_ plugin, we only need to configure the extension png/jpeg in the _`webpack.config.js`_ loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
