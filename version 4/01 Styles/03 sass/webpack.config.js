@@ -1,16 +1,14 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 var path = require('path');
+
 var basePath = __dirname;
 
+
 module.exports = {
-  context: path.join(basePath, 'src'),
-  resolve: {
-    extensions: ['.js', '.ts']
-  },
   entry: {
-    app: './students.ts',
+    app: './students.js',
     appStyles: [
       './mystyles.scss',
     ],
@@ -18,28 +16,26 @@ module.exports = {
       'jquery',
     ],
     vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
+        './node_modules/bootstrap/dist/css/bootstrap.css',
+    ],      
   },
   output: {
     filename: '[name].[chunkhash].js',
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        },
+      }
+    }
+  },
   module: {
     rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        loader: 'awesome-typescript-loader',
-        options: {
-          useBabel: true,
-        },
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -47,26 +43,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-              loader: 'css-loader',
-            },
-            {
-              loader: 'sass-loader',
-            },
-          ],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
       },
     ],
   },
@@ -81,10 +69,9 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-    new ExtractTextPlugin({
-      filename: '[name].[chunkhash].css',
-      disable: false,
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
   ],
 };
