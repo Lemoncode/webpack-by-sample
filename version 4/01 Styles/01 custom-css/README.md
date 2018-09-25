@@ -51,9 +51,9 @@ _./index.html_
 
 <body>
   Hello Webpack 4!
- + <div class="red-background">
- +  RedBackground stuff
- + </div>
++  <div class="red-background">
++   RedBackground stuff
++  </div>
 </body>
 </html>
 
@@ -64,7 +64,7 @@ _./index.html_
   - `style-loader` is to insert styles in html file, so we can use these styles.
 
 ```bash
-npm install style-loader css-loader --d
+npm install style-loader css-loader --save-dev
 ```
 
 - Let's add this style to our entry point, first our entry point will hold more
@@ -151,19 +151,40 @@ output: {
 -   filename: 'bundle.js',
 +   filename: '[name].[chunkhash].js',
 },
++ optimization: {
++  splitChunks: {
++    cacheGroups: {
++      vendor: {
++        chunks: 'initial',
++        name: 'vendor',
++        test: 'vendor',
++        enforce: true
++      },
++    }
++  },
++ },
 ```
 
-*****
+> More info about this: https://webpack.js.org/plugins/split-chunks-plugin/
+https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0
 
-- Now in the ouput file instead of creating a single file, we will create a file
-pero entry point (chunk).
+
+- Before running a build let's ensure we clear the dist folder.
+
+```bash
+npm install rimraf --save-dev
+```
+
+- Let's add the following command to our build:
+
+_./package.json_
 
 ```diff
-  output: {
--    filename: 'bundle.js',
-+    filename: '[name].[chunkhash].js',
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+-    "build": "webpack --mode development"
++    "build": "rimraf dist && webpack --mode development"
   },
-
 ```
 
 - Now if we run a build

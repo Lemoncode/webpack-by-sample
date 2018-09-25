@@ -1,5 +1,4 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 
 module.exports = {
@@ -15,19 +14,36 @@ module.exports = {
   output: {
     filename: '[name].[chunkhash].js',
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        },
+      }
+    }
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      },
+      },      
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: [
-          MiniCssExtractPlugin.loader, 
-          "css-loader"
-        ]
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
       },
     ],
   },
@@ -41,10 +57,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
     }),
   ],
 };
