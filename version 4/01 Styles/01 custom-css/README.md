@@ -51,9 +51,9 @@ _./index.html_
 
 <body>
   Hello Webpack 4!
- + <div class="red-background">
- +  RedBackground stuff
- + </div>
++  <div class="red-background">
++   RedBackground stuff
++  </div>
 </body>
 </html>
 
@@ -64,7 +64,7 @@ _./index.html_
   - `style-loader` is to insert styles in html file, so we can use these styles.
 
 ```bash
-npm install style-loader css-loader --d
+npm install style-loader css-loader --save-dev
 ```
 
 - Let's add this style to our entry point, first our entry point will hold more
@@ -151,19 +151,40 @@ output: {
 -   filename: 'bundle.js',
 +   filename: '[name].[chunkhash].js',
 },
++ optimization: {
++  splitChunks: {
++    cacheGroups: {
++      vendor: {
++        chunks: 'initial',
++        name: 'vendor',
++        test: 'vendor',
++        enforce: true
++      },
++    }
++  },
++ },
 ```
 
-*****
+> More info about this: https://webpack.js.org/plugins/split-chunks-plugin/
+https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0
 
-- Now in the ouput file instead of creating a single file, we will create a file
-pero entry point (chunk).
+
+- Before running a build let's ensure we clear the dist folder.
+
+```bash
+npm install rimraf --save-dev
+```
+
+- Let's add the following command to our build:
+
+_./package.json_
 
 ```diff
-  output: {
--    filename: 'bundle.js',
-+    filename: '[name].[chunkhash].js',
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+-    "build": "webpack --mode development"
++    "build": "rimraf dist && webpack --mode development"
   },
-
 ```
 
 - Now if we run a build
@@ -182,7 +203,7 @@ your, if you want to have more control over it: https://gist.github.com/sokra/15
 css file? We can make use of MiniCssExtractPlugin.
 
 ```bash
-npm install mini-css-extract-plugin --d
+npm install mini-css-extract-plugin --save-dev
 ```
 
 > In the webpack roadmap (versions 4.x or 5) it supposed that the core webpack functionallity will
@@ -254,28 +275,6 @@ module.exports = {
 ```
 
 - Running `webpack` again, it split into two files `appStyles.js` and `appStyles.css` and how to size decrease:
-
-- Maybe you have noticed that the _dist_ folder gets dirty, on every build we get some new files and files
-from previous build that have a different hash remain, in order to make a cleanup, we could just call
-an _rm_ or _delete_ command preivous to our _webpack_ command, but then our scripts would be platform
-dependant (windows or linux), there's a package called _rimraf_ that works multiplatform, le't configure 
-it.
-
-- First let's install it:
-
-```bash
-npm install rimraf -d
-```
-
-- Now in the _package.json_ file let's add an extra step
-
-```diff
-  "scripts": {
-    "start": "webpack-dev-server --mode development --open",
--    "build": "webpack  --mode development"
-+    "build": "rimraf dist && webpack  --mode development"
-  },
-```
 
 - Now if we run a build, we will see that dist folder is wiped and we get only the new generated fresh
 content.

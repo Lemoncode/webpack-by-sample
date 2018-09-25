@@ -15,6 +15,18 @@ module.exports = {
   output: {
     filename: '[name].[chunkhash].js',
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        },
+      }
+    }
+  },
   module: {
     rules: [
       {
@@ -25,7 +37,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader, 
+          MiniCssExtractPlugin.loader,
           "css-loader"
         ]
       },

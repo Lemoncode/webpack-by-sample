@@ -1,6 +1,6 @@
 # 04 Manejo de imágenes
 
-En esta demostración, vamos a incluir imágenes en nuestro proyecto en dos formas: mediante JavaScript y mediante HTML.
+En esta demostración, vamos a incluir imágenes en nuestro proyecto de dos formas: mediante JavaScript y mediante HTML.
 En el lado de JavaScript veremos que es algo sencillo (utilizando los mismos complementos que utilizamos para las fuentes), para el HTML utilizaremos un nuevo cargador: [`html-loader`](https://github.com/webpack-contrib/html-loader).
 
 Comenzaremos por la muestra _01 Estilos / 03 SASS_.
@@ -236,3 +236,47 @@ _[./src/index.html](./src/index.html)_
 ```
 
 - Podemos ver ahora que la imagen se referencia automáticamente (herramientas de desarrollador F12 ...).
+
+
+# Apéndice - Organizar la carpeta dist en subcarpetas
+
+Sería posible organizar la carpeta `dist` en subcarpetas.
+
+Para ello necesitaremos modificar el fichero _wepback.config.js_.
+
+Tenemos que modificar el cargador para los ficheros`.png` y `.jpg` para añadir un parametro llamado **name** en el que especificaremos la subcarpeta:
+
+_wepback.config.js_
+
+```diff
+      {
+       test: /\.(png|jpg)$/,
+       exclude: /node_modules/,
+-        loader: 'url-loader?limit=5000',
++        use: {
++        loader: 'url-loader',
++        options: {
++        limit:5000,
++        name: './img/[hash].[name].[ext]'
+      },
+```
+
+También es posible organizar los ficheros `.js` y `.css` en sus propias subcarpetas.
+
+En el caso de los ficheros `.js` tendremos que añadir el nombre de la subcarpeta en el párametro **filename**:
+
+```diff
+  output: {
+-    filename: '[name].[chunkhash].js',
++    filename: './js/[name].[chunkhash].js',
+  },
+```
+Para los ficheros `.css` necesitaremos modificar el parámetro **filename** en el MiniCssExtractPlugin:
+
+```diff
+new MiniCssExtractPlugin({
+- filename: "[name].[chunkhash].css",
++ filename: "./css/[name].[chunkhash].css",
+  chunkFilename: "[id].css"
+})
+```

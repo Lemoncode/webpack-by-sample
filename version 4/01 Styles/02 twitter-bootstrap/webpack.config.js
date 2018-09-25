@@ -1,5 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 
 module.exports = {
@@ -12,11 +12,23 @@ module.exports = {
       'jquery',
     ],
     vendorStyles: [
-      './node_modules/bootstrap/dist/css/bootstrap.css',
-    ],              
+        './node_modules/bootstrap/dist/css/bootstrap.css',
+    ],      
   },
   output: {
     filename: '[name].[chunkhash].js',
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        },
+      }
+    }
   },
   module: {
     rules: [
@@ -26,13 +38,11 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.css$/,        
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
       },
     ],
   },
@@ -47,10 +57,9 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-    new ExtractTextPlugin({
-      filename: '[name].[chunkhash].css',
-      disable: false,
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
   ],
 };

@@ -35,7 +35,7 @@ You will need to have Node.js (at least v 8.9) installed in your computer. In or
 #### ./averageService.js
 
 ```javascript
- export function getAvg(scores) {
+export function getAvg(scores) {
  return getTotalScore(scores) / scores.length;
 }
 
