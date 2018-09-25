@@ -10,7 +10,7 @@
   "author": "Lemoncode",
   "license": "ISC",
   "dependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
   }
 }

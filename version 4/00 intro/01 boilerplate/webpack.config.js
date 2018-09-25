@@ -1,6 +1,8 @@
 module.exports = {
-  entry: ['./students.js'],
-  output: {
+  entry: ['@babel/polyfill', 
+          './students.js'
+         ],
+  output: {    
     filename: 'bundle.js',
   },
   module: {

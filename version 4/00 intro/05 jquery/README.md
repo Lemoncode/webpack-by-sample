@@ -24,7 +24,7 @@ Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your
 
 - `npm install` to install previous sample packages:
 
-```
+```bash
 npm install
 ```
 - Let's start by downloading the jquery library via npm. In this case we will execute the following command on the command prompt: ```npm install jquery --save```.
@@ -105,3 +105,6 @@ document.write(messageToDisplay);
 ```bash
 npm start
 ```
+
+> Now that we have the sample running, try to update _student.js_ and change the color from _lightSkyBlue_ to _red_ and save the file you will notice that 
+automatically the browser gets refreshed.
