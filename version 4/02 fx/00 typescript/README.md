@@ -67,7 +67,7 @@ _./tsconfig.json_
 - In order to get JQuery intellisense, we can install JQuery typings:
 
 ```
-npm install @types/jquery -d
+npm install @types/jquery --save-dev
 ```
 
 - Let's port our code to TypeScript, we are going to rename the files *`students.js`* and *`averageService.js`* to _students.**ts**_ and _averageService.**ts**_.
