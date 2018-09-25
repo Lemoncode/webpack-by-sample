@@ -237,3 +237,31 @@ document.write(messageToDisplay);
 
 - Now we can click on the html file and see our small piece of code up and running.
 
+- There's still one thing to take into account: what if we are using generators or promises? If we are 
+working on old browsers we are going to have an issue it won't work,we need to setup polyfills, let's
+check how this work.
+
+- First we will need to install _@babel/polyfill_
+
+```bash
+npm install @babel/polyfill --save
+```
+
+- Then we can add an import to this polyfill in our main file, or as an entry in our webpack.config.js
+
+_./webpack.config.js_
+
+```diff
+module.exports = {
+-  entry: ['./students.js'],
++  entry: [
++      '@babel/polyfill',
++      './students.js'
++    ],
+```
+
+> If you do it in your main file you will get benefit of babelorc _"useBuiltIns": "entry"_ (just import the minimum and
+ignore deprecated browsers like IE10)
+
+> Another optimization use _usage_ just only imports what you are really using (https://babeljs.io/docs/en/babel-preset-env#usebuiltins).
+
