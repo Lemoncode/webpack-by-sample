@@ -27,7 +27,8 @@ npm install
 
 - We can start creating `AverageComponent` styles file (SASS file):
 
-### [./src/averageComponentStyles.scss](./src/averageComponentStyles.scss)
+_./src/averageComponentStyles.scss_
+
 ```css
 $background: teal;
 
@@ -38,7 +39,8 @@ $background: teal;
 
 - Let's go to use this style in `AverageComponent`:
 
-### [./src/averageComponent.jsx](./src/averageComponent.jsx)
+_./src/averageComponent.jsx_
+
 ```diff
 import * as React from 'react';
 import {getAvg} from './averageService';
@@ -71,9 +73,10 @@ export class AverageComponent extends React.Component {
 
 ```
 
-- Finally we need to update `webpack.config` for load `.scss` file, as we usually load it in other samples:
+- Finally we need to update `webpack.config` to load `.scss` file, as we usually load it in other samples:
 
-### [./webpack.config.js](./webpack.config.js)
+_-/webpack.config.js_
+
 ```diff
 ...
 module.exports = {
@@ -103,7 +106,8 @@ css names.
 
 - Now we are going to create `totalScoreComponent` creating the component [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx) and its style [/src/totalScoreComponentStyles.scss](/src/totalScoreComponentStyles.scss) :
 
-### [./src/averageService.js](./src/averageService.js)
+_./src/averageService.js_
+
 ```diff
 export function getAvg(scores) {
  return getTotalScore(scores) / scores.length;
@@ -118,7 +122,8 @@ export function getAvg(scores) {
 
 ```
 
-### [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx)
+_./src/totalScoreComponent.jsx_
+
 ```javascript
 import * as React from 'react';
 import {getTotalScore} from './averageService';
@@ -149,7 +154,8 @@ export class TotalScoreComponent extends React.Component {
 }
 ```
 
-### [./src/totalScoreComponentStyles.scss](./src/totalScoreComponentStyles.scss)
+_./src/totalScoreComponentStyles.scss_
+
 ```css
 $background: indianred;
 
@@ -162,7 +168,8 @@ $background: indianred;
 
 - Using `TotalScoreComponent`:
 
-### [./src/students.jsx](./src/students.jsx)
+_./src/students.jsx_
+
 ```diff
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -182,7 +189,7 @@ ReactDOM.render(
 
 - And update `webpack.config`:
 
-### [./webpack.config.js](./webpack.config.js)
+_./webpack.config.js_
 ```diff
 ...
 
@@ -218,9 +225,9 @@ npm start
 
 - As result, averageComponentStyles are overridden by totalScoreComponentStyles. How to solve this? _CSS Modules to the rescue!_
 
-- CSS Modules scope is to isolate different scss files using same css class names. We are going to replace `adding styles via webpack entry point` by `import styles where we need it`. Let's to configure it:
+- CSS Modules scope is to isolate different scss files using same css class names. We are going to replace `adding styles via webpack entry point` by `import styles where we need it`. Let's configure it:
 
-### [./webpack.config.js](./webpack.config.js)
+_./webpack.config.js_
 ```diff
 ...
 
@@ -251,25 +258,20 @@ module.exports = {
   module: {
     rules: [
       ...
-      {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
--           { loader: 'css-loader', },
-+           {
-+             loader: 'css-loader',
-+             options: {
-+               modules: true,
-+               localIdentName: '[name]__[local]___[hash:base64:5]',
-+             },
-+           },
-            { loader: 'sass-loader', },
-          ],
-        }),
-      },
-      {
+        use: [
+          MiniCssExtractPlugin.loader,
+-          "css-loader",
++          { 
++            loader: "css-loader",
++            options: {
++              modules: true,
++              localIdentName: '[name]__[local]___[hash:base64:5]',
++            },    
++          },
+          "sass-loader",
+        ]
+      },      {
         test: /\.css$/,
         include: /node_modules/,
         loader: ExtractTextPlugin.extract({
@@ -290,7 +292,7 @@ module.exports = {
 
 - Updating `AverageComponent`:
 
-### [./src/averageComponent.jsx](./src/averageComponent.jsx)
+_./src/averageComponent.jsx_
 ```diff
 import * as React from 'react';
 import {getAvg} from './averageService';
@@ -369,7 +371,7 @@ npm start
 
 - To avoid reference classNames like `classNames['result-background']`, webpack provides us to transform `kebab case` to `camelCase`:
 
-### [./webpack.config.js](./webpack.config.js)
+_./webpack.config.js_
 ```diff
 ...
 
@@ -405,7 +407,7 @@ module.exports = {
 
 - Updating components:
 
-### [./src/averageComponent.jsx](./src/averageComponent.jsx)
+_./src/averageComponent.jsx_
 ```diff
 ...
 
@@ -423,7 +425,8 @@ module.exports = {
 
 ```
 
-### [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx)
+_./src/totalScoreComponent.jsx_
+
 ```diff
 ...
 
@@ -452,7 +455,7 @@ npm start
 
 - Finally, let's do an example where we need to add styles to element that has a Bootstrap class:
 
-### [./src/averageComponent.jsx](./src/averageComponent.jsx)
+_./src/averageComponent.jsx_
 ```diff
 ...
 
@@ -463,9 +466,9 @@ npm start
           Students average: {this.state.average}
         </span>
 
-+       <span className={`jumbotron ${classNames.resultBackground}`}>
-+         Jumbotron students average: {this.state.average}
-+       </span>
++       <div className={`jumbotron ${classNames.resultBackground}`}>
++         <h1>Jumbotron students average: {this.state.average}</h1>
++       </div>
       </div>
     );
   }
