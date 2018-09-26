@@ -46,7 +46,8 @@ module.exports = {
         loader: 'awesome-typescript-loader',
         options: {
           useBabel: true,
-        },
+          "babelCore": "@babel/core", // needed for Babel v7
+        },        
       },
       {
         test: /\.js$/,

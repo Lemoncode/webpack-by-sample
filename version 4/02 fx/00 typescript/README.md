@@ -152,6 +152,7 @@ _./webpack.config.js_
 +        loader: 'awesome-typescript-loader',
 +        options: {
 +          useBabel: true,
++          "babelCore": "@babel/core", // needed for Babel v7
 +        },
 +      },
       {
@@ -160,6 +161,11 @@ _./webpack.config.js_
         loader: 'babel-loader',
       },
 ```
+
+> It is possible to use directly babel 7 to transpile to typescript (preset-typescript) but type checking will be skipped:
+https://blogs.msdn.microsoft.com/typescript/2018/08/27/typescript-and-babel-7/, it turns out is a fast process but you
+have to rely on the editor capabilities to show that issues.
+
 - If we run the app (`npm start`) we can check that everything is working as expected.
 
 - If we open browser console we can access to `.ts` files and add breakpoints thanks to previous `sourceMap` configuration:
