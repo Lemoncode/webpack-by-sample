@@ -1,44 +1,35 @@
 {
-  "name": "sass-demo",
+  "name": "boilerplate",
   "version": "1.0.0",
-  "description": "Front-End Lemoncode Master, Bundle Modules, Webpack Demo 01 Styles - 03 SASS",
+  "description": "In this sample we are going to setup a web project that can be easily managed by webpack.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "rimraf dist && webpack",
-    "build:prod": "rimraf dist && webpack -p"
+    "start": "webpack-dev-server --mode development --open",
+    "build": "rimraf dist && webpack --mode development"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
-  },
-  "author": "Lemoncode",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
-  },
-  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@types/jquery": "^1.10.34",
-    "awesome-typescript-loader": "^4.0.1",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.11.2",
-    "html-webpack-plugin": "^2.30.1",
-    "node-sass": "^4.5.3",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@types/jquery": "^3.3.10",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.9.3",
     "rimraf": "^2.6.2",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "typescript": "^2.7.2",
-    "url-loader": "^0.5.9",
-    "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.7.1"
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "typescript": "^3.0.3",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.8"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.3.1"
   }
 }

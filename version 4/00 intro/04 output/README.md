@@ -41,7 +41,7 @@ copy of the HTM file? There's a plugin that will do that for you _html-webpack-p
 start by installing it.
 
 ```bash
-npm install html-webpack-plugin --d
+npm install html-webpack-plugin --save-dev
 ```
 
 - Let's remove from our base `index.html` the script tag:
@@ -89,14 +89,15 @@ _webpack.config.js_
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
-    ],
-+   plugins: [
-+     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
-+     new HtmlWebpackPlugin({
-+       filename: 'index.html', //Name of file in ./dist/
-+       template: 'index.html', //Name of template in ./src
-+      }),
-+   ],
+    ]
+  },
++ plugins: [
++   //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
++   new HtmlWebpackPlugin({
++     filename: 'index.html', //Name of file in ./dist/
++     template: 'index.html', //Name of template in ./src
++    }),
++ ],
 ```
 
 - Now if we run webpack we will realize that `index.html` is copied under the dist folder and the script tag is automatically being generated. There is only one caveat... we are not getting any additional hash param to avoid browser caching, we can do that by setting the option hash to true:
@@ -117,6 +118,8 @@ npm run build
     }),
   ],
 ```
+
+- Let's run the build and check that now we get a hash on our script.
 
 
 

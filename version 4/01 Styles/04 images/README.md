@@ -83,10 +83,10 @@ document.write(messageToDisplay);
 depending on it's size and _file-loader_ this loader will let us manage with raw folder.
 
 ```bash
-npm install url-loader file-loader -d
+npm install url-loader file-loader -save-dev
 ```
 
-- Now that We have already installed _url-loader_ plugin, we only need to configure the extension png/jpeg in the _`webpack.config.js`_ loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
+- Now that we have already installed _url-loader_ plugin, we only need to configure the extension png/jpeg in the _`webpack.config.js`_ loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
 
 ```diff
   module: {
@@ -150,7 +150,7 @@ $blue-color: teal;
 ```bash
 npm start
 ```
-- That's fine but what if we had already the image referenced inside a HTML <img> tag? Let's add [`logo_2.png`](./src/content/logo_2.png) into the index.html file:
+- That's fine but what if we had already the image referenced inside a HTML `<img>` tag? Let's add [`logo_2.png`](./src/content/logo_2.png) into the index.html file:
 
 ### ./index.html
 ```diff
@@ -187,7 +187,7 @@ npm start
 npm install html-loader --save-dev
 ```
 
-- And configre the loader for the _.html_ files
+- And configure the loader for the _.html_ files
 
 _wepback.config.js_
 
@@ -205,7 +205,7 @@ _wepback.config.js_
   },
 ```
 
-- And remember that the wepback `context` is over `./src` so:
+- And remember that the webpack `context` is over `./src` so:
 
 _./src/index.html_
 
@@ -233,6 +233,45 @@ _./src/index.html_
 - We can see now that image is auto referenced (F12 developer tools...).
 
 
+# Appendix - Organize dist folder into subfolders
 
+It will possible to organize `dist` folder into subfolders.
 
+To do this we will need to modify the _wepback.config.js_ file.
 
+We have to modify the loader for `.png` and `.jpg` files to add a parameter called **name** to especify the subfolder:
+
+_wepback.config.js_
+
+```diff
+      {
+       test: /\.(png|jpg)$/,
+       exclude: /node_modules/,
+-        loader: 'url-loader?limit=5000',
++        use: {
++        loader: 'url-loader',
++        options: {
++        limit:5000,
++        name: './img/[hash].[name].[ext]'
+      },
+```
+
+It's also possible to organize the `.js` and `.css` files into their own subfolders.
+
+In the case of the `.js` files we will have to add the subfolder name in the **filename** parameter:
+
+```diff
+  output: {
+-    filename: '[name].[chunkhash].js',
++    filename: './js/[name].[chunkhash].js',
+  },
+```
+For the `.css` files we need to modify the **filename** parameter in the MiniCssExtractPlugin:
+
+```diff
+new MiniCssExtractPlugin({
+- filename: "[name].[chunkhash].css",
++ filename: "./css/[name].[chunkhash].css",
+  chunkFilename: "[id].css"
+})
+```

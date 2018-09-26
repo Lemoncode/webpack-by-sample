@@ -19,13 +19,13 @@ export class AverageComponent extends React.Component {
   render() {
     return (
       <div>
-       <span className={classNames.resultBackground}>
+        <span className={classNames.resultBackground}>
          Students average: {this.state.average}
        </span>
 
-       <span className={`jumbotron ${classNames.resultBackground}`}>
-         Jumbotron students average: {this.state.average}
-       </span>       
+        <span className={`jumbotron ${classNames.resultBackground}`}>
+          Jumbotron students average: {this.state.average}
+        </span>       
       </div>
     );
   }
