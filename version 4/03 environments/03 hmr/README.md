@@ -50,6 +50,9 @@ npm install react-hot-loader --save-dev
 
 _[./src/student.jsx](./src/student.jsx)_
 ```diff
++ import { hot } from 'react-hot-loader'
+//(...)
+
 + const myRoot = () =>
 +  <div>
 +    <h1>Hello from React DOM</h1>
@@ -60,12 +63,12 @@ _[./src/student.jsx](./src/student.jsx)_
 +const App = hot(module)(myRoot);
 
 ReactDOM.render(
-+  hot(module)(App)  
++  <App/>,
 -  <div>
 -    <h1>Hello from React DOM</h1>
 -    <AverageComponent />
 -    <TotalScoreComponent />
-  </div>,
+-  </div>,
   document.getElementById('root')
 );
 ```
@@ -99,5 +102,33 @@ ReactDOM.render(
 //...
 ```
 
-Now you can launch `npm run start` to view the changes.
+- Now you can launch `npm run start`, and try to .
 
+- This won't work with CSS using miniCSSExtractTextPlugin, you will need to disable in by config when working on dev mode.
+
+https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
+
+webpack config udpates
+
+```
+module.exports = async function(envCliArgs = {}, argv = {}) {
+  const isHot = !!argv.hot || !!argv.hotOnly;
+```
+
+```
+use: [
+  {
+    loader: isHot ? "style-loader" : MiniCssExtractPlugin.loader,
+  },
+```
+
+```
+if (!isHot) {
+  config.plugins.push(
+    new MiniCssExtractPlugin({
+      filename: "[name].bundle.[chunkhash].css",
+      chunkFilename: "[id].[chunkhash].css",
+    }),
+  );
+}
+```
