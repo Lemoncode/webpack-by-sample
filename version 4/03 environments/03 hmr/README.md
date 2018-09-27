@@ -106,6 +106,11 @@ ReactDOM.render(
 
 - This won't work with CSS using miniCSSExtractTextPlugin, you will need to disable in by config when working on dev mode.
 
+Guide 1: 
+https://github.com/webpack-contrib/mini-css-extract-plugin#advanced-configuration-example
+
+Guide 2:
+
 https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
 
 webpack config udpates
