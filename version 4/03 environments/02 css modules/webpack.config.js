@@ -1,26 +1,18 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 var path = require('path');
+
 var basePath = __dirname;
+
 
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
-    // add '.scss' extension
     extensions: ['.js', '.jsx', '.scss'],
   },
   entry: {
     app: './students.jsx',
-    /*
-    // add 'appStyles'
-    appStyles: [
-      './averageComponentStyles.scss',
-      // add new style from totalScoreComponent
-      './totalScoreComponentStyles.scss',
-    ],
-    //.. 
-    */ 
     vendor: [
       'react',
       'react-dom',
@@ -32,40 +24,47 @@ module.exports = {
   output: {
     filename: '[name].[chunkhash].js',
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        },
+      }
+    }
+  },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.jsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-             loader: 'css-loader',
-             options: {
-               modules: true,
-               localIdentName: '[name]__[local]___[hash:base64:5]',
-               camelCase: true,
-             },
-           },
-            { loader: 'sass-loader', },
-          ],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          { 
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              camelCase: true,
+            },    
+          },
+          "sass-loader",
+        ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
-      },
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },      
     ],
   },
   plugins: [
@@ -75,10 +74,9 @@ module.exports = {
       template: 'index.html', //Name of template in ./src
       hash: true,
     }),
-    new ExtractTextPlugin({
-      filename: '[name].[chunkhash].css',
-      disable: false,
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
   ],
 };

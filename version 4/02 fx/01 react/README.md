@@ -50,20 +50,20 @@ You will need to have [Node.js](https://nodejs.org/en/) installed in your comput
 - React is an open source library for building user interfaces, quite popular nowadays. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
 
 ```bash
-  npm install react --save
-  npm install react-dom --save
+npm install react react-dom --save  
 ```
 
-Side note: if you are using TypeScript, add React type support for TypeScript:
+> Side note: if you are using TypeScript, add React type support for TypeScript:
 
+** NOT NEEDED FOR THIS SAMPLE ***
 ```bash
-  npm install @types/react @types/react-dom --save-dev
+npm install @types/react @types/react-dom --save-dev
 ```
 
 - `jquery` won't be needed for this sample, so you can safely uninstall it:
 
 ```bash
-  npm uninstall jquery --save
+npm uninstall jquery --save
 ```
 
 - And update `webpack.config.js` vendor stuff with these changes:
@@ -201,7 +201,7 @@ Side note: if you are using TypeScript, add React type support for TypeScript:
 - For *Babel* to parse React `jsx` files we need to install [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
 
 ```bash
-  npm install babel-preset-react --save-dev
+  npm install @babel/preset-react --save-dev
 ```
 
 - Add it to `.babelrc` config:
@@ -209,13 +209,17 @@ Side note: if you are using TypeScript, add React type support for TypeScript:
 ### ./.babelrc
 
 ```diff
-  {
-    "presets": [
--     "env"
-+     "env",
-+     "react"
+{
+  "presets": [
++    "@babel/preset-react",      
+    [
+      "@babel/preset-env",      
+      {
+        "useBuiltIns": "entry"
+      }
     ]
-  }
+  ]
+}
 ```
 
 - It's time to update *`webpack.config.js`*, we will start by adding the resolve `jsx` extension:
