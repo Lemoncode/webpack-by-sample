@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {getAvg} from './averageService';
+import { getAvg } from './averageService';
 import classNames from './averageComponentStyles';
 
 export class AverageComponent extends React.Component {
@@ -13,19 +13,19 @@ export class AverageComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({average: getAvg(this.state.scores)});
+    this.setState({ average: getAvg(this.state.scores) });
   }
 
   render() {
     return (
       <div>
-       <span className={classNames.resultBackground}>
-         Students average: {this.state.average}
-       </span>
+        <span className={classNames.resultBackground}>
+          Students average: {this.state.average}
+        </span>
+        <div className={`jumbotron ${classNames.resultBackground}`}>
+          <h1>Jumbotron students average: {this.state.average}</h1>
+        </div>
 
-       <span className={`jumbotron ${classNames.resultBackground}`}>
-         Jumbotron students average: {this.state.average}
-       </span>       
       </div>
     );
   }

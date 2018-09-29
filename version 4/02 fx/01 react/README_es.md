@@ -49,9 +49,15 @@ Deberás tener instalado [Node.js](https://nodejs.org/en/) en tu equipo. Si dese
 
 - React es una biblioteca de código abierto para crear interfaces de usuario, bastante popular hoy en día. Comencemos instalando la biblioteca que está dividida en 2: [react](https://www.npmjs.com/package/react) es la biblioteca central y [react-dom](https://www.npmjs.com/package/react-dom) es como el pegamento entre React y el DOM.
 
+
 ```bash
-  npm install react --save
-  npm install react-dom --save
+npm install react react-dom --save  
+```
+> Nota: Si estas usando TypeScript, añade el soporte de tipos para React, TypeScript:
+** NO NECESARIO PARA ESTE EJEMPLO ***
+
+```bash
+npm install @types/react @types/react-dom --save-dev
 ```
 
 - `jquery` no lo necesitamos para esta demo por lo que puedes desinstalarlo de forma segura:
@@ -195,7 +201,7 @@ Deberás tener instalado [Node.js](https://nodejs.org/en/) en tu equipo. Si dese
 - Para que *Babel* analice los archivos `jsx` de React necesitaremos instalar [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
 
 ```bash
-  npm install babel-preset-react --save-dev
+  npm install @babel/preset-react --save-dev
 ```
 
 - Agregar la configuración `.babelrc`:
@@ -203,13 +209,17 @@ Deberás tener instalado [Node.js](https://nodejs.org/en/) en tu equipo. Si dese
 ### ./.babelrc
 
 ```diff
-  {
-    "presets": [
--     "env"
-+     "env",
-+     "react"
+ {
+  "presets": [
++    "@babel/preset-react",      
+    [
+      "@babel/preset-env",      
+      {
+        "useBuiltIns": "entry"
+      }
     ]
-  }
+  ]
+}
 ```
 
 - Es hora de actualizar *`webpack.config.js`*, comenzaremos agregando la extensión `jsx`:
