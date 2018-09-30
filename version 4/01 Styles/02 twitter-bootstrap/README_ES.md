@@ -53,23 +53,6 @@ module.exports = {
   },
 ``` 
 
-- Dado que vamos a profundizar en * node_modules *, en la sección del cargador de CSS, excluiremos los node_modules:
-
-_webpack.config.js_
-
-```diff
-  {
-    test: /\.css$/,
--    exclude: /node_modules/,
-    loader: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: {
-        loader: 'css-loader',
-      },
-    }),
-  },
-```
-
 - Modifiquemos nuestro * index.html * e incluyamos algún componente específico de Bootstrap:
 
 _index.html_
