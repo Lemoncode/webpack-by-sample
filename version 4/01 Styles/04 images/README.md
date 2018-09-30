@@ -45,7 +45,7 @@ _./src/index.html_
 -     </p>
 -   </div>
 +   <div id="imgContainer"></div>
-    Hello Webpack 3!
+    Hello Webpack 4!
     <div class="red-background">
       RedBackground stuff
     </div>
@@ -220,7 +220,7 @@ _./src/index.html_
   </head>
   <body>
     <div id="imgContainer"></div>
-    Hello Webpack 3!
+    Hello Webpack 4!
 -   <img src="./src/content/logo_2.png" />
 +   <img src="./content/logo_2.png" />
     <div class="red-background">
