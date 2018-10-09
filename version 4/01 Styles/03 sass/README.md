@@ -95,12 +95,11 @@ npm install sass-loader node-sass --save-dev
 +      },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },
 ```
 
 - If we run our app (`npm start`), we can check that now we are getting a blue background instead of a red one.

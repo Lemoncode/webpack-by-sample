@@ -94,12 +94,11 @@ npm install sass-loader node-sass --save-dev
 +      },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },
 ```
 
 - Si ejecutamos la app (`npm start`), podemos comprobar que ahora tenemos un fondo azul en lugar del rojo.
