@@ -46,20 +46,12 @@ Now, our **`package.json`** file should looks something like:
 ### ./package.json
 ```diff
 {
-  "name": "zeroconfigsample",
-  "version": "1.0.0",
-  "description": "One of the new features announced by webpack is the possibility of using this package with zero configuration,\r just if you follow some conventions you won't need to create a config file.",
-  "main": "index.js",
+  ...
   "scripts": {
 +   "build": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
-  }
+  ...
 }
 ```
 
