@@ -45,32 +45,16 @@ npm install webpack webpack-cli --save-dev
 
  Now, our **`package.json`** file should looks something like:
 
-### ./package.json
+_./package.json_
 
 ```diff
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "Front End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
-  "main": "index.js",
+...
   "scripts": {
 +   "start": "webpack --mode development"
 -   "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
-  },
-  "author": "Lemoncode",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
-  },
-  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
-  "devDependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
-  }
+...
 }
 ```
 
@@ -99,21 +83,14 @@ _./package.json_
 
 ```diff
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "In this sample we are going to setup a web project that can be easily managed by webpack.",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack"
-  },
-  "author": "",
-  "license": "ISC",
+...
   "devDependencies": {
-+    "babel-core": "^6.26.0",
-+    "babel-loader": "^7.1.3",
-+    "babel-preset-env": "^1.6.1",
-+    "webpack": "^4.0.1",
-+    "webpack-cli": "^2.0.10"
++   "@babel/cli": "^7.1.2",
++   "@babel/core": "^7.1.2",
++   "@babel/preset-env": "^7.1.0",
++   "babel-loader": "^8.0.4",
++   "webpack": "^4.23.1",
++   "webpack-cli": "^3.1.2"
   }
 }
 ```
