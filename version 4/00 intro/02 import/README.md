@@ -2,7 +2,7 @@
 
 In this sample we are going to start working with ES6 modules (import).
 
-We will start from sample _00 Intro/00 Boilerplate_ and add a new JavaScript service that will
+We will start from sample _00 Intro/01 Boilerplate_ and add a new JavaScript service that will
 hold a simple algorithm to calculate the average of an score array.
 
 We will use this JavaScript array into the main students.js file by importing
@@ -20,7 +20,7 @@ Summary steps:
 
 ## Prerequisites
 
-You will need to have Node.js (at least v 8.9) installed in your computer. In order to follow this step guides you will also need to take sample _00 BoilerPlate_ as a starting point.
+You will need to have Node.js (at least v 8.9) installed in your computer. In order to follow this step guides you will also need to take sample _01 BoilerPlate_ as a starting point.
 
 ## Steps
 
@@ -32,7 +32,7 @@ You will need to have Node.js (at least v 8.9) installed in your computer. In or
 
 - Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them). So, add the following content to `averageService.js`:
 
-#### ./averageService.js
+_./averageService.js_
 
 ```javascript
 export function getAvg(scores) {
@@ -46,7 +46,7 @@ function getTotalScore(scores) {
 
 - Now let's update `students.js` to import the previous file and consume it:
 
-#### ./students.js
+_./students.js_
 
 ```diff
 -  // Let's use some ES6 features
@@ -69,8 +69,6 @@ npm start
 
 It is time to double-click on the `index.html` and check that the new average function is up and running and has been included in the `bundle.js` file.
 
-![running webpack 4](../../99%20Readme%20Resources/00%20Intro/01%20Import/result.png)
-
 ## Appendix - Module alternative usage
 
 We have covered a single named export usage in our previous example, but there are some other ways to use modules:
@@ -81,7 +79,7 @@ One popular way is using **`export default`** as the export keyword. This will i
 
 - Default export usage in `averageService.js`:
 
-#### ./averageService.js
+_./averageService.js_
 
 ```diff
 - export function getAvg(scores) {
@@ -99,7 +97,7 @@ function getTotalScore(scores) {
 
 - Default import usage in `students.js`:
 
-#### ./students.js
+_./students.js_
 
 ```diff
 - import {getAvg} from "./averageService";
@@ -119,7 +117,7 @@ Let's consider two functions, *getAvg* and *getTotalScore*, for the sake of this
 
 - Multiple exports usage in `averageService.js`:
 
-#### ./averageService.js
+_./averageService.js_
 
 ```diff
 - export default function getAvg(scores) {
@@ -139,7 +137,7 @@ Now, we can import them in several ways into `students.js`:
 
 - Import both members into the current scope:
 
-#### ./students.js
+_./students.js_
 
 ```diff
 - import getAvg from "./averageService";
@@ -161,7 +159,7 @@ const averageScore = getAvg(scores);
 
 - Import the entire module's content by using the wildcard `*` and a *name* for our module. This *name* will hold all the exported members in our current scope (*name* is used as namespace):
 
-#### ./students.js
+_./students.js_
 
 ```diff
 - import {getAvg, getTotalScore} from "./averageService";
