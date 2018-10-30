@@ -120,7 +120,8 @@ _./.babelrc_
 
 - Podemos continuar con la configuración de webpack. Crea un archivo vacío llamado **`webpack.config.js`**, e indica el punto de entrada del JS.
 
-### ./webpack.config.js
+_./webpack.config.js_
+
 ```javascript
 module.exports = {
   entry: ['./students.js'],
@@ -131,7 +132,7 @@ module.exports = {
 
 ```
 
-- Ahora agrege soporte para ES6, le pediremos a webpack que maneje todos los archivos js que hay en la carpeta del proyecto (excluyendo la subcarpeta `node_modules` ) y que los transpile de es6a es5 (usando `babel-loader`).
+- Ahora agrege soporte para ES6, le pediremos a webpack que maneje todos los archivos js que hay en la carpeta del proyecto (excluyendo la subcarpeta `node_modules` ) y que los transpile de es6 a es5 (usando `babel-loader`).
 
 _./webpack.config.js_
 
@@ -163,26 +164,26 @@ npm start
 
 - Si abrimos el archivo **`bundle.js`** podemos verificar que contiene (entre otro código) la transpilación a ES5 de **`students.js`**.
 
-### ./bundle.js
+_./bundle.js_
+
 ```javascript
 ...
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./students.js":
+/*!*********************!*\
+  !*** ./students.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
+eval("var averageScore = \"90\";\nvar messageToDisplay = \"average score \".concat(averageScore);\ndocument.write(messageToDisplay);\n\n//# sourceURL=webpack:///./students.js?");
 
-
-// Let's use some ES6 features
-var averageScore = "90";
-var messageToDisplay = "average score " + averageScore;
-
-document.write(messageToDisplay);
+/***/ }),
 ...
 ```
 
 - Crea ahora un archivo HTML simple, **`index.html`**, e incluye la etiqueta de script que llamará a nuestro archivo **`bundle.js`**.
 
-### ./index.html
+_./index.html_
 
 ```html
 <!DOCTYPE html>
@@ -200,10 +201,10 @@ document.write(messageToDisplay);
 </html>
 
 ```
+
 - Ahora podemos hacer click en el archivo html y ver nuestro pequeño código en funcionamiento.
 
-
--Aún hay una cosa a tener en cuenta: ¿que ocurre si utilizamos generadores o promesas? Si estas trabajando con navegadores antiguos noa va a funcionar, necesitamos preparar polyfills, veamos como funciona esto.
+- Aún hay una cosa a tener en cuenta: ¿que ocurre si utilizamos generadores o promesas? Si estas trabajando con navegadores antiguos no va a funcionar, necesitamos preparar polyfills, veamos como funciona esto.
 
 - Primero necesitamos instalar _@babel/polyfill_
 
@@ -219,11 +220,11 @@ _./webpack.config.js_
 module.exports = {
 -  entry: ['./students.js'],
 +  entry: [
-+      '@babel/polyfill',
-+      './students.js'
-+    ],
++   '@babel/polyfill',
++   './students.js'
++ ],
 ```
 
-> Si lo haces en tu fichero principal te beneficiaras de babelorc _"useBuiltIns": "entry"_ (simplemente importa el minimo e ignora los navegadores obsoletos como IE10)
+> Si lo haces en tu fichero principal te beneficiarás de babelrc _"useBuiltIns": "entry"_ (simplemente importa el minimo e ignora los navegadores obsoletos como IE10)
 
 > Otra optimización es utilizar  _usage_ para importar solo aquello que realmente estás utilizando (https://babeljs.io/docs/en/babel-preset-env#usebuiltins).

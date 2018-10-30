@@ -173,27 +173,26 @@ npm start
 
 - if we open the **`bundle.js`** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **`students.js`**.
 
-### ./bundle.js
+_./bundle.js_
 
 ```javascript
 ...
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./students.js":
+/*!*********************!*\
+  !*** ./students.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
+eval("var averageScore = \"90\";\nvar messageToDisplay = \"average score \".concat(averageScore);\ndocument.write(messageToDisplay);\n\n//# sourceURL=webpack:///./students.js?");
 
-
-// Let's use some ES6 features
-var averageScore = "90";
-var messageToDisplay = "average score " + averageScore;
-
-document.write(messageToDisplay);
+/***/ }),
 ...
 ```
 
 - Create now a simple HTML file, **`index.html`**, and include a script tag that will point to our generated **`bundle.js`** file.
 
-### ./index.html
+_./index.html_
 
 ```html
 <!DOCTYPE html>
@@ -214,9 +213,7 @@ document.write(messageToDisplay);
 
 - Now we can click on the html file and see our small piece of code up and running.
 
-- There's still one thing to take into account: what if we are using generators or promises? If we are 
-working on old browsers we are going to have an issue it won't work,we need to setup polyfills, let's
-check how this work.
+- There's still one thing to take into account: what if we are using generators or promises? If we are working on old browsers we are going to have an issue it won't work, we need to setup polyfills, let's check how this work.
 
 - First we will need to install _@babel/polyfill_
 
@@ -232,13 +229,12 @@ _./webpack.config.js_
 module.exports = {
 -  entry: ['./students.js'],
 +  entry: [
-+      '@babel/polyfill',
-+      './students.js'
-+    ],
++   '@babel/polyfill',
++   './students.js'
++ ],
 ```
 
-> If you do it in your main file you will get benefit of babelorc _"useBuiltIns": "entry"_ (just import the minimum and
-ignore deprecated browsers like IE10)
+> If you do it in your main file you will get benefit of babelrc _"useBuiltIns": "entry"_ (just import the minimum and ignore deprecated browsers like IE10)
 
 > Another optimization use _usage_ just only imports what you are really using (https://babeljs.io/docs/en/babel-preset-env#usebuiltins).
 
