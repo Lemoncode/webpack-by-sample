@@ -41,20 +41,12 @@ Ahora, nuestro fichero **`package.json`** debería ser parecido a este:
 ### ./package.json
 ```diff
 {
-  "name": "ejemplosinconfiguracion",
-  "version": "1.0.0",
-  "description": "Una de las nuevas características anunciadas por webpack es la posibilidad de usar este paquete sin necesidad de configuración, simplemente, si sigue algunas convenciones no necesitará crear fichero de configuración",
-  "main": "index.js",
+  ...
   "scripts": {
 +   "build": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
-  }
+  ...
 }
 ```
 
