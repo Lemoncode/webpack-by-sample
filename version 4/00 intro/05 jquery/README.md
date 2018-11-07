@@ -5,12 +5,12 @@ basic pillars of web development, consuming third party libraries.
 
 In this demo we will install a legacy library (jquery) via npm, define it as global, and use it. Finally we will end up creating a separate bundle for libraries.
 
-We will start from sample _00 intro/_04 output_.
+We will start from sample _00 intro/04 output_.
 
 Summary steps:
   - Prerequisites:
     - nodejs packages must be installed
-    - (Optional) starting point _00 intro/_04 output_
+    - (Optional) starting point _00 intro/04 output_
   - Install jQuery packages via npm
   - Setup global variables
 
@@ -18,7 +18,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your computer. If you want to follow this guide steps you will need to take as starting point sample _00 intro/_04 output_.
+Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your computer. If you want to follow this guide steps you will need to take as starting point sample _00 intro/04 output_.
 
 ## Steps
 
@@ -27,6 +27,7 @@ Prerequisites, you will need to have nodejs installed (at least v 8.9.2) on your
 ```bash
 npm install
 ```
+
 - Let's start by downloading the jquery library via npm. In this case we will execute the following command on the command prompt: ```npm install jquery --save```.
 >Note down: this time we are not adding the `-d` suffix to the parameter, this time the jquery package is a dependency of the web app not of the build process.
 
@@ -106,5 +107,4 @@ document.write(messageToDisplay);
 npm start
 ```
 
-> Now that we have the sample running, try to update _student.js_ and change the color from _lightSkyBlue_ to _red_ and save the file you will notice that 
-automatically the browser gets refreshed.
+> Now that we have the sample running, try to update _student.js_ and change the color from _lightSkyBlue_ to _red_ and save the file you will notice that automatically the browser gets refreshed.
