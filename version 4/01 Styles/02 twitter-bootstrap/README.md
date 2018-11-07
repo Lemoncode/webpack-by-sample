@@ -18,7 +18,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs (at least v 8.9.2) installed in your computer. If you want to follow this step guides you will need to take as starting point sample _00 Intro/05 JQuery_.
+Prerequisites, you will need to have nodejs (at least v 8.9.2) installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 Styles / 01 Custom CSS_.
 
 ## steps
 
