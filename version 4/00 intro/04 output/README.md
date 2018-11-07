@@ -6,7 +6,7 @@ copy our main HTML page to that distribution path.
 
 > Note down by default webpack uses _dist_ folder as default configuration.
 
-We will start from sample _00 Intro/02 Server_,
+We will start from sample _00 Intro/03 Server_,
 
 Summary steps:
  - Redirect output (`bundle.js`) to "dist" folder.
