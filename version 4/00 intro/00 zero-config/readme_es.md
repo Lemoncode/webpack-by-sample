@@ -29,7 +29,7 @@ npm init -y
 - Instalar **webpack** y **webpack-cli** localmente como una dependencia de desarrollo (la razón para instalarlo localmente y no globalmente es para que sea sencillo de configurar; por ejemplo, puede ser lanzada en un equipo limpio sin tener que instalar nada globalmente excepto nodejs).
 
 ```bash
-npm install webpack webpack-cli --d
+npm install webpack webpack-cli --save-dev
 ```
 
 - Para poder lanzar webpack, modifique el fichero **`package.json`** y añada la siguiente propiedad `"build": "webpack --mode development"` dentro del objeto scripts. Esto nos permitirá lanzar webpack desde la línea de comandos con la instrucción de npm `npm run build`.
