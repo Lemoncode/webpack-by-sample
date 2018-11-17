@@ -45,7 +45,7 @@ npm install
 ### ./webpack.config.js
 ```diff
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 
 + var path = require('path');
