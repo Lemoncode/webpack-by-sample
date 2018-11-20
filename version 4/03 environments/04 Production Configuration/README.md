@@ -159,9 +159,8 @@ export function getTotalScore(scores) {
   ...
   "scripts": {
 -   "start": "webpack-dev-server --mode development --open --hot",
-+   "start": "webpack-dev-server --open --config dev.webpack.config.js",
-    "build": "rimraf dist && webpack",
-    "build:prod": "rimraf dist && webpack -p"
++    "start": "webpack-dev-server --open --config dev.webpack.config.js",
+    "build": "rimraf dist && webpack --mode development"
   },
   ...
 }
@@ -179,7 +178,7 @@ We can see in console `We are in: development`
   ...
   "scripts": {
     "start": "webpack-dev-server --open --config dev.webpack.config.js",
--    "build": "rimraf dist && webpack --mode development",
+-    "build": "rimraf dist && webpack --mode development"
 +    "build": "rimraf dist && webpack --config dev.webpack.config.js"
   },
   },
@@ -190,7 +189,7 @@ We can see in console `We are in: development`
 
 - Running `npm run build`:
 
-The dist folder is created. If we execute `index.html`, it shows us `We are in: development`.
+The `dist` folder is created. If we execute `index.html`, it shows us `We are in: development`.
 
 - Let's configure `production` environment:
 
@@ -213,7 +212,8 @@ module.exports = merge(common, {
   ...
   "scripts": {
     "start": "webpack-dev-server --open --config dev.webpack.config.js",
-    "build": "rimraf dist && webpack --config dev.webpack.config.js",
+-    "build": "rimraf dist && webpack --config dev.webpack.config.js"
++    "build": "rimraf dist && webpack --config dev.webpack.config.js",
 +    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
   },
   ...
@@ -227,7 +227,8 @@ module.exports = merge(common, {
 ```
   app.js          =>    46 KB
   app.css         =>     2 KB
-  index.html      =>  2060 KB
+  index.html      =>     1 KB
+  vendor.js       =>  2060 KB
   vendor.css      =>   462 KB
   vendorStyles.js =>    15 KB
 
@@ -235,6 +236,7 @@ module.exports = merge(common, {
 
 `npm run build:prod`
 ```
+  0.css           => 170 KB
   app.js          =>  12 KB
   app.css         =>   1 KB
   index.html      =>   1 KB
@@ -260,25 +262,37 @@ const common = require('./base.webpack.config.js');
 module.exports = merge(common, {
     mode: 'production',
 +   plugins: [
-+       new CompressionPlugin(),
-+   ],
++       new CompressionPlugin({
++           filename: '[path].gz[query]',
++           algorithm: 'gzip',
++           test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
++           threshold: 1024,
++           minRatio: 0.8
++       }),
     ],
 });
 
 ```
 
-- Running `npm run build:prod`, we can see `.gz` files that we can upload to server. This is an optional configuration because it needs an extra configuration in server side:
+> _filename: [file] is replaced with the original asset filename. [path] is replaced with the path of the original asset. [query] is replaced with the query._
 
-`npm run build:prod` with `CompressionPlugin`
+> _algorithm: The compression algorithm/function._
+
+> _test: Test to match files against._
+
+> _threshold: Only assets bigger than this size are processed. In bytes._
+
+> _minRatio: Only assets that compress better that this ratio are processed. Defaults to 0.8._
+
+- Running `npm run build:prod` with `CompressionPlugin`, we can see `.gz` files that we can upload to server. This is an optional configuration because it needs an extra configuration in server side:
+
 ```
   0.css              => 170 KB 
   0.css.gz           =>  23 KB 
   app.js             =>  12 KB
   app.js.gz          =>   3 KB
   app.css            =>   1 KB
-  app.css.gz         =>   1 KB
   index.html         =>   1 KB
-  index.html.gz      =>   1 KB
   vendor.css         => 108 KB
   vendor.css.gz      =>  35 KB
   vendorStyles.js    =>   2 KB
@@ -286,6 +300,42 @@ module.exports = merge(common, {
 
 ```
 
-> NOTE: `.map` files are not gzipping because they have low sizes and compression is not needed.
+- If we finally configure the `deleteOriginalAssets` property, we delete the original assets.
 
-> _minRatio: Only assets that compress better that this ratio are processed. Defaults to 0.8._
+### ./prod.webpack.config.js
+```diff
+const merge = require('webpack-merge');
+const common = require('./base.webpack.config.js');
+ const CompressionPlugin = require('compression-webpack-plugin');
+
+module.exports = merge(common, {
+    mode: 'production',
+   plugins: [
+       new CompressionPlugin({
+           filename: '[path].gz[query]',
+           algorithm: 'gzip',
+           test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
+           threshold: 1024,
+-          minRatio: 0.8
++          minRatio: 0.8,
++          deleteOriginalAssets: true
+       }),
+    ],
+});
+
+```
+
+- Running `npm run build:prod`, the files in the `dist` folder are:
+
+```
+  0.css.gz           =>  23 KB 
+  app.js.gz          =>   3 KB
+  app.css            =>   1 KB
+  index.html         =>   1 KB
+  vendor.css.gz      =>  35 KB
+  vendorStyles.js.gz =>   1 KB
+
+```
+
+
+
