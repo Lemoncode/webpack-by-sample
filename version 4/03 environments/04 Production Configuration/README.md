@@ -269,7 +269,7 @@ module.exports = merge(common, {
 +           threshold: 1024,
 +           minRatio: 0.8
 +       }),
-    ],
++  ],
 });
 
 ```
