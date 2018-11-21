@@ -25,9 +25,9 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- We are going to start with creating a base webpack configuration file where we are going to add the common features for both environments (`dev` and `prod`). One of the feature which we are split between environments is `sourcemaps`. [Webpack recommends](https://webpack.js.org/guides/production/#source-mapping) that we enable source maps for `production` environment, due to are useful for debugging and to run benchmark tests, but we have to disable it for normal use.
+- We are will start by creating base webpack configuration that will hold all the common feature for both environments (dev and _prod). Then we will place specific configuration for dev and production in their config files (e.g. sourcemaps). Webpack, recommends enabling sources maps for development environment (debuggging purposes), but disable it for normal use.
 
-- Let's go to rename `webpack.config.js` to `base.webpack.config.js`:
+- Let's rename `webpack.config.js` to `base.webpack.config.js`:
 
 ### ./base.webpack.config.js
 ```diff
@@ -114,13 +114,13 @@ module.exports = {
 };
 ```
 
-- Now it's time to install `webpack-merge` package. This allow us to combine `base.webpack.config` with environment config:
+- Now it's time to install `webpack-merge` package. This allow us to combine `base.webpack.config` with dev or production specific config settings:
 
 ```
 npm install webpack-merge --save-dev
 ```
 
-- Let's go to create the `dev` environment configuration:
+- Let's create the `dev` environment configuration:
 
 ### ./dev.webpack.config.js
 ```javascript
@@ -136,7 +136,7 @@ module.exports = merge(common, {
 });
 ```
 
-- Make a configuration to see in console the enviroment in which we are
+- Just to make a quick check we will add console log, to check in which environment we are running the app (dev or production):
 
 ### ./averageService.js
 ```diff
@@ -179,7 +179,7 @@ We can see in console `We are in: development`
   "scripts": {
     "start": "webpack-dev-server --open --config dev.webpack.config.js",
 -    "build": "rimraf dist && webpack --mode development"
-+    "build": "rimraf dist && webpack --config dev.webpack.config.js"
++    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js"
   },
   },
   ...
@@ -191,7 +191,7 @@ We can see in console `We are in: development`
 
 The `dist` folder is created. If we execute `index.html`, it shows us `We are in: development`.
 
-- Let's configure `production` environment:
+- Let's configure the `production` environment:
 
 ### ./prod.webpack.config.js
 ```javascript
@@ -204,7 +204,7 @@ module.exports = merge(common, {
 
 ```
 
-- Add production command script:
+- Let's add a production command script:
 
 ### ./package.json
 ```diff
@@ -212,8 +212,8 @@ module.exports = merge(common, {
   ...
   "scripts": {
     "start": "webpack-dev-server --open --config dev.webpack.config.js",
--    "build": "rimraf dist && webpack --config dev.webpack.config.js"
-+    "build": "rimraf dist && webpack --config dev.webpack.config.js",
+-    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js"
++    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
 +    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
   },
   ...
@@ -221,7 +221,7 @@ module.exports = merge(common, {
 
 ```
 
-- Running `npm run build:prod`, we can see in console `We are in: production` and we can see how all bundle sizes decrease:
+- If we run `npm run build:prod`, the following output will be dumped into the console log `We are in: production` and we can check that all bundle sizes decrease:
 
 `npm run build`
 ```
@@ -245,13 +245,13 @@ module.exports = merge(common, {
 
 ```
 
-- As an optional configuration, we can go one over step and generate gzipped bundles. We need install [compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin):
+- Just as an optional extra step, we could generated the gzipped bundles (usually this is just handled by the web servers but is a good idea to generate this files in order to check the size). We need to install [compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin):
 
 ```
 npm install compression-webpack-plugin --save-dev
 ```
 
-- Updating `prod.webpack.config`:
+- Let's update `prod.webpack.config`:
 
 ### ./prod.webpack.config.js
 ```diff
