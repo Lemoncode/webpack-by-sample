@@ -36,7 +36,7 @@ created a folder name that contains uppercase characters or blank spaces it will
 - Install **webpack** and **webpack-cli** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
 ```bash
-npm install webpack webpack-cli --d
+npm install webpack webpack-cli --save-dev
 ```
 
 - In order to launch webpack, modify the **`package.json`** file an add the following property `"start": "webpack"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
@@ -45,32 +45,16 @@ npm install webpack webpack-cli --d
 
  Now, our **`package.json`** file should looks something like:
 
-### ./package.json
+_./package.json_
 
 ```diff
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "Front End Lemoncode Master, Bundle Modules, Webpack Demo 00 Boilerplate",
-  "main": "index.js",
+...
   "scripts": {
 +   "start": "webpack --mode development"
 -   "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lemoncode/webpack-3.x-by-sample.git"
-  },
-  "author": "Lemoncode",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Lemoncode/webpack-3.x-by-sample/issues"
-  },
-  "homepage": "https://github.com/Lemoncode/webpack-3.x-by-sample#readme",
-  "devDependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
-  }
+...
 }
 ```
 
@@ -99,21 +83,14 @@ _./package.json_
 
 ```diff
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "In this sample we are going to setup a web project that can be easily managed by webpack.",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack"
-  },
-  "author": "",
-  "license": "ISC",
+...
   "devDependencies": {
-+    "babel-core": "^6.26.0",
-+    "babel-loader": "^7.1.3",
-+    "babel-preset-env": "^1.6.1",
-+    "webpack": "^4.0.1",
-+    "webpack-cli": "^2.0.10"
++   "@babel/cli": "^7.1.2",
++   "@babel/core": "^7.1.2",
++   "@babel/preset-env": "^7.1.0",
++   "babel-loader": "^8.0.4",
++   "webpack": "^4.23.1",
++   "webpack-cli": "^3.1.2"
   }
 }
 ```
@@ -196,27 +173,26 @@ npm start
 
 - if we open the **`bundle.js`** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **`students.js`**.
 
-### ./bundle.js
+_./bundle.js_
 
 ```javascript
 ...
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./students.js":
+/*!*********************!*\
+  !*** ./students.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
+eval("var averageScore = \"90\";\nvar messageToDisplay = \"average score \".concat(averageScore);\ndocument.write(messageToDisplay);\n\n//# sourceURL=webpack:///./students.js?");
 
-
-// Let's use some ES6 features
-var averageScore = "90";
-var messageToDisplay = "average score " + averageScore;
-
-document.write(messageToDisplay);
+/***/ }),
 ...
 ```
 
 - Create now a simple HTML file, **`index.html`**, and include a script tag that will point to our generated **`bundle.js`** file.
 
-### ./index.html
+_./index.html_
 
 ```html
 <!DOCTYPE html>
@@ -237,9 +213,7 @@ document.write(messageToDisplay);
 
 - Now we can click on the html file and see our small piece of code up and running.
 
-- There's still one thing to take into account: what if we are using generators or promises? If we are 
-working on old browsers we are going to have an issue it won't work,we need to setup polyfills, let's
-check how this work.
+- There's still one thing to take into account: what if we are using generators or promises? If we are working on old browsers we are going to have an issue it won't work, we need to setup polyfills, let's check how this work.
 
 - First we will need to install _@babel/polyfill_
 
@@ -255,13 +229,12 @@ _./webpack.config.js_
 module.exports = {
 -  entry: ['./students.js'],
 +  entry: [
-+      '@babel/polyfill',
-+      './students.js'
-+    ],
++   '@babel/polyfill',
++   './students.js'
++ ],
 ```
 
-> If you do it in your main file you will get benefit of babelorc _"useBuiltIns": "entry"_ (just import the minimum and
-ignore deprecated browsers like IE10)
+> If you do it in your main file you will get benefit of babelrc _"useBuiltIns": "entry"_ (just import the minimum and ignore deprecated browsers like IE10)
 
 > Another optimization use _usage_ just only imports what you are really using (https://babeljs.io/docs/en/babel-preset-env#usebuiltins).
 

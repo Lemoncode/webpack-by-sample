@@ -31,7 +31,7 @@ npm install
 Let's start by downloading the `eslint` library via `npm`:
 
 ```
-npm install eslint -D
+npm install eslint --save-dev
 ```
 
 - ESLint works with Babel and JSX syntax by installing plugins. That is, it's a great library to develop React projects. This sample is a demo, so we're going to implement just a basic configuration.
@@ -81,7 +81,7 @@ npm run lint
 _ESLint throws two parsing errors due to the usage of _export_ and _import_ keywords. Import and export functionalities are provided by Babel to work with modules, so it's time to connect ESLint with Babel:_
 
 ```
-npm install babel-eslint -D
+npm install babel-eslint --save-dev
 ```
 
 ### ./.eslintrc.json

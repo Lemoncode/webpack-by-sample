@@ -34,7 +34,7 @@ created a folder name that contains uppercase characters or blank spaces it will
 - Install **webpack** and **webpack-cli** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
 ```bash
-npm install webpack webpack-cli --d
+npm install webpack webpack-cli --save-dev
 ```
 
 - In order to launch webpack, modify the **`package.json`** file and add the following property `"build": "webpack --mode development"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm run build`.
@@ -46,20 +46,12 @@ Now, our **`package.json`** file should looks something like:
 ### ./package.json
 ```diff
 {
-  "name": "zeroconfigsample",
-  "version": "1.0.0",
-  "description": "One of the new features announced by webpack is the possibility of using this package with zero configuration,\r just if you follow some conventions you won't need to create a config file.",
-  "main": "index.js",
+  ...
   "scripts": {
 +   "build": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
-  }
+  ...
 }
 ```
 

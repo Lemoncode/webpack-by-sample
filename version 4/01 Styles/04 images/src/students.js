@@ -1,11 +1,11 @@
-// Let's use some ES6 features
-import {getAvg} from "./averageService";
+import { getAvg } from "./averageService";
 import logoImg from './content/logo_1.png';
 
 $('body').css('background-color', 'lightSkyBlue');
 
 const scores = [90, 75, 60, 99, 94, 30];
 const averageScore = getAvg(scores);
+
 const messageToDisplay = `average score ${averageScore}`;
 
 document.write(messageToDisplay);

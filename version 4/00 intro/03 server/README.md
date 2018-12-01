@@ -36,7 +36,7 @@ can use as dev web server.
 npm install webpack-dev-server --save-dev
 ```
 
-- Let's reconfigure our _package.json_ _start_command and add a new custom command that we will call _build_.
+- Let's reconfigure our _package.json_ _start_ command and add a new custom command that we will call _build_.
 
 ### ./package.json
 ```diff
@@ -72,7 +72,7 @@ _index.html_
 
 - Now if we type from the command prompt.
 
-```cmd
+```bash
 npm start
 ```
 - If we open a browser we can point the url to http://localhost:8080 and we will browse our web app.
@@ -81,13 +81,14 @@ npm start
 
 - If we want to run _webpack_ build, we only need to type from the command prompt:
 
-```cmd
+```bash
 npm run build
 ```
 
 - Finally, we can configure this server in _`webpack.config.js`_:
 
-### ./webpack.config.js
+_### _./webpack.config.js_
+
 ```diff
 module.exports = {
   entry: ['./students.js'],
@@ -114,7 +115,8 @@ module.exports = {
 
 - We can restore default port:
 
-### ./webpack.config.js
+_### _./webpack.config.js_
+
 ```diff
 module.exports = {
   entry: ['./students.js'],

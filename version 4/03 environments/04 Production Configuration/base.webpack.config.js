@@ -1,6 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var webpack = require('webpack');
 var path = require('path');
 
 var basePath = __dirname;
