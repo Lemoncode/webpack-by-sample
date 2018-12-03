@@ -3,17 +3,16 @@ $("body").css("background-color", "lightSkyBlue");
 const scores = [90, 75, 60, 99, 94, 30];
 
 const handleOnClick = () => {
-  const averageServiceModule = import(/* webpackChunkName averageService */ "./averageService");
+  const averageServicePromise = import(/* webpackChunkName averageService */ "./averageService");
 
-  averageServiceModule.then(x => {
-    const averageScore = x.getAvg(scores);
+  averageServicePromise.then(averageServiceModule => {
+    const averageScore = averageServiceModule.getAvg(scores);
     const messageToDisplay = `average score ${averageScore}`;
 
     const element = document.createElement("div");
     element.innerText = messageToDisplay;
 
     document.getElementById("container").append(element);
-    console.log(messageToDisplay);
   });
 };
 
