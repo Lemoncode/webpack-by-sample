@@ -1,24 +1,24 @@
 # Resolve alias
 
-In this sample we will create aliases to import or require certain modules more easily. For example, we will create an alias for the common _src_ folder.
+En este ejemplo crearemos alias para importar o requerir ciertos módulos más fácilmente. Por ejemplo, crearemos un alias para la carpeta común _src_.
 
-We will start from sample _02 Plain Vanilla_ of the [jest-testing-by-sample](https://github.com/Lemoncode/jest-testing-by-sample/tree/master/frontend/02%20Plain%20Vanilla) repo.
+Empezaremos desde el ejemplo _02 Plain Vanilla_ del repo [jest-testing-by-sample](https://github.com/Lemoncode/jest-testing-by-sample/tree/master/frontend/02%20Plain%20Vanilla).
 
-Summary steps:
- - Edit webpack config.
- - Edit Typescript config.
- - Edit Jest config.
- - Update files with aliases.
+Pasos resumidos:
+ - Editar la configuración de Webpack.
+ - Editar la configuración de Typesript.
+ - Editar la configuración de Jest.
+ - Actualizar los ficheros con los alias.
 
-# Steps to build it
+# Pasos para construirlo.
 
-- `npm install` to install previous sample packages:
+- `npm install` para instalar los paquetes del ejemplo previo.
 
 ```bash
 npm install
 ```
 
-- Edit webpack config in _common.js_ file:
+- Editar la configuración de webpack en el fichero _common.js_:
 
 ### ./src/config/webpack/common.js
 
@@ -37,17 +37,17 @@ module.exports = {
     ···
 ```
 
-Now, instead of using relative paths when importing like so:
+Ahora, en lugar de usar rutas relativas cuando importemos algo como:
 
 `import { Input, Button } from '../../../common/components/form';`
 
-you can use the alias:
+puedes usar el alias:
 
 `import { Input, Button } from '@/common/components/form';`
 
-More info about [Resolve alias](https://webpack.js.org/configuration/resolve/#resolve-alias) in Webpack.
+Más información sobre [Resolve alias](https://webpack.js.org/configuration/resolve/#resolve-alias) en Webpack.
 
-- Edit Typescript config in _tsconfig.json_ file:
+- Editar la configuración de Typescripten el fichero _tsconfig.json_:
 
 ### ./src/tsconfig.json
 
@@ -66,9 +66,9 @@ More info about [Resolve alias](https://webpack.js.org/configuration/resolve/#re
 
 ```
 
-More info about [Resolve alias/Module resolution](https://www.typescriptlang.org/docs/handbook/module-resolution.html) with Typescript.
+Más información sobre [Resolve alias/Module resolution](https://www.typescriptlang.org/docs/handbook/module-resolution.html) con Typescript.
 
-- Edit Jest config in _jest.json_ file:
+- Editar la configuración Jest en el fichero _jest.json_:
 
 ### ./src/config/test/json.json
 
@@ -83,9 +83,9 @@ More info about [Resolve alias/Module resolution](https://www.typescriptlang.org
 
 ```
 
-More info about [Jest using with webpack](https://jestjs.io/docs/en/webpack).
+Más información sobre [Jest using with webpack](https://jestjs.io/docs/en/webpack).
 
-- Update paths in files and test:
+- Actualizar las rutas en los ficheros siguientes (como muestra):
 
 ### ./src/pages/login/components/form.tsx
 
@@ -119,7 +119,7 @@ import { mapMemberListModelToVM } from './mappers';
 
 ```
 
-- Update in the rest files and test:
+- Actualiza las rutas en el resto de ficheros y pruébalo:
 
 ```
 npm start
@@ -129,7 +129,7 @@ npm start
 npm run build
 ```
 
-- And Test Jest config:
+- Y prueba la configuración de Jest:
 
 ```
 npm run test
