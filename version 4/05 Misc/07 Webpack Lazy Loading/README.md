@@ -1,11 +1,8 @@
-# 05 JQuery
+# 06 Lazy Loading
 
-So far we have made good progress on our journey... but we are lacking one of the
-basic pillars of web development, consuming third party libraries.
+In this demo we will load bundles asynchronously via npm.
 
-In this demo we will install a legacy library (jquery) via npm, define it as global, and use it. Finally we will end up creating a separate bundle for libraries.
-
-We will start from sample _00 intro/04 output_.
+We will start from sample _00 intro/05 jquery_.
 
 Summary steps:
 
