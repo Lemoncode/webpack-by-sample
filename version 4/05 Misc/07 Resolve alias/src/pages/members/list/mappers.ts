@@ -1,4 +1,4 @@
-import * as model from '../../../rest-api/model';
+import * as model from '@/rest-api/model';
 import * as vm from './viewModel';
 
 export const mapMemberListModelToVM = (members: model.Member[]): vm.Member[] => (

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MemberListPage } from './page';
 import { Member } from './viewModel';
-import { fetchMembers } from '../../../rest-api/api/member';
+import { fetchMembers } from '@/rest-api/api/member';
 import { mapMemberListModelToVM } from './mappers';
 
 interface State {

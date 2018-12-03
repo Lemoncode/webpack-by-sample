@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormProps } from './formProps';
-import { Input, Button } from '../../../common/components/form';
+import { Input, Button } from '@/common/components/form';
 
 export const Form: React.StatelessComponent<FormProps> = (props) => (
   <form role="form">

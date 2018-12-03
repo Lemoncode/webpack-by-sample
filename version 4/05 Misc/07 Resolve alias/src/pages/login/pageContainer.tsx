@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { history } from '../../history';
+import { history } from '@/history';
 import {
   LoginEntity,
   createEmptyLoginEntity,
@@ -8,8 +8,8 @@ import {
 } from './viewModel';
 import { validations } from './validations';
 import { LoginPage } from './page';
-import { routes } from '../../common/constants/routes';
-import { login } from '../../rest-api/api/login';
+import { routes } from '@/common/constants/routes';
+import { login } from '@/rest-api/api/login';
 import { mapLoginEntityVMToModel } from './mappers';
 import { FieldValidationResult } from 'lc-form-validation';
 
