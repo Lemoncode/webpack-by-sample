@@ -6,4 +6,3 @@ dist/
 bundle.js
 package-lock.json
 .awcache
-.editorconfig
