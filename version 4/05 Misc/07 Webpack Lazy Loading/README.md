@@ -84,40 +84,79 @@ _package.json_
 
 - Now it's ready to be used. Just to test it, let's change the synchronous import on the students.js file. Let's import the averageService module lazily when button clicked:
 
-_./students.js_
+Steps:
+
+- Create getComponent function load the averageService module lazily, and return div element async with the average score:
 
 ```diff
++ const getComponent = () =>
++   import(/* webpackChunkName "averageService" */ "./averageService").then(
++     averageServiceModule => {
++       const scores = [90, 75, 60, 99, 94, 30];
++       const averageScore = averageServiceModule.getAvg(scores);
++       const messageToDisplay = `average score ${averageScore}`;
++
++       const element = document.createElement("div");
++       element.innerText = messageToDisplay;
++
++       return element;
++     }
++   );
+```
 
-- import {getAvg} from "./averageService";
+- Create handleOnClick function will call the getComponent function and append the average score to container:
 
-$('body').css('background-color', 'lightSkyBlue');
-
-const scores = [90, 75, 60, 99, 94, 30];
-
-- const averageScore = getAvg(scores);
-- const messageToDisplay = `average score ${averageScore}`;
-- document.write(messageToDisplay);
-
-
+```diff
 + const handleOnClick = () => {
-+   const averageServicePromise = import(/* webpackChunkName averageService */ "./averageService");
-+
-+   averageServicePromise.then(averageServiceModule => {
-+     const averageScore = averageServiceModule.getAvg(scores);
-+     const messageToDisplay = `average score ${averageScore}`;
-+
-+     const element = document.createElement("div");
-+     element.innerText = messageToDisplay;
-+
-+     document.getElementById("container").append(element);
-+   });
-+ };
++   getComponent().then(element =>
++     document.getElementById("container").append(element)
++   );
+};
+```
 
+- Create a button to handle on click event and load the average score:
+
+```diff
 + const button = document.createElement("button");
 + button.innerText = "Lazy loading sample";
 + button.onclick = handleOnClick;
-
 + document.getElementById("container").append(button);
+```
+
+Then, our _students.js_ file look like this:
+
+_./students.js_
+
+```
+$("body").css("background-color", "lightSkyBlue");
+
+// getComponent function load the averageService module lazily, and return div element async with the average score:
+const getComponent = () =>
+  import(/* webpackChunkName "averageService" */ "./averageService").then(
+    averageServiceModule => {
+      const scores = [90, 75, 60, 99, 94, 30];
+      const averageScore = averageServiceModule.getAvg(scores);
+      const messageToDisplay = `average score ${averageScore}`;
+
+      const element = document.createElement("div");
+      element.innerText = messageToDisplay;
+
+      return element;
+    }
+  );
+
+// handleOnClick function will call the getComponent function and append the average score to container:
+const handleOnClick = () => {
+  getComponent().then(element =>
+    document.getElementById("container").append(element)
+  );
+};
+
+// Create a button to handle on click event and load the average score:
+const button = document.createElement("button");
+button.innerText = "Lazy loading sample";
+button.onclick = handleOnClick;
+document.getElementById("container").append(button);
 
 ```
 
