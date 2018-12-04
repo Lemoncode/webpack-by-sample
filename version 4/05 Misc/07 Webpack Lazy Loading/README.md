@@ -86,7 +86,7 @@ _package.json_
 
 _lazy loading the averageService module:_
 
-import(/_ webpackChunkName "averageService" _/ "./averageService").then(...)
+> import(/\* webpackChunkName "averageService" \*/ "./averageService").then(...)
 
 Steps:
 
