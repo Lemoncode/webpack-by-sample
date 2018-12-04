@@ -82,7 +82,11 @@ _package.json_
 }
 ```
 
-- Now it's ready to be used. Just to test it, let's change the synchronous import on the students.js file. Let's import the averageService module lazily when button clicked:
+- Now it's ready to be used. Just to test it, let's change the synchronous import on the students.js file. Let's import the averageService module lazily when button clicked.
+
+_lazy loading the averageService module:_
+
+import(/_ webpackChunkName "averageService" _/ "./averageService").then(...)
 
 Steps:
 
