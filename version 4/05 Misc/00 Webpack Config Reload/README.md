@@ -79,8 +79,8 @@ npm start
 
 and notice how `nodemon` is now the launcher of our `webpack-dev-server` as well as the watcher of `webpack.config.js`.
 
-![Command Prompt Start](../../99%20Readme%20Resources/00%20Intro/BONUS%20Auto%20Restart%20DevServer/commandPrompt_start.png)
+![Command Prompt Start](../../99%20Readme%20Resources/00%20Intro/BONUS%20Auto%20Restart%20DevServer/commandPrompt_start.PNG)
 
 Now open `webpack.config.js` and just add a empty line at the end to force a change. Save it and look at the terminal.
 
-![Command Prompt Restart](../../99%20Readme%20Resources/00%20Intro/BONUS%20Auto%20Restart%20DevServer/commandPrompt_restart.png)
+![Command Prompt Restart](../../99%20Readme%20Resources/00%20Intro/BONUS%20Auto%20Restart%20DevServer/commandPrompt_restart.PNG)
