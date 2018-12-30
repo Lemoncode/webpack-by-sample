@@ -1,0 +1,11 @@
+{
+  "rootDir": "../../",
+  "moduleNameMapper": {
+    "^@/(.*)": "<rootDir>/src/$1"
+  },
+  "preset": "ts-jest",
+  "restoreMocks": true,
+  "setupFiles": [
+    "<rootDir>/config/test/polyfills.js"
+  ]
+}
