@@ -173,7 +173,7 @@ npm start
 
 - if we open the **`bundle.js`** file we can check that it contains (amongst other boiler plate code) the transpiled to es5 version of **`students.js`**.
 
-_./bundle.js_
+_./dist/bundle.js_
 
 ```javascript
 ...

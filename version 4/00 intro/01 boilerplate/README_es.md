@@ -164,7 +164,7 @@ npm start
 
 - Si abrimos el archivo **`bundle.js`** podemos verificar que contiene (entre otro código) la transpilación a ES5 de **`students.js`**.
 
-_./bundle.js_
+_./dist/bundle.js_
 
 ```javascript
 ...
