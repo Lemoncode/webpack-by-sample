@@ -132,6 +132,8 @@ _As we see, this time we have an error related to `jquery` library. To solve thi
 npm install eslint-loader --save-dev
 ```
 
+> What about getting error at IDE editing code time (install a Vs Code plugin).
+
 - To configure Webpack, we're going to use a preloader definition. We make sure ESLint parses the code before any other process. We get a _`webpack.config.js`_ like this:
 
 ### ./webpack.config.js
@@ -266,6 +268,8 @@ const messageToDisplay = `average score ${averageScore}`;
 - We can trigger the linting by saving the `students.js` file again with no changes. Then we can see how the error referring to the console is not shown anymore.
 
 ![disabling no-console rule](../../99%20Readme%20Resources/03%20Environments/01%20Linting/disabling%20no-console%20rule.png)
+
+> You can disable as well rule for some given lines of code (see hint in VS Code).
 
 - Other example is the rule named [max-lines](http://eslint.org/docs/rules/max-lines). This rule _enforces a maximum number of lines per file, in order to aid in maintainability and reduce complexity._ For demo purposes we're going to configure it with a ridiculously low number of lines, that is, just one, so we can see the error.
 

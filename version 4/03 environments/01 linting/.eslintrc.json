@@ -1,11 +1,12 @@
 {
-  "extends": [
-    "eslint:recommended"
-  ],
+  "extends": ["eslint:recommended"],
   "env": {
     "browser": true,
     "node": true,
     "jquery": true
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "rules": {
+    "no-console": 0
+  }
 }
