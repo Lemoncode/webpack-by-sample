@@ -73,6 +73,18 @@ _index.html_
   </div>
 </body>
 ```
+- Now that we are using bootstrap that is located
+unde the _node_modules_ folder we need to 
+dig into that
+
+```diff
+{
+  test: /\.css$/,
+-  exclude: /node_modules/,
+  use: [MiniCssExtractPlugin.loader, "css-loader"]
+}
+```` 
+
 - Try to run webpack now, just type in the command line:
 
 ```bash
