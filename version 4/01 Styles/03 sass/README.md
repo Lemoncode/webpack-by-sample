@@ -48,10 +48,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpack = require('webpack');
 
-+ var path = require('path');
-
-+ var basePath = __dirname;
-
 //...
 
 module.exports = {
@@ -119,6 +115,9 @@ solution to make it more maintaneable.
 - After this, we must modify the path into our _webpack.config.js_ file, for these files to be found.
 
 ```diff
++ var path = require('path');
++ var basePath = __dirname;
+
 module.exports = {
 + context: path.join(basePath, 'src'),  
   entry: {

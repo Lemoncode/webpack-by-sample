@@ -70,11 +70,14 @@ _./tsconfig.json_
 npm install @types/jquery --save-dev
 ```
 
+> Play a bit with JQuery statement and intellisense
+
 - Let's port our code to TypeScript, we are going to rename the files *`students.js`* and *`averageService.js`* to _students.**ts**_ and _averageService.**ts**_.
 
 
 - Let's introduce some TypeScript, in *`students.ts`* we are going to type the
-variables we are using:
+variables we are using (check... this type is not needed typescript
+already infers the values):
 
 _./src/students.ts_
 ```diff
@@ -85,6 +88,7 @@ $('body').css('background-color', 'lightSkyBlue');
 - const scores = [90, 75, 60, 99, 94, 30];
 + const scores: number[] = [90, 75, 60, 99, 94, 30];
 - const averageScore = getAvg(scores);
++ // No need to type this it would be already inferred by typescript
 + const averageScore: number = getAvg(scores);
 
 - const messageToDisplay = `average score ${averageScore}`;
