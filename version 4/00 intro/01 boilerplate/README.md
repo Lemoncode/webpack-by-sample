@@ -208,7 +208,6 @@ _./index.html_
     <script src="./dist/bundle.js"></script>
   </body>
 </html>
-
 ```
 
 - Now we can click on the html file and see our small piece of code up and running.

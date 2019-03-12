@@ -1,4 +1,4 @@
-# 01 Import
+# 02 Import
 
 In this sample we are going to start working with ES6 modules (import).
 
@@ -27,7 +27,7 @@ You will need to have Node.js (at least v 8.9) installed in your computer. In or
 - `npm install` to install previous sample dependencies:
 
 ```
-  npm install
+npm install
 ```
 
 - Let's add a new file called `averageService.js`. This file will contain a function that will calculate the average value of a given array, this function will be exported (make it visible to other modules that need to consume them). So, add the following content to `averageService.js`:
