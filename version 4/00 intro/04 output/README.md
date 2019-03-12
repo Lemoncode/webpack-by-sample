@@ -32,12 +32,12 @@ npm install
 _dist_ folder (we can add plumbing into our webpack.config to change this folder if needed).
 
 ```bash
-npm start
+npm run build
 ```
 
 - That's fine, but we need to copy as well the HTML to the dist folder, and... wouldn't it 
 be nice that webpack could be able to automatically inject the bundle script into the dist
-copy of the HTM file? There's a plugin that will do that for you _html-webpack-plugin_, let's
+copy of the HTML file? There's a plugin that will do that for you _html-webpack-plugin_, let's
 start by installing it.
 
 ```bash
