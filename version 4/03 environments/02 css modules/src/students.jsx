@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { AverageComponent } from './averageComponent';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { AverageComponent } from "./averageComponent";
 import {TotalScoreComponent} from './totalScoreComponent';
 
 ReactDOM.render(
@@ -9,5 +9,5 @@ ReactDOM.render(
     <AverageComponent />
     <TotalScoreComponent />
   </div>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
