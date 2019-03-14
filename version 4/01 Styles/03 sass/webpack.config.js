@@ -1,12 +1,12 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var webpack = require("webpack");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-var path = require("path");
+var path = require('path');
 var basePath = __dirname;
 
+
 module.exports = {
-  context: path.join(basePath, 'src'),
+  context: path.join(basePath, 'src'),  
   entry: {
     app: "./students.js",
     appStyles: ["./mystyles.scss"],
@@ -37,13 +37,21 @@ module.exports = {
         loader: "babel-loader"
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
-      },
-
-      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass")
+            }
+          }
+        ]
       }
     ]
   },

@@ -66,7 +66,7 @@ module.exports = {
 - Now it's time to start with the webpack plumbing. Let's install a [sass-loader](https://github.com/webpack-contrib/sass-loader) that requires [node-sass](https://github.com/sass/node-sass) as dependency:
 
 ```bash
-npm install sass-loader node-sass --save-dev
+npm install sass node-sass --save-dev
 ```
 
 - We only need one more step. Open our `webpack.config.js` and add a new  entry (scss) to the loaders that will use the just installed sass-loader. Interesting to note down: we are chaining loaders, first we preprocess the scss, then we apply the previous loaders to the resulting css.
@@ -86,7 +86,12 @@ npm install sass-loader node-sass --save-dev
 +        use: [
 +          MiniCssExtractPlugin.loader,
 +          "css-loader",
-+          "sass-loader",
++          {
++            loader: "sass-loader",
++            options: {
++              implementation: require("sass")
++            }
++          },
 +        ]
 +      },
       {
