@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { getAvg } from './averageService';
-import classNames from './averageComponentStyles';
+import * as React from "react";
+import { getAvg } from "./averageService";
+import classNames from "./averageComponentStyles";
 
 export class AverageComponent extends React.Component {
   constructor() {
@@ -8,7 +8,7 @@ export class AverageComponent extends React.Component {
 
     this.state = {
       scores: [90, 75, 60, 99, 94, 30],
-      average: 0,
+      average: 0
     };
   }
 
@@ -25,7 +25,6 @@ export class AverageComponent extends React.Component {
         <div className={`jumbotron ${classNames.resultBackground}`}>
           <h1>Jumbotron students average: {this.state.average}</h1>
         </div>
-
       </div>
     );
   }
