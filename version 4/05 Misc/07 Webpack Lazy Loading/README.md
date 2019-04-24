@@ -59,7 +59,8 @@ _package.json_
 +     [
 +       "@babel/preset-env",
 +       {
-+         "useBuiltIns": "entry"
++         "useBuiltIns": "entry",
++         "corejs": "3"
 +       }
 +     ]
 +   ]
@@ -74,7 +75,8 @@ _package.json_
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "entry"
+        "useBuiltIns": "entry",
+        "corejs": "3"
       }
     ]
   ],
