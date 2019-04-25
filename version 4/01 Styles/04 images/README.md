@@ -275,3 +275,23 @@ new MiniCssExtractPlugin({
   chunkFilename: "[id].css"
 })
 ```
+
+- Important to replace optimization splitChunks by:
+
+```diff
+...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+-         test: 'vendor',
++         test: /vendor$/,
+          enforce: true,
+        },
+      },
+    },
+  },
+...
+```
