@@ -6,6 +6,7 @@ We will learn how to configure it and how to reduce bundle file sizes.
 We will start from sample _03 Environments/03 HMR_.
 
 Summary steps:
+
 - Add base webpack config file
 - Add webpack-merge package.
 - Add development config file.
@@ -25,11 +26,12 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- We are will start by creating base webpack configuration that will hold all the common feature for both environments (dev and _prod). Then we will place specific configuration for dev and production in their config files (e.g. sourcemaps). Webpack, recommends enabling sources maps for development environment (debuggging purposes), but disable it for normal use.
+- We are will start by creating base webpack configuration that will hold all the common feature for both environments (dev and \_prod). Then we will place specific configuration for dev and production in their config files (e.g. sourcemaps). Webpack, recommends enabling sources maps for development environment (debuggging purposes), but disable it for normal use.
 
 - Let's rename `webpack.config.js` to `base.webpack.config.js`:
 
 ### ./base.webpack.config.js
+
 ```diff
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -79,15 +81,20 @@ module.exports = {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { 
+          {
             loader: "css-loader",
             options: {
               modules: true,
               localIdentName: '[name]__[local]___[hash:base64:5]',
               camelCase: true,
-            },    
+            },
           },
-          "sass-loader",
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
         ]
       },
       {
@@ -96,7 +103,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           "css-loader"
         ]
-      },      
+      },
     ],
   },
   plugins: [
@@ -123,22 +130,24 @@ npm install webpack-merge --save-dev
 - Let's create the `dev` environment configuration:
 
 ### ./dev.webpack.config.js
+
 ```javascript
 const merge = require('webpack-merge');
 const common = require('./base.webpack.config.js');
 
 module.exports = merge(common, {
-    mode: 'development',
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './dist'
-    }
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+  },
 });
 ```
 
 - Just to make a quick check we will add console log, to check in which environment we are running the app (dev or production):
 
 ### ./averageService.js
+
 ```diff
 export function getAvg(scores) {
   return getTotalScore(scores) / scores.length;
@@ -154,6 +163,7 @@ export function getTotalScore(scores) {
 - Finally we need to update command script:
 
 ### ./package.json
+
 ```diff
 {
   ...
@@ -173,6 +183,7 @@ We can see in console `We are in: development`
 - We are going to create a `build dev` command to see how much size has bundles files without `webpack-dev-server` stuff:
 
 ### ./package.json
+
 ```diff
 {
   ...
@@ -194,19 +205,20 @@ The `dist` folder is created. If we execute `index.html`, it shows us `We are in
 - Let's configure the `production` environment:
 
 ### ./prod.webpack.config.js
+
 ```javascript
 const merge = require('webpack-merge');
 const common = require('./base.webpack.config.js');
 
 module.exports = merge(common, {
-    mode: 'production',
+  mode: 'production',
 });
-
 ```
 
 - Let's add a production command script:
 
 ### ./package.json
+
 ```diff
 {
   ...
@@ -224,6 +236,7 @@ module.exports = merge(common, {
 - If we run `npm run build:prod`, the following output will be dumped into the console log `We are in: production` and we can check that all bundle sizes decrease:
 
 `npm run build`
+
 ```
   app.js          =>    46 KB
   app.css         =>     2 KB
@@ -235,6 +248,7 @@ module.exports = merge(common, {
 ```
 
 `npm run build:prod`
+
 ```
   0.css           => 170 KB
   app.js          =>  12 KB
@@ -254,6 +268,7 @@ npm install compression-webpack-plugin --save-dev
 - Let's update `prod.webpack.config`:
 
 ### ./prod.webpack.config.js
+
 ```diff
 const merge = require('webpack-merge');
 const common = require('./base.webpack.config.js');
@@ -287,8 +302,8 @@ module.exports = merge(common, {
 - Running `npm run build:prod` with `CompressionPlugin`, we can see `.gz` files that we can upload to server. This is an optional configuration because it needs an extra configuration in server side:
 
 ```
-  0.css              => 170 KB 
-  0.css.gz           =>  23 KB 
+  0.css              => 170 KB
+  0.css.gz           =>  23 KB
   app.js             =>  12 KB
   app.js.gz          =>   3 KB
   app.css            =>   1 KB
@@ -303,6 +318,7 @@ module.exports = merge(common, {
 - If we finally configure the `deleteOriginalAssets` property, we delete the original assets.
 
 ### ./prod.webpack.config.js
+
 ```diff
 const merge = require('webpack-merge');
 const common = require('./base.webpack.config.js');
@@ -328,7 +344,7 @@ module.exports = merge(common, {
 - Running `npm run build:prod`, the files in the `dist` folder are:
 
 ```
-  0.css.gz           =>  23 KB 
+  0.css.gz           =>  23 KB
   app.js.gz          =>   3 KB
   app.css            =>   1 KB
   index.html         =>   1 KB
@@ -336,6 +352,3 @@ module.exports = merge(common, {
   vendorStyles.js.gz =>   1 KB
 
 ```
-
-
-
