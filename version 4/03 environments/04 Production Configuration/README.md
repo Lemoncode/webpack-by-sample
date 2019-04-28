@@ -34,7 +34,7 @@ npm install
 
 ```diff
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+- var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 - var webpack = require('webpack');
 var path = require('path');
 
@@ -55,16 +55,16 @@ module.exports = {
       '../node_modules/bootstrap/dist/css/bootstrap.css',
     ],
   },
-  output: {
-    filename: '[name].[hash].js',
-  },
+- output: {
+-   filename: '[name].[hash].js',
+- },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
           chunks: 'initial',
           name: 'vendor',
-          test: 'vendor',
+          test: /vendor$/,
           enforce: true
         },
       }
@@ -77,35 +77,38 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-              camelCase: true,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-            },
-          },
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
-      },
+-     {
+-       test: /\.scss$/,
+-       use: [
+-         MiniCssExtractPlugin.loader,
+-         {
+-           loader: "css-loader",
+-           options: {
+-             modules: true,
+-             localIdentName: '[name]__[local]___[hash:base64:5]',
+-             camelCase: true,
+-           },
+-         },
+-         {
+-           loader: 'sass-loader',
+-           options: {
+-             implementation: require('sass'),
+-           },
+-         },
+-       ]
+-     },
+-     {
+-       test: /\.css$/,
+-       use: [
+-         MiniCssExtractPlugin.loader,
+-         "css-loader"
+-       ]
+-     },
     ],
   },
+- devServer: {
+-   hot: true,
+- },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
@@ -113,10 +116,10 @@ module.exports = {
       template: 'index.html', //Name of template in ./src
       hash: true,
     }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    }),
+-   new MiniCssExtractPlugin({
+-     filename: "[name].css",
+-     chunkFilename: "[id].css"
+-   }),
   ],
 };
 ```
@@ -138,10 +141,43 @@ const common = require('./base.webpack.config.js');
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
+  output: {
+    filename: '[name].js',
+  },
   devServer: {
     contentBase: './dist',
+    hot: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              camelCase: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
 });
+
 ```
 
 - Just to make a quick check we will add console log, to check in which environment we are running the app (dev or production):
@@ -209,10 +245,49 @@ The `dist` folder is created. If we execute `index.html`, it shows us `We are in
 ```javascript
 const merge = require('webpack-merge');
 const common = require('./base.webpack.config.js');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
+  output: {
+    filename: '[name].[chunkhash].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              camelCase: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
 });
+
 ```
 
 - Let's add a production command script:
@@ -272,19 +347,26 @@ npm install compression-webpack-plugin --save-dev
 ```diff
 const merge = require('webpack-merge');
 const common = require('./base.webpack.config.js');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 + const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = merge(common, {
-    mode: 'production',
-+   plugins: [
-+       new CompressionPlugin({
-+           filename: '[path].gz[query]',
-+           algorithm: 'gzip',
-+           test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
-+           threshold: 1024,
-+           minRatio: 0.8
-+       }),
-+  ],
+...
+
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
++   new CompressionPlugin({
++     filename: '[path].gz[query]',
++     algorithm: 'gzip',
++     test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
++     threshold: 1024,
++     minRatio: 0.8
++   }),
+  ],
 });
 
 ```
@@ -320,24 +402,22 @@ module.exports = merge(common, {
 ### ./prod.webpack.config.js
 
 ```diff
-const merge = require('webpack-merge');
-const common = require('./base.webpack.config.js');
- const CompressionPlugin = require('compression-webpack-plugin');
-
-module.exports = merge(common, {
-    mode: 'production',
-   plugins: [
-       new CompressionPlugin({
-           filename: '[path].gz[query]',
-           algorithm: 'gzip',
-           test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
-           threshold: 1024,
--          minRatio: 0.8
-+          minRatio: 0.8,
-+          deleteOriginalAssets: true
-       }),
-    ],
-});
+...
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
+      threshold: 1024,
+      minRatio: 0.8,
++     deleteOriginalAssets: true
+    }),
+  ],
+...
 
 ```
 

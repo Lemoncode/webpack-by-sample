@@ -45,7 +45,7 @@ module.exports = merge(common, {
         vendor: {
           chunks: 'initial',
           name: 'vendor',
-          test: 'vendor',
+          test: /vendor$/,
           enforce: true,
         },
       },
