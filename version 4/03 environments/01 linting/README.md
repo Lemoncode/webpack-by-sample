@@ -63,7 +63,7 @@ We are going to create a file `.eslintrc.json` (there are many [file formats opt
     "build": "rimraf dist && webpack",
 -   "build:prod": "rimraf dist && webpack -p"
 +   "build:prod": "rimraf dist && webpack -p",
-+   "lint": "eslint ."
++   "lint": "eslint ./src"
   },
   ...
 }
@@ -174,7 +174,7 @@ module.exports = {
     "build": "rimraf dist && webpack",
 +   "build:prod": "rimraf dist && webpack -p"
 -   "build:prod": "rimraf dist && webpack -p",
--   "lint": "eslint ."
+-   "lint": "eslint ./src"
   },
   ...
 }

@@ -39,9 +39,16 @@ npm install react-hot-loader --save-dev
 ```diff
 {
   "presets": [
-    "env",
-    "react"
-  ],
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": "3"
+      }
+    ]
+- ]
++ ],
 + "plugins": ["react-hot-loader/babel"]  
 }
 ```
@@ -53,14 +60,14 @@ _[./src/student.jsx](./src/student.jsx)_
 + import { hot } from 'react-hot-loader'
 //(...)
 
-+ const myRoot = () =>
++ const InnerApp = () =>
 +  <div>
 +    <h1>Hello from React DOM</h1>
 +    <AverageComponent />
 +    <TotalScoreComponent />
 +  </div>
 +
-+const App = hot(module)(myRoot);
++const App = hot(module)(InnerApp);
 
 ReactDOM.render(
 +  <App/>,
@@ -136,4 +143,73 @@ if (!isHot) {
     }),
   );
 }
+```
+
+- Meanwhile, we could do some changes:
+
+### [./webpack.config.js](./webpack.config.js)
+
+```diff
+...
+  output: {
+-   filename: '[name].[chunkhash].js',
++   filename: '[name].js',
+  },
+...
+
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [
+-         MiniCssExtractPlugin.loader,
++         'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              camelCase: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+-         MiniCssExtractPlugin.loader,
++         'style-loader',
+          'css-loader'
+        ],
+      },
+    ],
+  },
+  devServer: {
+    hot: true,
+  },
+  plugins: [
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+      hash: true,
+    }),
+-   new MiniCssExtractPlugin({
+-     filename: '[name].css',
+-     chunkFilename: '[id].css',
+-   }),
+  ],
+};
+
 ```

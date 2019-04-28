@@ -117,7 +117,8 @@ _./.babelrc_
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "entry"
+        "useBuiltIns": "entry",
+        "corejs": "3"
       }
     ]
   ]

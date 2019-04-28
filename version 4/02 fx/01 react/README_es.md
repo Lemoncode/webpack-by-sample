@@ -215,7 +215,8 @@ npm install @types/react @types/react-dom --save-dev
     [
       "@babel/preset-env",      
       {
-        "useBuiltIns": "entry"
+        "useBuiltIns": "entry",
+        "corejs": "3"
       }
     ]
   ]

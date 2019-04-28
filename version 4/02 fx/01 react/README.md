@@ -215,7 +215,8 @@ npm uninstall jquery --save
     [
       "@babel/preset-env",      
       {
-        "useBuiltIns": "entry"
+        "useBuiltIns": "entry",
+        "corejs": "3"
       }
     ]
   ]
