@@ -87,7 +87,7 @@ npm run build
 
 - Finally, we can configure this server in _`webpack.config.js`_:
 
-_### _./webpack.config.js_
+_./webpack.config.js_
 
 ```diff
 module.exports = {
@@ -115,7 +115,7 @@ module.exports = {
 
 - We can restore default port:
 
-_### _./webpack.config.js_
+_./webpack.config.js_
 
 ```diff
 module.exports = {
