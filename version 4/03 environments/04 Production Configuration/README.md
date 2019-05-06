@@ -540,7 +540,34 @@ npm run build:prod
 
 ![third-time-change-app](./readme-resources/third-time-change-app.png)
 
-- If we want serve gzip file, we could install [compression](https://github.com/expressjs/compression) from express team:
+- Using gzipped static files:
+
+```bash
+npm install express-static-gzip --save
+```
+
+### ./server/index.js
+
+```diff
+var express = require('express');
++ var expressStaticGzip = require("express-static-gzip");
+var path = require('path');
+
+var port = 8081;
+var app = express();
+var distPath = path.resolve(__dirname, '../dist');
+
+- app.use(express.static(distPath, {
++ app.use(expressStaticGzip(distPath, {
+  maxAge: '1y',
+}));
+app.listen(port, function() {
+  console.log('Server running on port ' + port);
+});
+
+```
+
+- Or gzip files in server, we have to install [compression](https://github.com/expressjs/compression) from express team:
 
 ```bash
 npm install compression --save
