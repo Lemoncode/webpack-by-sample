@@ -453,11 +453,15 @@ var port = 8081;
 var app = express();
 var distPath = path.resolve(__dirname, '../dist');
 
-app.use(express.static(distPath));
+app.use(express.static(distPath, {
+  maxAge: '1y',
+}));
 app.listen(port, function() {
   console.log('Server running on port ' + port);
 });
 ```
+
+> NOTE: [express static options](https://github.com/expressjs/serve-static)
 
 - Update `npm` scripts:
 
@@ -505,8 +509,72 @@ npm run build:prod
 npm run start:prod
 ```
 
+![first-time-get-static-files](./readme-resources/first-time-get-static-files.png)
+
+![second-time-refresh-page](./readme-resources/second-time-refresh-page.png)
+
+- If we made some changes in our app:
+
+### ./src/averageComponent.jsx
+
+```diff
+...
+
+      <div>
+        <span className={classNames.resultBackground}>
+-         Students average: {this.state.average}
++         AAAAAA Students average: {this.state.average}
+        </span>
+        <div className={`jumbotron ${classNames.resultBackground}`}>
+          <h1>Jumbotron students average: {this.state.average}</h1>
+        </div>
+      </div>
+...
+```
+
+- And run build again:
+
+```bash
+npm run build:prod  
+```
+
+![third-time-change-app](./readme-resources/third-time-change-app.png)
+
 - If we want serve gzip file, we could install [compression](https://github.com/expressjs/compression) from express team:
 
 ```bash
 npm install compression --save
 ```
+
+- And use it in `server`:
+
+### ./server/index.js
+
+```diff
+var express = require('express');
++ var compression = require('compression');
+var path = require('path');
+
+var port = 8081;
+var app = express();
+var distPath = path.resolve(__dirname, '../dist');
+
++ app.use(compression());
+app.use(express.static(distPath, {
+  maxAge: '1y',
+}));
+app.listen(port, function() {
+  console.log('Server running on port ' + port);
+});
+
+```
+
+- Run the app:
+
+```bash
+npm run start:prod
+```
+
+> NOTE: CTRL + F5 to refresh cache
+
+![fourth-time-using-gzip-files](./readme-resources/fourth-time-using-gzip-files.png)
