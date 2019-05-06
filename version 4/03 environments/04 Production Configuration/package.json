@@ -4,11 +4,10 @@
   "description": "In this sample we are going to setup a web project that can be easily managed\r by webpack.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config dev.webpack.config.js",
-    "start:prod": "webpack-dev-server --open --config prod.webpack.config.js",
-    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js",
-    "build": "rimraf dist && webpack --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "webpack-dev-server --open --config dev.webpack.config.js",
+    "start:prod": "node ./server",
+    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
+    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +34,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "bootstrap": "^4.3.1",
+    "express": "^4.16.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   }

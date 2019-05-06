@@ -38,7 +38,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[chunkhash].css',
       chunkFilename: '[id].css',
     }),
     new CompressionPlugin({
@@ -47,7 +47,6 @@ module.exports = merge(common, {
       test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
       threshold: 1024,
       minRatio: 0.8,
-      deleteOriginalAssets: true,
     }),
   ],
 });

@@ -282,7 +282,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[chunkhash].css',
       chunkFilename: '[id].css',
     }),
   ],
@@ -405,7 +405,7 @@ module.exports = merge(common, {
 ...
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[chunkhash].css',
       chunkFilename: '[id].css',
     }),
     new CompressionPlugin({
@@ -431,4 +431,82 @@ module.exports = merge(common, {
   vendor.css.gz      =>  35 KB
   vendorStyles.js.gz =>   1 KB
 
+```
+
+## Appendix - Server for production build
+
+- If we want to create a basic `web server` for `static files`, we could use `nodejs` and `express`:
+
+```bash
+npm install express --save
+```
+
+- A basic express server configuration:
+
+### ./server/index.js
+
+```javascript
+var express = require('express');
+var path = require('path');
+
+var port = 8081;
+var app = express();
+var distPath = path.resolve(__dirname, '../dist');
+
+app.use(express.static(distPath));
+app.listen(port, function() {
+  console.log('Server running on port ' + port);
+});
+```
+
+- Update `npm` scripts:
+
+### ./package.json
+
+```diff
+{
+  ...
+  "scripts": {
+-   "start": "webpack-dev-server --open --config dev.webpack.config.js",
++   "start:dev": "webpack-dev-server --open --config dev.webpack.config.js",
++   "start:prod": "node ./server",
+    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
+    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
+  },
+  ...
+}
+```
+
+- To keep working, first we are going to disable the `deleteOriginalAssets` compression plugin flag:
+
+### ./prod.webpack.config.js
+
+```diff
+...
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
+      threshold: 1024,
+      minRatio: 0.8,
+-     deleteOriginalAssets: true,
+    }),
+```
+
+- We need to `build` our app as production first:
+
+```bash
+npm run build:prod  
+```
+
+- And now, run the app:
+
+```bash
+npm run start:prod
+```
+
+- If we want serve gzip file, we could install [compression](https://github.com/expressjs/compression) from express team:
+
+```bash
+npm install compression --save
 ```
