@@ -23,25 +23,25 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 
 - `npm install` to install previous sample packages:
 
-```
+```bash
 npm install
 ```
 
 - Let's install dotenv-webpack
 
-``bash
+```bash
 npm install dotenv-webpack --save-dev
-``
+```
 - Let's create two simple environment files.
 
 _dev.env_
 
 ```
-// .env
+// .dev
 API_BASE=http://localhost:8081/
 ```
 
-prod.env_
+_prod.env_
 
 ```
 // .prod
@@ -49,6 +49,13 @@ API_BASE=https://myapp.api/
 ```
 
 - Let's setup the plugin dev config.
+
+_./dev.webpack.config.js_
+
+```diff
+const common = require("./base.webpack.config.js");
++ const Dotenv = require('dotenv-webpack');
+```
 
 _./dev.webpack.config.js_
 
@@ -66,6 +73,13 @@ _./dev.webpack.config.js_
 ```
 
 - Let's setup the plugin prod config.
+
+_./prod.webpack.config.js_
+
+```diff
+const CompressionPlugin = require("compression-webpack-plugin");
++ const Dotenv = require('dotenv-webpack');
+```
 
 ```diff
   plugins: [
