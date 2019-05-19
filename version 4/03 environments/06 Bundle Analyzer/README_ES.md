@@ -58,7 +58,6 @@ module.exports = merge(common, {
 
 
 - Por último, necesitamos actualizar nuestro script.
-- Finally we need to update command script:
 
 ### ./package.json
 
