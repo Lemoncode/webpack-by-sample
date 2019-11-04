@@ -101,10 +101,11 @@ _./students.js_
 
 ```javascript
 // Let's use some ES6 features
-const averageScore = "90";
+const averageScore = '90';
 const messageToDisplay = `average score ${averageScore}`;
 
 document.write(messageToDisplay);
+
 ```
 
 - Now, it's time to add babel configuration file:
@@ -113,16 +114,9 @@ _./.babelrc_
 
 ```javascript
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "useBuiltIns": "entry",
-        "corejs": "3"
-      }
-    ]
-  ]
+  "presets": ["@babel/preset-env"]
 }
+
 ```
 
 > More info about this config: https://babeljs.io/docs/en/babel-preset-env
@@ -215,10 +209,10 @@ _./index.html_
 
 - There's still one thing to take into account: what if we are using generators or promises? If we are working on old browsers we are going to have an issue it won't work, we need to setup polyfills, let's check how this work.
 
-- First we will need to install _@babel/polyfill_
+- First we will need to install _regenerator-runtime_
 
 ```bash
-npm install @babel/polyfill --save
+npm install regenerator-runtime --save
 ```
 
 - Then we can add an import to this polyfill in our main file, or as an entry in our webpack.config.js
@@ -229,12 +223,9 @@ _./webpack.config.js_
 module.exports = {
 -  entry: ['./students.js'],
 +  entry: [
-+   '@babel/polyfill',
++   'regenerator-runtime/runtime',
 +   './students.js'
 + ],
 ```
 
-> If you do it in your main file you will get benefit of babelrc _"useBuiltIns": "entry"_ (just import the minimum and ignore deprecated browsers like IE10)
-
-> Another optimization use _usage_ just only imports what you are really using (https://babeljs.io/docs/en/babel-preset-env#usebuiltins).
-
+> If we want to use for example future proposals we could install [core-js](https://github.com/zloirock/core-js) too.
