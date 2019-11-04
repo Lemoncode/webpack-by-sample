@@ -4,20 +4,20 @@
   "description": "In this sample we are going to setup a web project that can be easily managed\r by webpack.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --mode development"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "babel-loader": "^8.0.5",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.2.5"
+    "regenerator-runtime": "^0.13.3"
   }
 }

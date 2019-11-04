@@ -36,12 +36,13 @@ _./averageService.js_
 
 ```javascript
 export function getAvg(scores) {
- return getTotalScore(scores) / scores.length;
+  return getTotalScore(scores) / scores.length;
 }
 
 function getTotalScore(scores) {
   return scores.reduce((score, count) => score + count);
 }
+
 ```
 
 - Now let's update `students.js` to import the previous file and consume it:
@@ -50,7 +51,7 @@ _./students.js_
 
 ```diff
 -  // Let's use some ES6 features
-+  import {getAvg} from "./averageService";
++  import { getAvg } from './averageService';
 
 +  const scores = [90, 75, 60, 99, 94, 30];
 -  const averageScore = "90";
