@@ -40,17 +40,10 @@ It automatically adds that entry to our _package.json_.
 _package.json_
 
 ```diff
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.3",
-    "babel-preset-env": "^1.6.1",
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9",
-    "html-webpack-plugin": "^3.0.4",
-    "webpack-dev-server": "^3.1.0"
-  },
+  ...
 +  "dependencies": {    
 +    "jquery": "^3.3.1"    
+  ...
 +  }
 ```
 
@@ -60,8 +53,8 @@ Instead of assigning this manually let's define it in the `webpack.config.js` fi
 - First we will require an import "webpack" at the top of the file:
 
 ```diff
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-+ var webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
++ const webpack = require('webpack');
 
 module.exports = {
 ```
@@ -79,7 +72,7 @@ module.exports = {
 +   new webpack.ProvidePlugin({
 +     $: "jquery",
 +     jQuery: "jquery"
-+   }),    
++   }),
   ],
 ```
 
@@ -88,7 +81,7 @@ module.exports = {
 _./students.js_
 
 ```diff
-import {getAvg} from "./averageService";
+import { getAvg } from './averageService';
 
 + $('body').css('background-color', 'lightSkyBlue');
 
