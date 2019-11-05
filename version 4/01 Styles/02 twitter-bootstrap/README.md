@@ -41,16 +41,9 @@ _webpack.config.js_
 ```diff
 module.exports = {
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.css',
-    ],
-    vendor: [
-      'jquery',
-    ],
-+     vendorStyles: [
-+       './node_modules/bootstrap/dist/css/bootstrap.css',
-+     ],    
+    app: ['regenerator-runtime/runtime', './students.js'],
+    appStyles: ['./mystyles.css'],
++   vendorStyles: ['./node_modules/bootstrap/dist/css/bootstrap.css'],
   },
 ``` 
 
@@ -73,8 +66,9 @@ _index.html_
   </div>
 </body>
 ```
+
 - Now that we are using bootstrap that is located
-unde the _node_modules_ folder we need to 
+under the _node_modules_ folder we need to 
 dig into that
 
 ```diff
