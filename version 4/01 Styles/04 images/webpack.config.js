@@ -1,34 +1,31 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-var path = require('path');
-var basePath = __dirname;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const basePath = __dirname;
 
 module.exports = {
   context: path.join(basePath, 'src'),
   entry: {
-    app: './students.js',
+    app: ['regenerator-runtime/runtime', './students.js'],
     appStyles: ['./mystyles.scss'],
-    vendor: ['jquery'],
     vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
-  },
-  output: {
-    filename: '[name].[chunkhash].js',
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
+          chunks: 'all',
           name: 'vendor',
-          test: /vendor$/,
+          test: /[\\/]node_modules[\\/]/,
           enforce: true,
         },
       },
     },
   },
-
+  output: {
+    filename: '[name].[chunkhash].js',
+  },
   module: {
     rules: [
       {
@@ -38,6 +35,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -49,7 +47,6 @@ module.exports = {
           },
         ],
       },
-
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
@@ -70,7 +67,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-      hash: true,
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',

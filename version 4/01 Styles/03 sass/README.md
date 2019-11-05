@@ -82,6 +82,7 @@ npm install sass sass-loader --save-dev
       },
 +     {
 +       test: /\.scss$/,
++       exclude: /node_modules/,
 +       use: [
 +         MiniCssExtractPlugin.loader,
 +         "css-loader",
