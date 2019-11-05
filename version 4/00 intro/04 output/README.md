@@ -67,7 +67,7 @@ _./index.html_
 - This plugin (html-webpack-plugin) will take as template input our `index.html`, and we will point an output destination (`index.html` under dist folder). The plugin will copy `index.html` into destination and inject the script tag including a hash tag to avoid browser caching when new versions are being deployed. Once we have installed it, we need to require it on top of our `webpack.config.js` file:
 
 ```diff
-+ var HtmlWebpackPlugin = require('html-webpack-plugin');
++ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./students.js'],
@@ -120,9 +120,3 @@ npm run build
 ```
 
 - Let's run the build and check that now we get a hash on our script.
-
-
-
-
-
-
