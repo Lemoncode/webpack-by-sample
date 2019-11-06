@@ -8,10 +8,9 @@
     "jsx": "react",
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "esModuleInterop": true
   },
   "compileOnSave": false,
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
