@@ -126,21 +126,13 @@ _./webpack.config.js_
 ```diff
 module.exports = {
   context: path.join(basePath, 'src'),
-+  resolve: {
-+    extensions: ['.js', '.ts']
-+  },  
++ resolve: {
++   extensions: ['.js', '.ts']
++ },
   entry: {
--    app: './students.js',
-+    app: './students.ts'
-    appStyles: [
-      './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
+-   app: ['regenerator-runtime/runtime', './students.js'],
++   app: ['regenerator-runtime/runtime', './students.ts'],
+...
   },
 ```
 
@@ -150,15 +142,15 @@ _./webpack.config.js_
 ```diff
   module: {
     rules: [
-+      {
-+        test: /\.(ts|tsx)$/,
-+        exclude: /node_modules/,
-+        loader: 'awesome-typescript-loader',
-+        options: {
-+          useBabel: true,
-+          "babelCore": "@babel/core", // needed for Babel v7
-+        },
-+      },
++     {
++       test: /\.(ts|tsx)$/,
++       exclude: /node_modules/,
++       loader: 'awesome-typescript-loader',
++       options: {
++         useBabel: true,
++         "babelCore": "@babel/core", // needed for Babel v7
++       },
++     },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -169,6 +161,33 @@ _./webpack.config.js_
 > It is possible to use directly babel 7 to transpile to typescript (preset-typescript) but type checking will be skipped:
 https://blogs.msdn.microsoft.com/typescript/2018/08/27/typescript-and-babel-7/, it turns out is a fast process but you
 have to rely on the editor capabilities to show that issues.
+
+- Enable `sourceMaps` in `webpack config`:
+
+### ./webpack.config.js
+
+```diff
+...
+
+  plugins: [
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
++ // For development https://webpack.js.org/configuration/devtool/#for-development
++ devtool: 'inline-source-map',
+
+```
 
 - If we run the app (`npm start`) we can check that everything is working as expected.
 
@@ -188,10 +207,9 @@ have to rely on the editor capabilities to show that issues.
 ```
 
 ### ./webpack.config.js
+
 ```javascript
 ...
-  // For development https://webpack.js.org/configuration/devtool/#for-development
   devtool: 'inline-source-map',
-  ...
 
 ```
