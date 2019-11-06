@@ -2,7 +2,7 @@
 
 In this demo we add support for [React](https://reactjs.org/).
 
-We start from sample _01 Styles / 03 SASS_, install React locally, rename students.js to students.jsx and include some basic rendering.
+We start from sample _01 Styles / 04 Images_, install React locally, rename students.js to students.jsx and include some basic rendering.
 
 Summary steps:
 
@@ -15,7 +15,7 @@ Summary steps:
 
 ## Prerequisites
 
-You need to have [Node.js](https://nodejs.org/en/) installed in your computer. If you want to follow this step guide you need to take sample _03 SASS_ as starting point.
+You need to have [Node.js](https://nodejs.org/en/) installed in your computer. If you want to follow this step guide you need to take sample _04 Images_ as starting point.
 
 ## Steps
 
@@ -23,26 +23,6 @@ You need to have [Node.js](https://nodejs.org/en/) installed in your computer. I
 
 ```bash
  npm install
-```
-
-- Delete `mystyles.scss`, we don't need it for this sample.
-
-- Let's update `webpack.config`:
-
-### ./webpack.config.js
-
-```diff
-  ...
-  module.exports = {
-    context: path.join(basePath, 'src'),
-    entry: {
-      app: ['regenerator-runtime/runtime', './students.js'],
--     appStyles: ['./mystyles.scss'],
-      ...
-    },
-    ...
-  };
-
 ```
 
 - React is an quite popular open source library for building user interfaces. Let's start by installing the library which is splitted into 2: [react](https://www.npmjs.com/package/react) as the core library and [react-dom](https://www.npmjs.com/package/react-dom) as the glue between React and the DOM.
@@ -58,58 +38,30 @@ npm install react react-dom --save
 npm install @types/react @types/react-dom --save-dev
 ```
 
-- `jquery` isn't needed for this sample, so you can safely uninstall it:
-
-```bash
-npm uninstall jquery --save
-```
-
-- And finally remove it from the plugins section.
-
-### ./webpack.config.js
-
-```diff
-  plugins: [
-    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html', //Name of file in ./dist/
-      template: 'index.html', //Name of template in ./src
-      hash: true,
-    }),
--    new webpack.ProvidePlugin({
--      $: "jquery",
--      jQuery: "jquery"
--    }),
-```
-
 - In the *`index.html`* file let's add a `<div>` element that will be the entry point for our React app.
 
 ### ./src/index.html
 
 ```diff
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Webpack 3.x by sample</title>
-    </head>
-    <body>
--     <div class="jumbotron">
--       <h1>Testing Bootstrap</h1>
--       <p>
--         Bootstrap is the most popular ...
--       </p>
--     </div>
--     Hello Webpack 3!
--    <div class="red-background">
--      RedBackground stuff
--    </div>
-+    <div id="root">
-+    </div>
-    </body>
-  </html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Webpack 4.x by sample</title>
+  </head>
+  <body>
++   <div id="root"></div>
+    <div id="imgContainer"></div>
+
+    Hello Webpack 4!
+    <img src="./content/logo_2.png" />
+    <div class="red-background">
+      RedBackground stuff
+    </div>
+  </body>
+</html>
 
 ```
 
@@ -143,27 +95,33 @@ export const AverageComponent = () => {
 ### ./src/students.jsx
 
 ```diff
-+   import React from 'react';
-+   import ReactDOM from 'react-dom';
-+   import {AverageComponent} from './averageComponent';
--   import {getAvg} from './averageService';
++ import React from 'react';
++ import ReactDOM from 'react-dom';
++ import {AverageComponent} from './averageComponent';
+- import { getAvg } from './averageService';
+import logoImg from './content/logo_1.png';
 
--   $('body').css('background-color', 'lightSkyBlue');
+$('body').css('background-color', 'lightSkyBlue');
 
--   const scores = [90, 75, 60, 99, 94, 30];
--   const averageScore = getAvg(scores);
+-const scores = [90, 75, 60, 99, 94, 30];
+-const averageScore = getAvg(scores);
+-const messageToDisplay = `average score ${averageScore}`;
 
--   const messageToDisplay = `average score ${averageScore}`;
+- document.write(messageToDisplay);
 
--   document.write(messageToDisplay);
+const img = document.createElement('img');
+img.src = logoImg;
 
-+   ReactDOM.render(
-+     <div>
-+       <h1>Hello from React DOM</h1>
-+       <AverageComponent />
-+     </div>,
-+     document.getElementById('root')
-+   );
+document.getElementById('imgContainer').appendChild(img);
+
++ ReactDOM.render(
++   <div>
++     <h1>Hello from React DOM</h1>
++     <AverageComponent />
++   </div>,
++   document.getElementById('root')
++ );
+
 ```
 
 - For *Babel* to parse React `jsx` files we need to install [*babel-preset-react*](https://github.com/babel/babel/tree/master/packages/babel-preset-react).
@@ -197,7 +155,7 @@ export const AverageComponent = () => {
     entry: {
 -     app: ['regenerator-runtime/runtime', './students.js'],
 +     app: ['regenerator-runtime/runtime', './students.jsx'],
-      vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
+      ...
     },
     ...
   };

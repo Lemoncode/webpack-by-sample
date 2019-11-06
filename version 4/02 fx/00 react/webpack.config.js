@@ -11,6 +11,7 @@ module.exports = {
   },
   entry: {
     app: ['regenerator-runtime/runtime', './students.jsx'],
+    appStyles: ['./mystyles.scss'],
     vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
   },
   optimization: {
@@ -53,6 +54,15 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
+      {
+        test: /\.(png|jpg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=5000',
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
     ],
   },
   plugins: [
@@ -60,6 +70,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
