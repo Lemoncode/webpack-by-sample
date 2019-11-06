@@ -7,10 +7,10 @@ const basePath = __dirname;
 module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   entry: {
-    app: ['regenerator-runtime/runtime', './students.ts'],
+    app: ['regenerator-runtime/runtime', './students.tsx'],
     appStyles: ['./mystyles.scss'],
     vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
   },
@@ -41,7 +41,7 @@ module.exports = {
         },
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
@@ -62,6 +62,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(png|jpg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=5000',
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
       },
     ],
   },

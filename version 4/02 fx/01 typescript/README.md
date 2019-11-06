@@ -7,7 +7,7 @@ In this demo we will add support for TypeScript. We will do the transpilation pr
 ¿Why this approach? We want our project to be as standard as possible, if you transpile from es6 to es5
 using babel you will be using the same approach as many existing projects an libraries.
 
-We will start from sample _01 Styles/03 SASS_, install TypeScript locally,
+We will start from sample _00 react_, install TypeScript locally,
 configure a tsconfig file, add some ts like, install awesome-typescript-loader and apply it to webpackconfig.
 
 Summary steps: 
@@ -19,7 +19,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer (at least v. 8.9.2). If you want to follow this step guides you will need to take as starting point sample _03 SASS_.
+Prerequisites, you will need to have nodejs installed in your computer (at least v. 8.9.2). If you want to follow this step guides you will need to take as starting point sample _00 react_.
 
 ## steps
 
@@ -55,49 +55,46 @@ _./tsconfig.json_
     "jsx": "react",
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "esModuleInterop": true
   },
   "compileOnSave": false,
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
-```
-
-- In order to get JQuery intellisense, we can install JQuery typings:
 
 ```
-npm install @types/jquery --save-dev
+
+- In order to get JQuery and React intellisense, we can install JQuery and React typings:
+
+```
+npm install @types/jquery @types/react @types/react-dom --save-dev
 ```
 
 > Play a bit with JQuery statement and intellisense
 
-- Let's port our code to TypeScript, we are going to rename the files *`students.js`* and *`averageService.js`* to _students.**ts**_ and _averageService.**ts**_.
+- Let's port our code to TypeScript, we are going to rename the files *`students.jsx`*, *`averageService.js`* and *`averageComponent.jsx`* to _students.**tsx**_, _averageService.**ts** and _averageComponent.**ts**_.
 
 
-- Let's introduce some TypeScript, in *`students.ts`* we are going to type the
+- Let's introduce some TypeScript, in *`students.tsx`* we are going to type the
 variables we are using (check... this type is not needed typescript
 already infers the values):
 
-_./src/students.ts_
+_./src/students.tsx_
+
 ```diff
-import {getAvg} from "./averageService";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AverageComponent } from './averageComponent';
+- import logoImg from './content/logo_1.png';
++ const logoImg = require('./content/logo_1.png');
 
-$('body').css('background-color', 'lightSkyBlue');
+...
 
-- const scores = [90, 75, 60, 99, 94, 30];
-+ const scores: number[] = [90, 75, 60, 99, 94, 30];
-- const averageScore = getAvg(scores);
-+ // No need to type this it would be already inferred by typescript
-+ const averageScore: number = getAvg(scores);
-
-- const messageToDisplay = `average score ${averageScore}`;
-+ const messageToDisplay: string = `average score ${averageScore}`;
-
-document.write(messageToDisplay);
 ```
 
 - Next we'll type our function in *`averageService.ts`*:
+
+_./src/averageService.ts_
 
 ```diff
 - export function getAvg(scores) {
@@ -113,6 +110,34 @@ document.write(messageToDisplay);
   }
 ```
 
+- And *`averageComponent.tsx`*:
+
+_./src/averageComponent.tsx_
+
+```diff
+import React from 'react';
+import { getAvg } from './averageService';
+
+export const AverageComponent = () => {
+- const [average, setAverage] = React.useState(0);
++ const [average, setAverage] = React.useState<number>(0);
+
+  React.useEffect(() => {
+-   const scores = [90, 75, 60, 99, 94, 30];
++   const scores: number[] = [90, 75, 60, 99, 94, 30];
+    setAverage(getAvg(scores));
+  }, []);
+
+  return (
+    <div>
+      <span>Students average: {average}</span>
+    </div>
+  );
+};
+
+```
+
+
 - Now it's time to configure *wepback*, let's install a loader that will manage
 TypeScript: [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader).
 
@@ -126,12 +151,13 @@ _./webpack.config.js_
 ```diff
 module.exports = {
   context: path.join(basePath, 'src'),
-+ resolve: {
-+   extensions: ['.js', '.ts']
-+ },
+  resolve: {
+-   extensions: ['.js', '.jsx'],
++   extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
   entry: {
--   app: ['regenerator-runtime/runtime', './students.js'],
-+   app: ['regenerator-runtime/runtime', './students.ts'],
+-   app: ['regenerator-runtime/runtime', './students.jsx'],
++   app: ['regenerator-runtime/runtime', './students.tsx'],
 ...
   },
 ```
