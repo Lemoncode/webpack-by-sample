@@ -36,10 +36,8 @@ You need to have [Node.js](https://nodejs.org/en/) installed in your computer. I
   module.exports = {
     context: path.join(basePath, 'src'),
     entry: {
-      app: './students.js',
--     appStyles: [
--       './mystyles.scss',
--     ],
+      app: ['regenerator-runtime/runtime', './students.js'],
+-     appStyles: ['./mystyles.scss'],
       ...
     },
     ...
@@ -64,29 +62,6 @@ npm install @types/react @types/react-dom --save-dev
 
 ```bash
 npm uninstall jquery --save
-```
-
-- Then update `webpack.config.js` vendor section with these changes:
-
-### ./webpack.config.js
-
-```diff
-  ...
-  module.exports = {
-    context: path.join(basePath, 'src'),
-    entry: {
-      app: './students.js',
-      vendor: [
--       'jquery',
-+       'react',
-+       'react-dom',
-      ],
-      vendorStyles: [
-        '../node_modules/bootstrap/dist/css/bootstrap.css',
-      ],
-    },
-    ...
-  };
 ```
 
 - And finally remove it from the plugins section.
@@ -143,31 +118,24 @@ npm uninstall jquery --save
 ### ./src/averageComponent.jsx
 
 ```javascript
-  import * as React from 'react';
-  import {getAvg} from './averageService';
+import React from 'react';
+import { getAvg } from './averageService';
 
-  export class AverageComponent extends React.Component {
-    constructor() {
-      super();
+export const AverageComponent = () => {
+  const [average, setAverage] = React.useState(0);
 
-      this.state = {
-        scores: [90, 75, 60, 99, 94, 30],
-        average: 0,
-      };
-    }
+  React.useEffect(() => {
+    const scores = [90, 75, 60, 99, 94, 30];
+    setAverage(getAvg(scores));
+  }, []);
 
-    componentDidMount() {
-      this.setState({average: getAvg(this.state.scores)});
-    }
+  return (
+    <div>
+      <span>Students average: {average}</span>
+    </div>
+  );
+};
 
-    render() {
-      return (
-        <div>
-          <span>Students average: {this.state.average}</span>
-        </div>
-      );
-    }
-  }
 ```
 
 - Let's rename `students.js` to `students.jsx` and update the code to use React:
@@ -175,8 +143,8 @@ npm uninstall jquery --save
 ### ./src/students.jsx
 
 ```diff
-+   import * as React from 'react';
-+   import * as ReactDOM from 'react-dom';
++   import React from 'react';
++   import ReactDOM from 'react-dom';
 +   import {AverageComponent} from './averageComponent';
 -   import {getAvg} from './averageService';
 
@@ -210,16 +178,8 @@ npm uninstall jquery --save
 
 ```diff
 {
-  "presets": [
-+    "@babel/preset-react",      
-    [
-      "@babel/preset-env",      
-      {
-        "useBuiltIns": "entry",
-        "corejs": "3"
-      }
-    ]
-  ]
+- "presets": ["@babel/preset-env"]
++ "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
 ```
 
@@ -235,9 +195,9 @@ npm uninstall jquery --save
 +     extensions: ['.js', '.jsx'],
 +   },
     entry: {
--     app: './students.js',
-+     app: './students.jsx',
-      ...
+-     app: ['regenerator-runtime/runtime', './students.js'],
++     app: ['regenerator-runtime/runtime', './students.jsx'],
+      vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
     },
     ...
   };

@@ -1,25 +1,17 @@
-import * as React from 'react';
-import {getAvg} from './averageService';
+import React from 'react';
+import { getAvg } from './averageService';
 
-export class AverageComponent extends React.Component {
-  constructor() {
-    super();
+export const AverageComponent = () => {
+  const [average, setAverage] = React.useState(0);
 
-    this.state = {
-      scores: [90, 75, 60, 99, 94, 30],
-      average: 0,
-    };
-  }
+  React.useEffect(() => {
+    const scores = [90, 75, 60, 99, 94, 30];
+    setAverage(getAvg(scores));
+  }, []);
 
-  componentDidMount() {
-    this.setState({average: getAvg(this.state.scores)});
-  }
-
-  render() {
-    return (
-      <div>
-        <span>Students average: {this.state.average}</span>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <span>Students average: {average}</span>
+    </div>
+  );
+};
