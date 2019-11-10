@@ -2,7 +2,7 @@
 
 In this sample we are going to introduce Linting. This is a technique which you can analyse code for potential errors, so that can help you to make less mistakes.
 
-We will start from sample _01 Styles/03 SASS_.
+We will start from sample _02 fx/01 typescript_.
 
 Summary steps:
  - Installing ESLint.
@@ -17,7 +17,7 @@ Summary steps:
 
 You will need to have nodejs installed in your computer. 
 
-If you want to follow this step guides you will need to take as starting point sample _01 Styles/03 SASS_.
+If you want to follow this step guides you will need to take as starting point sample _02 fx/01 typescript_.
 
 ## Steps
 
@@ -59,11 +59,8 @@ We are going to create a file `.eslintrc.json` (there are many [file formats opt
 {
   ...
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "rimraf dist && webpack",
--   "build:prod": "rimraf dist && webpack -p"
-+   "build:prod": "rimraf dist && webpack -p",
-+   "lint": "eslint ./src"
+    ...    
++   "lint": "eslint './src/**/*.{ts,tsx}'"
   },
   ...
 }
@@ -78,51 +75,110 @@ npm run lint
 
 - We get linter errors the following output:
 
-_ESLint throws two parsing errors due to the usage of _export_ and _import_ keywords. Import and export functionalities are provided by Babel to work with modules, so it's time to connect ESLint with Babel:_
+_ESLint throws errors due to the usage of _export_ and _import_ keywords. Import and export functionalities are provided by Babel to work with modules, so it's time to connect ESLint with Typescript:_
 
 ```
-npm install babel-eslint --save-dev
+npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
 ```
 
 ### ./.eslintrc.json
 ```diff
 {
   "extends": [
-    "eslint:recommended"
+-   "eslint:recommended"
++   "plugin:@typescript-eslint/recommended"
   ],
   "env": {
     "browser": true,
     "node": true
   },
-+ "parser": "babel-eslint"
++ "parser": "@typescript-eslint/parser",
++ "plugins": ["@typescript-eslint"]
 }
 
 ```
-- Then, when we run the `npm run lint` command again we get the following result:
 
-_As we see, this time we have an error related to `jquery` library. To solve this we need to change the linter configuration to define the `jquery` global variables, the same that we did with `browser` and `node` related variables:_
+- If we run `npm run lint` again, we still have some issues related with React. Let's configure it:
+
+```
+npm install eslint-plugin-react --save-dev
+```
 
 ### ./.eslintrc.json
 ```diff
 {
   "extends": [
-    "eslint:recommended"
+    "plugin:@typescript-eslint/recommended",
++   "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
--   "node": true
-+   "node": true,
-+   "jquery": true
+    "node": true
   },
-  "parser": "babel-eslint"
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"]
 }
 
 ```
 
-- Now if we run `npm run lint` again:
+- Let's fix some errors:
 
-![eslint no errors](../../99%20Readme%20Resources/03%20Environments/01%20Linting/eslint%20no%20errors.png)
+### ./src/averageService.ts
 
+```diff
++ function getTotalScore(scores: number[]): number {
++   return scores.reduce((score, count) => score + count);
++ }
+
+export function getAvg(scores: number[]): number {
+  return getTotalScore(scores) / scores.length;
+}
+
+- function getTotalScore(scores: number[]): number {
+-   return scores.reduce((score, count) => score + count);
+- }
+
+```
+
+- We can [configure all of these rules](http://eslint.org/docs/user-guide/configuring#configuring-rules) using the following values:
+
+  - `0` or `off` - Disable rule.
+  - `1` or `warn` - Enable the rule with "warning" severity.
+  - `2` or `error` - Enable the rule with "error" severity.
+
+### ./.eslintrc.json
+```diff
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
++ "rules": {
++   "@typescript-eslint/no-var-requires": 0
++ }
+}
+
+```
+
+> NOTE: If you want to remove the React warning:
+
+```diff
+...
+  "rules": {
+    "@typescript-eslint/no-var-requires": 0
+  },
++ "settings": {
++   "react": {
++     "version": "detect"
++   }
+  }
+```
 
 - As we see, this time the command doesn't throw any errors. That sounds good! But we want to execute ESLint while we are writing our code, so the following step is connect ESLint with Webpack, so the `webpack-dev-server` uses it to continuously check for errors.
 
@@ -137,6 +193,7 @@ npm install eslint-loader --save-dev
 - To configure Webpack, we're going to use a preloader definition. We make sure ESLint parses the code before any other process. We get a _`webpack.config.js`_ like this:
 
 ### ./webpack.config.js
+
 ```diff
 ...
 
@@ -145,16 +202,11 @@ module.exports = {
   module: {
     rules: [
 +     {
-+       test: /\.js$/,
++       test: /\.tsx?$/,
 +       exclude: /node_modules/,
 +       enforce: 'pre',
 +       loader: 'eslint-loader',
 +     },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
       ...
     ],
   },
@@ -170,11 +222,8 @@ module.exports = {
 {
   ...
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "rimraf dist && webpack",
-+   "build:prod": "rimraf dist && webpack -p"
--   "build:prod": "rimraf dist && webpack -p",
--   "lint": "eslint ./src"
+  ...
+-   "lint": "eslint './src/**/*.{ts,tsx}'"
   },
   ...
 }
@@ -183,123 +232,10 @@ module.exports = {
 
 - Now if we execute again `npm start`, at first sight it looks like nothing new happens with the build. But let's change the code to introduce a typo:
 
-### ./src/students.js
+### ./src/students.tsx
 
 ```diff
-import {getAvg} from "./averageService";
-
-$('body').css('background-color', 'lightSkyBlue');
-
-const scores = [90, 75, 60, 99, 94, 30];
-const averageScore = getAvg(scores);
-
-const messageToDisplay = `average score ${averageScore}`;
-
-- document.write(messageToDisplay);
-+ document.write(message);
+...
+- const img = document.createElement('img');
++ const image = document.createElement('img');
 ```
-
-- As soon as we save the javascript file, we get the linter error:
-
-## Defining Rules
-
-- As we saw previously, we are using [ESLint default rules](http://eslint.org/docs/rules/). That was set up in the linter configuration file.
-
-### ./.eslintrc.json
-```diff
-{
-  "extends": [
-    "eslint:recommended"
-  ],
-  ...
-}
-
-```
-
-- The good news is that we can [configure all of these rules](http://eslint.org/docs/user-guide/configuring#configuring-rules) using the following values:
-
-  - `0` or `off` - Disable rule.
-  - `1` or `warn` - Enable the rule with "warning" severity.
-  - `2` or `error` - Enable the rule with "error" severity.
-
-- For example, if we change `students.js` to this code:
-
-### ./src/students.js
-```diff
-import {getAvg} from "./averageService";
-
-$('body').css('background-color', 'lightSkyBlue');
-
-const scores = [90, 75, 60, 99, 94, 30];
-const averageScore = getAvg(scores);
-
-const messageToDisplay = `average score ${averageScore}`;
-
-- document.write(message);
-+ console.log(messageToDisplay);
-
-```
-
-- As result, we get this error because the use of _console_ is not allowed by default.
-
-![console error](../../99%20Readme%20Resources/03%20Environments/01%20Linting/console%20error.png)
-
-- We can disable this rule with the following configuration:
-
-### ./.eslintrc.json
-```diff
-{
-  "extends": [
-    "eslint:recommended"
-  ],
-  "env": {
-    "browser": true,
-    "node": true,
-    "jquery": true
-  },
-- "parser": "babel-eslint"
-+ "parser": "babel-eslint",
-+ "rules": {
-+   "no-console": 0
-+ }
-}
-
-```
-- We can trigger the linting by saving the `students.js` file again with no changes. Then we can see how the error referring to the console is not shown anymore.
-
-![disabling no-console rule](../../99%20Readme%20Resources/03%20Environments/01%20Linting/disabling%20no-console%20rule.png)
-
-> You can disable as well rule for some given lines of code (see hint in VS Code).
-
-- Other example is the rule named [max-lines](http://eslint.org/docs/rules/max-lines). This rule _enforces a maximum number of lines per file, in order to aid in maintainability and reduce complexity._ For demo purposes we're going to configure it with a ridiculously low number of lines, that is, just one, so we can see the error.
-
-### ./.eslintrc.json
-```diff
-{
-  "extends": [
-    "eslint:recommended"
-  ],
-  "env": {
-    "browser": true,
-    "node": true,
-    "jquery": true
-  },
-  "parser": "babel-eslint",
-  "rules": {
--   "no-console": 0
-+   "no-console": 0,
-+   "max-lines": ["error", 1]
-  }
-}
-
-```
-
-_NOTE:_ In the rule configuration, we can use the value `2` instead of `"error"` to define the severity, but for a better readability we prefer to use the `"error"` syntax instead of the numeric value.
-
-- Again, we can trigger the linting action by saving the `students.js` file.
-
-![enable max-lines rule](../../99%20Readme%20Resources/03%20Environments/01%20Linting/enable%20max-lines%20rule.png)
-
-- To "go back to normal" we should remove the rule or configure it to a more reasonable number of lines per file.
-
-- Finally, if we want to integrate eslint with a React based project, we can use [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react) that provides linting for JSX language.

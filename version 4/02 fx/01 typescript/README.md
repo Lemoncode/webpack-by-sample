@@ -118,7 +118,8 @@ _./src/averageComponent.tsx_
 import React from 'react';
 import { getAvg } from './averageService';
 
-export const AverageComponent = () => {
+- export const AverageComponent = () => {
++ export const AverageComponent: React.FunctionComponent  = () => {
 - const [average, setAverage] = React.useState(0);
 + const [average, setAverage] = React.useState<number>(0);
 
