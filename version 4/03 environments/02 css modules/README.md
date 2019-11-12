@@ -3,9 +3,10 @@
 In this demo we are going to isolate different scss files using same css class names.
 We will learn how to configure it and how to deal with external css class provided by third libraries like Bootstrap.
 
-We will start from sample _02 Fx/01 React_.
+We will start from sample _03 environments/01 linting_.
 
 Summary steps:
+
 - Update `webpack.config.js` with CSS Modules config.
 - Add scss file with averageComponent styles.
 - Create other component and scss file with same class name.
@@ -15,7 +16,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 React_.
+Prerequisites, you will need to have nodejs installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 linting_.
 
 ## steps
 
@@ -39,119 +40,93 @@ $background: teal;
 
 - Let's go to use this style in `AverageComponent`:
 
-_./src/averageComponent.jsx_
+_./src/averageComponent.tsx_
 
 ```diff
-import * as React from 'react';
-import {getAvg} from './averageService';
+import React from 'react';
+import { getAvg } from './averageService';
 
-export class AverageComponent extends React.Component {
-  constructor() {
-    super();
+export const AverageComponent: React.FunctionComponent = () => {
+  const [average, setAverage] = React.useState<number>(0);
 
-    this.state = {
-      scores: [90, 75, 60, 99, 94, 30],
-      average: 0,
-    };
-  }
+  React.useEffect(() => {
+    const scores: number[] = [90, 75, 60, 99, 94, 30];
+    setAverage(getAvg(scores));
+  }, []);
 
-  componentDidMount() {
-    this.setState({average: getAvg(this.state.scores)});
-  }
-
-  render() {
-    return (
-      <div>
--       <span>Students average: {this.state.average}</span>
-+       <span className='result-background'>
-+         Students average: {this.state.average}
-+       </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+-     <span>Students average: {average}</span>
++     <span className="result-background">Students average: {average}</span>
+    </div>
+  );
+};
 
 ```
 
 - Finally we need to update `webpack.config` to load `.scss` file, as we usually load it in other samples:
 
-_-/webpack.config.js_
+_./webpack.config.js_
 
 ```diff
 ...
-module.exports = {
-  context: path.join(basePath, 'src'),
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
   entry: {
-    app: './students.jsx',
-+   appStyles: [
-+     './averageComponentStyles.scss',
-+   ],
-    vendor: [
-      'react',
-      'react-dom',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
+    app: ['regenerator-runtime/runtime', './students.tsx'],
+-   appStyles: ['./mystyles.scss'],
++   appStyles: ['./mystyles.scss', './averageComponentStyles.scss'],
+    ...
   },
   ...
 };
+
 ```
 
-- If we run the the sample we can check that the style is being applied to the component (background color), but we are using global
-css names.
+- Run example:
 
-- Now we are going to create `totalScoreComponent` creating the component [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx) and its style [/src/totalScoreComponentStyles.scss](/src/totalScoreComponentStyles.scss) :
+```bash
+npm start
+```
 
-_./src/averageService.js_
+- If we run the the sample we can check that the style is being applied to the component (background color), but we are using global css names.
+
+- Now we are going to create `totalScoreComponent` creating the component [./src/totalScoreComponent.tsx](./src/totalScoreComponent.tsx) and its style [/src/totalScoreComponentStyles.scss](/src/totalScoreComponentStyles.scss) :
+
+_./src/averageService.ts_
 
 ```diff
-export function getAvg(scores) {
- return getTotalScore(scores) / scores.length;
+- function getTotalScore(scores: number[]): number {
++ export function getTotalScore(scores: number[]): number {
+  return scores.reduce((score, count) => score + count);
 }
 
-- function getTotalScore(scores) {
-+ export function getTotalScore(scores) {
-  return scores.reduce((score, count) => {
-    return score + count;
-  });
+export function getAvg(scores: number[]): number {
+  return getTotalScore(scores) / scores.length;
 }
 
 ```
 
-_./src/totalScoreComponent.jsx_
+_./src/totalScoreComponent.tsx_
 
 ```javascript
-import * as React from 'react';
-import {getTotalScore} from './averageService';
+import React from "react";
+import { getTotalScore } from "./averageService";
 
-export class TotalScoreComponent extends React.Component {
-  constructor() {
-    super();
+export const TotalScoreComponent: React.FunctionComponent = () => {
+  const [totalScore, setTotalScore] = React.useState < number > 0;
 
-    this.state = {
-      scores: [10, 20, 30, 40, 50],
-      totalScore: 0,
-    };
-  }
+  React.useEffect(() => {
+    const scores: number[] = [10, 20, 30, 40, 50];
+    setTotalScore(getTotalScore(scores));
+  }, []);
 
-  componentDidMount() {
-    this.setState({totalScore: getTotalScore(this.state.scores)});
-  }
-
-  render() {
-    return (
-      <div>
-        <span className='result-background'>
-          Students total score: {this.state.totalScore}
-        </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <span className="result-background">
+        Students total score: {totalScore}
+      </span>
+    </div>
+  );
+};
 ```
 
 _./src/totalScoreComponentStyles.scss_
@@ -168,13 +143,21 @@ $background: indianred;
 
 - Using `TotalScoreComponent`:
 
-_./src/students.jsx_
+_./src/students.tsx_
 
 ```diff
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import {AverageComponent} from './averageComponent';
-+ import {TotalScoreComponent} from './totalScoreComponent';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AverageComponent } from './averageComponent';
++ import { TotalScoreComponent } from './totalScoreComponent';
+const logoImg = require('./content/logo_1.png');
+
+$('body').css('background-color', 'lightSkyBlue');
+
+const img = document.createElement('img');
+img.src = logoImg;
+
+document.getElementById('imgContainer').appendChild(img);
 
 ReactDOM.render(
   <div>
@@ -190,27 +173,17 @@ ReactDOM.render(
 - And update `webpack.config`:
 
 _./webpack.config.js_
+
 ```diff
 ...
-
-module.exports = {
-  context: path.join(basePath, 'src'),
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
   entry: {
-    app: './students.jsx',
+    ...
     appStyles: [
+      './mystyles.scss',
       './averageComponentStyles.scss',
 +     './totalScoreComponentStyles.scss',
     ],
-    vendor: [
-      'react',
-      'react-dom',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
+    ...
   },
   ...
 };
@@ -228,142 +201,96 @@ npm start
 - CSS Modules scope is to isolate different scss files using same css class names. We are going to replace `adding styles via webpack entry point` by `import styles where we need it`. Let's configure it:
 
 _./webpack.config.js_
+
 ```diff
 ...
-
-module.exports = {
-  context: path.join(basePath, 'src'),
-  resolve: {
--   extensions: ['.js', '.jsx'],
-+   extensions: ['.js', '.jsx', '.scss'],
-  },
   entry: {
-    app: './students.jsx',
--   appStyles: [
+    ...
+    appStyles: [
+      './mystyles.scss',
 -     './averageComponentStyles.scss',
 -     './totalScoreComponentStyles.scss',
--   ],
-    vendor: [
-      'react',
-      'react-dom',
     ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
-  },
-  output: {
-    path: path.join(basePath, 'dist'),
-    filename: '[name].[chunkhash].js',
+    ...
   },
   module: {
     rules: [
       ...
+      {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
--          "css-loader",
-+          { 
-+            loader: "css-loader",
-+            options: {
-+              modules: true,
-+              localIdentName: '[name]__[local]___[hash:base64:5]',
-+            },    
-+          },
+-         'css-loader',
++         {
++           loader: 'css-loader',
++           options: {
++             modules: {
++               localIdentName: '[name]__[local]__[hash:base64:5]',
++             },
++           },
++         },
           {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
             },
           },
-        ]
-      },      {
-        test: /\.css$/,
-        include: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        ],
       },
       ...
     ],
   },
   ...
-  ],
 };
 
 ```
 
 - Updating `AverageComponent`:
 
-_./src/averageComponent.jsx_
+_./src/averageComponent.tsx_
+
 ```diff
-import * as React from 'react';
-import {getAvg} from './averageService';
-+ import classNames from './averageComponentStyles';
+import React from 'react';
+import { getAvg } from './averageService';
++ const classes = require('./averageComponentStyles.scss');
 
-export class AverageComponent extends React.Component {
-  constructor() {
-    super();
+export const AverageComponent: React.FunctionComponent = () => {
+  ...
 
-    this.state = {
-      scores: [90, 75, 60, 99, 94, 30],
-      average: 0,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({average: getAvg(this.state.scores)});
-  }
-
-  render() {
-    return (
-      <div>
--       <span className='result-background'>
-+       <span className={classNames['result-background']}>
-          Students average: {this.state.average}
-        </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+-     <span className="result-background">
++     <span className={classes['result-background']}>
+        Students average: {average}
+      </span>
+    </div>
+  );
+};
 
 ```
 
 - Updating `TotalScoreComponent`:
 
-### [./src/totalScoreComponent.jsx](./src/totalScoreComponent.jsx)
+_./src/totalScoreComponent.tsx_
+
 ```diff
-import * as React from 'react';
-import {getTotalScore} from './averageService';
-+ import classNames from './totalScoreComponentStyles';
+import React from 'react';
+import { getTotalScore } from './averageService';
++ const classes = require('./totalScoreComponentStyles.scss');
 
-export class TotalScoreComponent extends React.Component {
-  constructor() {
-    super();
+export const TotalScoreComponent: React.FunctionComponent = () => {
+  ...
 
-    this.state = {
-      scores: [10, 20, 30, 40, 50],
-      totalScore: 0,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({totalScore: getTotalScore(this.state.scores)});
-  }
-
-  render() {
-    return (
-      <div>
--       <span className='result-background'>
-+       <span className={classNames['result-background']}>
-          Students total score: {this.state.totalScore}
-        </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+-     <span className="result-background">
++     <span className={classes['result-background']}>
+        Students total score: {totalScore}
+      </span>
+    </div>
+  );
+};
 
 ```
 
@@ -373,34 +300,31 @@ export class TotalScoreComponent extends React.Component {
 npm start
 ```
 
-
 - To avoid reference classNames like `classNames['result-background']`, webpack provides us to transform `kebab case` to `camelCase`:
 
 _./webpack.config.js_
+
 ```diff
 ...
-
-module.exports = {
-  ...
   module: {
-    ...
+    rules: [
+      ...
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-+               camelCase: true,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
               },
++             localsConvention: 'camelCase',
             },
-            { loader: 'sass-loader', },
-          ],
-        }),
+          },
+          ...
+        ],
       },
       ...
     ],
@@ -412,41 +336,36 @@ module.exports = {
 
 - Updating components:
 
-_./src/averageComponent.jsx_
+_./src/averageComponent.tsx_
+
 ```diff
 ...
-
-  render() {
-    return (
-      <div>
--       <span className={classNames['result-background']}>
-+       <span className={classNames.resultBackground}>
-          Students average: {this.state.average}
-        </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+-     <span className={classes['result-background']}>
++     <span className={classes.resultBackground}>
+        Students average: {average}
+      </span>
+    </div>
+  );
+};
 
 ```
 
-_./src/totalScoreComponent.jsx_
+_./src/totalScoreComponent.tsx_
 
 ```diff
 ...
 
-  render() {
-    return (
-      <div>
--       <span className={classNames['result-background']}>
-+       <span className={classNames.resultBackground}>
-          Students total score: {this.state.totalScore}
-        </span>
-      </div>
-    );
-  }
-}
-
+  return (
+    <div>
+-     <span className={classes['result-background']}>
++     <span className={classes.resultBackground}>
+        Students total score: {totalScore}
+      </span>
+    </div>
+  );
+};
 ```
 
 - Running `npm start` again:
@@ -455,29 +374,26 @@ _./src/totalScoreComponent.jsx_
 npm start
 ```
 
-
 - If we take a look to the browser console, we can see how webpack transform css class names, adding prefixes (inspect element).
 
 - Finally, let's do an example where we need to add styles to element that has a Bootstrap class:
 
-_./src/averageComponent.jsx_
+_./src/averageComponent.tsx_
+
 ```diff
 ...
 
-  render() {
-    return (
-      <div>
-        <span className={classNames.resultBackground}>
-          Students average: {this.state.average}
-        </span>
-
-+       <div className={`jumbotron ${classNames.resultBackground}`}>
-+         <h1>Jumbotron students average: {this.state.average}</h1>
-+       </div>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <span className={classes.resultBackground}>
+        Students average: {average}
+      </span>
++     <div className={`jumbotron ${classes.resultBackground}`}>
++       <h1>Jumbotron students average: {average}</h1>
++     </div>
+    </div>
+  );
+};
 
 ```
 
@@ -485,7 +401,8 @@ _./src/averageComponent.jsx_
 
 - Let's go to add own styles:
 
-### [./src/averageComponentStyles.scss](./src/averageComponentStyles.scss)
+_./src/averageComponentStyles.scss_
+
 ```diff
 $background: teal;
 + $jumbotronBackground: darkseagreen;
@@ -503,7 +420,8 @@ $background: teal;
 
 - Running `npm start` nothing changes, why? Due to webpack is transform `local` class names to `'[name]__[local]___[hash:base64:5]'` we need to tell him that jumbotron is a `global` style ([more info](https://webpack.js.org/loaders/css-loader/#-css-modules-https-github-com-css-modules-css-modules-)):
 
-### [./src/averageComponentStyles.scss](./src/averageComponentStyles.scss)
+_./src/averageComponentStyles.scss_
+
 ```diff
 $background: teal;
 $jumbotronBackground: darkseagreen;
