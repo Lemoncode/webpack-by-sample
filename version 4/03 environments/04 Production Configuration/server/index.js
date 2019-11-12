@@ -1,15 +1,16 @@
-var express = require('express');
-var compression = require('compression');
-var path = require('path');
+const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
+const path = require('path');
 
-var port = 8081;
-var app = express();
-var distPath = path.resolve(__dirname, '../dist');
+const port = 8081;
+const app = express();
+const distPath = path.resolve(__dirname, '../dist');
 
-app.use(compression());
-app.use(express.static(distPath, {
-  maxAge: '1y',
-}));
+app.use(
+  expressStaticGzip(distPath, {
+    maxAge: '1y',
+  })
+);
 app.listen(port, function() {
   console.log('Server running on port ' + port);
 });

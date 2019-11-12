@@ -26,103 +26,9 @@ Prerequisites, you will need to have nodejs installed in your computer. If you w
 npm install
 ```
 
-- We are will start by creating base webpack configuration that will hold all the common feature for both environments (dev and \_prod). Then we will place specific configuration for dev and production in their config files (e.g. sourcemaps). Webpack, recommends enabling sources maps for development environment (debuggging purposes), but disable it for normal use.
+- We will start by creating base webpack configuration that will hold all the common feature for both environments (dev and prod). Then we will place specific configuration for dev and production in their config files (e.g. sourcemaps). Webpack, recommends enabling sources maps for development environment (debuggging purposes), but disable it for normal use.
 
-- Let's rename `webpack.config.js` to `base.webpack.config.js`:
-
-### ./base.webpack.config.js
-
-```diff
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-- var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-- var webpack = require('webpack');
-var path = require('path');
-
-var basePath = __dirname;
-
-module.exports = {
-  context: path.join(basePath, 'src'),
-  resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
-  },
-  entry: {
-    app: './students.jsx',
-    vendor: [
-      'react',
-      'react-dom',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
-  },
-- output: {
--   filename: '[name].[hash].js',
-- },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: 'initial',
-          name: 'vendor',
-          test: /vendor$/,
-          enforce: true
-        },
-      }
-    }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
--     {
--       test: /\.scss$/,
--       use: [
--         MiniCssExtractPlugin.loader,
--         {
--           loader: "css-loader",
--           options: {
--             modules: true,
--             localIdentName: '[name]__[local]___[hash:base64:5]',
--             camelCase: true,
--           },
--         },
--         {
--           loader: 'sass-loader',
--           options: {
--             implementation: require('sass'),
--           },
--         },
--       ]
--     },
--     {
--       test: /\.css$/,
--       use: [
--         MiniCssExtractPlugin.loader,
--         "css-loader"
--       ]
--     },
-    ],
-  },
-- devServer: {
--   hot: true,
-- },
-  plugins: [
-    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html', //Name of file in ./dist/
-      template: 'index.html', //Name of template in ./src
-      hash: true,
-    }),
--   new MiniCssExtractPlugin({
--     filename: "[name].css",
--     chunkFilename: "[id].css"
--   }),
-  ],
-};
-```
+- Let's rename `webpack.config.js` to `base.webpack.config.js`. We will update it when we will have `dev` and `prod` config.
 
 - Now it's time to install `webpack-merge` package. This allow us to combine `base.webpack.config` with dev or production specific config settings:
 
@@ -132,34 +38,36 @@ npm install webpack-merge --save-dev
 
 - Let's create the `dev` environment configuration:
 
-### ./dev.webpack.config.js
+_./dev.webpack.config.js_
 
 ```javascript
 const merge = require('webpack-merge');
-const common = require('./base.webpack.config.js');
+const base = require('./base.webpack.config.js');
 
-module.exports = merge(common, {
+module.exports = merge(base, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
   output: {
     filename: '[name].js',
-  },
-  devServer: {
-    contentBase: './dist',
-    hot: true,
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-              camelCase: true,
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+              localsConvention: 'camelCase',
             },
           },
           {
@@ -176,24 +84,92 @@ module.exports = merge(common, {
       },
     ],
   },
+  devtool: 'inline-source-map',
+  devServer: {
+    hot: true,
+  },
 });
 
 ```
 
 - Just to make a quick check we will add console log, to check in which environment we are running the app (dev or production):
 
-### ./averageService.js
+### ./averageService.ts
 
 ```diff
-export function getAvg(scores) {
-  return getTotalScore(scores) / scores.length;
-}
-
-export function getTotalScore(scores) {
+export function getTotalScore(scores: number[]): number {
   return scores.reduce((score, count) => score + count);
 }
 
+export function getAvg(scores: number[]): number {
+  return getTotalScore(scores) / scores.length;
+}
+
+
 + console.log(`We are in: ${process.env.NODE_ENV}`);
+```
+
+- Remove unnecessary configuration from `base`:
+
+_./base.webpack.config.js_
+
+```diff
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const basePath = __dirname;
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+-   alias: {
+-     'react-dom': '@hot-loader/react-dom',
+-   },
+  },
+  ...
+- output: {
+-   filename: '[name].js',
+- },
+  module: {
+    rules: [
+      ...
+-     {
+-       test: /\.scss$/,
+-       exclude: /node_modules/,
+-       use: [
+-         'style-loader',
+-         {
+-           loader: 'css-loader',
+-           options: {
+-             modules: {
+-               localIdentName: '[name]__[local]__[hash:base64:5]',
+-             },
+-             localsConvention: 'camelCase',
+-           },
+-         },
+-         {
+-           loader: 'sass-loader',
+-           options: {
+-             implementation: require('sass'),
+-           },
+-         },
+-       ],
+-     },
+-     {
+-       test: /\.css$/,
+-       use: ['style-loader', 'css-loader'],
+-     },
+      ...
+    ],
+  },
+  ...
+- devtool: 'inline-source-map',
+- devServer: {
+-   hot: true,
+- },
+};
+
 ```
 
 - Finally we need to update command script:
@@ -204,8 +180,8 @@ export function getTotalScore(scores) {
 {
   ...
   "scripts": {
--   "start": "webpack-dev-server --mode development --open --hot",
-+    "start": "webpack-dev-server --open --config dev.webpack.config.js",
+-   "start": "webpack-dev-server --mode development --open",
++   "start": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
     "build": "rimraf dist && webpack --mode development"
   },
   ...
@@ -224,10 +200,9 @@ We can see in console `We are in: development`
 {
   ...
   "scripts": {
-    "start": "webpack-dev-server --open --config dev.webpack.config.js",
--    "build": "rimraf dist && webpack --mode development"
-+    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js"
-  },
+    "start": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
+-   "build": "rimraf dist && webpack --mode development"
++   "build:dev": "rimraf dist && webpack --config dev.webpack.config.js"
   },
   ...
 }
@@ -240,14 +215,14 @@ The `dist` folder is created. If we execute `index.html`, it shows us `We are in
 
 - Let's configure the `production` environment:
 
-### ./prod.webpack.config.js
+_./prod.webpack.config.js_
 
 ```javascript
 const merge = require('webpack-merge');
-const common = require('./base.webpack.config.js');
+const base = require('./base.webpack.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = merge(common, {
+module.exports = merge(base, {
   mode: 'production',
   output: {
     filename: '[name].[chunkhash].js',
@@ -256,14 +231,16 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-              camelCase: true,
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+              localsConvention: 'camelCase',
             },
           },
           {
@@ -298,10 +275,10 @@ module.exports = merge(common, {
 {
   ...
   "scripts": {
-    "start": "webpack-dev-server --open --config dev.webpack.config.js",
--    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js"
-+    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
-+    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
+    "start": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
+-   "build:dev": "rimraf dist && webpack --config dev.webpack.config.js"
++   "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
++   "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
   },
   ...
 }
@@ -342,15 +319,15 @@ npm install compression-webpack-plugin --save-dev
 
 - Let's update `prod.webpack.config`:
 
-### ./prod.webpack.config.js
+_./prod.webpack.config.js_
 
 ```diff
 const merge = require('webpack-merge');
-const common = require('./base.webpack.config.js');
+const base = require('./base.webpack.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 + const CompressionPlugin = require('compression-webpack-plugin');
 
-module.exports = merge(common, {
+module.exports = merge(base, {
 ...
 
   },
@@ -399,7 +376,7 @@ module.exports = merge(common, {
 
 - If we finally configure the `deleteOriginalAssets` property, we delete the original assets.
 
-### ./prod.webpack.config.js
+_./prod.webpack.config.js_
 
 ```diff
 ...
@@ -443,39 +420,41 @@ npm install express --save
 
 - A basic express server configuration:
 
-### ./server/index.js
+_./server/index.js_
 
 ```javascript
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const path = require('path');
 
-var port = 8081;
-var app = express();
-var distPath = path.resolve(__dirname, '../dist');
+const port = 8081;
+const app = express();
+const distPath = path.resolve(__dirname, '../dist');
 
-app.use(express.static(distPath, {
-  maxAge: '1y',
-}));
+app.use(
+  express.static(distPath, {
+    maxAge: '1y',
+  })
+);
 app.listen(port, function() {
   console.log('Server running on port ' + port);
 });
+
 ```
 
 > NOTE: [express static options](https://github.com/expressjs/serve-static)
 
 - Update `npm` scripts:
 
-### ./package.json
+_./package.json_
 
 ```diff
 {
   ...
   "scripts": {
--   "start": "webpack-dev-server --open --config dev.webpack.config.js",
-+   "start:dev": "webpack-dev-server --open --config dev.webpack.config.js",
+-   "start": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
++   "start:dev": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
 +   "start:prod": "node ./server",
-    "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
-    "build:prod": "rimraf dist && webpack --config prod.webpack.config.js"
+    ...
   },
   ...
 }
@@ -483,7 +462,7 @@ app.listen(port, function() {
 
 - To keep working, first we are going to disable the `deleteOriginalAssets` compression plugin flag:
 
-### ./prod.webpack.config.js
+_./prod.webpack.config.js_
 
 ```diff
 ...
@@ -515,20 +494,20 @@ npm run start:prod
 
 - If we made some changes in our app:
 
-### ./src/averageComponent.jsx
+_./src/averageComponent.tsx_
 
 ```diff
 ...
 
       <div>
-        <span className={classNames.resultBackground}>
--         Students average: {this.state.average}
-+         AAAAAA Students average: {this.state.average}
-        </span>
-        <div className={`jumbotron ${classNames.resultBackground}`}>
-          <h1>Jumbotron students average: {this.state.average}</h1>
-        </div>
+      <span className={classes.resultBackground}>
+-       Students average: {average}
++       Students average: {average} AAAAAA
+      </span>
+      <div className={`jumbotron ${classes.resultBackground}`}>
+        <h1>Jumbotron students average: {average}</h1>
       </div>
+    </div>
 ...
 ```
 
@@ -546,24 +525,20 @@ npm run build:prod
 npm install express-static-gzip --save
 ```
 
-### ./server/index.js
+_./server/index.js_
 
 ```diff
-var express = require('express');
-+ var expressStaticGzip = require("express-static-gzip");
-var path = require('path');
+const express = require('express');
++ const expressStaticGzip = require('express-static-gzip');
+...
 
-var port = 8081;
-var app = express();
-var distPath = path.resolve(__dirname, '../dist');
-
-- app.use(express.static(distPath, {
-+ app.use(expressStaticGzip(distPath, {
-  maxAge: '1y',
-}));
-app.listen(port, function() {
-  console.log('Server running on port ' + port);
-});
+app.use(
+- express.static(distPath, {
++ expressStaticGzip(distPath, {
+    maxAge: '1y',
+  })
+);
+...
 
 ```
 
@@ -578,21 +553,19 @@ npm install compression --save
 ### ./server/index.js
 
 ```diff
-var express = require('express');
-+ var compression = require('compression');
-var path = require('path');
-
-var port = 8081;
-var app = express();
-var distPath = path.resolve(__dirname, '../dist');
+const express = require('express');
+- const expressStaticGzip = require('express-static-gzip');
++ const compression = require('compression');
+...
 
 + app.use(compression());
-app.use(express.static(distPath, {
-  maxAge: '1y',
-}));
-app.listen(port, function() {
-  console.log('Server running on port ' + port);
-});
+app.use(
+- expressStaticGzip(distPath, {
++ express.static(distPath, {
+    maxAge: '1y',
+  })
+);
+...
 
 ```
 
