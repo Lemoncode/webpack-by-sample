@@ -7,6 +7,9 @@ module.exports = {
   context: path.join(basePath, 'src'),
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   entry: {
     app: ['regenerator-runtime/runtime', './index.tsx'],

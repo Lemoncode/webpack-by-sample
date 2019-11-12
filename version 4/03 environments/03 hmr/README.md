@@ -201,3 +201,30 @@ module.exports = {
 };
 
 ```
+
+- See `Chrome dev tools` warning about react-dom. There is a [`react-dom` hot-loader](https://github.com/hot-loader/react-dom) friendly to obtain more `hot` dev experience:
+
+```bash
+npm install @hot-loader/react-dom --save-dev
+```
+
+- Let's configure it:
+
+_./webpack.config.js_
+
+```diff
+...
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
++   alias: {
++     'react-dom': '@hot-loader/react-dom',
++   },
+  },
+  ...
+```
+
+- Running it:
+
