@@ -177,7 +177,8 @@ export function getAvg(scores: number[]): number {
 +   "react": {
 +     "version": "detect"
 +   }
-  }
++ }
+}
 ```
 
 - As we see, this time the command doesn't throw any errors. That sounds good! But we want to execute ESLint while we are writing our code, so the following step is connect ESLint with Webpack, so the `webpack-dev-server` uses it to continuously check for errors.

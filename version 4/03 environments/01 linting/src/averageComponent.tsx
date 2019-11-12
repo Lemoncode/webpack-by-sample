@@ -1,7 +1,7 @@
 import React from 'react';
 import { getAvg } from './averageService';
 
-export const AverageComponent: React.FunctionComponent  = () => {
+export const AverageComponent: React.FunctionComponent = () => {
   const [average, setAverage] = React.useState<number>(0);
 
   React.useEffect(() => {
