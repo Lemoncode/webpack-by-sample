@@ -1,48 +1,54 @@
-const merge = require("webpack-merge");
-const common = require("./base.webpack.config.js");
+const merge = require('webpack-merge');
+const base = require('./base.webpack.config.js');
 const Dotenv = require('dotenv-webpack');
 
-module.exports = merge(common, {
-  mode: "development",
-  devtool: "inline-source-map",
+module.exports = merge(base, {
+  mode: 'development',
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
   output: {
-    filename: "[name].js"
+    filename: '[name].js',
   },
-  devServer: {
-    contentBase: "./dist",
-    hot: true
-  },
-  plugins: [
-    new Dotenv({
-      path: "./dev.env"
-    })
-  ],
   module: {
     rules: [
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: "[name]__[local]___[hash:base64:5]",
-              camelCase: true
-            }
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+              localsConvention: 'camelCase',
+            },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              implementation: require("sass")
-            }
-          }
-        ]
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
-  }
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    hot: true,
+  },
+  plugins: [
+    new Dotenv({
+      path: './dev.env',
+    }),
+  ],
 });

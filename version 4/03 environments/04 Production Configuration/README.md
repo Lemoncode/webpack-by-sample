@@ -452,6 +452,7 @@ _./package.json_
   ...
   "scripts": {
 -   "start": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
++   "start": "npm run start:dev",
 +   "start:dev": "webpack-dev-server --mode development --open --config dev.webpack.config.js",
 +   "start:prod": "node ./server",
     ...

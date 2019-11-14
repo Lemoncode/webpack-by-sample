@@ -1,13 +1,4 @@
 {
-  "presets": [
-    "@babel/preset-react",
-    [
-      "@babel/preset-env",
-      {
-        "useBuiltIns": "entry",
-        "corejs": "3"
-      }
-    ]
-  ],
-  "plugins": ["react-hot-loader/babel"] 
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": ["react-hot-loader/babel"]
 }

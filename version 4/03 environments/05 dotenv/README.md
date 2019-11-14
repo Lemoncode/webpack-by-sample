@@ -32,19 +32,18 @@ npm install
 ```bash
 npm install dotenv-webpack --save-dev
 ```
+
 - Let's create two simple environment files.
 
 _dev.env_
 
 ```
-// .dev
 API_BASE=http://localhost:8081/
 ```
 
 _prod.env_
 
 ```
-// .prod
 API_BASE=https://myapp.api/
 ```
 
@@ -53,23 +52,24 @@ API_BASE=https://myapp.api/
 _./dev.webpack.config.js_
 
 ```diff
-const common = require("./base.webpack.config.js");
+const base = require('./base.webpack.config.js');
 + const Dotenv = require('dotenv-webpack');
 ```
 
 _./dev.webpack.config.js_
 
 ```diff
+  ...
   devServer: {
-    contentBase: './dist',
     hot: true,
   },
 + plugins: [
-+  new Dotenv({
-+    path: './dev.env'
-+  }),
-+ ],  
-  module: {
++   new Dotenv({
++     path: './dev.env',
++   }),
++ ],
+});
+
 ```
 
 - Let's setup the plugin prod config.
@@ -83,26 +83,17 @@ const CompressionPlugin = require("compression-webpack-plugin");
 
 ```diff
   plugins: [
+    ...
 +   new Dotenv({
 +     path: './prod.env'
 +   }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash].css',
-      chunkFilename: '[id].css',
-    }),
-    new CompressionPlugin({
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.jsx$|\.scss$|\.css$|\.html$/,
-      threshold: 1024,
-      minRatio: 0.8,
-    }),
   ],
+  ...
 ```
 
 - Let's introduce a test in our code (console log).
 
-_./src/averageservice.jsx_
+_./src/averageService.ts_
 
 ```diff
  console.log(`We are in: ${process.env.NODE_ENV}`);
@@ -110,10 +101,10 @@ _./src/averageservice.jsx_
 ```
 
 - Let test dev config, run the following command from terminal and open your browser
-console:
+  console:
 
 ```bash
-npm run start
+npm start
 ```
 
 - To test production settings we have to build + start prod server:
@@ -121,7 +112,6 @@ npm run start
 ```bash
 npm run build:prod
 ```
-
 
 ```bash
 npm run start:prod
