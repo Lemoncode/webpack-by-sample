@@ -89,6 +89,8 @@ npm install url-loader file-loader --save-dev
 
 - Now that we have already installed _url-loader_ plugin, we only need to configure the extension png/jpeg in the _`webpack.config.js`_ loaders section. One thing to note down is that we are adding an additional parameter to the url-loader called **limit**. By using this parameter we are telling the loader to encode the image if its size is less than 5KB approx and embed it directly in the HTML file.
 
+_[webpack.config.js](webpack.config.js)_
+
 ```diff
   module: {
     rules: [
@@ -124,9 +126,11 @@ $blue-color: teal;
 ```bash
 npm start
 ```
+
 - That's fine but what if we had already the image referenced inside a HTML `<img>` tag? Let's add [`logo_2.png`](./src/content/logo_2.png) into the index.html file:
 
 ### ./index.html
+
 ```diff
 <!DOCTYPE html>
 <html lang="en">
@@ -163,7 +167,7 @@ npm install html-loader --save-dev
 
 - And configure the loader for the _.html_ files
 
-_wepback.config.js_
+_webpack.config.js_
 
 ```diff
       {
@@ -208,13 +212,13 @@ _./src/index.html_
 
 # Appendix - Organize dist folder into subfolders
 
-It will possible to organize `dist` folder into subfolders.
+It will be possible to organize `dist` folder into subfolders.
 
-To do this we will need to modify the _wepback.config.js_ file.
+To do this we will need to modify the _webpack.config.js_ file.
 
 We have to modify the loader for `.png` and `.jpg` files to add a parameter called **name** to especify the subfolder:
 
-_wepback.config.js_
+_webpack.config.js_
 
 ```diff
       {
