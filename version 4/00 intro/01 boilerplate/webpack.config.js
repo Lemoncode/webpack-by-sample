@@ -1,8 +1,6 @@
 module.exports = {
-  entry: ['@babel/polyfill', 
-          './students.js'
-         ],
-  output: {    
+  entry: ['regenerator-runtime/runtime', './students.js'],
+  output: {
     filename: 'bundle.js',
   },
   module: {

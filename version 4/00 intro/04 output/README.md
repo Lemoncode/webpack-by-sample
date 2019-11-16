@@ -6,7 +6,7 @@ copy our main HTML page to that distribution path.
 
 > Note down by default webpack uses _dist_ folder as default configuration.
 
-We will start from sample _00 Intro/02 Server_,
+We will start from sample _00 Intro/03 Server_,
 
 Summary steps:
  - Redirect output (`bundle.js`) to "dist" folder.
@@ -32,12 +32,12 @@ npm install
 _dist_ folder (we can add plumbing into our webpack.config to change this folder if needed).
 
 ```bash
-npm start
+npm run build
 ```
 
 - That's fine, but we need to copy as well the HTML to the dist folder, and... wouldn't it 
 be nice that webpack could be able to automatically inject the bundle script into the dist
-copy of the HTM file? There's a plugin that will do that for you _html-webpack-plugin_, let's
+copy of the HTML file? There's a plugin that will do that for you _html-webpack-plugin_, let's
 start by installing it.
 
 ```bash
@@ -67,7 +67,7 @@ _./index.html_
 - This plugin (html-webpack-plugin) will take as template input our `index.html`, and we will point an output destination (`index.html` under dist folder). The plugin will copy `index.html` into destination and inject the script tag including a hash tag to avoid browser caching when new versions are being deployed. Once we have installed it, we need to require it on top of our `webpack.config.js` file:
 
 ```diff
-+ var HtmlWebpackPlugin = require('html-webpack-plugin');
++ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./students.js'],
@@ -120,9 +120,3 @@ npm run build
 ```
 
 - Let's run the build and check that now we get a hash on our script.
-
-
-
-
-
-

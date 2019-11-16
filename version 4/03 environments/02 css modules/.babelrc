@@ -1,11 +1,3 @@
 {
-  "presets": [
-    "@babel/preset-react",      
-    [
-      "@babel/preset-env",      
-      {
-        "useBuiltIns": "entry"
-      }
-    ]
-  ]
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
 }

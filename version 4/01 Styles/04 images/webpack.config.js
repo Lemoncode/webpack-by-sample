@@ -1,39 +1,30 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var webpack = require('webpack');
-var path = require('path');
-
-var basePath = __dirname;
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const basePath = __dirname;
 
 module.exports = {
   context: path.join(basePath, 'src'),
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
-  },
-  output: {
-    filename: '[name].[chunkhash].js',
+    app: ['regenerator-runtime/runtime', './students.js'],
+    appStyles: ['./mystyles.scss'],
+    vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
+          chunks: 'all',
           name: 'vendor',
-          test: 'vendor',
-          enforce: true
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
         },
-      }
-    }
+      },
+    },
+  },
+  output: {
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -44,18 +35,21 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
-        ]
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|jpg)$/,
@@ -73,15 +67,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-      hash: true,
     }),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };

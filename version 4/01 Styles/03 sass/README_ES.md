@@ -66,10 +66,10 @@ module.exports = {
 };
 ```
 
-- Ahora es el momento de empezar con la fontanería de webpack. Instalemos un [sass-loader](https://github.com/webpack-contrib/sass-loader) que requiere [node-sass](https://github.com/sass/node-sass) como dependencia:
+- Ahora es el momento de empezar con la fontanería de webpack. Instalemos un [sass-loader](https://github.com/webpack-contrib/sass-loader) que requiere [sass](https://github.com/sass/sass) como dependencia:
 
 ```bash
-npm install sass-loader node-sass --save-dev
+npm install sass sass-loader --save-dev
 ```
 
 - Solo nos falta un paso más. Abrir nuestro `webpack.config.js` y añadir una nueva entrada (scss) para los cargadores que utilizarán sass-loader que acabamos de instalar. Interesante para apuntar: estamos encadenando cargadores, primero preprocesamos el scss, después aplicamos el cargador anterior al css resultantes.
@@ -94,12 +94,11 @@ npm install sass-loader node-sass --save-dev
 +      },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },
 ```
 
 - Si ejecutamos la app (`npm start`), podemos comprobar que ahora tenemos un fondo azul en lugar del rojo.

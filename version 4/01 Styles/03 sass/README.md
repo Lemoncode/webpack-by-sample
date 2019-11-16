@@ -25,7 +25,6 @@ Prerequisites, you will need to have nodejs installed in your computer (at least
 npm install
 ```
 
-
 - Let's start by renaming `mystyles.css` to `mystyles.scss`
 
 - Let's open `mystyles.scss` and add some sass simple code (in this case we will create a variable that will hold a blue background, this will introduce a change into our sample app, a blue background will be displayed instead of the former red one):
@@ -44,33 +43,29 @@ npm install
 
 ### ./webpack.config.js
 ```diff
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var webpack = require('webpack');
-
-+ var path = require('path');
-
-+ var basePath = __dirname;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 //...
 
 module.exports = {
   entry: {
-    app: './students.js',
+    app: ['regenerator-runtime/runtime', './students.js'],
     appStyles: [
 -     './mystyles.css',
 +     './mystyles.scss',
+      ...
     ],
-    ...
   },
   ...
 };
 ```
 
-- Now it's time to start with the webpack plumbing. Let's install a [sass-loader](https://github.com/webpack-contrib/sass-loader) that requires [node-sass](https://github.com/sass/node-sass) as dependency:
+- Now it's time to start with the webpack plumbing. Let's install a [sass-loader](https://github.com/webpack-contrib/sass-loader) that requires [sass](https://github.com/sass/sass) as dependency:
 
 ```bash
-npm install sass-loader node-sass --save-dev
+npm install sass sass-loader --save-dev
 ```
 
 - We only need one more step. Open our `webpack.config.js` and add a new  entry (scss) to the loaders that will use the just installed sass-loader. Interesting to note down: we are chaining loaders, first we preprocess the scss, then we apply the previous loaders to the resulting css.
@@ -85,22 +80,27 @@ npm install sass-loader node-sass --save-dev
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
-+      {
-+        test: /\.scss$/,
-+        use: [
-+          MiniCssExtractPlugin.loader,
-+          "css-loader",
-+          "sass-loader",
-+        ]
-+      },
++     {
++       test: /\.scss$/,
++       exclude: /node_modules/,
++       use: [
++         MiniCssExtractPlugin.loader,
++         "css-loader",
++         {
++           loader: "sass-loader",
++           options: {
++             implementation: require("sass")
++           }
++         },
++       ]
++     },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },
 ```
 
 - If we run our app (`npm start`), we can check that now we are getting a blue background instead of a red one.
@@ -108,8 +108,8 @@ npm install sass-loader node-sass --save-dev
 ```bash
 npm start
 ```
-- So far so good, it's time to refactor a bit our
-solution to make it more maintaneable.
+
+- So far so good, it's time to refactor a bit our solution to make it more maintaneable.
 
 - To keep maintainable our source code, let's create a `src` folder and move the following files into:
   - Move to `./src/averageService.js`.
@@ -120,16 +120,15 @@ solution to make it more maintaneable.
 - After this, we must modify the path into our _webpack.config.js_ file, for these files to be found.
 
 ```diff
+...
++ const path = require('path');
++ const basePath = __dirname;
+
 module.exports = {
 + context: path.join(basePath, 'src'),  
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
+    app: ['regenerator-runtime/runtime', './students.js'],
+    appStyles: ['./mystyles.scss'],
     vendorStyles: [
 -     './node_modules/bootstrap/dist/css/bootstrap.css',
 +     '../node_modules/bootstrap/dist/css/bootstrap.css',
@@ -142,6 +141,5 @@ module.exports = {
 ```bash
 npm start
 ```
+
 - We did it!
-
-

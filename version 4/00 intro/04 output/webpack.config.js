@@ -1,7 +1,7 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['./students.js'],
+  entry: ['regenerator-runtime/runtime', './students.js'],
   output: {
     filename: 'bundle.js',
   },
@@ -19,7 +19,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-      hash:true,
+      hash: true,
     }),
   ],
 };

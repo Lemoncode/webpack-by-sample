@@ -1,67 +1,82 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var webpack = require('webpack');
-var path = require('path');
-
-var basePath = __dirname;
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const basePath = __dirname;
 
 module.exports = {
   context: path.join(basePath, 'src'),
-  entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.scss',
-    ],
-    vendor: [
-      'jquery',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
-  output: {
-    filename: '[name].[chunkhash].js',
+  entry: {
+    app: ['regenerator-runtime/runtime', './students.tsx'],
+    appStyles: ['./mystyles.scss'],
+    vendorStyles: ['../node_modules/bootstrap/dist/css/bootstrap.css'],
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
+          chunks: 'all',
           name: 'vendor',
-          test: 'vendor',
-          enforce: true
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
         },
-      }
-    }
+      },
+    },
+  },
+  output: {
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         enforce: 'pre',
         loader: 'eslint-loader',
       },
       {
-        test: /\.js$/,
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+          babelCore: '@babel/core', // needed for Babel v7
+        },
+      },
+      {
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
-        ]
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(png|jpg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=5000',
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
       },
     ],
   },
@@ -70,15 +85,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-      hash: true,
     }),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
+  devtool: 'inline-source-map',
 };

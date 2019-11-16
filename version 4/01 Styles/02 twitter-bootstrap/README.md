@@ -18,7 +18,7 @@ Summary steps:
 
 ## Prerequisites
 
-Prerequisites, you will need to have nodejs (at least v 8.9.2) installed in your computer. If you want to follow this step guides you will need to take as starting point sample _00 Intro/05 JQuery_.
+Prerequisites, you will need to have nodejs (at least v 8.9.2) installed in your computer. If you want to follow this step guides you will need to take as starting point sample _01 Styles / 01 Custom CSS_.
 
 ## steps
 
@@ -41,16 +41,9 @@ _webpack.config.js_
 ```diff
 module.exports = {
   entry: {
-    app: './students.js',
-    appStyles: [
-      './mystyles.css',
-    ],
-    vendor: [
-      'jquery',
-    ],
-+     vendorStyles: [
-+       './node_modules/bootstrap/dist/css/bootstrap.css',
-+     ],    
+    app: ['regenerator-runtime/runtime', './students.js'],
+    appStyles: ['./mystyles.css'],
++   vendorStyles: ['./node_modules/bootstrap/dist/css/bootstrap.css'],
   },
 ``` 
 
@@ -73,6 +66,19 @@ _index.html_
   </div>
 </body>
 ```
+
+- Now that we are using bootstrap that is located
+under the _node_modules_ folder we need to 
+dig into that
+
+```diff
+{
+  test: /\.css$/,
+-  exclude: /node_modules/,
+  use: [MiniCssExtractPlugin.loader, "css-loader"]
+}
+```` 
+
 - Try to run webpack now, just type in the command line:
 
 ```bash

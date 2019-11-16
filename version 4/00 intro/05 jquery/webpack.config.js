@@ -1,8 +1,8 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: ['./students.js'],
+  entry: ['regenerator-runtime/runtime', './students.js'],
   output: {
     filename: 'bundle.js',
   },
@@ -23,8 +23,8 @@ module.exports = {
       hash: true,
     }),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
   ],
 };

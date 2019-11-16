@@ -28,83 +28,114 @@ npm install
 - To work with HMR and `react`, we need to install `react-hot-loader`:
 
 ```bash
-npm install react-hot-loader --save-dev
+npm install react-hot-loader --save
 ```
 
 - Let' add react-hot-loader/babel plugin to the _[./babelrc](./babelrc)_:
 
-
-### [./babelrc](./babelrc)
+_./babelrc_
 
 ```diff
 {
-  "presets": [
-    "env",
-    "react"
-  ],
-+ "plugins": ["react-hot-loader/babel"]  
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
++ "plugins": ["react-hot-loader/babel"]
 }
+
+```
+
+- Let's move some functionality to `index.tsx` file. It will be the new start up point:
+
+_./src/index.tsx_
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(<h1>App component</h1>, document.getElementById('root'));
+
 ```
 
 - Let's mark the root component as _hot-exported_:
 
-_[./src/student.jsx](./src/student.jsx)_
+_./src/student.tsx_
+
 ```diff
-+ import { hot } from 'react-hot-loader'
-//(...)
+import React from 'react';
+- import ReactDOM from 'react-dom';
++ import { hot } from 'react-hot-loader/root';
+import { AverageComponent } from './averageComponent';
+import { TotalScoreComponent } from './totalScoreComponent';
+- const logoImg = require('./content/logo_1.png');
 
-+ const myRoot = () =>
-+  <div>
-+    <h1>Hello from React DOM</h1>
-+    <AverageComponent />
-+    <TotalScoreComponent />
-+  </div>
-+
-+const App = hot(module)(myRoot);
+$('body').css('background-color', 'lightSkyBlue');
 
-ReactDOM.render(
-+  <App/>,
--  <div>
--    <h1>Hello from React DOM</h1>
--    <AverageComponent />
--    <TotalScoreComponent />
--  </div>,
-  document.getElementById('root')
-);
+- const img = document.createElement('img');
+- img.src = logoImg;
+
+- document.getElementById('imgContainer').appendChild(img);
+
+- ReactDOM.render(
++ const App: React.FunctionComponent = () => {
++   return (
+      <div>
+        <h1>Hello from React DOM</h1>
+        <AverageComponent />
+      <TotalScoreComponent />
+-     </div>,
++     </div>
++   );
++ };
+-   document.getElementById('root')
+- );
++ export default hot(App);
+
 ```
 
-- Let's add the flag 'hot' to our start command in package json
+- Update `index.tsx`:
 
-### [./package.json](./package.json)
+_./src/index.tsx_
+
 ```diff
-  "scripts": {
--    "start": "webpack-dev-server --mode development --open",
-+    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "rimraf dist && webpack  --mode development"
-  }
+import React from 'react';
+import ReactDOM from 'react-dom';
++ import App from './students';
+
+- ReactDOM.render(<h1>App component</h1>, document.getElementById('root'));
++ ReactDOM.render(<App />, document.getElementById('root'));
+
 ```
 
-> We could configure --hot in [./webpack.config.js](./webpack.config.js)
+- Let's update `webpack config`:
 
-### [./webpack.config.js](./webpack.config.js)
+_./webpack.config.js_
+
 ```diff
-...
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const basePath = __dirname;
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  entry: {
+-   app: ['regenerator-runtime/runtime', './students.tsx'],
++   app: ['regenerator-runtime/runtime', './index.tsx'],
+    ...
+  },
+  ...
+  devtool: 'inline-source-map',
 + devServer: {
 +   hot: true,
 + },
-  plugins: [
-    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html', //Name of file in ./dist/
-      template: 'index.html', //Name of template in ./src
-      hash: true,
-    }),
-//...
 ```
 
 - Now you can launch `npm run start`, and try to .
 
-- This won't work with CSS using miniCSSExtractTextPlugin, you will need to disable in by config when working on dev mode.
+- This won't work with CSS using `MiniCssExtractPlugin` nor `chunkhash`, you will need to disable it when working on dev mode. We will see in next example.
 
 Guide 1: 
 https://github.com/webpack-contrib/mini-css-extract-plugin#advanced-configuration-example
@@ -113,27 +144,87 @@ Guide 2:
 
 https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
 
-webpack config udpates
+- Meanwhile, we could do some changes:
 
-```
-module.exports = async function(envCliArgs = {}, argv = {}) {
-  const isHot = !!argv.hot || !!argv.hotOnly;
-```
+_./webpack.config.js_
 
-```
-use: [
-  {
-    loader: isHot ? "style-loader" : MiniCssExtractPlugin.loader,
+```diff
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+- const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const basePath = __dirname;
+
+module.exports = {
+  ...
+  output: {
+-   filename: '[name].[chunkhash].js',
++   filename: '[name].js',
   },
-```
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+-         MiniCssExtractPlugin.loader,
++         'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+              localsConvention: 'camelCase',
+            },
+          },
+          ...
+        ],
+      },
+      {
+        test: /\.css$/,
+-       use: [MiniCssExtractPlugin.loader, 'css-loader'],
++       use: ['style-loader', 'css-loader'],
+      },
+      ...
+    ],
+  },
+  plugins: [
+    ...
+-   new MiniCssExtractPlugin({
+-     filename: '[name].css',
+-     chunkFilename: '[id].css',
+-   }),
+  ],
+  ...
+};
 
 ```
-if (!isHot) {
-  config.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: "[name].bundle.[chunkhash].css",
-      chunkFilename: "[id].[chunkhash].css",
-    }),
-  );
-}
+
+- See `Chrome dev tools` warning about react-dom. There is a [`react-dom` hot-loader](https://github.com/hot-loader/react-dom) friendly to obtain more `hot` dev experience:
+
+```bash
+npm install @hot-loader/react-dom --save-dev
 ```
+
+- Let's configure it:
+
+_./webpack.config.js_
+
+```diff
+...
+
+module.exports = {
+  context: path.join(basePath, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
++   alias: {
++     'react-dom': '@hot-loader/react-dom',
++   },
+  },
+  ...
+```
+
+- Running it:
+

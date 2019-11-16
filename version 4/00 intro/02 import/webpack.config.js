@@ -1,5 +1,5 @@
 module.exports = {
-  entry: ['./students.js'],
+  entry: ['regenerator-runtime/runtime', './students.js'],
   output: {
     filename: 'bundle.js',
   },

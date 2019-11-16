@@ -74,12 +74,13 @@ _webpack.config.js_
 
 ```diff
 module.exports = {
--  entry: ['./students.js'],
-+  entry: ['./students.js', './mystyles.css'],
+-  entry: ['regenerator-runtime/runtime', './students.js'],
++ entry: ['regenerator-runtime/runtime', './students.js', './mystyles.css'],
   output: {
     filename: 'bundle.js',
   },
 ```
+
 - If we launch a webpack build this will throw errors, that's because we haven't
 defined any loader to handle the css extension. To configure webpack
 properly let's add to the loader section a css entry and execute first
@@ -128,7 +129,7 @@ _webpack.config.js_
 
 ```diff
 module.exports = {
--  entry: ['./students.js', './mystyles.css'],
+-  entry: ['regenerator-runtime/runtime', './students.js', './mystyles.css'],
 +  entry: {
 +    app: './students.js',
 +    appStyles: [
@@ -151,22 +152,62 @@ output: {
 -   filename: 'bundle.js',
 +   filename: '[name].[chunkhash].js',
 },
+
+```
+
+- As we notice, we don't need to use `hash` flag from `HtmlWebpackPlugin` because all chunks has same value, the `chunkhash` is the best due to it changes when content does it.
+
+_webpack.config.json_
+
+```diff
+...
+  plugins: [
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+-     hash: true,
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
+  ],
+```
+
+- Check the build:
+
+```bash
+npm run build
+```
+
+- Checking `app` and `vendor` bundles, we will see that we are duplicating `jquery` code, let's refactor `vendors` section by `optimization splitChunks`:
+
+_webpack.config.json_
+
+```diff
+...
+  entry: {
+    app: ['regenerator-runtime/runtime', './students.js'],
+    appStyles: ['./mystyles.css'],
+-   vendor: ['jquery'],
+  },
 + optimization: {
-+  splitChunks: {
-+    cacheGroups: {
-+      vendor: {
-+        chunks: 'initial',
-+        name: 'vendor',
-+        test: 'vendor',
-+        enforce: true
-+      },
-+    }
-+  },
++   splitChunks: {
++     cacheGroups: {
++       vendor: {
++         chunks: 'all',
++         name: 'vendor',
++         test: /[\\/]node_modules[\\/]/,
++         enforce: true,
++       },
++     },
++   },
 + },
 ```
 
 > More info about this: https://webpack.js.org/plugins/split-chunks-plugin/
-https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0
+> https://medium.com/dailyjs/webpack-4-splitchunks-plugin-d9fbbe091fd0
 
 
 - Before running a build let's ensure we clear the dist folder.
@@ -216,9 +257,9 @@ implement the functionallity of this plugin.
 _webpack.config.js_
 
 ```diff
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-+ var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
++ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 ```
@@ -235,7 +276,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
--        exclude: /node_modules/,
+         exclude: /node_modules/,
 -        use: [
 -          {
 -            loader: 'style-loader',
@@ -261,7 +302,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', //Name of file in ./dist/
       template: 'index.html', //Name of template in ./src
-      hash: true,
     }),
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -282,4 +322,3 @@ content.
 ```bash
 npm run build
 ```
-
