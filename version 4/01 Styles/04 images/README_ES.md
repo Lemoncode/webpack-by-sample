@@ -28,6 +28,7 @@ npm install
 - Comencemos limpiando nuestro _[index.html](./src/index.html)_. Vamos a eliminar el componente _`jumbotron`_ de Bootstrap y agregar un elemento `<div>` con un `id` determinado:
 
 _[./src/index.html](./src/index.html)_
+
 ```diff
 <!DOCTYPE html>
 <html lang="en">
@@ -93,34 +94,7 @@ _[webpack.config.js](webpack.config.js)_
 ```diff
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-          use: [
-            { loader: 'css-loader', },
-            { loader: 'sass-loader', },
-          ],
-        }),
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
-      },
+      ...
 +     {
 +       test: /\.(png|jpg)$/,
 +       exclude: /node_modules/,
@@ -193,7 +167,7 @@ npm install html-loader --save-dev
 
 - Y configura el cargador para los archivos _`.html`_
 
-_[wepback.config.js](wepback.config.js)_
+_[webpack.config.js](webpack.config.js)_
 
 ```diff
       {
@@ -236,27 +210,28 @@ _[./src/index.html](./src/index.html)_
 
 - Podemos ver ahora que la imagen se referencia automáticamente (herramientas de desarrollador F12 ...).
 
-
 # Apéndice - Organizar la carpeta dist en subcarpetas
 
 Sería posible organizar la carpeta `dist` en subcarpetas.
 
-Para ello necesitaremos modificar el fichero _wepback.config.js_.
+Para ello necesitaremos modificar el fichero _webpack.config.js_.
 
 Tenemos que modificar el cargador para los ficheros`.png` y `.jpg` para añadir un parametro llamado **name** en el que especificaremos la subcarpeta:
 
-_wepback.config.js_
+_webpack.config.js_
 
 ```diff
       {
        test: /\.(png|jpg)$/,
        exclude: /node_modules/,
--        loader: 'url-loader?limit=5000',
-+        use: {
+-      loader: 'url-loader?limit=5000',
++      use: {
 +        loader: 'url-loader',
 +        options: {
-+        limit:5000,
-+        name: './img/[hash].[name].[ext]'
++          limit: 5000,
++          name: './img/[hash].[name].[ext]',
++        },
++      },
       },
 ```
 
@@ -278,4 +253,24 @@ new MiniCssExtractPlugin({
 + filename: "./css/[name].[chunkhash].css",
   chunkFilename: "[id].css"
 })
+```
+
+- Es importante reemplazar la optimización de splitChunks por:
+
+```diff
+...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'all',
+          name: 'vendor',
+-         test: /[\\/]node_modules[\\/]$/,
++         test: /[\\/]node_modules[\\/]((?!s?css).)*$/,
+          enforce: true,
+        },
+      },
+    },
+  },
+...
 ```
