@@ -78,4 +78,4 @@ module.exports = merge(common, {
 
 - Ahora podemos ver nuestro treemap interactivo en funcionamiento ejecutando `npm run build:perf`
 
-![Captura Webpack Bundle Analyzer](./readme-resource/bundleAnalyzer.png)
+![Captura Webpack Bundle Analyzer](./readme-resources/bundleAnalyzer.png)
