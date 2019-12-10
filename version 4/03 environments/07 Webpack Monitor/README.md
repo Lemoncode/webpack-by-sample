@@ -1,6 +1,6 @@
 # 07 Webpack Monitor
 
-In this demo we are going to install and configure the "Webpack Monitor" plugin which captures relevant statistics on our builds and provide an interactive analysis tool of bundle composition.
+In this demo we are going to install and configure the [Webpack Monitor](http://webpackmonitor.com/) plugin which captures relevant statistics on our builds and provide an interactive analysis tool of bundle composition.
 
 We will start from sample _03 Environments/06 Bundle Analyzer_
 
@@ -32,21 +32,33 @@ npm install webpack-monitor --save-dev
 
 - Add the plugin to our _dev.webpack.config.js_:
 
+  1.- Create the following variable:
 
+_./dev.webpack.config.js_
+
+```diff
+const merge = require('webpack-merge');
+const base = require('./base.webpack.config.js');
+const Dotenv = require('dotenv-webpack');
++ const WebpackMonitor = require('webpack-monitor');
 ```
-1.- Create the following variable:
 
-const WebpackMonitor = require('webpack-monitor');
- 
 2.- Add the following entry into the plugins array:
 
-new WebpackMonitor({
-    capture: true, // -> default 'true'
-    target: '../monitor/myStatsStore.json', // default -> '../monitor/stats.json'
-    launch: true, // -> default 'false'
-    port: 3030, // default -> 8081
-})
+_./dev.webpack.config.js_
 
+```diff
+  plugins: [
+    new Dotenv({
+      path: './dev.env',
+    }),
++    new WebpackMonitor({
++      capture: true, // -> default 'true'
++      target: '../monitor/myStatsStore.json', // default -> '../monitor/stats.json'
++      launch: true, // -> default 'false'
++      port: 3030, // default -> 8081
++    }),
+  ],
 ```
 
 - Parameters explanation:
@@ -63,6 +75,6 @@ new WebpackMonitor({
 ```
 
 - Now we can see our Webpack Monitor plugin working! Simply execute the command `npm run build:dev`
-Depending on your machine, it could takes a while for the plugin to show up on your browser. Be patient!
+  Depending on your machine, it could takes a while for the plugin to show up on your browser. Be patient!
 
 ![Snapshot Webpack Monitor](./readme-resources/webpack_monitor.png)
