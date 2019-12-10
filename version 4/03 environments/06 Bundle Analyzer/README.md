@@ -67,7 +67,9 @@ _./package.json_
 
 - Now we can see our interactive treemap working! Simply execute the command `npm run build:perf`
 
-![Captura Webpack Bundle Analyzer](./readme-resource/bundleAnalyzer.png)
+![Captura Webpack Bundle Analyzer](./readme-resources/bundleAnalyzer.png)
+
+
 
 - How can we reduce the jquery dependency size? Jquery comes with `slim` version, how can we use it?:
 
